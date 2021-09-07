@@ -1,3 +1,4 @@
+require("dotenv").config();
 import express, { NextFunction, Request, Response } from "express";
 import { json } from "body-parser";
 import morgan from "morgan";
@@ -9,7 +10,6 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routes/user.router";
 import masterRouter from "./routes/master.router";
 import adminRouter from "./routes/admin.router";
-require("dotenv").config();
 
 declare module "express-session" {
   export interface SessionData {
@@ -36,6 +36,7 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }));
+console.log('---->', DBURL);
 
 app.use(
   session({
