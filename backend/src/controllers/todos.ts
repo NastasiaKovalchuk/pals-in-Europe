@@ -3,24 +3,24 @@ import { RequestHandler } from "express";
 import todoModel, { Todo } from "../db/models/todo.models";
 import userModel from "../db/models/user.model";
 
-export const createTodo: RequestHandler = (req, res) => {
-  try {
-    setTimeout(async () => {
-      const text = (req.body as { text: string }).text;
-      const id = (req.body as { id: string }).id;
-      const user = await userModel.findById(id);
-      const newTodo = await todoModel.create({ text, completed: false });
-      if (user) {
-        user.todos.push(newTodo);
-        user.save();
-        return res.status(200).json({ message: "Created the todo", newTodo });
-      }
-    }, 500);
-  } catch (err) {
-    res.status(500).json({errorMessage: err});
-    throw new Error(err);
-  }
-};
+// export const createTodo: RequestHandler = (req, res) => {
+//   try {
+//     setTimeout(async () => {
+//       const text = (req.body as { text: string }).text;
+//       const id = (req.body as { id: string }).id;
+//       const user = await userModel.findById(id);
+//       const newTodo = await todoModel.create({ text, completed: false });
+//       if (user) {
+//         user.todos.push(newTodo);
+//         user.save();
+//         return res.status(200).json({ message: "Created the todo", newTodo });
+//       }
+//     }, 500);
+//   } catch (err) {
+//     res.status(500).json({errorMessage: err});
+//     throw new Error(err);
+//   }
+// };
 
 export const updateStatusTodo: RequestHandler = (
   req,
@@ -43,7 +43,8 @@ export const updateStatusTodo: RequestHandler = (
       }
     }, 500);
   } catch (err) {
-    throw new Error(err);
+    // throw new Error(err);
+    console.log(err); 
   }
 };
 
@@ -65,7 +66,7 @@ export const deleteTodo: RequestHandler = (req, res, next) => {
         }
       }
     }, 500);
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(err);
   }
 };
@@ -82,7 +83,7 @@ export const getAllTodo: RequestHandler = (req, res) => {
         res.status(200).json({ todos });
       }
     }, 500);
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(err);
   }
 };
@@ -100,7 +101,7 @@ export const editTodo: RequestHandler = (req, res, next) => {
         res.status(200).json();
       }
     }, 500);
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
@@ -114,7 +115,7 @@ export const getStatus: RequestHandler = (req, res, next) => {
         res.status(200).json({ status: findTodo.completed });
       }
     }, 500);
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };

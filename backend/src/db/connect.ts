@@ -1,6 +1,8 @@
+require("dotenv").config();
 import mongoose from "mongoose";
 
-const dbUrl = "mongodb://localhost:27017/todos";
+
+const { DBURL } = process.env;
 const options = {
   useCreateIndex: true,
   useFindAndModify: false,
@@ -9,10 +11,12 @@ const options = {
 };
 
 async function dbconnect() {
-  await mongoose.connect(dbUrl, options, (err) => {
-    console.log("success connect mongo");
-    if (err) return console.log(err);
-  });
+  if (typeof DBURL === 'string') {
+    await mongoose.connect(DBURL, options, (err) => {
+      console.log("success connect mongo");
+      if (err) return console.log(err);
+    });
+  }
 }
 
 export default dbconnect;

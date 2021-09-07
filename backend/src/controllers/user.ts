@@ -27,7 +27,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
         return res.status(500).json({ message: "This nick already exists" });
       }
       return res.status(500).json({ message: "This email already exists" });
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(err);
   }
 };
@@ -53,7 +53,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
       return res
         .status(500)
         .json({ success: false, message: "Wrong email or password" });
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };
@@ -64,7 +64,7 @@ export const logoutUser: RequestHandler = (req, res, next) => {
         console.log(err);
       });
       return res.status(200).send({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error);
   }
 };

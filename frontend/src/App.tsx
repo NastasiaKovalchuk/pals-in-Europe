@@ -24,6 +24,15 @@ function App() {
             <Route exact path="/signup">
               <Signup/>
             </Route>
+            <Route exact path="/master/signup">
+              <div>signupmaster</div>
+            </Route>
+            <Route exact path="/signupuser">
+              <div>signupmuser</div>
+            </Route>
+            <Route exact path="/signupadmin">
+              <div>signupuser</div>
+            </Route>
           </Switch>
         </div>
       </Router>
