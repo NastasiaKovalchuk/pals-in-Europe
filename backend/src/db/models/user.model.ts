@@ -1,19 +1,18 @@
 import { Schema, model, ObjectId, Types, Mongoose } from "mongoose";
-import { Todo } from "./todo.models";
 
 export interface User {
   _id: string;
   email: string;
-  nick: string;
+  username: string;
   password: string;
-  todos: Todo[];
+  login: string;
 }
 
 const UserSchema = new Schema<User>({
   email: String,
-  nick: String,
+  username: String,
+  login: String,
   password: String,
-  todos: [{ type: Schema.Types.ObjectId, ref: "Todo" }],
 });
 
 const userModel = model<User>("User", UserSchema);

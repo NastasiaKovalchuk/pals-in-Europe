@@ -6,13 +6,15 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import indexRouter from "./routes/index";
+import userRouter from "./routes/user.router";
+import masterRouter from "./routes/master.router";
+import adminRouter from "./routes/admin.router";
 require("dotenv").config();
 
 declare module "express-session" {
   export interface SessionData {
-    username: string;
-    userId: string;
+    name: string;
+    id: string;
   }
 }
 
@@ -46,7 +48,9 @@ app.use(
   })
 );
 
-app.use("/", indexRouter);
+app.use("/user", userRouter);
+app.use("/master", masterRouter);
+app.use("/admin", adminRouter);
 
 app.use((req, res, next) => {
   res.locals.userId = req.session.userId;
