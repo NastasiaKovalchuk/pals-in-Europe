@@ -9,7 +9,7 @@ const StartPage = () => {
 
   const sumbitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    history.push("/search");
+    history.push(`/search/${search}`);
   }
 
   return (
@@ -20,6 +20,7 @@ const StartPage = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>): void => setSearch(event.target.value)}
           className="form-control me-2"
           type="search"
+          value={search}
           placeholder="Search"
           aria-label="Search" />
         <button className="btn" type="submit">Search</button>
