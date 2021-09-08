@@ -1,11 +1,12 @@
-import { Header } from "./components/Header/Header";
+import Header from "./components/Header/Header";
 import { ShowMasters } from "./components/ShowMasters/ShowMasters";
-import { StartPage } from "./components/StartPage/StartPage";
+import StartPage from "./components/StartPage/StartPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Login } from "./components/Login/Login";
 import { Signup } from "./components/Signup/Signup";
 
 function App() {
+
   return (
     <div>
       <Router>
@@ -16,13 +17,13 @@ function App() {
               <ShowMasters />
             </Route>
             <Route exact path="/">
-              <StartPage/>
+              <StartPage />
             </Route>
             <Route exact path="/login">
-              <Login/>
+              <Login />
             </Route>
             <Route exact path="/signup">
-              <Signup/>
+              <Signup />
             </Route>
             <Route exact path="/master/signup">
               <div>signupmaster</div>
@@ -32,6 +33,9 @@ function App() {
             </Route>
             <Route exact path="/signupadmin">
               <div>signupuser</div>
+            </Route>
+            <Route exact path="/search">
+              <div>Search</div>
             </Route>
           </Switch>
         </div>
