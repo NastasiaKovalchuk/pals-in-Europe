@@ -10,6 +10,8 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routes/user.router";
 import masterRouter from "./routes/master.router";
 import adminRouter from "./routes/admin.router";
+import generalRouter from "./routes/general.router";
+
 
 declare module "express-session" {
   export interface SessionData {
@@ -49,10 +51,10 @@ app.use(
   })
 );
 
+app.use("/", generalRouter);
 app.use("/user", userRouter);
 app.use("/master", masterRouter);
 app.use("/admin", adminRouter);
-
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: err.message });

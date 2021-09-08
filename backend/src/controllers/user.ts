@@ -22,7 +22,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
         newUser.save();
         if (newUser) {
           req.session.name = newUser.username;
-          // req.session.id = newUser._id;
+          req.session.id = newUser._id;
           return res.status(200).json({
             name: req.session.name,
             userId: newUser._id,
@@ -51,7 +51,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
       // console.log('checkUser =>', checkUser);
       if (checkUser.password === password) {
         req.session.name = checkUser.username;
-        // req.session.id = checkUser._id;
+        req.session.id = checkUser._id;
         return res.status(200).json({
           success: true,
           name: req.session.name,
@@ -65,19 +65,4 @@ export const loginUser: RequestHandler = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-export const logoutUser: RequestHandler = (req, res, next) => {
-  try {
-    req.session.destroy((err) => {
-      console.log(err);
-    });
-    return res.status(200).send({ success: true });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const checkUser: RequestHandler = (req, res, next) => {
-  res.send({ name: req.session.name});
 };
