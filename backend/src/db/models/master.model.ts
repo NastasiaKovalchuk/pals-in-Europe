@@ -15,7 +15,8 @@ const MasterSchema = new Schema<Master>({
   mastername: String,
   login: String,
   password: String,
-  category: String,
+  category: { type: Schema.Types.ObjectId, ref: "Category"},
+  // category: String,
   experience: String,
 });
 
