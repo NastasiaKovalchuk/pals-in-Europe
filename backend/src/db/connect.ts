@@ -1,6 +1,6 @@
 require("dotenv").config();
 import mongoose from "mongoose";
-
+import masterMaker from "./seeder/seedMasters";
 
 const { DBURL } = process.env;
 const options = {
@@ -17,6 +17,8 @@ async function dbconnect() {
       if (err) return console.log(err);
     });
   }
+  // starting the seeding function
+  // masterMaker();
 }
 
 export default dbconnect;
