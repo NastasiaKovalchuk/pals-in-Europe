@@ -28,17 +28,6 @@ export const loginAdmin: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const logoutAdmin: RequestHandler = (req, res, next) => {
-  try {
-      req.session.destroy((err) => {
-        console.log(err);
-      });
-      return res.status(200).send({ success: true });
-  } catch (error) {
-    console.log(error); 
-  }
-};
-
-export const checkAdmin: RequestHandler = (req, res, next) => {
-  res.send({ login: req.session.name});
-};
+// export const checkAdmin: RequestHandler = (req, res, next) => {
+//   res.send({ login: req.session.name});
+// };

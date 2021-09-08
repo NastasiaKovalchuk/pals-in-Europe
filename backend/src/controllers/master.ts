@@ -64,17 +64,7 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
   }
 };
 
-export const logoutMaster: RequestHandler = (req, res, next) => {
-  try {
-    req.session.destroy((err) => {
-      console.log(err);
-    });
-    return res.status(200).send({ success: true });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-export const checkMaster: RequestHandler = (req, res, next) => {
-  res.send({ name: req.session.name });
-};
+// export const checkMaster: RequestHandler = (req, res, next) => {
+//   res.send({ name: req.session.name });
+// };
