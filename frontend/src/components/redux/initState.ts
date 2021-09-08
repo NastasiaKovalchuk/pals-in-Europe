@@ -10,6 +10,20 @@ export interface InitStateValue {
   user: UserStateValue
 }
 
+export interface Master {
+  _id: string;
+  email: string;
+  mastername: string;
+  password: string;
+  login: string;
+  category: {
+    _id: string,
+    category: string
+  };
+  experience: string;
+  location: string,
+}
+
 const initState: InitStateValue = {
   user: {
     name: "",

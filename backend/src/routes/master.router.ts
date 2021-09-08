@@ -3,13 +3,12 @@ import { Router } from "express";
 import {
   createMaster,
   loginMaster,
+  getAllMasters
 } from "../controllers/master";
 
 const router = Router();
-router.get("/", (req, res) => {
-  res.json({hello: 'hello'});
-  
-});
+
+router.get("/", getAllMasters);
 
 router.post("/signup", createMaster);
 

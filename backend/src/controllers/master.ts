@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
 
-
 export const createMaster: RequestHandler = async (req, res, next) => {
   try {
     const { name, login, email, password, experience, category } = req.body as {
@@ -18,7 +17,14 @@ export const createMaster: RequestHandler = async (req, res, next) => {
     if (!checkExistingEmail) {
       const checkExistingName = await masterModel.findOne({ mastername: name });
       if (!checkExistingName) {
-        const newMaster = await new masterModel({ email, mastername: name, password, login, experience, category });
+        const newMaster = await new masterModel({
+          email,
+          mastername: name,
+          password,
+          login,
+          experience,
+          category,
+        });
         newMaster.save();
         if (newMaster) {
           req.session.name = newMaster.mastername;
@@ -27,9 +33,7 @@ export const createMaster: RequestHandler = async (req, res, next) => {
             masterId: newMaster._id,
           });
         }
-        return res
-          .status(500)
-          .json({ message: "Something went wrong" });
+        return res.status(500).json({ message: "Something went wrong" });
       }
       return res.status(500).json({ message: "This nick already exists" });
     }
@@ -64,6 +68,16 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const getAllMasters: RequestHandler = async (req, res) => {
+  try {
+    const masters = await masterModel.find();
+    console.log(masters);
+    
+    res.status(200).json({ masters });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // export const checkMaster: RequestHandler = (req, res, next) => {
 //   res.send({ name: req.session.name });

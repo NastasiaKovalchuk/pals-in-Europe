@@ -6,8 +6,9 @@ export interface Master {
   mastername: string;
   password: string;
   login: string;
-  category: string;
+  category: object;
   experience: string;
+  location: string,
 }
 
 const MasterSchema = new Schema<Master>({
@@ -15,9 +16,10 @@ const MasterSchema = new Schema<Master>({
   mastername: String,
   login: String,
   password: String,
-  category: { type: Schema.Types.ObjectId, ref: "Category"},
+  category: {},
   // category: String,
   experience: String,
+  location: String,
 });
 
 const masterModel = model<Master>("Master", MasterSchema);
