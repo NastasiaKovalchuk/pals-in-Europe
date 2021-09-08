@@ -1,5 +1,13 @@
 import { AppDispatch } from "../../../index";
-import { SET_USER } from "../types/types";
+import { SET_USER, UNSET_USER } from "../types/types";
+
+
+export const getUserAC = (name: string) => {
+  return {
+    type: SET_USER,
+    payload: name
+  }
+};
 
 export const userSignupAC = (
   name: string,
@@ -48,3 +56,10 @@ export const userLoginAC = (login: string, password: string) => async (dispatch:
     payload: result,
   })
 }
+
+export const logoutAC = () => {
+  return {
+    type: UNSET_USER,
+    payload: ''
+  }
+};
