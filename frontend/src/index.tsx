@@ -7,7 +7,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 import { rootReducer } from './components/redux/reducers/rootReducer';
-
+import { Provider } from 'react-redux';
 
 const store = createStore(
   rootReducer,
@@ -19,7 +19,9 @@ export type AppDispatch = typeof store.dispatch;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

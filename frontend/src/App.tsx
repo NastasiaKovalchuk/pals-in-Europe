@@ -2,8 +2,10 @@ import Header from "./components/Header/Header";
 import { ShowMasters } from "./components/ShowMasters/ShowMasters";
 import StartPage from "./components/StartPage/StartPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Login } from "./components/Login/Login";
-import { Signup } from "./components/Signup/Signup";
+import { UserLogin } from "./components/User/UserLogin/UserLogin";
+import { UserSignup } from "./components/User/UserSignup/UserSignup";
+import { MasterLogin } from "./components/Master/MasterLogin/MasterLogin";
+import { MasterSignup } from "./components/Master/MasterSignup/MasterSignup";
 
 function App() {
 
@@ -19,20 +21,19 @@ function App() {
             <Route exact path="/">
               <StartPage />
             </Route>
-            <Route exact path="/login">
-              <Login />
+
+            <Route exact path="/user/login">
+              <UserLogin/>
             </Route>
-            <Route exact path="/signup">
-              <Signup />
+            <Route exact path="/user/signup">
+              <UserSignup/>
+
+            </Route>
+            <Route exact path="/master/login">
+              <MasterLogin />
             </Route>
             <Route exact path="/master/signup">
-              <div>signupmaster</div>
-            </Route>
-            <Route exact path="/signupuser">
-              <div>signupmuser</div>
-            </Route>
-            <Route exact path="/signupadmin">
-              <div>signupuser</div>
+              <MasterSignup />
             </Route>
             <Route exact path="/search/:value">
               <ShowMasters />

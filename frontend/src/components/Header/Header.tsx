@@ -1,7 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { RootStateValue } from '../redux/reducers/rootReducer'
 
-const Header = () => {
+export const Header = () => {
+  const session = useSelector((state: RootStateValue) => state)
+  console.log('session =>', session.user.name);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,7 +23,7 @@ const Header = () => {
             <ul className="dropdown-menu">
               <li><Link to="/master/signup" className="dropdown-item">Signup as Master</Link></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><Link to="/signupuser" className="dropdown-item">Signup as User</Link></li>
+              <li><Link to="/user/signup" className="dropdown-item">Signup as User</Link></li>
             </ul>
           </div>
           <div className="btn-group">
@@ -26,9 +31,9 @@ const Header = () => {
               Login
             </button>
             <ul className="dropdown-menu">
-              <li><Link to="/loginmaster" className="dropdown-item">Login as Master</Link></li>
+              <li><Link to="/master/login" className="dropdown-item">Login as Master</Link></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><Link to="/loginuser" className="dropdown-item">Login as User</Link></li>
+              <li><Link to="/user/login" className="dropdown-item">Login as User</Link></li>
             </ul>
           </div>
         </div>
