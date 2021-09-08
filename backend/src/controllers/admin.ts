@@ -16,8 +16,7 @@ export const loginAdmin: RequestHandler = async (req, res, next) => {
           req.session.id = checkAdmin._id;
           return res.status(200).json({
             success: true,
-            username: req.session.login,
-            userID: req.session.adminId,
+            login: req.session.name,
           });
         }
       }
@@ -41,5 +40,5 @@ export const logoutAdmin: RequestHandler = (req, res, next) => {
 };
 
 export const checkAdmin: RequestHandler = (req, res, next) => {
-  res.send({ username: req.session.username, userID: req.session.userId });
+  res.send({ login: req.session.name});
 };

@@ -1,15 +1,21 @@
 
-export interface InitStateValue {
-  user: {
-    username: string;
+export interface UserStateValue {
+    name: string;
     userID: string;
-  };
+    masterID: string;
+    adminID: string;
+}
+
+export interface InitStateValue {
+  user: UserStateValue
 }
 
 const initState: InitStateValue = {
   user: {
-    username: "",
+    name: "",
     userID: "",
+    masterID: "",
+    adminID: "",
   },
 };
 
