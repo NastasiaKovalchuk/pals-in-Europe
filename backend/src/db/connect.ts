@@ -1,6 +1,7 @@
 require("dotenv").config();
 import mongoose from "mongoose";
 import masterMaker from "./seeder/seedMasters";
+import { categoryMaker } from "./seeder/seedCategory";
 
 const { DBURL } = process.env;
 const options = {
@@ -19,6 +20,7 @@ async function dbconnect() {
   }
   // starting the seeding function
   // masterMaker();
+  // categoryMaker()
 }
 
 export default dbconnect;
