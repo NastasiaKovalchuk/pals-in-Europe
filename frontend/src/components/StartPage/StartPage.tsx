@@ -9,8 +9,8 @@ const StartPage = () => {
 
   const sumbitHandler = useCallback((event: React.FormEvent) => {
     event.preventDefault();
-    history.push("/search");
-  }, [history])
+    history.push(`/search/${search}`);
+  }, [search, history]);
 
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
@@ -20,6 +20,7 @@ const StartPage = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>): void => setSearch(event.target.value)}
           className="form-control me-2"
           type="search"
+          value={search}
           placeholder="Search"
           aria-label="Search" />
         <button className="btn" type="submit">Search</button>

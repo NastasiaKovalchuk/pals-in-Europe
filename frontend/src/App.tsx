@@ -34,8 +34,8 @@ function App() {
             <Route exact path="/signupadmin">
               <div>signupuser</div>
             </Route>
-            <Route exact path="/search">
-              <div>Search</div>
+            <Route exact path="/search/:value">
+              <ShowMasters />
             </Route>
           </Switch>
         </div>
