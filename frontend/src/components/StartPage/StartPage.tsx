@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom"
 import "./StartPage.scss";
 
@@ -7,10 +7,10 @@ const StartPage = () => {
   const [search, setSearch] = useState("")
   let history = useHistory();
 
-  const sumbitHandler = (event: React.FormEvent) => {
+  const sumbitHandler = useCallback((event: React.FormEvent) => {
     event.preventDefault();
     history.push("/search");
-  }
+  }, [history])
 
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
