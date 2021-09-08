@@ -1,14 +1,17 @@
-import { AppDispatch } from "../../../index";
-import { SET_USER } from "../types/types";
 
-export const userSignupAC = (
+import { AppDispatch } from "../../../index";
+import { SET_MASTER } from "../types/types";
+
+export const masterSignupAC = (
   name: string,
   login: string,
   email: string,
-  password: string) => async (dispatch: AppDispatch) => {
-console.log('userSignupAC');
+  password: string,
+  category: string,
+  experience: string) => async (dispatch: AppDispatch) => {
 
-    const response = await fetch('http://localhost:8080/user/signup', {
+
+    const response = await fetch('http://localhost:8080/master/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -19,18 +22,20 @@ console.log('userSignupAC');
         login,
         email,
         password,
+        category,
+        experience
       }),
     });
     const result = await response.json();
-    console.log('userSignupAC', result);
+    console.log('masterSignupAC', result);
     dispatch({
-      type: SET_USER,
+      type: SET_MASTER,
       payload: result,
     })
   }
 
-export const userLoginAC = (login: string, password: string) => async (dispatch: AppDispatch) => {
-  const response = await fetch('http://localhost:8080/user/login', {
+export const masterLoginAC = (login: string, password: string) => async (dispatch: AppDispatch) => {
+  const response = await fetch('http://localhost:8080/master/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,9 +47,12 @@ export const userLoginAC = (login: string, password: string) => async (dispatch:
     }),
   });
   const result = await response.json();
-  console.log('loginUserAC', result);
+  console.log('masterLoginAC', result);
   dispatch({
-    type: SET_USER,
+    type: SET_MASTER,
     payload: result,
   })
 }
+
+
+

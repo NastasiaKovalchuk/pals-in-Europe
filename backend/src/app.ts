@@ -14,7 +14,7 @@ import adminRouter from "./routes/admin.router";
 declare module "express-session" {
   export interface SessionData {
     name: string;
-    id: string;
+    // id: string;
   }
 }
 

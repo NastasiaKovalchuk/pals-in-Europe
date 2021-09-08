@@ -1,16 +1,16 @@
 import { useState } from "react"
-import css from '../Master.module.css';
-import { masterLoginAC } from '../../redux/actionCreators/masterAC';
+import css from './Admin.module.css';
+import { adminLoginAC } from '../../redux/actionCreators/adminAC';
 import { useDispatch } from "react-redux";
 
-export const MasterLogin = () => {
+export const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const dispatch = useDispatch();
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(masterLoginAC(login, password))
+    dispatch(adminLoginAC(login, password))
   }
 
   return (
