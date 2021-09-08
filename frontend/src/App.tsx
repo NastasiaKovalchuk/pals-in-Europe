@@ -15,7 +15,6 @@ function App() {
   const dispatch = useDispatch();
   // const
   const user = useSelector((state: RootStateValue) => state.user)
-  console.log('user =>', user.name);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -29,9 +28,7 @@ function App() {
           }
         }
       )
-      const result = await response.json();
-      console.log(result);
-      
+      const result = await response.json();      
       dispatch(getUserAC(result.name));
     }
 
