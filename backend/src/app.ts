@@ -52,10 +52,6 @@ app.use("/user", userRouter);
 app.use("/master", masterRouter);
 app.use("/admin", adminRouter);
 
-app.use((req, res, next) => {
-  res.locals.userId = req.session.userId;
-  next();
-});
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: err.message });

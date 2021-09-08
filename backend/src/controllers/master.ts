@@ -37,11 +37,11 @@ export const createMaster: RequestHandler = async (req, res, next) => {
 
 export const loginMaster: RequestHandler = async (req, res, next) => {
   try {
-      const { email, password } = req.body as {
-        email: string;
+      const { login, password } = req.body as {
+        login: string;
         password: string;
       };
-      const checkMaster = await masterModel.findOne({ email });
+      const checkMaster = await masterModel.findOne({ login });
       if (checkMaster) {
         if (checkMaster.password === password) {
           req.session.name = checkMaster.mastername;
