@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useEffect } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { YMaps, Map } from "react-yandex-maps";
 import { Master } from "../redux/initState";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getMastersAC } from "../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./ShowMasters.scss";
@@ -17,10 +17,13 @@ export const ShowMasters = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenLocation, setChosenLocation] = useState("");
+  const { value } = useParams<MastersValue>();
 
+  console.log(value);
+  
   const dispatch = useDispatch();
-  const mastersRedux = useSelector(state => state)
-  console.log('mastersRedux ===>', mastersRedux);
+  // const mastersRedux = useSelector(state => state)
+  // console.log('mastersRedux ===>', mastersRedux);
   
 
 
@@ -32,7 +35,7 @@ export const ShowMasters = () => {
     location: string
   ) => {
     event.preventDefault();
-    console.log(masters);
+    // console.log(masters);
     if (category && location) {
       setMasters(
         masters.filter(
@@ -54,12 +57,10 @@ export const ShowMasters = () => {
     setChosenLocation("");
   };
 
-  const findCategories = (e: ChangeEvent) => {
-    //@ts-ignore
+  const findCategories = (e: ChangeEvent<HTMLSelectElement>) => {
     setChosenCategory(e.target.value);
   };
-  const findLocation = (e: ChangeEvent) => {
-    //@ts-ignore
+  const findLocation = (e: ChangeEvent<HTMLSelectElement>) => {
     setChosenLocation(e.target.value);
   };
 
@@ -76,7 +77,7 @@ export const ShowMasters = () => {
         dispatch(action)
         //   }
       });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     fetch("http://localhost:8080/master/")
@@ -97,7 +98,6 @@ export const ShowMasters = () => {
       });
   }, []);
 
-  const { value } = useParams<MastersValue>();
   return (
     <div className="maindiv">
       <div className="mastersDiv">

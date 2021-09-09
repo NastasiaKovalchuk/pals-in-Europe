@@ -1,6 +1,6 @@
 import React from "react";
-import { useState, useCallback } from "react";
-import { useHistory } from "react-router-dom"
+// import { useState, useCallback } from "react";
+// import { useHistory } from "react-router-dom"
 import { Master } from "../redux/initState";
 import "./CardMaster.scss";
 

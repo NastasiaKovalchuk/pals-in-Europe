@@ -1,32 +1,73 @@
-import React from "react";
+import React, { ChangeEvent, MouseEventHandler } from "react";
 import { useState, useCallback } from "react";
-import { useHistory } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux";
-import { getInputSagaAC } from "../redux/actionCreators/inputAC";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./StartPage.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
 
 const StartPage = () => {
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [show, setShow] = useState(false);
+  const [noCategories, setNoCategories] = useState(false);
+  const [filterCategories, setfilterCategories] = useState<string[]>([]);
   let history = useHistory();
-  const dispatch = useDispatch();
-  const categoryFromSelector = useSelector((state: RootStateValue) => state.categories)
-  const onlyCategories = categoryFromSelector.map((el) => el.category);
-  const filterCategories = onlyCategories.filter((el) => el[0] == search)
-  console.log(filterCategories);
+  // const dispatch = useDispatch();
+  const categoryFromSelector = useSelector(
+    (state: RootStateValue) => state.categories
+  );
+  // console.log(categoryFromSelector);
   // const onChangeFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSearch(event.target.value)
   //   dispatch(getInputSagaAC(event.target.value))
   // }
 
-  const sumbitHandler = useCallback((event: React.FormEvent) => {
+  const chooseCategory = (value: string) => {
+    setSearch(value);
+    if (value.length === 0) {
+      setfilterCategories([]);
+      setShow(false);
+      setNoCategories(false);
+    } else {
+      const regexp = new RegExp(value, "i");
+      const check = categoryFromSelector.filter((el) => {
+        const returnCheck = el.match(regexp);
+        if (returnCheck) {
+          return returnCheck;
+        }
+      });
+      setfilterCategories(check);
+      if (check.length > 0) {
+        setShow(true);
+      } else {
+        setNoCategories(true);
+      }
+    }
+  };
+
+  const sumbitHandler = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
+      history.push(`/search/${search}`);
+    },
+    [search, history]
+  );
+
+  const getTheRightSearch = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    text: React.SetStateAction<string>
+  ) => {
     event.preventDefault();
-    history.push(`/search/${search}`);
-  }, [search, history]);
+    setSearch(text);
+    setfilterCategories([]);
+  };
 
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
-      <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div
+        id="carouselExampleFade"
+        className="carousel slide carousel-fade"
+        data-bs-ride="carousel"
+      >
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img src="img/1.jpg" className="d-block w-100" alt="ss" />
@@ -38,28 +79,55 @@ const StartPage = () => {
             <img src="img/1.jpg" className="d-block w-100" alt="ss" />
           </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="prev"
+        >
+          <span
+            className="carousel-control-prev-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Предыдущий</span>
         </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="next"
+        >
+          <span
+            className="carousel-control-next-icon"
+            aria-hidden="true"
+          ></span>
           <span className="visually-hidden">Следующий</span>
         </button>
       </div>
       <form onSubmit={sumbitHandler} className="d-flex justify-content-center">
         <input
-          onChange={(event: React.ChangeEvent<HTMLInputElement>): void => setSearch(event.target.value)}
+          onChange={(e) => chooseCategory(e.target.value)}
           className="form-control me-2 mainInput"
           type="search"
           value={search}
           placeholder="Search"
-          aria-label="Search" />
-        <button className="btn btnSearch" type="submit">Search</button>
+          aria-label="Search"
+        />
+        <button className="btn btnSearch" type="submit">
+          Search
+        </button>
       </form>
-      <div>{filterCategories}</div>
+      {/* @ts-ignore */}
+      {filterCategories && setShow
+        ? filterCategories.map((el, index) => (
+            <div key={index} onClick={(e) => getTheRightSearch(e, el)}>
+              {el}
+            </div>
+          ))
+        : ""}
+      {noCategories ? <div>We don't have such a category</div> : ""}
     </div>
-  )
-}
+  );
+};
 
-export default React.memo(StartPage)
+export default React.memo(StartPage);

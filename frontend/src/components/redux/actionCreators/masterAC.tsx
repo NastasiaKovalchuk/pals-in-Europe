@@ -25,7 +25,7 @@ export const masterSignupAC = (
       }),
     });
     const result = await response.json();
-    console.log('masterSignupAC', result);
+    // console.log('masterSignupAC', result);
     dispatch({
       type: SET_MASTER,
       payload: result,

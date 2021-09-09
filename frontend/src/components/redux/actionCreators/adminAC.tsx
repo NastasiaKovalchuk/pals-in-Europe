@@ -15,7 +15,7 @@ export const adminLoginAC = (login: string, password: string) => async (dispatch
     }),
   });
   const result = await response.json();
-  console.log('adminLoginAC', result);
+  // console.log('adminLoginAC', result);
   dispatch({
     type: SET_ADMIN,
     payload: result,
