@@ -1,3 +1,4 @@
+import { RootStateValue } from "./reducers/rootReducer";
 
 export interface UserStateValue {
     name: string;
@@ -6,9 +7,14 @@ export interface UserStateValue {
     adminID: string;
 }
 
-export interface InitStateValue {
-  masters: Master[]
-  user: UserStateValue
+export interface Category {
+  _id: string;
+  category: string;
+}
+
+export interface Search {
+  category: string,
+  location: string,
 }
 
 export interface Master {
@@ -25,13 +31,18 @@ export interface Master {
   location: string,
 }
 
-const initState: InitStateValue = {
+const initState: RootStateValue = {
   masters: [],
+  categories: [],
   user: {
     name: "",
     userID: "",
     masterID: "",
     adminID: "",
+  },
+  search: {
+    category: "",
+    location: "",
   },
 };
 

@@ -11,6 +11,7 @@ import userRouter from "./routes/user.router";
 import masterRouter from "./routes/master.router";
 import adminRouter from "./routes/admin.router";
 import generalRouter from "./routes/general.router";
+import categoryRouter from "./routes/category.router";
 
 
 declare module "express-session" {
@@ -55,6 +56,7 @@ app.use("/", generalRouter);
 app.use("/user", userRouter);
 app.use("/master", masterRouter);
 app.use("/admin", adminRouter);
+app.use("/categories", categoryRouter);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: err.message });

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserAC } from "./components/redux/actionCreators/userAC";
 import { RootStateValue } from './components/redux/reducers/rootReducer';
+import { getCategoriesSagaAC } from "./components/redux/actionCreators/categoryAC";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,10 +32,14 @@ function App() {
       const result = await response.json();      
       dispatch(getUserAC(result.name));
     }
-
+    
     checkUser();
-
+    
   }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(getCategoriesSagaAC()) 
+  }, [dispatch])
 
   return (
     <div>
