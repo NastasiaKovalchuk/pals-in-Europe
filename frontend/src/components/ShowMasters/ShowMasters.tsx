@@ -115,7 +115,7 @@ export const ShowMasters = () => {
         </button>
         <div className="cards">
           {masters
-            ? masters.map((master: Master) => <CardMaster />)
+            ? masters.map((master: Master) => <p>{master.mastername}</p>)
             : ""}
         </div>
         
