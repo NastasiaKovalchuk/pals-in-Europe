@@ -6,3 +6,5 @@ export const UNSET_MASTER = "UNSET_MASTER";
 
 export const SET_ADMIN = "SET_ADMIN"
 export const UNSET_ADMIN = "UNSET_ADMIN";
+
+export const GET_MASTERS = "GET_MASTERS"
