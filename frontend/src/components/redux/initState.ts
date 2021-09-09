@@ -7,6 +7,7 @@ export interface UserStateValue {
 }
 
 export interface InitStateValue {
+  masters: Master[]
   user: UserStateValue
 }
 
@@ -25,6 +26,7 @@ export interface Master {
 }
 
 const initState: InitStateValue = {
+  masters: [],
   user: {
     name: "",
     userID: "",
