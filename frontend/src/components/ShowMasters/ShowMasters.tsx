@@ -24,11 +24,24 @@ export const ShowMasters = () => {
     location: string
   ) => {
     event.preventDefault();
-    console.log(event.target);
-
-    setMasters(
-      masters.filter((master) => master.category.category === category && master.location === location)
-    );
+    console.log(masters);
+    if (category && location) {
+      setMasters(
+        masters.filter(
+          (master) =>
+            master.category.category === category &&
+            master.location === location
+        )
+      );
+    } else if (category) {
+      setMasters(
+        masters.filter((master) => master.category.category === category)
+      );
+    } else if (location) {
+      setMasters(masters.filter((master) => master.location === location));
+    }
+    setChosenCategory("");
+    setChosenLocation("");
   };
 
   const findCategories = (e: ChangeEvent) => {
@@ -48,7 +61,6 @@ export const ShowMasters = () => {
         //       setMasters(result.masters.filter((master: Master) => master.category.category === value))
         //   } else {
         setMasters(result.masters);
-        console.log(result);
         //   }
       });
   }, []);
@@ -58,7 +70,16 @@ export const ShowMasters = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setCategories(result.masters.map((master: Master) => master.category.category));
+        const allCategories = result.masters.map(
+          (master: Master) => master.category.category
+        );
+        const categoriesArr: string[] = [];
+        for (let i = 0; i < allCategories.length; i++) {
+          if (!categoriesArr.includes(allCategories[i])) {
+            categoriesArr.push(allCategories[i]);
+          }
+        }
+        setCategories(categoriesArr);
         setCities(result.masters.map((master: Master) => master.location));
       });
   }, []);
@@ -84,8 +105,8 @@ export const ShowMasters = () => {
               </option>
               {categories
                 ? categories.map((category) => (
-                  <option value={category}>{category}</option>
-                ))
+                    <option value={category}>{category}</option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -121,7 +142,6 @@ export const ShowMasters = () => {
             ? masters.map((master: Master) => <p>{master.mastername}</p>)
             : ""}
         </div>
-
       </div>
       <div className="ymaps">
         <YMaps>
