@@ -54,11 +54,14 @@ export const ShowMasters = () => {
   }, []);
 
   useEffect(() => {
-    if (masters) {
-      setCategories(masters.map((master) => master.category.category));
-      setCities(masters.map((master) => master.location));
-    }
-  }, [masters]);
+    fetch("http://localhost:8080/master/")
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setCategories(result.masters.map((master: Master) => master.category.category));
+        setCities(result.masters.map((master: Master) => master.location));
+      });
+  }, []);
 
   const { value } = useParams<MastersValue>();
   return (
@@ -118,7 +121,7 @@ export const ShowMasters = () => {
             ? masters.map((master: Master) => <p>{master.mastername}</p>)
             : ""}
         </div>
-        
+
       </div>
       <div className="ymaps">
         <YMaps>
