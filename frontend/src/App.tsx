@@ -28,7 +28,9 @@ function App() {
           }
         }
       )
-      const result = await response.json();      
+      const result = await response.json();   
+      console.log(result);
+         
       dispatch(getUserAC(result.name));
     }
 

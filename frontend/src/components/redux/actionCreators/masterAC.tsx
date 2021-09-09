@@ -9,8 +9,6 @@ export const masterSignupAC = (
   password: string,
   category: string,
   experience: string) => async (dispatch: AppDispatch) => {
-
-
     const response = await fetch('http://localhost:8080/master/signup', {
       method: 'POST',
       headers: {

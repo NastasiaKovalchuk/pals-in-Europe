@@ -15,8 +15,11 @@ import generalRouter from "./routes/general.router";
 
 declare module "express-session" {
   export interface SessionData {
-    name: string;
-    // id: string;
+    user: {
+      name: string;
+      id: string;
+
+    }
   }
 }
 
@@ -43,7 +46,7 @@ console.log('---->', DBURL);
 app.use(
   session({
     secret: SECRET!,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     name: "myCookie", // указываем название наших куки
     cookie: { secure: false, maxAge: 60000000 },

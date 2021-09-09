@@ -14,8 +14,7 @@ export const userSignupAC = (
   login: string,
   email: string,
   password: string) => async (dispatch: AppDispatch) => {
-console.log('userSignupAC');
-
+    // console.log('userSignupAC');
     const response = await fetch('http://localhost:8080/user/signup', {
       method: 'POST',
       headers: {
@@ -30,7 +29,7 @@ console.log('userSignupAC');
       }),
     });
     const result = await response.json();
-    console.log('userSignupAC', result);
+    // console.log('userSignupAC', result);
     dispatch({
       type: SET_USER,
       payload: result,
@@ -50,16 +49,26 @@ export const userLoginAC = (login: string, password: string) => async (dispatch:
     }),
   });
   const result = await response.json();
-  console.log('loginUserAC', result);
+  // console.log('loginUserAC', result);
   dispatch({
     type: SET_USER,
     payload: result,
   })
 }
 
-export const logoutAC = () => {
-  return {
-    type: UNSET_USER,
-    payload: ''
+export const logoutAC = () => async (dispatch: AppDispatch) => {
+  // console.log('logoutAC', logoutAC);
+  const responce = await fetch('http://localhost:8080/logout', {
+    credentials: 'include',
+  });
+  const result = await responce.json();
+  // console.log('logoutAC =>', result);
+
+  if (result.success) {
+    // console.log("Сессия окончена");
+    dispatch({
+      type: UNSET_USER,
+      payload: ''
+    })
   }
-};
+}

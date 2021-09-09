@@ -11,12 +11,16 @@ export const loginAdmin: RequestHandler = async (req, res, next) => {
       };
       const checkAdmin = await adminModel.findOne({ login });
       if (checkAdmin) {
+        req.session.user = {
+          name: checkAdmin.login,
+          id: checkAdmin.id
+        };
         if (checkAdmin.password === password) {
-          req.session.name = checkAdmin.login;
-          req.session.id = checkAdmin._id;
           return res.status(200).json({
             success: true,
-            login: req.session.name,
+            login: req.session.user.name,
+            role: 'admin',
+            id:  req.session.user.id,
           });
         }
       }
@@ -29,5 +33,5 @@ export const loginAdmin: RequestHandler = async (req, res, next) => {
 };
 
 // export const checkAdmin: RequestHandler = (req, res, next) => {
-//   res.send({ login: req.session.name});
+//   res.send({ login: req.session.user.name});
 // };

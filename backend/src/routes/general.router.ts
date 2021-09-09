@@ -1,23 +1,36 @@
 import { Router } from "express";
+import { Cookie } from "express-session";
 const router = Router();
 
 
 router.get("/logout", (req, res) => {
+  console.log('========================');
   try {
-    req.session.destroy((err) => {
-      console.log(err);
-    });
-    return res.status(200).send({ success: true });
+    req.session.destroy(function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('logout', req.session);
+        res.clearCookie('myCookie');
+        return res.status(200).send({ success: true });
+      }
+    })
   } catch (error) {
     console.log(error);
   }
 });
 
 router.get("/checkuser", (req, res, next) => {
-  if (req.session.name) {
-    res.send({ name: req.session.name });
+  // console.log("==========================================");
+  
+  
+  // console.log('ПЕtttttttрвый лог', typeof req.session.user);
+  if (req?.session?.user?.name) {
+    // console.log('Второй лог', req.session.user.name);
+    res.json({ name: req.session.user.name });
   } else {
-    res.send({ name: "" });
+    // console.log('Третий лог', req.session);
+    res.json({ name: "" });
   }
 });
 

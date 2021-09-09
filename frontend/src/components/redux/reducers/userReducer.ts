@@ -7,14 +7,17 @@ export const userReducer = (
 ) => {
   switch (action.type) {
     case SET_USER:
+      console.log('action =>', action);
       return {
         name: action.payload,
       };
     case UNSET_USER:
+      console.log('action =>', action);
       return {
         name: "",
       };
     case SET_MASTER:
+      console.log(action);
       return {
         name: action.payload.name,
         masterID: action.payload.masterID,
