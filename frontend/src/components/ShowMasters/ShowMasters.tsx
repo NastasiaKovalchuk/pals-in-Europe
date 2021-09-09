@@ -3,6 +3,7 @@ import { useState, useCallback } from "react";
 import { useParams } from "react-router";
 import { YMaps, Map } from "react-yandex-maps";
 import { Master } from "../redux/initState";
+import CardMaster from "../CardMaster/CardMaster";
 import "./ShowMasters.scss";
 
 type MastersValue = {
@@ -80,8 +81,8 @@ export const ShowMasters = () => {
               </option>
               {categories
                 ? categories.map((category) => (
-                    <option value={category}>{category}</option>
-                  ))
+                  <option value={category}>{category}</option>
+                ))
                 : ""}
             </select>
           </div>
@@ -107,14 +108,17 @@ export const ShowMasters = () => {
         </div>
 
         <button
-          className="btn"
+          className="btnFind"
           onClick={(e) => findMastersBtn(e, chosenCategory, chosenLocation)}
         >
           Find a master
         </button>
-        {masters
-          ? masters.map((master: Master) => <p>{master.mastername}</p>)
-          : ""}
+        <div className="cards">
+          {masters
+            ? masters.map((master: Master) => <CardMaster />)
+            : ""}
+        </div>
+        
       </div>
       <div className="ymaps">
         <YMaps>

@@ -1,7 +1,22 @@
 .mainDiv {
   // text-align: center;
+  margin-top: 100px;
 
-  button {
+  .mainInput {
+    &:hover {
+      filter: drop-shadow(0 0 5px #4aff59);
+
+      -webkit-transition: all 0.3s ease;
+      ;
+      -moz-transition: all 0.3s ease;
+      ;
+      -o-transition: all 0.3s ease;
+      ;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .btnSearch {
     background-color: #7dc50f;
     color: white;
     width: 500px;
@@ -10,6 +25,15 @@
     &:hover {
       color: white;
       background-color: #8be700;
+      filter: drop-shadow(0 0 7px #8aff94);
+
+      -webkit-transition: all 0.3s ease;
+      ;
+      -moz-transition: all 0.3s ease;
+      ;
+      -o-transition: all 0.3s ease;
+      ;
+      transition: all 0.3s ease;
     }
   }
 }
