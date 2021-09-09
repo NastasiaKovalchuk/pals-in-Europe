@@ -3,6 +3,8 @@ import { useState, useCallback } from "react";
 import { useParams } from "react-router";
 import { YMaps, Map } from "react-yandex-maps";
 import { Master } from "../redux/initState";
+import { useDispatch, useSelector } from "react-redux";
+import { getMastersAC } from "../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./ShowMasters.scss";
 
@@ -15,6 +17,12 @@ export const ShowMasters = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenLocation, setChosenLocation] = useState("");
+
+  const dispatch = useDispatch();
+  const mastersRedux = useSelector(state => state)
+  console.log('mastersRedux ===>', mastersRedux);
+  
+
 
   const [cities, setCities] = useState<string[]>([]);
 
@@ -39,6 +47,8 @@ export const ShowMasters = () => {
       );
     } else if (location) {
       setMasters(masters.filter((master) => master.location === location));
+    // } else if (!location && !category) {
+    //   setMasters(mastersRedux);
     }
     setChosenCategory("");
     setChosenLocation("");
@@ -61,6 +71,9 @@ export const ShowMasters = () => {
         //       setMasters(result.masters.filter((master: Master) => master.category.category === value))
         //   } else {
         setMasters(result.masters);
+
+        const action = getMastersAC(result.masters)
+        dispatch(action)
         //   }
       });
   }, []);
@@ -139,7 +152,7 @@ export const ShowMasters = () => {
         </button>
         <div className="cards">
           {masters
-            ? masters.map((master: Master) => <p>{master.mastername}</p>)
+            ? masters.map((master) => <CardMaster master={master} />)
             : ""}
         </div>
       </div>

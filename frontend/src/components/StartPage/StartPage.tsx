@@ -1,11 +1,23 @@
 import React from "react";
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux";
+import { getInputSagaAC } from "../redux/actionCreators/inputAC";
 import "./StartPage.scss";
+import { RootStateValue } from "../redux/reducers/rootReducer";
 
 const StartPage = () => {
   const [search, setSearch] = useState("")
   let history = useHistory();
+  const dispatch = useDispatch();
+  const categoryFromSelector = useSelector((state: RootStateValue) => state.categories)
+  const onlyCategories = categoryFromSelector.map((el) => el.category);
+  const filterCategories = onlyCategories.filter((el) => el[0] == search)
+  console.log(filterCategories);
+  // const onChangeFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setSearch(event.target.value)
+  //   dispatch(getInputSagaAC(event.target.value))
+  // }
 
   const sumbitHandler = useCallback((event: React.FormEvent) => {
     event.preventDefault();
@@ -45,6 +57,7 @@ const StartPage = () => {
           aria-label="Search" />
         <button className="btn btnSearch" type="submit">Search</button>
       </form>
+      <div>{filterCategories}</div>
     </div>
   )
 }
