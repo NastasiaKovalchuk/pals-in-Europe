@@ -4,6 +4,7 @@ export interface UserStateValue {
     userID: string;
     masterID: string;
     adminID: string;
+    role: string;
 }
 
 export interface InitStateValue {
@@ -30,6 +31,7 @@ const initState: InitStateValue = {
     userID: "",
     masterID: "",
     adminID: "",
+    role: '',
   },
 };
 

@@ -16,14 +16,14 @@ export const Header = () => {
     event.preventDefault();
     const responce = await fetch('http://localhost:8080/logout');
     const result = await responce.json();
-    console.log(result);
+    // console.log(result);
     
     if(result.success) {
       // setName('')
       console.log("Сессия окончена");
       // console.log(history);
       dispatch(logoutAC())
-      // history.push("/");
+      history.push("/");
     }
   }
 

@@ -31,6 +31,7 @@ export const createMaster: RequestHandler = async (req, res, next) => {
           return res.status(200).json({
             name: req.session.name,
             masterId: newMaster._id,
+            role: 'master'
           });
         }
         return res.status(500).json({ message: "Something went wrong" });
@@ -57,6 +58,7 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
           success: true,
           name: req.session.name,
           masterId: checkMaster._id,
+          role: 'master'
         });
       }
     }

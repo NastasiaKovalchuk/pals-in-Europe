@@ -11,14 +11,14 @@ export const createUser: RequestHandler = async (req, res, next) => {
       password: string;
     };
     // console.log(email, name, login, password);
-    
+
     const checkExistingEmail = await userModel.findOne({ email });
     if (!checkExistingEmail) {
-      
+
       const checkExistingNick = await userModel.findOne({ username: name });
       if (!checkExistingNick) {
         const newUser = await new userModel({ email, username: name, login, password });
-        
+
         newUser.save();
         if (newUser) {
           req.session.name = newUser.username;
@@ -26,6 +26,8 @@ export const createUser: RequestHandler = async (req, res, next) => {
           return res.status(200).json({
             name: req.session.name,
             userId: newUser._id,
+            role: 'user'
+
           });
         }
         return res
@@ -56,6 +58,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
           success: true,
           name: req.session.name,
           userID: checkUser._id,
+          role: 'user'
         });
       }
     }
