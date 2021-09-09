@@ -27,10 +27,13 @@ export const createMaster: RequestHandler = async (req, res, next) => {
         });
         newMaster.save();
         if (newMaster) {
-          req.session.name = newMaster.mastername;
+          req.session.user = {
+            name: newMaster.mastername,
+            id: newMaster.id
+          };
           return res.status(200).json({
-            name: req.session.name,
-            masterId: newMaster._id,
+            name: req.session.user.name,
+            masterId: req.session.user.id,
             role: 'master'
           });
         }
@@ -53,12 +56,14 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
     const checkMaster = await masterModel.findOne({ login });
     if (checkMaster) {
       if (checkMaster.password === password) {
-        req.session.name = checkMaster.mastername;
+        req.session.user = {
+          name: checkMaster.mastername,
+          id: checkMaster.id
+        };
         return res.status(200).json({
-          success: true,
-          name: req.session.name,
-          masterId: checkMaster._id,
-          role: 'master'
+          name: req.session.user.name,
+            masterId: req.session.user.id,
+            role: 'master'
         });
       }
     }
@@ -73,14 +78,9 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
 export const getAllMasters: RequestHandler = async (req, res) => {
   try {
     const masters = await masterModel.find();
-    console.log(masters);
-    
+    // console.log(masters)
     res.status(200).json({ masters });
   } catch (error) {
     console.log(error);
   }
 };
-
-// export const checkMaster: RequestHandler = (req, res, next) => {
-//   res.send({ name: req.session.name });
-// };

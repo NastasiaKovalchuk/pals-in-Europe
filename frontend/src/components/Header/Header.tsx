@@ -11,21 +11,15 @@ export const Header = () => {
   const session = useSelector((state: RootStateValue) => state);
   const history = useHistory();
   const dispatch = useDispatch();
-  
-  const logout = async (event: React.SyntheticEvent) => {
+console.log('Header', session.user.name );
+
+  const onLogout = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-    const responce = await fetch('http://localhost:8080/logout');
-    const result = await responce.json();
-    // console.log(result);
-    
-    if(result.success) {
-      // setName('')
-      console.log("Сессия окончена");
-      // console.log(history);
-      dispatch(logoutAC())
-      history.push("/");
-    }
+
+    dispatch(logoutAC())
+    history.push("/");
   }
+
 
   return (
     <>
@@ -64,7 +58,7 @@ export const Header = () => {
             <>
               <div>
                 <Link to="/" className="dropdown-item">
-                  <button type="button" onClick={logout} className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button type="button" onClick={onLogout} className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Logout
                   </button>
                 </Link>

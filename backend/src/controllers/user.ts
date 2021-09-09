@@ -10,25 +10,24 @@ export const createUser: RequestHandler = async (req, res, next) => {
       login: string;
       password: string;
     };
-    // console.log(email, name, login, password);
-
     const checkExistingEmail = await userModel.findOne({ email });
     if (!checkExistingEmail) {
-
       const checkExistingNick = await userModel.findOne({ username: name });
       if (!checkExistingNick) {
         const newUser = await new userModel({ email, username: name, login, password });
-
         newUser.save();
         if (newUser) {
-          req.session.name = newUser.username;
-          req.session.id = newUser._id;
-          return res.status(200).json({
-            name: req.session.name,
-            userId: newUser._id,
-            role: 'user'
-
-          });
+          if (req.session) {
+            req.session.user = {
+              name: newUser.username,
+              id: newUser._id,
+            }
+            return res.status(200).json({
+              name: req.session.user.name,
+              id: req.session.user.id,
+              role: 'user',
+            });
+          }
         }
         return res
           .status(500)
@@ -50,16 +49,18 @@ export const loginUser: RequestHandler = async (req, res, next) => {
     };
     const checkUser = await userModel.findOne({ login });
     if (checkUser) {
-      // console.log('checkUser =>', checkUser);
       if (checkUser.password === password) {
-        req.session.name = checkUser.username;
-        req.session.id = checkUser._id;
-        return res.status(200).json({
-          success: true,
-          name: req.session.name,
-          userID: checkUser._id,
-          role: 'user'
-        });
+        if (req.session) {
+          req.session.user = {
+            name: checkUser.username,
+            id: checkUser._id,
+          }
+          return res.status(200).json({
+            name: req.session.user.name,
+            id: req.session.user.id,
+            role: 'user',
+          });
+        }
       }
     }
     return res
