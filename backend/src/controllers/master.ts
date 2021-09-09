@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
+import categoryModel from "../db/models/category.model";
 
 export const createMaster: RequestHandler = async (req, res, next) => {
   try {
