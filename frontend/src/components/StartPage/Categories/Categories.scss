@@ -1,0 +1,43 @@
+.allCategoriesDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  .allCategoriesHead {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .categoryList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 1500px;
+    margin-left: 90px;
+ 
+
+    .oneCategory {
+      margin: 5px;
+      width: 190px;
+      font-size: 20px;
+      padding: 7px;
+
+      &:hover {
+        cursor: pointer;
+        color: white;
+        background-color: #7780ff;
+        filter: drop-shadow(0 0 7px #85d8ff);
+
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+}

@@ -6,6 +6,9 @@ import { UserLogin } from "./components/User/UserLogin/UserLogin";
 import { UserSignup } from "./components/User/UserSignup/UserSignup";
 import { MasterLogin } from "./components/Master/MasterLogin/MasterLogin";
 import { MasterSignup } from "./components/Master/MasterSignup/MasterSignup";
+import { UserAccount } from "./components/User/UserAccount/UserAccount";
+import { MasterAccount } from "./components/Master/MasterAccount/MasterAccount";
+import { AdminAccount } from "./components/Admin/AdminAccount/AdminAccount";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserAC } from "./components/redux/actionCreators/userAC";
@@ -21,7 +24,7 @@ function App() {
   const user = useSelector((state: RootStateValue) => state.user);
 
   useEffect(() => {
-    const checkUser = async () => {
+    const getUser = async () => {
       const response = await fetch("http://localhost:8080/checkuser", {
         method: "GET",
         credentials: "include",
@@ -30,11 +33,9 @@ function App() {
         },
       });
       const result = await response.json();
-
-      dispatch(getUserAC(result.name));
+      dispatch(getUserAC(result));
     };
-
-    checkUser();
+    getUser();
   }, [dispatch]);
 
   useEffect(() => {
@@ -68,21 +69,29 @@ function App() {
             <Route exact path="/">
               <StartPage />
             </Route>
-
             <Route exact path="/user/login">
-              {user.name === "" ? <UserLogin /> : <StartPage />}
+              {!user.name ? <UserLogin /> : <StartPage />}
+            </Route>
+            <Route exact path="/user/signup">
+              {!user.name ? <UserSignup /> : <StartPage />}
             </Route>
             <Route exact path="/user/signup">
               {user.name === "" ? <UserSignup /> : <StartPage />}
             </Route>
             <Route exact path="/master/login">
-              <MasterLogin />
+              {!user.name ? <MasterLogin /> : <StartPage />}
             </Route>
             <Route exact path="/master/signup">
-              <MasterSignup />
+              {!user.name ? <MasterSignup /> : <StartPage />}
             </Route>
             <Route exact path="/search">
               <ShowMasters />
+            </Route>
+            <Route exact path="/account">
+              {user.role === "user" ? <UserAccount /> : <MasterAccount />}
+            </Route>
+            <Route exact path="/admin/account">
+              <AdminAccount />
             </Route>
           </Switch>
         </div>

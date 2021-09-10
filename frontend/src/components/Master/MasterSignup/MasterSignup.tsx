@@ -2,7 +2,7 @@ import { useState } from "react";
 import css from '../Master.module.css';
 import { masterSignupAC } from '../../redux/actionCreators/masterAC';
 import { useDispatch } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 
 export const MasterSignup = () => {
   const [name, setName] = useState('');
@@ -12,10 +12,12 @@ export const MasterSignup = () => {
   const [category, setCategory] = useState('');
   const [experience, setExperience] = useState('');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(masterSignupAC(name, login, email, password, category, experience))
+    dispatch(masterSignupAC(name, login, email, password, category, experience));
+    history.push("/");
   }
 
   return (

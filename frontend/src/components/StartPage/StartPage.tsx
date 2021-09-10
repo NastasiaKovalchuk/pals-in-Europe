@@ -1,10 +1,12 @@
-import React, { ChangeEvent, MouseEventHandler } from "react";
+import React from "react";
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./StartPage.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
 import { setSearchValue } from "../redux/actionCreators/searchAC";
+import Slider from "./Slider/Slider";
+import Categories from "./Categories/Categories";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -61,49 +63,10 @@ const StartPage = () => {
 
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
-      <div
-        id="carouselExampleFade"
-        className="carousel slide carousel-fade"
-        data-bs-ride="carousel"
-      >
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="img/1.jpg" className="d-block w-100" alt="ss" />
-          </div>
-          <div className="carousel-item">
-            <img src="img/2.jpg" className="d-block w-100" alt="ss" />
-          </div>
-          <div className="carousel-item">
-            <img src="img/1.jpg" className="d-block w-100" alt="ss" />
-          </div>
-        </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Предыдущий</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="visually-hidden">Следующий</span>
-        </button>
-      </div>
-      <form onSubmit={sumbitHandler} className="d-flex justify-content-center">
+      <Slider />
+      <form onSubmit={sumbitHandler} className="d-flex justify-content-center mainForm">
         <input
+          id="typeahead-basic"
           onChange={(e) => chooseCategory(e.target.value)}
           className="form-control me-2 mainInput"
           type="search"
@@ -112,18 +75,24 @@ const StartPage = () => {
           aria-label="Search"
         />
         <button className="btn btnSearch" type="submit">
-          Search
+          Search Masters
         </button>
       </form>
-      {/* @ts-ignore */}
-      {filterCategories && show
-        ? filterCategories.map((el, index) => (
-            <div key={index} onClick={(e) => getTheRightSearch(e, el)}>
+      <div className="prompt">
+        {filterCategories && show
+          ? filterCategories.map((el, index) => (
+            <div
+              className="onePrompt"
+              key={index}
+              onClick={(e) => getTheRightSearch(e, el)}
+            >
               {el}
             </div>
           ))
-        : ""}
-      {noCategories ? <div>We don't have such a category</div> : ""}
+          : ""}
+        {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
+      </div>
+      <Categories />
     </div>
   );
 };
