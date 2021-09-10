@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { RootStateValue } from '../redux/reducers/rootReducer';
@@ -11,7 +11,7 @@ export const Header = () => {
   const session = useSelector((state: RootStateValue) => state);
   const history = useHistory();
   const dispatch = useDispatch();
-console.log('Header', session.user.name );
+// console.log('Header', session.user.name );
 
   const onLogout = async (event: React.SyntheticEvent) => {
     event.preventDefault();

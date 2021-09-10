@@ -9,39 +9,49 @@ import { MasterSignup } from "./components/Master/MasterSignup/MasterSignup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserAC } from "./components/redux/actionCreators/userAC";
-import { RootStateValue } from './components/redux/reducers/rootReducer';
-import { getCategoriesSagaAC } from "./components/redux/actionCreators/categoryAC";
+import { RootStateValue } from "./components/redux/reducers/rootReducer";
+import {
+  getCategoriesAC,
+  getCategoriesSagaAC,
+} from "./components/redux/actionCreators/categoryAC";
 
 function App() {
   const dispatch = useDispatch();
   // const
-  const user = useSelector((state: RootStateValue) => state.user)
+  const user = useSelector((state: RootStateValue) => state.user);
 
   useEffect(() => {
     const checkUser = async () => {
-      const response = await fetch(
-        'http://localhost:8080/checkuser',
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
+      const response = await fetch("http://localhost:8080/checkuser", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const result = await response.json();
+      // console.log(result);
+
+      dispatch(getUserAC(result.name));
+    };
+
+    checkUser();
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/categories/")
+      .then((res) => res.json())
+      .then((res) => {
+        const categoriesArr: string[] = [];
+        for (let i = 0; i < res.categoriesFind.length; i++) {
+          if (!categoriesArr.includes(res.categoriesFind[i])) {
+            
+            categoriesArr.push(res.categoriesFind[i]);
           }
         }
-      )
-      const result = await response.json();   
-      console.log(result);
-         
-      dispatch(getUserAC(result.name));
-    }
-    
-    checkUser();
-    
+        dispatch(getCategoriesAC(categoriesArr));
+      });
   }, [dispatch]);
-  
-  useEffect(() => {
-    dispatch(getCategoriesSagaAC()) 
-  }, [dispatch])
 
   return (
     <div>
@@ -57,16 +67,10 @@ function App() {
             </Route>
 
             <Route exact path="/user/login">
-              {user.name === "" ?
-                <UserLogin />
-                : <StartPage />
-              }
+              {user.name === "" ? <UserLogin /> : <StartPage />}
             </Route>
             <Route exact path="/user/signup">
-              {user.name === "" ?
-                <UserSignup />
-                : <StartPage />
-              }
+              {user.name === "" ? <UserSignup /> : <StartPage />}
             </Route>
             <Route exact path="/master/login">
               <MasterLogin />

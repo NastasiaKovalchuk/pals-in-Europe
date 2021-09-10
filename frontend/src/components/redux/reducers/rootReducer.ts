@@ -8,7 +8,7 @@ export interface RootStateValue {
   user: UserStateValue,
   masters: Master[],
   // categories == state.categories from useSelector
-  categories: Category[]
+  categories: string[]
   search: Search
 }
 
