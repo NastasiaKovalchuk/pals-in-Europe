@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "./StartPage.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
 import Slider from "./Slider/Slider";
+import Categories from "./Categories/Categories";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +17,8 @@ const StartPage = () => {
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
-  // console.log(categoryFromSelector);
+
+  console.log('categoryFromSelector', categoryFromSelector);
   // const onChangeFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSearch(event.target.value)
   //   dispatch(getInputSagaAC(event.target.value))
@@ -65,8 +67,9 @@ const StartPage = () => {
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
       <Slider />
-      <form onSubmit={sumbitHandler} className="d-flex justify-content-center">
+      <form onSubmit={sumbitHandler} className="d-flex justify-content-center mainForm">
         <input
+          id="typeahead-basic"
           onChange={(e) => chooseCategory(e.target.value)}
           className="form-control me-2 mainInput"
           type="search"
@@ -75,18 +78,25 @@ const StartPage = () => {
           aria-label="Search"
         />
         <button className="btn btnSearch" type="submit">
-          Search
+          Search Masters
         </button>
       </form>
-      {/* @ts-ignore */}
-      {filterCategories && setShow
-        ? filterCategories.map((el, index) => (
-          <div key={index} onClick={(e) => getTheRightSearch(e, el)}>
-            {el}
-          </div>
-        ))
-        : ""}
-      {noCategories ? <div>We don't have such a category</div> : ""}
+      <div className="prompt">
+        {/* @ts-ignore */}
+        {filterCategories && setShow
+          ? filterCategories.map((el, index) => (
+            <div
+              className="onePrompt"
+              key={index}
+              onClick={(e) => getTheRightSearch(e, el)}
+            >
+              {el}
+            </div>
+          ))
+          : ""}
+        {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
+      </div>
+      <Categories />
     </div>
   );
 };

@@ -1,39 +1,106 @@
 .mainDiv {
   // text-align: center;
   margin-top: 26px;
+  overflow: hidden;
 
-  .mainInput {
-    &:hover {
-      filter: drop-shadow(0 0 5px #4aff59);
+  .mainForm {
+    z-index: 12;
+    position: absolute;
+    top: 480px;
+    
+    .mainInput {
+      font-size: 23px;
+      padding-left: 20px;
 
-      -webkit-transition: all 0.3s ease;
-      ;
-      -moz-transition: all 0.3s ease;
-      ;
-      -o-transition: all 0.3s ease;
-      ;
-      transition: all 0.3s ease;
+      &:hover {
+        filter: drop-shadow(0 0 9px #4aff59);
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
+    }
+  
+    .btnSearch {
+      font-size: 25px;
+      background-color: #7dc50f;
+      color: white;
+      width: 600px;
+      height: 70px;
+  
+      &:hover {
+        color: white;
+        background-color: #8be700;
+        filter: drop-shadow(0 0 7px #8aff94);
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
     }
   }
 
-  .btnSearch {
-    background-color: #7dc50f;
-    color: white;
-    width: 500px;
-    height: 50px;
+  .prompt {
+    z-index: 13;
+    background-color: rgb(151, 151, 151);
+    position: absolute;
+    top: 549px;
+    left: 505px;
+    width: 543px;
 
     &:hover {
-      color: white;
-      background-color: #8be700;
-      filter: drop-shadow(0 0 7px #8aff94);
+      cursor: pointer;
+    }
+    
+    .onePrompt {
+      padding-left: 25px;
+      padding-bottom: 3px;
+      padding-top: 3px;
+      color: rgb(228, 228, 228);
 
-      -webkit-transition: all 0.3s ease;
-      ;
-      -moz-transition: all 0.3s ease;
-      ;
-      -o-transition: all 0.3s ease;
-      ;
-      transition: all 0.3s ease;
+      &:hover {
+        color: white;
+        background-color: #8be700;
+        filter: drop-shadow(0 0 7px #8aff94);
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
+    }
+
+    .noPrompt {
+      background-color: rgb(230, 100, 100);
+      padding-left: 25px;
+      padding-bottom: 7px;
+      padding-top: 7px;
+      color: rgb(240, 240, 240);
+      &:hover {
+        cursor: not-allowed;
+        color: white;
+        background-color: rgb(255, 153, 153);
+        filter: drop-shadow(0 0 7px rgb(255, 79, 79));
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
     }
   }
 }
