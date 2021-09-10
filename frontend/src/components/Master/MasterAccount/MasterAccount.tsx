@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getMasterAccountAC } from '../../redux/actionCreators/masterAC';
+// import { getMasterAccountAC } from '../../redux/actionCreators/masterAC';
 import { RootStateValue } from '../../redux/reducers/rootReducer';
 
 export const MasterAccount = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateValue) => state)
-// console.log(user);
+console.log(user);
 
   // useEffect(() => {
   //   const getMasterAccount = async () => {

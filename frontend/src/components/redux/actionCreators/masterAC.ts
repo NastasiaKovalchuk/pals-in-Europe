@@ -48,29 +48,29 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  console.log('masterLoginAC ===>', result);
+  // console.log('masterLoginAC ===>', result);
   dispatch({
     type: SET_MASTER,
     payload: result,
   })
 }
 
-export const getMasterAccountAC = (master: object) => async (dispatch: AppDispatch) => {
-  const response = await fetch('http://localhost:8080/master/account', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    credentials: "include",
-    body: JSON.stringify({
-      master
-    }),
-  });
-  const result = await response.json();
-  console.log('masterLoginAC ===>', result);
-  dispatch({
-    type: GET_MASTER_ACCOUNT,
-    payload: result,
-  })
-}
+// export const getMasterAccountAC = (master: object) => async (dispatch: AppDispatch) => {
+//   const response = await fetch('http://localhost:8080/master/account', {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     credentials: "include",
+//     body: JSON.stringify({
+//       master
+//     }),
+//   });
+//   const result = await response.json();
+//   // console.log('masterLoginAC ===>', result);
+//   dispatch({
+//     type: GET_MASTER_ACCOUNT,
+//     payload: result,
+//   })
+// }
 
