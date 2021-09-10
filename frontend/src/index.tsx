@@ -8,18 +8,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 import { rootReducer } from './components/redux/reducers/rootReducer';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from "redux-saga";
-import { categoryWatcher } from "./components/redux/saga/saga"
-
-const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
   initState,
-  composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
-sagaMiddleware.run(categoryWatcher)
 
 export type AppDispatch = typeof store.dispatch;
 

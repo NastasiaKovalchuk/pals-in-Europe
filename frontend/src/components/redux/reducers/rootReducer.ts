@@ -3,6 +3,7 @@ import { userReducer } from "./userReducer";
 import { masterReducer } from "./mastersReducer";
 import { categoryReducer } from "./categoryReducer";
 import { Category, Master, UserStateValue, Search } from '../initState';
+import { searchReducer } from "./searchReducer";
 
 export interface RootStateValue {
   user: UserStateValue,
@@ -16,4 +17,5 @@ export const rootReducer = combineReducers({
     user: userReducer,
     masters: masterReducer,
     categories: categoryReducer,
+    search: searchReducer
 })

@@ -1,5 +1,5 @@
 import Header from "./components/Header/Header";
-import { ShowMasters } from "./components/ShowMasters/ShowMasters";
+import { ShowMasters } from "./components/ShowMasters/Map";
 import StartPage from "./components/StartPage/StartPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { UserLogin } from "./components/User/UserLogin/UserLogin";
@@ -14,10 +14,10 @@ import {
   getCategoriesAC,
   getCategoriesSagaAC,
 } from "./components/redux/actionCreators/categoryAC";
+import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
 
 function App() {
   const dispatch = useDispatch();
-  // const
   const user = useSelector((state: RootStateValue) => state.user);
 
   useEffect(() => {
@@ -30,7 +30,6 @@ function App() {
         },
       });
       const result = await response.json();
-      // console.log(result);
 
       dispatch(getUserAC(result.name));
     };
@@ -45,11 +44,15 @@ function App() {
         const categoriesArr: string[] = [];
         for (let i = 0; i < res.categoriesFind.length; i++) {
           if (!categoriesArr.includes(res.categoriesFind[i])) {
-            
             categoriesArr.push(res.categoriesFind[i]);
           }
         }
         dispatch(getCategoriesAC(categoriesArr));
+      });
+    fetch("http://localhost:8080/master/")
+      .then((res) => res.json())
+      .then((result) => {
+        dispatch(getMastersAC(result.masters));
       });
   }, [dispatch]);
 
@@ -78,7 +81,7 @@ function App() {
             <Route exact path="/master/signup">
               <MasterSignup />
             </Route>
-            <Route exact path="/search/:value">
+            <Route exact path="/search">
               <ShowMasters />
             </Route>
           </Switch>

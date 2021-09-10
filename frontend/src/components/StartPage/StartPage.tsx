@@ -1,9 +1,10 @@
 import React, { ChangeEvent, MouseEventHandler } from "react";
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./StartPage.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
+import { setSearchValue } from "../redux/actionCreators/searchAC";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -15,11 +16,7 @@ const StartPage = () => {
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
-  // console.log(categoryFromSelector);
-  // const onChangeFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearch(event.target.value)
-  //   dispatch(getInputSagaAC(event.target.value))
-  // }
+  const dispatch = useDispatch()
 
   const chooseCategory = (value: string) => {
     setSearch(value);
@@ -46,10 +43,11 @@ const StartPage = () => {
 
   const sumbitHandler = useCallback(
     (event: React.FormEvent) => {
-      event.preventDefault();
-      history.push(`/search/${search}`);
+      event.preventDefault();      
+      dispatch(setSearchValue(search))
+      history.push("/search");
     },
-    [search, history]
+    [dispatch, search, history]
   );
 
   const getTheRightSearch = (
@@ -118,7 +116,7 @@ const StartPage = () => {
         </button>
       </form>
       {/* @ts-ignore */}
-      {filterCategories && setShow
+      {filterCategories && show
         ? filterCategories.map((el, index) => (
             <div key={index} onClick={(e) => getTheRightSearch(e, el)}>
               {el}

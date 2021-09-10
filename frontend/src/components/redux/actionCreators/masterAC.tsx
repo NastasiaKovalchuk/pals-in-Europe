@@ -45,7 +45,6 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  console.log('masterLoginAC', result);
   dispatch({
     type: SET_MASTER,
     payload: result,
