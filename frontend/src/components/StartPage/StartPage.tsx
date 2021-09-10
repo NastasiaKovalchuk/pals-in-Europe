@@ -65,7 +65,7 @@ const StartPage = () => {
   return (
     <div className="d-flex flex-column align-items-center mainDiv">
       <Slider />
-      <form onSubmit={sumbitHandler} className="d-flex justify-content-center">
+      <form onSubmit={sumbitHandler} className="d-flex justify-content-center mainForm">
         <input
           onChange={(e) => chooseCategory(e.target.value)}
           className="form-control me-2 mainInput"
@@ -75,7 +75,7 @@ const StartPage = () => {
           aria-label="Search"
         />
         <button className="btn btnSearch" type="submit">
-          Search
+          Search Masters
         </button>
       </form>
       {/* @ts-ignore */}
