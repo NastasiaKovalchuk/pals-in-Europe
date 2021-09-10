@@ -12,15 +12,14 @@ import masterRouter from "./routes/master.router";
 import adminRouter from "./routes/admin.router";
 import generalRouter from "./routes/general.router";
 import categoryRouter from "./routes/category.router";
-
+import locationRouter from "./routes/location.router";
 
 declare module "express-session" {
   export interface SessionData {
     user: {
       name: string;
       id: string;
-
-    }
+    };
   }
 }
 
@@ -42,7 +41,7 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }));
-console.log('---->', DBURL);
+console.log("---->", DBURL);
 
 app.use(
   session({
@@ -60,6 +59,7 @@ app.use("/user", userRouter);
 app.use("/master", masterRouter);
 app.use("/admin", adminRouter);
 app.use("/categories", categoryRouter);
+app.use("/location", locationRouter);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ message: err.message });

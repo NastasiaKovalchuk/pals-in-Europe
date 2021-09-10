@@ -1,11 +1,11 @@
 import { RootStateValue } from "./reducers/rootReducer";
 
 export interface UserStateValue {
-    name: string;
-    userID: string;
-    masterID: string;
-    adminID: string;
-    role: string;
+  name: string;
+  userID: string;
+  masterID: string;
+  adminID: string;
+  role: string;
 }
 
 export interface Category {
@@ -14,22 +14,27 @@ export interface Category {
 }
 
 export interface Search {
-  category: string,
-  location: string,
+  category: string;
+  location: string;
 }
 
 export interface Master {
+  picture: string | undefined;
   _id: string;
   email: string;
   mastername: string;
   password: string;
   login: string;
   category: {
-    _id: string,
-    category: string
+    _id: string;
+    category: string;
   };
   experience: string;
-  location: string,
+  location: {
+    _id: string,
+    city: string,
+    coordinates: number[]
+  };
 }
 
 const initState: RootStateValue = {
@@ -40,7 +45,7 @@ const initState: RootStateValue = {
     userID: "",
     masterID: "",
     adminID: "",
-    role: '',
+    role: "",
   },
   search: {
     category: "",
