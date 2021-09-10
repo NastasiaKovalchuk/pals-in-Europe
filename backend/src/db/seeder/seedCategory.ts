@@ -4,11 +4,8 @@ import categoryModel from "../models/category.model";
 const categories: object[] = []
 
 async function categoryMaker() {
-  console.log('Зашли сюда');
-  
   for (let i = 0; i < 20; i += 1) {
     const category = faker.name.jobType();
-    console.log(category);
     
     categories.push({
       category
