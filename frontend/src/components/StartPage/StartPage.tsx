@@ -67,6 +67,7 @@ const StartPage = () => {
       <Slider />
       <form onSubmit={sumbitHandler} className="d-flex justify-content-center mainForm">
         <input
+          id="typeahead-basic"
           onChange={(e) => chooseCategory(e.target.value)}
           className="form-control me-2 mainInput"
           type="search"
@@ -78,15 +79,21 @@ const StartPage = () => {
           Search Masters
         </button>
       </form>
-      {/* @ts-ignore */}
-      {filterCategories && setShow
-        ? filterCategories.map((el, index) => (
-          <div key={index} onClick={(e) => getTheRightSearch(e, el)}>
-            {el}
-          </div>
-        ))
-        : ""}
-      {noCategories ? <div>We don't have such a category</div> : ""}
+      <div className="prompt">
+        {/* @ts-ignore */}
+        {filterCategories && setShow
+          ? filterCategories.map((el, index) => (
+            <div
+              className="onePrompt"
+              key={index}
+              onClick={(e) => getTheRightSearch(e, el)}
+            >
+              {el}
+            </div>
+          ))
+          : ""}
+        {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
+      </div>
     </div>
   );
 };
