@@ -8,7 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 import { rootReducer } from './components/redux/reducers/rootReducer';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from "redux-saga";
+import  createSagaMiddleware from "redux-saga";
 import { categoryWatcher } from "./components/redux/saga/saga"
 
 const sagaMiddleware = createSagaMiddleware();

@@ -1,7 +1,9 @@
 import { Router } from "express";
 import { Cookie } from "express-session";
+import { idText } from "typescript";
+import masterModel from "../db/models/master.model";
+import userModel from "../db/models/user.model";
 const router = Router();
-
 
 router.get("/logout", (req, res) => {
   try {
@@ -9,7 +11,6 @@ router.get("/logout", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        console.log('logout', req.session);
         res.clearCookie('myCookie');
         return res.status(200).send({ success: true });
       }
@@ -19,17 +20,34 @@ router.get("/logout", (req, res) => {
   }
 });
 
-router.get("/checkuser", (req, res, next) => {
-  // console.log("==========================================");
-  
-  
-  // console.log('ПЕtttttttрвый лог', typeof req.session.user);
-  if (req?.session?.user?.name) {
-    // console.log('Второй лог', req.session.user.name);
-    res.json({ name: req.session.user.name });
+router.get("/checkuser", async (req, res, next) => {
+  if (req?.session?.user) {
+    const id = req?.session?.user?.id
+    const userID = await userModel.findOne({ _id: id });
+    const masterID = await masterModel.findOne({ _id: id })
+    if (userID) {
+      // console.log('Сессия юзера существует');
+      res.json({
+        name: req.session.user.name,
+        userID: req.session.user.id,
+        role: 'user'
+      });
+    }
+    if (masterID) {
+      // console.log('Сессия мастера существует');
+      res.json({
+        name: req.session.user.name,
+        masterID: req.session.user.id,
+        role: 'master'
+      });
+    }
   } else {
-    // console.log('Третий лог', req.session);
-    res.json({ name: "" });
+    // console.log('Сессия не существует');
+    res.json({
+      name: '',
+      id: '',
+      role: ''
+    });
   }
 });
 

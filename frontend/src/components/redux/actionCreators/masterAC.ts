@@ -1,6 +1,7 @@
 
 import { AppDispatch } from "../../../index";
-import { SET_MASTER } from "../types/types";
+import { SET_MASTER, GET_MASTER_ACCOUNT } from "../types/types";
+
 
 export const masterSignupAC = (
   name: string,
@@ -25,7 +26,9 @@ export const masterSignupAC = (
       }),
     });
     const result = await response.json();
-    // console.log('masterSignupAC', result);
+    // console.log('masterSignupAC===>', result);
+
+    // console.log('masterSignupAC', result);>>>>>>> 981bd2e75304e69e298404957084c8aa7e243b6b
     dispatch({
       type: SET_MASTER,
       payload: result,
@@ -45,12 +48,29 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  console.log('masterLoginAC', result);
+  console.log('masterLoginAC ===>', result);
   dispatch({
     type: SET_MASTER,
     payload: result,
   })
 }
 
-
+export const getMasterAccountAC = (master: object) => async (dispatch: AppDispatch) => {
+  const response = await fetch('http://localhost:8080/master/account', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: "include",
+    body: JSON.stringify({
+      master
+    }),
+  });
+  const result = await response.json();
+  console.log('masterLoginAC ===>', result);
+  dispatch({
+    type: GET_MASTER_ACCOUNT,
+    payload: result,
+  })
+}
 
