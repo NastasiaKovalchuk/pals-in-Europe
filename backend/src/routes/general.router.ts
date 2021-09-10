@@ -4,7 +4,6 @@ const router = Router();
 
 
 router.get("/logout", (req, res) => {
-  console.log('========================');
   try {
     req.session.destroy(function (err) {
       if (err) {

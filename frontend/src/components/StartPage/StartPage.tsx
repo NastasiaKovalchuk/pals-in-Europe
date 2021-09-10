@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import "./StartPage.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
 import Slider from "./Slider/Slider";
+import Categories from "./Categories/Categories";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -16,7 +17,8 @@ const StartPage = () => {
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
-  // console.log(categoryFromSelector);
+
+  console.log('categoryFromSelector', categoryFromSelector);
   // const onChangeFunc = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSearch(event.target.value)
   //   dispatch(getInputSagaAC(event.target.value))
@@ -94,6 +96,7 @@ const StartPage = () => {
           : ""}
         {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
       </div>
+      <Categories />
     </div>
   );
 };
