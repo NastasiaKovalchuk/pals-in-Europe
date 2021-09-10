@@ -23,7 +23,7 @@ export const userReducer = (
         role: '',
       };
     case SET_MASTER:
-      // console.log('action =>', action);
+      // console.log(action);
       return {
         name: action.payload.name,
         masterID: action.payload.masterID,
@@ -35,6 +35,14 @@ export const userReducer = (
         adminID: action.payload.adminID,
         role: action.payload.role,
       };
+
+    // case GET_USER:
+    //   console.log('GET_USER =>', action.payload);
+    //   return {
+    //     name: action.payload.login,
+    //     id: action.payload,
+    //   };
+      
     default:
       return state;
   }

@@ -2,6 +2,7 @@
 import { AppDispatch } from "../../../index";
 import { SET_MASTER, GET_MASTER_ACCOUNT } from "../types/types";
 
+
 export const masterSignupAC = (
   name: string,
   login: string,
@@ -26,6 +27,8 @@ export const masterSignupAC = (
     });
     const result = await response.json();
     // console.log('masterSignupAC===>', result);
+
+    // console.log('masterSignupAC', result);>>>>>>> 981bd2e75304e69e298404957084c8aa7e243b6b
     dispatch({
       type: SET_MASTER,
       payload: result,
@@ -45,7 +48,7 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  // console.log('masterLoginAC ===>', result);
+  console.log('masterLoginAC ===>', result);
   dispatch({
     type: SET_MASTER,
     payload: result,
@@ -70,6 +73,4 @@ export const getMasterAccountAC = (master: object) => async (dispatch: AppDispat
     payload: result,
   })
 }
-
-
 

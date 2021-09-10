@@ -6,7 +6,7 @@ import { RootStateValue } from '../../redux/reducers/rootReducer';
 export const MasterAccount = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateValue) => state)
-console.log(user);
+// console.log(user);
 
   // useEffect(() => {
   //   const getMasterAccount = async () => {

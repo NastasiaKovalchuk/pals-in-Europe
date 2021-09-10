@@ -1,14 +1,14 @@
+
 import { AppDispatch } from "../../../index";
-import { SET_USER, UNSET_USER } from "../types/types";
+import { SET_USER, UNSET_USER} from "../types/types";
 
-
-export const getUserAC = (name: string) => {
+export const getUserAC = (user: object) => {
+  // console.log('getUserAC ===================>', user);
   return {
     type: SET_USER,
-    payload: name
+    payload: user
   }
-};
-
+}
 export const userSignupAC = (
   name: string,
   login: string,
@@ -29,7 +29,7 @@ export const userSignupAC = (
       }),
     });
     const result = await response.json();
-    console.log('userSignupAC===>', result);
+    // console.log('userSignupAC===>', result);
     dispatch({
       type: SET_USER,
       payload: result,
@@ -49,7 +49,7 @@ export const userLoginAC = (login: string, password: string) => async (dispatch:
     }),
   });
   const result = await response.json();
-  console.log('loginUserAC ====>', result);
+  // console.log('loginUserAC ====>', result);
   dispatch({
     type: SET_USER,
     payload: result,
@@ -64,7 +64,7 @@ export const logoutAC = () => async (dispatch: AppDispatch) => {
   const result = await responce.json();
   // console.log('logoutAC =>', result);
   if (result.success) {
-    console.log("Сессия окончена");
+    // console.log("Сессия окончена");
     dispatch({
       type: UNSET_USER,
       payload: ''

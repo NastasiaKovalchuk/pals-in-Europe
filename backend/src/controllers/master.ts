@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
+import categoryModel from "../db/models/category.model";
 
 export const createMaster: RequestHandler = async (req, res, next) => {
   try {
@@ -60,10 +61,12 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
           name: checkMaster.mastername,
           id: checkMaster.id
         };
+        // console.log('req.session.user ==>', req.session.user.id);
+
         return res.status(200).json({
           name: req.session.user.name,
-            masterId: req.session.user.id,
-            role: 'master'
+          masterId: req.session.user.id,
+          role: 'master'
         });
       }
     }
@@ -87,7 +90,7 @@ export const getAllMasters: RequestHandler = async (req, res) => {
 
 export const getAccount: RequestHandler = async (req, res) => {
   try {
-    const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id});
+    const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id });
     // console.log(masters)
     res.status(200).json({ masterAccount });
   } catch (error) {

@@ -1,8 +1,10 @@
 import React, { ChangeEvent, useEffect } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { YMaps, Map } from "react-yandex-maps";
 import { Master } from "../redux/initState";
+import { useDispatch } from "react-redux";
+import { getMastersAC } from "../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./ShowMasters.scss";
 
@@ -15,6 +17,15 @@ export const ShowMasters = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenLocation, setChosenLocation] = useState("");
+  const { value } = useParams<MastersValue>();
+
+  console.log(value);
+  
+  const dispatch = useDispatch();
+  // const mastersRedux = useSelector(state => state)
+  // console.log('mastersRedux ===>', mastersRedux);
+  
+
 
   const [cities, setCities] = useState<string[]>([]);
 
@@ -24,19 +35,32 @@ export const ShowMasters = () => {
     location: string
   ) => {
     event.preventDefault();
-    console.log(event.target);
-
-    setMasters(
-      masters.filter((master) => master.category.category === category && master.location === location)
-    );
+    // console.log(masters);
+    if (category && location) {
+      setMasters(
+        masters.filter(
+          (master) =>
+            master.category.category === category &&
+            master.location === location
+        )
+      );
+    } else if (category) {
+      setMasters(
+        masters.filter((master) => master.category.category === category)
+      );
+    } else if (location) {
+      setMasters(masters.filter((master) => master.location === location));
+    // } else if (!location && !category) {
+    //   setMasters(mastersRedux);
+    }
+    setChosenCategory("");
+    setChosenLocation("");
   };
 
-  const findCategories = (e: ChangeEvent) => {
-    //@ts-ignore
+  const findCategories = (e: ChangeEvent<HTMLSelectElement>) => {
     setChosenCategory(e.target.value);
   };
-  const findLocation = (e: ChangeEvent) => {
-    //@ts-ignore
+  const findLocation = (e: ChangeEvent<HTMLSelectElement>) => {
     setChosenLocation(e.target.value);
   };
 
@@ -48,19 +72,32 @@ export const ShowMasters = () => {
         //       setMasters(result.masters.filter((master: Master) => master.category.category === value))
         //   } else {
         setMasters(result.masters);
-        console.log(result);
+
+        const action = getMastersAC(result.masters)
+        dispatch(action)
         //   }
+      });
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/master/")
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const allCategories = result.masters.map(
+          (master: Master) => master.category.category
+        );
+        const categoriesArr: string[] = [];
+        for (let i = 0; i < allCategories.length; i++) {
+          if (!categoriesArr.includes(allCategories[i])) {
+            categoriesArr.push(allCategories[i]);
+          }
+        }
+        setCategories(categoriesArr);
+        setCities(result.masters.map((master: Master) => master.location));
       });
   }, []);
 
-  useEffect(() => {
-    if (masters) {
-      setCategories(masters.map((master) => master.category.category));
-      setCities(masters.map((master) => master.location));
-    }
-  }, [masters]);
-
-  const { value } = useParams<MastersValue>();
   return (
     <div className="maindiv">
       <div className="mastersDiv">
@@ -81,8 +118,8 @@ export const ShowMasters = () => {
               </option>
               {categories
                 ? categories.map((category) => (
-                  <option value={category}>{category}</option>
-                ))
+                    <option value={category}>{category}</option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -115,10 +152,9 @@ export const ShowMasters = () => {
         </button>
         <div className="cards">
           {masters
-            ? masters.map((master: Master) => <p>{master.mastername}</p>)
+            ? masters.map((master) => <CardMaster master={master} />)
             : ""}
         </div>
-        
       </div>
       <div className="ymaps">
         <YMaps>
