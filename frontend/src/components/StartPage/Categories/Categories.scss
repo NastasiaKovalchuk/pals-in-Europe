@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 
   .allCategoriesHead {
     font-size: 32px;
@@ -23,12 +24,15 @@
       width: 190px;
       font-size: 20px;
       padding: 7px;
+      border-radius: 10px;
+    
 
       &:hover {
         cursor: pointer;
         color: white;
-        background-color: #7780ff;
-        filter: drop-shadow(0 0 7px #85d8ff);
+        background-color: #b3b8ff;
+       
+        filter: drop-shadow(0 0 7px #cfd2ff);
 
         -webkit-transition: all 0.3s ease;
         ;

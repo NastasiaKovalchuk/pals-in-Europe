@@ -25,6 +25,7 @@ export interface Master {
   mastername: string;
   password: string;
   login: string;
+  rating: number;
   category: {
     _id: string;
     category: string;

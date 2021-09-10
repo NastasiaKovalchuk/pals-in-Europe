@@ -7,6 +7,7 @@ import { RootStateValue } from "../redux/reducers/rootReducer";
 import { setSearchValue } from "../redux/actionCreators/searchAC";
 import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
+import Month from "./Month/Month";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -93,6 +94,7 @@ const StartPage = () => {
         {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
       </div>
       <Categories />
+      <Month />
     </div>
   );
 };
