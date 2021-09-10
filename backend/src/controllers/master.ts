@@ -84,3 +84,13 @@ export const getAllMasters: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getAccount: RequestHandler = async (req, res) => {
+  try {
+    const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id});
+    // console.log(masters)
+    res.status(200).json({ masterAccount });
+  } catch (error) {
+    console.log(error);
+  }
+};

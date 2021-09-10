@@ -3,7 +3,8 @@ import { Router } from "express";
 import {
   createMaster,
   loginMaster,
-  getAllMasters
+  getAllMasters,
+  getAccount
 } from "../controllers/master";
 
 const router = Router();
@@ -14,5 +15,5 @@ router.post("/signup", createMaster);
 
 router.post("/login", loginMaster);
 
-
+router.get("/account", getAccount);
 export default router;

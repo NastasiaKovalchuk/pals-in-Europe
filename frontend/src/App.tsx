@@ -6,6 +6,9 @@ import { UserLogin } from "./components/User/UserLogin/UserLogin";
 import { UserSignup } from "./components/User/UserSignup/UserSignup";
 import { MasterLogin } from "./components/Master/MasterLogin/MasterLogin";
 import { MasterSignup } from "./components/Master/MasterSignup/MasterSignup";
+import { UserAccount } from './components/User/UserAccount/UserAccount';
+import { MasterAccount } from './components/Master/MasterAccount/MasterAccount'
+import { AdminAccount } from './components/Admin/AdminAccount/AdminAccount'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserAC } from "./components/redux/actionCreators/userAC";
@@ -15,6 +18,7 @@ function App() {
   const dispatch = useDispatch();
   // const
   const user = useSelector((state: RootStateValue) => state.user)
+  console.log('App ===>', user);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -28,14 +32,10 @@ function App() {
           }
         }
       )
-      const result = await response.json();   
-      console.log(result);
-         
+      const result = await response.json();
       dispatch(getUserAC(result.name));
     }
-
     checkUser();
-
   }, [dispatch]);
 
   return (
@@ -52,13 +52,13 @@ function App() {
             </Route>
 
             <Route exact path="/user/login">
-              {user.name === "" ?
+              {!user.name ?
                 <UserLogin />
                 : <StartPage />
               }
             </Route>
             <Route exact path="/user/signup">
-              {user.name === "" ?
+              {!user.name ?
                 <UserSignup />
                 : <StartPage />
               }
@@ -71,6 +71,15 @@ function App() {
             </Route>
             <Route exact path="/search/:value">
               <ShowMasters />
+            </Route>
+            <Route exact path="/user/account">
+              <UserAccount />
+            </Route>
+            <Route exact path="/master/account">
+              <MasterAccount />
+            </Route>
+            <Route exact path="/admin/account">
+              <AdminAccount />
             </Route>
           </Switch>
         </div>
