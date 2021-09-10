@@ -16,10 +16,9 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   initState,
-  composeWithDevTools(applyMiddleware(thunk, sagaMiddleware))
+  composeWithDevTools(applyMiddleware(thunk))
 );
 
-sagaMiddleware.run(categoryWatcher)
 
 export type AppDispatch = typeof store.dispatch;
 

@@ -1,31 +1,31 @@
 import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router";
-import { YMaps, Map } from "react-yandex-maps";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { Master } from "../redux/initState";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMastersAC } from "../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
-import "./ShowMasters.scss";
-
-type MastersValue = {
-  value: string;
-};
+import "./Map.scss";
+import { RootStateValue } from "../redux/reducers/rootReducer";
 
 export const ShowMasters = () => {
-  const [masters, setMasters] = useState<Master[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [showMasters, setShowMasters] = useState<Master[]>([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenLocation, setChosenLocation] = useState("");
-  const { value } = useParams<MastersValue>();
-
-  console.log(value);
-  
   const dispatch = useDispatch();
-  // const mastersRedux = useSelector(state => state)
-  // console.log('mastersRedux ===>', mastersRedux);
-  
+  const categories = useSelector((state: RootStateValue) => state.categories);
+  const masters = useSelector((state: RootStateValue) => state.masters);
+  const search = useSelector((state: RootStateValue) => state.search);
+  console.log(search);
 
+  useEffect(() => {
+    fetch("http://localhost:8080/master/")
+      .then((res) => res.json())
+      .then((result) => {
+        dispatch(getMastersAC(result.masters));
+      });
+  }, [dispatch]);
+  // console.log("mastersRedux ===>", masters);
 
   const [cities, setCities] = useState<string[]>([]);
 
@@ -35,23 +35,23 @@ export const ShowMasters = () => {
     location: string
   ) => {
     event.preventDefault();
-    // console.log(masters);
-    if (category && location) {
-      setMasters(
+    if (category !== "" && location !== "") {
+      setShowMasters(
         masters.filter(
           (master) =>
             master.category.category === category &&
-            master.location === location
+            master.location.city === location
         )
       );
-    } else if (category) {
-      setMasters(
-        masters.filter((master) => master.category.category === category)
+    } else if (category !== "") {
+      const list = masters.filter(
+        (master) => master.category.category === category
       );
-    } else if (location) {
-      setMasters(masters.filter((master) => master.location === location));
-    // } else if (!location && !category) {
-    //   setMasters(mastersRedux);
+      setShowMasters(list);
+    } else if (location !== "") {
+      setShowMasters(
+        masters.filter((master) => master.location.city === location)
+      );
     }
     setChosenCategory("");
     setChosenLocation("");
@@ -65,43 +65,34 @@ export const ShowMasters = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8080/master/")
-      .then((res) => res.json())
-      .then((result) => {
-        //   if (value) {
-        //       setMasters(result.masters.filter((master: Master) => master.category.category === value))
-        //   } else {
-        setMasters(result.masters);
-
-        const action = getMastersAC(result.masters)
-        dispatch(action)
-        //   }
-      });
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetch("http://localhost:8080/master/")
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        const allCategories = result.masters.map(
-          (master: Master) => master.category.category
+    if (masters.length > 0) {
+      if (search.category !== "") {
+        setShowMasters(
+          masters.filter(
+            (master) => master.category.category === search.category
+          )
         );
-        const categoriesArr: string[] = [];
-        for (let i = 0; i < allCategories.length; i++) {
-          if (!categoriesArr.includes(allCategories[i])) {
-            categoriesArr.push(allCategories[i]);
+      } else {
+        setShowMasters(masters);
+      }
+    }
+    fetch("http://localhost:8080/location/")
+      .then((res) => res.json())
+      .then((result) => {
+        const uniqueCities: string[] = [];
+        for (let i = 0; i < result.locations.length; i++) {
+          if (!uniqueCities.includes(result.locations[i].city)) {
+            uniqueCities.push(result.locations[i].city);
           }
         }
-        setCategories(categoriesArr);
-        setCities(result.masters.map((master: Master) => master.location));
+        setCities(uniqueCities);
       });
-  }, []);
+  }, [masters, search.category]);
 
   return (
     <div className="maindiv">
       <div className="mastersDiv">
-        <span>Found masters:</span>
+        <span>Our masters:</span>
         <div className="selects">
           <div>
             <p>Category</p>
@@ -112,6 +103,7 @@ export const ShowMasters = () => {
               name="category"
               id=""
               onChange={findCategories}
+              value={chosenCategory}
             >
               <option hidden disabled selected value="">
                 All categories
@@ -133,12 +125,17 @@ export const ShowMasters = () => {
               name="location"
               id=""
               onChange={findLocation}
+              value={chosenLocation}
             >
               <option hidden disabled selected value="">
                 All locations
               </option>
               {cities
-                ? cities.map((city) => <option value={city}>{city}</option>)
+                ? cities.map((city, index) => (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -151,8 +148,10 @@ export const ShowMasters = () => {
           Find a master
         </button>
         <div className="cards">
-          {masters
-            ? masters.map((master) => <CardMaster master={master} />)
+          {showMasters
+            ? showMasters.map((master) => (
+                <CardMaster key={master._id} master={master} />
+              ))
             : ""}
         </div>
       </div>
@@ -161,7 +160,20 @@ export const ShowMasters = () => {
           <Map
             defaultState={{ center: [49.75, 14.57], zoom: 5 }}
             className="map"
-          />
+          >
+            {masters
+              ? masters.map((el) => {
+                  if (el.location) {
+                    return (
+                      <Placemark
+                        key={el._id}
+                        geometry={el.location.coordinates}
+                      />
+                    );
+                  }
+                })
+              : ""}
+          </Map>
         </YMaps>
       </div>
     </div>

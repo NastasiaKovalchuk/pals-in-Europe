@@ -16,3 +16,4 @@ export const GET_CATEGORY_SAGA = 'GET_CATEGORY_SAGA'
 export const GET_INPUT = 'GET_INPUT'
 export const GET_INPUT_SAGA = 'GET_INPUT_SAGA'
 
+export const SET_SEARCH = "SET_SEARCH"
