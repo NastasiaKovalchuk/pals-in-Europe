@@ -1,3 +1,45 @@
 footer {
- background-color: royalblue;
+  background-color: rgb(75, 75, 75); 
+  bottom: 0;
+  width: 100%;
+  padding: 20px 220px;
+
+  .head {
+    display: flex;
+    color: rgb(184, 184, 184);
+    justify-content: space-between;
+  }
+  
+  .elements {
+    display: flex;
+    justify-content: space-between;
+    
+    .discription {
+      color: rgb(148, 148, 148);
+      width: 930px;
+    }
+  
+    .icons {
+      width: 46px;
+      background-color: rgb(116, 116, 116);
+      border-radius: 12px;
+      padding: 6px;
+      margin: 4px;
+  
+      &:hover {
+        cursor: pointer;
+        background-color: rgb(175, 175, 175);
+        filter: drop-shadow(0 0 7px #8aff94);
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
 }

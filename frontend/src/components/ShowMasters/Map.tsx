@@ -92,7 +92,7 @@ export const ShowMasters = () => {
   return (
     <div className="maindiv">
       <div className="mastersDiv">
-        <span>Our masters:</span>
+        <span>Our masters: {showMasters.length}</span>
         <div className="selects">
           <div>
             <p>Category</p>

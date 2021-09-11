@@ -34,7 +34,6 @@ const Month = () => {
       <div className="topMasters">
         {ratingSort.map((el, index) => (
           <div key={index} className="topCards">
-            {/* <CardMaster key={el._id} master={el} /> */}
             <img src={el.picture} />
             <div className="mastername">{el.mastername}</div>
             <hr className="dropdown-divider" />

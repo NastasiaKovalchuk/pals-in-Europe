@@ -18,7 +18,6 @@ import {
   getCategoriesSagaAC,
 } from "./components/redux/actionCreators/categoryAC";
 import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
-import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -96,7 +95,6 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <Footer />
       </Router>
     </div>
   );

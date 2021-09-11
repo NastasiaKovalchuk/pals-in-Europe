@@ -1,6 +1,80 @@
 .cardDiv {
   // text-align: center;
   display: flex;
-  width: 200px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  min-width: 200px;
+  max-width: 200px;
+  justify-content: space-between;
+  overflow-wrap: break-word;
   margin-top: 20px;
+  background-color: rgb(255, 255, 255);
+  filter: drop-shadow(0 0 4px #636363);
+
+  &:hover {
+    cursor: pointer;
+    color: #4f52ff;
+    background-color: #e2e4ff;
+
+    filter: drop-shadow(0 0 7px #000ba5) saturate(2) hue-rotate(0deg);
+    ;
+
+    -webkit-transition: all 0.3s ease;
+    ;
+    -moz-transition: all 0.3s ease;
+    ;
+    -o-transition: all 0.3s ease;
+    ;
+    transition: all 0.3s ease;
+  }
+
+  .picture {
+    height: 200px;
+  }
+
+  .cardBody {
+    margin-top: 5px;
+    text-align: center;
+    
+    .mastername {
+      font-size: 20px;
+      font-weight: bold;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .location {
+      height: 50px;
+    }
+
+    .rating {
+      padding-left: 12px;
+      padding-bottom: 10px;
+      padding-top: 7px;
+      font-weight: bold;
+      color: rgb(255, 49, 49);
+    }
+  
+    .topRating {
+      padding-left: 12px;
+      padding-bottom: 10px;
+      padding-top: 7px;
+      color: rgb(0, 0, 0);
+      font-weight: bold;
+  
+      background: linear-gradient(124deg, #ffd698, #faffb8, #e5b7ff, #ffc1d6, #87ffcd, #8d8fff, #8bffcf);
+      background-size: 1800% 1800%;
+  
+      -webkit-animation: rainbow 5s ease infinite;
+      -z-animation: rainbow 5s ease infinite;
+      -o-animation: rainbow 5s ease infinite;
+      animation: rainbow 5s ease infinite;
+  }
+
+  }
 }
