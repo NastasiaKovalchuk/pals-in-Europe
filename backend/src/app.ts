@@ -41,7 +41,6 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: false }));
-console.log("---->", DBURL);
 
 app.use(
   session({

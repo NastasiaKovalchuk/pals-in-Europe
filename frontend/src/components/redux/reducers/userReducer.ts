@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SET_USER, UNSET_USER, SET_MASTER, SET_ADMIN } from "../types/types";
+import { SET_USER, UNSET_USER, SET_MASTER } from "../types/types";
 
 export const userReducer = (
   state = {},
@@ -8,7 +8,7 @@ export const userReducer = (
   switch (action.type) {
     case SET_USER:
       // console.log('action =>', action);
-      return {
+      return {...state, 
         name: action.payload.name,
         userID: action.payload.id,
         role: action.payload.role,
@@ -22,19 +22,21 @@ export const userReducer = (
         adminID: '',
         role: '',
       };
-    case SET_MASTER:
-      // console.log(action);
+    
+      case SET_MASTER:
+      console.log('masterReducer ===>', action);
       return {
+        ...state,
         name: action.payload.name,
         masterID: action.payload.masterID,
         role: action.payload.role,
       };
-    case SET_ADMIN:
-      return {
-        name: action.payload.login,
-        adminID: action.payload.adminID,
-        role: action.payload.role,
-      };
+    // case SET_ADMIN:
+    //   return {...state,
+    //     name: action.payload.login,
+    //     adminID: action.payload.adminID,
+    //     role: action.payload.role,
+    //   };
 
     // case GET_USER:
     //   console.log('GET_USER =>', action.payload);

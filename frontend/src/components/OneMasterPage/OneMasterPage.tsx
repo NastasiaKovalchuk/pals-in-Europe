@@ -19,9 +19,9 @@ export const OneMasterPage = () => {
     <>
       <div className="idMasterDiv">
         <div className="idHead">
-          <img src={oneMasterObj.picture} />
+          <img src={oneMasterObj.picture} alt=""/>
           <div className="nameAndJob">
-            <div className="name">{oneMasterObj.mastername}</div>
+            <div className="name">{oneMasterObj.name}</div>
             {/* <div className="job">Master {oneMasterObj.category.category}</div> */}
           </div>
           <button className="btn contactBtn" type="submit">

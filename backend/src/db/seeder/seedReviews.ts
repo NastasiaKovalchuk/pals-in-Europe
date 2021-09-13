@@ -24,7 +24,6 @@ async function reviewsAndLinksMaker() {
     });
   }
   const users = await userModel.find();
-  console.log(faker.internet.url());
   
   for (let i = 0; i < masters.length; i += 1) {
     for (let j = 0; j < 4; j++) {

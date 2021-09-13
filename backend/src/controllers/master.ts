@@ -1,9 +1,10 @@
+import { mailer } from './mailer';
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
 import categoryModel from "../db/models/category.model";
 
-export const createMaster: RequestHandler = async (req, res, next) => {
+export const createMaster: RequestHandler = async (req, res) => {
   try {
     const { name, login, email, password, experience, category } = req.body as {
       email: string;
@@ -16,22 +17,38 @@ export const createMaster: RequestHandler = async (req, res, next) => {
 
     const checkExistingEmail = await masterModel.findOne({ email });
     if (!checkExistingEmail) {
-      const checkExistingName = await masterModel.findOne({ mastername: name });
+      const checkExistingName = await masterModel.findOne({ login });
       if (!checkExistingName) {
         const newMaster = await new masterModel({
           email,
-          mastername: name,
+          name,
           password,
           login,
           experience,
           category,
         });
-        newMaster.save();
+        await newMaster.save();
+
+        const message = {
+          to: email,
+          subject: 'Вы успешно зарегистрировались.',
+          html: `
+          <h2>Поздравляем с успешной регистрацией!</h2>
+          <div>Данные вашей учетной записи:</div>
+          <ul>
+          <li>Логин: ${login},</li>
+          <li>Пароль: ${password}.</li>
+          </ul>
+          Желаем успешных заказов!`
+        };
+        mailer(message);
+
         if (newMaster) {
           req.session.user = {
-            name: newMaster.mastername,
+            name: newMaster.name,
             id: newMaster.id
           };
+          // console.log(newMaster, req.session.user);
           return res.status(200).json({
             name: req.session.user.name,
             masterId: req.session.user.id,
@@ -58,11 +75,9 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
     if (checkMaster) {
       if (checkMaster.password === password) {
         req.session.user = {
-          name: checkMaster.mastername,
+          name: checkMaster.name,
           id: checkMaster.id
         };
-        // console.log('req.session.user ==>', req.session.user.id);
-
         return res.status(200).json({
           name: req.session.user.name,
           masterId: req.session.user.id,
@@ -81,18 +96,54 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
 export const getAllMasters: RequestHandler = async (req, res) => {
   try {
     const masters = await masterModel.find();
-    // console.log(masters)
     res.status(200).json({ masters });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const getAccount: RequestHandler = async (req, res) => {
+export const getAccountMaster: RequestHandler = async (req, res) => {
   try {
     const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id });
-    // console.log(masters)
     res.status(200).json({ masterAccount });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const editMasterProfile: RequestHandler = async (req, res) => {
+  try {
+    console.log('Зашли в ручку editMasterProfile');
+    const {
+      name,
+      login,
+      phoneNumber,
+      email,
+      description,
+      category, } = req.body as {
+        name: string,
+        login: string,
+        phoneNumber: string,
+        email: string,
+        description: string,
+        category: string,
+      };
+    const newCategory = await categoryModel.findOne({ category });
+    //@ts-ignore
+    const uptdaterMaster = await masterModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
+      name,
+      login,
+      phoneNumber,
+      email,
+      description,
+      category: {
+        _id: newCategory?._id,
+        category: newCategory?.category
+      },
+    }, { new: true })
+    return res.status(200).json({
+      uptdaterMaster
+    });
   } catch (error) {
     console.log(error);
   }

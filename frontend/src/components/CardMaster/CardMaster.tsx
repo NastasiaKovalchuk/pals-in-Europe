@@ -16,14 +16,11 @@ const CardMaster = ({ master }: { master: Master }) => {
       <div className="cardDiv">
         <img src={master.picture} className="picture" alt="..." />
         <div className="cardBody">
-          <div className="mastername">{master.mastername}</div>
+          <div className="mastername">{master.name}</div>
           <hr className="dropdown-divider" />
           <p className="category">{master.category.category}</p>
           <p className="location">Location: {master.location ? master.location.city : ''}</p>
-          {master.rating >= 95 ?
-            <div className="topRating">Rating: {master.rating}</div> :
-            <div className="as"></div>
-          }
+          <div className="topRating">Rating: {master.rating}</div> :
           <button className="btn btn-primary stretched-link masterBtn">Go somewhere</button>
         </div>
       </div>

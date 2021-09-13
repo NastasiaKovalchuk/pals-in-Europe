@@ -22,15 +22,18 @@ export interface Master {
   picture: string | undefined;
   _id: string;
   email: string;
-  mastername: string;
+  name: string;
   password: string;
   login: string;
-  rating: number;
+  rating: string;
+  description: string;
+  phoneNumber: string;
   category: {
     _id: string;
     category: string;
   };
   experience: string;
+  reviews: string[];
   location: {
     _id: string,
     city: string,
@@ -52,6 +55,28 @@ const initState: RootStateValue = {
     category: "",
     location: "",
   },
+  master: {
+    picture: '',
+    _id: '',
+    email: '',
+    name: '',
+    password: '',
+    login: '',
+    rating: '',
+    description: '',
+    phoneNumber: '',
+    category: {
+      _id: '',
+      category: '',
+    },
+    experience: '',
+    reviews: [],
+    location: {
+      _id: '',
+      city: '',
+      coordinates: []
+    },
+  }
 };
 
 export default initState;

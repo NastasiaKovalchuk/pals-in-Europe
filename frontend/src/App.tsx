@@ -6,9 +6,15 @@ import { UserLogin } from "./components/User/UserLogin/UserLogin";
 import { UserSignup } from "./components/User/UserSignup/UserSignup";
 import { MasterLogin } from "./components/Master/MasterLogin/MasterLogin";
 import { MasterSignup } from "./components/Master/MasterSignup/MasterSignup";
+import { EditUserProfile } from './components/User/EditUserProfile/EditUserProfile';
+import { EditMasterProfile } from './components/Master/EditMasterProfile/EditMasterProfile';
 import { UserAccount } from "./components/User/UserAccount/UserAccount";
 import { MasterAccount } from "./components/Master/MasterAccount/MasterAccount";
 import { AdminAccount } from "./components/Admin/AdminAccount/AdminAccount";
+import { OrdersMaster } from './components/Master/OrdersMaster/OrdersMaster';
+import { OrdersUser } from './components/User/OrdersUser/OrdersUser';
+import { ReviewsUser } from './components/User/ReviewsUser/ReviewsUser';
+import { ReviewsMaster } from './components/Master/ReviewsMaster/ReviewsMaster';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserAC } from "./components/redux/actionCreators/userAC";
@@ -19,10 +25,14 @@ import {
 } from "./components/redux/actionCreators/categoryAC";
 import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
 import OneMasterPage from "./components/OneMasterPage/OneMasterPage";
+import { getMasterAC } from "./components/redux/actionCreators/masterAC";
+import { Footer } from "./components/Footer/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateValue) => state.user);
+  // console.log('APP ===>', user);
 
   useEffect(() => {
     const getUser = async () => {
@@ -34,8 +44,14 @@ function App() {
         },
       });
       const result = await response.json();
-      dispatch(getUserAC(result));
+      // console.log('APP RESULT ===>', result);
+      if (result.role === 'user') {
+        dispatch(getUserAC(result));
+      } else {
+        dispatch(getMasterAC(result));
+      }
     };
+    // проверка на  роль + ошибка на регистрацию
     getUser();
   }, [dispatch]);
 
@@ -90,6 +106,15 @@ function App() {
             </Route>
             <Route exact path="/account">
               {user.role === "user" ? <UserAccount /> : <MasterAccount />}
+            </Route>
+            <Route exact path="/account/profile">
+              {user.role === "user" ? <EditUserProfile /> : <EditMasterProfile />}
+            </Route>
+            <Route exact path="/account/orders">
+              {user.role === "user" ? <OrdersUser /> : <OrdersMaster />}
+            </Route>
+            <Route exact path="/account/reviews">
+              {user.role === "user" ? <ReviewsUser /> : <ReviewsMaster />}
             </Route>
             <Route exact path="/admin/account">
               <AdminAccount />

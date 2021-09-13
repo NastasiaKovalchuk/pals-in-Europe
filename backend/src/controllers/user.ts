@@ -12,14 +12,14 @@ export const createUser: RequestHandler = async (req, res, next) => {
     };
     const checkExistingEmail = await userModel.findOne({ email });
     if (!checkExistingEmail) {
-      const checkExistingNick = await userModel.findOne({ username: name });
+      const checkExistingNick = await userModel.findOne({  name });
       if (!checkExistingNick) {
-        const newUser = await new userModel({ email, username: name, login, password });
+        const newUser = await new userModel({ email, name, login, password });
         newUser.save();
         if (newUser) {
           if (req.session) {
             req.session.user = {
-              name: newUser.username,
+              name: newUser.name,
               id: newUser._id,
             }
             return res.status(200).json({
@@ -52,7 +52,7 @@ export const loginUser: RequestHandler = async (req, res, next) => {
       if (checkUser.password === password) {
         if (req.session) {
           req.session.user = {
-            name: checkUser.username,
+            name: checkUser.name,
             id: checkUser._id,
           }
           return res.status(200).json({
@@ -66,6 +66,16 @@ export const loginUser: RequestHandler = async (req, res, next) => {
     return res
       .status(500)
       .json({ success: false, message: "Wrong email or password" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAccountUser: RequestHandler = async (req, res) => {
+  try {
+    const userAccount = await userModel.findOne({ _id: req?.session?.user?.id });
+    // console.log(masters)
+    res.status(200).json({ userAccount });
   } catch (error) {
     console.log(error);
   }

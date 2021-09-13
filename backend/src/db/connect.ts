@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import masterMaker from "./seeder/seedMasters";
 import { categoryMaker } from "./seeder/seedCategory";
 import { reviewsAndLinksMaker } from "./seeder/seedReviews";
-// import { locationMaker } from "./seeder/seedLocation";
+import { locationMaker } from "./seeder/seedLocation";
 
 const { DBURL } = process.env;
 const options = {
@@ -14,13 +14,14 @@ const options = {
 };
 
 async function dbconnect() {
-  if (typeof DBURL === 'string') {
+  if (typeof DBURL === "string") {
     await mongoose.connect(DBURL, options, (err) => {
       console.log("success connect mongo");
       if (err) return console.log(err);
     });
   }
-  // locationMaker()
+  // locationMaker();
+
   // reviewsAndLinksMaker();
   // starting the seeding function
   // masterMaker();
