@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import CardMaster from "../../CardMaster/CardMaster";
@@ -13,9 +13,9 @@ const Month = () => {
   );
   const dispatch = useDispatch();
 
-  const ratingSort = mastersFromSelector.sort((b, a) => 
-  a.rating > b.rating ? 1 : -1).slice(0, 10)
-  
+  const ratingSort = mastersFromSelector.sort((b, a) =>
+    a.rating > b.rating ? 1 : -1).slice(0, 10)
+
   const arr = ratingSort.map((el) => el.category.category)
   console.log('ratingSort', arr);
 
@@ -33,16 +33,18 @@ const Month = () => {
       <div className="bestMastersHead">TOP 10 masters of the month</div>
       <div className="topMasters">
         {ratingSort.map((el, index) => (
-          <div key={index} className="topCards">
-            <img src={el.picture} />
-            <div className="mastername">{el.mastername}</div>
-            <hr className="dropdown-divider" />
-            <div className="category">Master {el.category.category}</div>
-            {el.rating >= 95 ? 
-            <div className="topRating">Rating: {el.rating}</div> :
-            <div className="rating">Rating: {el.rating}</div>
-            }
-          </div>
+          <Link to={`/master/${el._id}`}>
+            <div key={index} className="topCards">
+              <img src={el.picture} />
+              <div className="mastername">{el.mastername}</div>
+              <hr className="dropdown-divider" />
+              <div className="category">Master {el.category.category}</div>
+              {el.rating >= 95 ?
+                <div className="topRating">Rating: {el.rating}</div> :
+                <div className="rating">Rating: {el.rating}</div>
+              }
+            </div>
+          </Link>
         ))}
       </div>
     </div>

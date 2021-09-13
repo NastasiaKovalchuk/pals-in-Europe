@@ -18,6 +18,7 @@ import {
   getCategoriesSagaAC,
 } from "./components/redux/actionCreators/categoryAC";
 import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
+import OneMasterPage from "./components/OneMasterPage/OneMasterPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -92,6 +93,9 @@ function App() {
             </Route>
             <Route exact path="/admin/account">
               <AdminAccount />
+            </Route>
+            <Route exact path="/master/:id">
+              <OneMasterPage />
             </Route>
           </Switch>
         </div>
