@@ -16,8 +16,5 @@ export const GET_MASTERS = "GET_MASTERS"
 export const GET_CATEGORY = 'GET_CATEGORY'
 export const GET_CATEGORY_SAGA = 'GET_CATEGORY_SAGA'
 
-export const GET_INPUT = 'GET_INPUT'
-export const GET_INPUT_SAGA = 'GET_INPUT_SAGA'
-
 export const SET_SEARCH = "SET_SEARCH"
 export const GET_MESSAGE = "GET_MESSAGE"

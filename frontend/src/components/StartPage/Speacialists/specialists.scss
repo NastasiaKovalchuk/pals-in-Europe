@@ -1,0 +1,54 @@
+.main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  background-image: url("../../../assets/bcsp.jpeg");
+  width: 100%;
+  height: 300px;
+  .first {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 70%;
+      height: 80%;
+      margin-left: 50px;
+    }
+
+    div {
+      position: absolute;
+      color: white;
+      button {
+        color: blue;
+        a {
+            text-decoration: none;
+        }
+      }
+    }
+  }
+
+  .second {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 70%;
+      height: 80%;
+      margin-right: 50px;
+    }
+    div {
+        position: absolute;
+        color: white;
+        button {
+          color: blue;
+          a {
+              text-decoration: none;
+          }
+        }
+      }
+  }
+}

@@ -1,49 +1,54 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getUserAccountAC } from '../../redux/actionCreators/userAC';
-import { RootStateValue } from '../../redux/reducers/rootReducer';
-import css from '../User.module.css';
-import { Route, Switch, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getUserAccountAC } from "../../redux/actionCreators/userAC";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
+import css from "../User.module.css";
+import { Route, Switch, Link, useParams } from "react-router-dom";
 import { EditUserProfile } from "../EditUserProfile/EditUserProfile";
 import { OrdersUser } from "../OrdersUser/OrdersUser";
 import { ReviewsUser } from "../ReviewsUser/ReviewsUser";
+import { Master, User, UserStateValue } from "../../redux/initState";
+interface IdParams {
+  id: string;
+}
 
 export const UserAccount = () => {
+  const [user, setUser] = useState<User>();
+  const { id } = useParams<IdParams>();
+
   const dispatch = useDispatch();
-  const user = useSelector((state: RootStateValue) => state.user)
-  console.log('UserAccount tsx ===>', user);
+  // const user = useSelector((state: RootStateValue) => state.user)
 
   useEffect(() => {
-    const getUserAccount = async () => {
-      const response = await fetch(
-        'http://localhost:8080/user/account',
-        {
-          method: 'GET',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
-      )
-      const result = await response.json();
-      dispatch(getUserAccountAC(result));
-    }
-    getUserAccount();
-  }, [dispatch]);
+    // const getUserAccount = async () => {
+    fetch("http://localhost:8080/user/account", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => setUser(result));
+
+    // dispatch(getUserAccountAC(result));
+    // }
+    // getUserAccount();
+  }, []);
 
   return (
     <div className={css.masterAccount}>
       <div>
-        <Link to='/account'>
+        <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to='/account/orders'>
+        <Link to="/account/orders">
           <button className={css.btn}>My orders</button>
         </Link>
-        <Link to='/account/profile'>
+        <Link to="/account/profile">
           <button className={css.btn}>Edit profile</button>
         </Link>
-        <Link to='/account/reviews'>
+        <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>
         </Link>
       </div>
@@ -124,7 +129,7 @@ export const UserAccount = () => {
             </div>
           </div>
         </div>*/}
-      </div> 
+      </div>
     </div>
-  )
-}
+  );
+};

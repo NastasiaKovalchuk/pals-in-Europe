@@ -13,6 +13,16 @@ export interface Category {
   category: string;
 }
 
+export interface User {
+  _id: string,
+  email: string,
+  name: string,
+  password: string,
+  login: string,
+  rating: number,
+  picture: string,
+}
+
 export interface Search {
   category: string;
   location: string;
@@ -54,28 +64,6 @@ const initState: RootStateValue = {
   search: {
     category: "",
     location: "",
-  },
-  master: {
-    picture: '',
-    _id: '',
-    email: '',
-    name: '',
-    password: '',
-    login: '',
-    rating: '',
-    description: '',
-    phoneNumber: '',
-    category: {
-      _id: '',
-      category: '',
-    },
-    experience: '',
-    reviews: [],
-    location: {
-      _id: '',
-      city: '',
-      coordinates: []
-    },
   },
   errorMessage: '',
 };

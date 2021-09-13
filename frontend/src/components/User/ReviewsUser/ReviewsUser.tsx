@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootStateValue } from '../../redux/reducers/rootReducer';
 
 export const ReviewsUser = () => {
-  const user = useSelector((state: RootStateValue) => state.master)
-  console.log('RewievsMaster tsx ===>');
+  // const user = useSelector((state: RootStateValue) => state.master)
 
 
   return (

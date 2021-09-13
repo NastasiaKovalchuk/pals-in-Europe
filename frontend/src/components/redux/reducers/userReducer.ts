@@ -1,31 +1,22 @@
 import { AnyAction } from "redux";
 import { SET_USER, UNSET_USER, GET_USER_ACCOUNT } from "../types/types";
 
-export const userReducer = (
-  state = {},
-  action: AnyAction
-) => {
+export const userReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
     case SET_USER:
       // console.log('action =>', action);
-      return {...state, 
-        name: action.payload.name,
-        userID: action.payload.id,
-        role: action.payload.role,
-        message: action.payload.message,
-      };
+      return action.payload;
     case UNSET_USER:
       // console.log('action =>', action);
       return {
-        name: '',
-        userID: '',
-        masterID: '',
-        adminID: '',
-        role: '',
+        name: "",
+        userID: "",
+        masterID: "",
+        adminID: "",
+        role: "",
       };
-    
-      case GET_USER_ACCOUNT:
-      console.log('GET_USER_ACCOUNT ===>', action.payload.userAccount);
+
+    case GET_USER_ACCOUNT:
       return {
         // ...state,
         // name: action.payload.masterAccount.name,
@@ -56,7 +47,7 @@ export const userReducer = (
     //     name: action.payload.login,
     //     id: action.payload,
     //   };
-      
+
     default:
       return state;
   }

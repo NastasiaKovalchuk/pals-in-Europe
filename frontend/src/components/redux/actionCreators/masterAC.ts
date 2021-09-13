@@ -40,15 +40,12 @@ export const masterSignupAC = (
     });
 
     const result = await response.json();
-    console.log('masterSignupAC =>', result);
     if (!result.message) {
-      console.log('result.status === 200');
       dispatch({
         type: SET_MASTER,
         payload: result,
       })
     } else if (result.message) {
-      console.log(result.message);
       dispatch({
         type: GET_MESSAGE,
         payload: result.message,
@@ -69,7 +66,9 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
+  
   if (!result.message) {
+    console.log('result', result);
     dispatch({
       type: SET_MASTER,
       payload: result,
