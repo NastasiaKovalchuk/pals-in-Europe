@@ -16,7 +16,7 @@ export const ShowMasters = () => {
   const categories = useSelector((state: RootStateValue) => state.categories);
   const masters = useSelector((state: RootStateValue) => state.masters);
   const search = useSelector((state: RootStateValue) => state.search);
-  console.log(search);
+  // console.log(search);
 
   useEffect(() => {
     fetch("http://localhost:8080/master/")

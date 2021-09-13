@@ -12,7 +12,7 @@ const Categories = () => {
     (state: RootStateValue) => state.categories
   );
   const dispatch = useDispatch();
-  console.log(categoryFromSelector);
+  // console.log(categoryFromSelector);
 
   const history = useHistory();
   //@ts-ignore

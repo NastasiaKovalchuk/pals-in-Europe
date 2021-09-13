@@ -9,6 +9,7 @@ export const getUserAC = (user: object) => {
     payload: user
   }
 }
+
 export const userSignupAC = (
   name: string,
   login: string,

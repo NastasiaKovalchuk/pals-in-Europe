@@ -1,14 +1,14 @@
+import { GET_MASTERS } from '../types/types';
 import { AnyAction } from "redux";
-import { GET_MASTERS } from "../types/types";
 
-export const masterReducer = (
+export const mastersReducer = (
   state = [],
   action: AnyAction
 ) => {
   switch (action.type) {
     case GET_MASTERS:
       return action.payload
-      
+    
     default:
       return state;
   }

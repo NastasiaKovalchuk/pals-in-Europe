@@ -5,11 +5,11 @@ export interface Master {
   _id: string;
   description: string,
   email: string;
-  mastername: string;
+  name: string;
   password: string;
   login: string;
   category: object;
-  experience: number;
+  experience: string;
   location: object;
   reviews: Review[];
   rating: number;
@@ -22,13 +22,13 @@ export interface Master {
 const MasterSchema = new Schema<Master>({
   description: String,
   email: String,
-  mastername: String,
+  name: String,
   phoneNumber: String,
   login: String,
   password: String,
   category: {},
   // category: String,
-  experience: Number,
+  experience: String,
   location: {},
   reviews: [],
   rating: { type: Number, default: 0 },
