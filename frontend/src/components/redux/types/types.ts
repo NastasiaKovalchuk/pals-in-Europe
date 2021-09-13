@@ -7,8 +7,8 @@ export const SET_ADMIN = "SET_ADMIN";
 
 export const GET_USER= "GET_USER";
 
-export const GET_ACCOUNT = "GET_ACCOUNT";
-// export const GET_USER_ACCOUNT = "GET_USER_ACCOUNT";
+export const GET_MASTER_ACCOUNT = "GET_MASTER_ACCOUNT";
+export const GET_USER_ACCOUNT = "GET_USER_ACCOUNT";
 // export const GET_ADMIN_ACCOUNT = "GET_ADMIN_ACCOUNT";
 
 export const GET_MASTERS = "GET_MASTERS"
@@ -20,3 +20,4 @@ export const GET_INPUT = 'GET_INPUT'
 export const GET_INPUT_SAGA = 'GET_INPUT_SAGA'
 
 export const SET_SEARCH = "SET_SEARCH"
+export const GET_MESSAGE = "GET_MESSAGE"

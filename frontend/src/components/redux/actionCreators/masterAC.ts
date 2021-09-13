@@ -1,6 +1,5 @@
-
 import { AppDispatch } from "../../../index";
-import { SET_MASTER, GET_ACCOUNT, EDIT_MASTER } from "../types/types";
+import { SET_MASTER, GET_MASTER_ACCOUNT, EDIT_MASTER, GET_MESSAGE } from "../types/types";
 
 export const getMasterAC = (user: object) => {
   // console.log('getMasterAC ===================>', user);
@@ -9,14 +8,17 @@ export const getMasterAC = (user: object) => {
     payload: user
   }
 }
-
 export const masterSignupAC = (
   name: string,
   login: string,
   email: string,
   password: string,
   category: string,
-  experience: string) => async (dispatch: AppDispatch) => {
+  experience: string,
+  description: string,
+  city: string,
+  street: string,
+  phoneNumber: string) => async (dispatch: AppDispatch) => {
     const response = await fetch('http://localhost:8080/master/signup', {
       method: 'POST',
       headers: {
@@ -29,14 +31,29 @@ export const masterSignupAC = (
         email,
         password,
         category,
-        experience
+        experience,
+        description,
+        city,
+        street,
+        phoneNumber,
       }),
     });
+
     const result = await response.json();
-    dispatch({
-      type: SET_MASTER,
-      payload: result,
-    })
+    console.log('masterSignupAC =>', result);
+    if (!result.message) {
+      console.log('result.status === 200');
+      dispatch({
+        type: SET_MASTER,
+        payload: result,
+      })
+    } else if (result.message) {
+      console.log(result.message);
+      dispatch({
+        type: GET_MESSAGE,
+        payload: result.message,
+      })
+    }
   }
 
 export const masterLoginAC = (login: string, password: string) => async (dispatch: AppDispatch) => {
@@ -52,10 +69,17 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  dispatch({
-    type: SET_MASTER,
-    payload: result,
-  })
+  if (!result.message) {
+    dispatch({
+      type: SET_MASTER,
+      payload: result,
+    })
+  } else if (result.message) {
+    dispatch({
+      type: GET_MESSAGE,
+      payload: result.message,
+    })
+  }
 }
 
 export const getMasterAccountAC = (user: object) => async (dispatch: AppDispatch) => {
@@ -69,37 +93,37 @@ export const getMasterAccountAC = (user: object) => async (dispatch: AppDispatch
   const result = await response.json();
   // console.log('getMasterAccountAC ===>', result);
   dispatch({
-    type: GET_ACCOUNT,
+    type: GET_MASTER_ACCOUNT,
     payload: result
   })
 }
 
 
 export const editMasterProfileAC = (
-  name: string, 
-  login: string, 
-  phoneNumber: string, 
-  email: string, 
+  name: string,
+  login: string,
+  phoneNumber: string,
+  email: string,
   description: string,
   category: string) => async (dispatch: AppDispatch) => {
-  const response = await fetch('http://localhost:8080/master/profile', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      login,
-      phoneNumber,
-      email,
-      description,
-      category,
-    }),
-    credentials: "include",
-  });
-  const result = await response.json();
-  dispatch({
-    type: EDIT_MASTER,
-    payload: result
-  })
-}
+    const response = await fetch('http://localhost:8080/master/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        login,
+        phoneNumber,
+        email,
+        description,
+        category,
+      }),
+      credentials: "include",
+    });
+    const result = await response.json();
+    dispatch({
+      type: EDIT_MASTER,
+      payload: result
+    })
+  }

@@ -32,7 +32,7 @@ import { Footer } from "./components/Footer/Footer";
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateValue) => state.user);
-  // console.log('APP ===>', user);
+  console.log('APP ===>', user);
 
   useEffect(() => {
     const getUser = async () => {
@@ -44,14 +44,13 @@ function App() {
         },
       });
       const result = await response.json();
-      // console.log('APP RESULT ===>', result);
+      console.log('APP RESULT ===>', result);
       if (result.role === 'user') {
         dispatch(getUserAC(result));
       } else {
         dispatch(getMasterAC(result));
       }
     };
-    // проверка на  роль + ошибка на регистрацию
     getUser();
   }, [dispatch]);
 

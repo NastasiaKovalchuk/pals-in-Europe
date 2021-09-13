@@ -14,21 +14,33 @@ export const MasterSignup = () => {
   const [password, setPassword] = useState("");
   const [category, setCategory] = useState("");
   const [experience, setExperience] = useState("");
+  const [description, setDescription] = useState("");
+  const [city, setCity] = useState("");
+  const [street, setStreet] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [socialMediaLinks, setSocialMediaLinks] = useState("");
 
   const categories = useSelector((state: RootStateValue) => state.categories);
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state: RootStateValue) => state.user);
+  const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
+  console.log('errorMessage!!!!!!! =>', errorMessage);
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(
-      masterSignupAC(name, login, email, password, category, experience)
+      masterSignupAC(
+        name, login, 
+        email, password, 
+        category, experience, 
+        description, city, 
+        street, phoneNumber)
     );
-    history.push("/");
   };
 
-  console.log(categories);
-  
+  // console.log(categories);
+
   return (
     <div>
       <form className={css.form} onSubmit={onSubmit}>
@@ -60,6 +72,13 @@ export const MasterSignup = () => {
           placeholder="password"
           value={password}
         />
+        <input
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+            setPhoneNumber(ev.target.value)
+          }
+          placeholder="phoneNumber"
+          value={phoneNumber}
+        />
         <select
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
             setCategory(ev.target.value)
@@ -70,10 +89,38 @@ export const MasterSignup = () => {
           <option>Profession</option>
           {categories
             ? categories.map((el: string) => (
-                <option value={el}>{el}</option>
-              ))
+              <option value={el}>{el}</option>
+            ))
             : ""}
         </select>
+        <input
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+            setDescription(ev.target.value)
+          }
+          placeholder="About you"
+          value={description}
+        />
+        <input
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+            setSocialMediaLinks(ev.target.value)
+          }
+          placeholder="About you"
+          value={socialMediaLinks}
+        />
+        <input
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+            setCity(ev.target.value)
+          }
+          placeholder="city"
+          value={city}
+        />
+        <input
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+            setStreet(ev.target.value)
+          }
+          placeholder="street"
+          value={street}
+        />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
             setExperience(ev.target.value)
@@ -83,7 +130,7 @@ export const MasterSignup = () => {
         />
         <button type="submit">Signup</button>
       </form>
-      <div>Error</div>
+      <div>{errorMessage}</div>
     </div>
   );
 };

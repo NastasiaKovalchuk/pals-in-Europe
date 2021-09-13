@@ -11,7 +11,7 @@ export const Header = () => {
   const session = useSelector((state: RootStateValue) => state);
   const history = useHistory();
   const dispatch = useDispatch();
-  // console.log('Header ===>', session.user.name);
+  console.log('Header ===>', session.user);
   // console.log('Header', session.user.name );
   const onLogout = async (event: React.SyntheticEvent) => {
     event.preventDefault();
