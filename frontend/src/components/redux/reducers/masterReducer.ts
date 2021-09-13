@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SET_MASTER, GET_ACCOUNT } from "../types/types";
+import { SET_MASTER, GET_MASTER_ACCOUNT } from "../types/types";
 
 export const masterReducer = (
   state = {},
@@ -7,15 +7,16 @@ export const masterReducer = (
 ) => {
   switch (action.type) {
     case SET_MASTER:
-      // console.log('masterReducer ===>', action);
+      console.log('masterReducer ===>', action);
       return {
         ...state,
         name: action.payload.name,
         masterID: action.payload.masterID,
         role: action.payload.role,
+        message: action.payload.message,
       };
-    case GET_ACCOUNT:
-      // console.log('GET_ACCOUNT ===>', action.payload.masterAccount);
+    case GET_MASTER_ACCOUNT:
+      console.log('GET_ACCOUNT ===>', action.payload.masterAccount);
       return {
         ...state,
         name: action.payload.masterAccount.name,

@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SET_USER, UNSET_USER, SET_MASTER } from "../types/types";
+import { SET_USER, UNSET_USER, GET_USER_ACCOUNT } from "../types/types";
 
 export const userReducer = (
   state = {},
@@ -12,6 +12,7 @@ export const userReducer = (
         name: action.payload.name,
         userID: action.payload.id,
         role: action.payload.role,
+        message: action.payload.message,
       };
     case UNSET_USER:
       // console.log('action =>', action);
@@ -23,13 +24,24 @@ export const userReducer = (
         role: '',
       };
     
-      case SET_MASTER:
-      console.log('masterReducer ===>', action);
+      case GET_USER_ACCOUNT:
+      console.log('GET_USER_ACCOUNT ===>', action.payload.userAccount);
       return {
-        ...state,
-        name: action.payload.name,
-        masterID: action.payload.masterID,
-        role: action.payload.role,
+        // ...state,
+        // name: action.payload.masterAccount.name,
+        // password: action.payload.masterAccount.password,
+        // login: action.payload.masterAccount.login,
+        // _id: action.payload.masterAccount._id,
+        // role: 'master',
+        // picture: action.payload.masterAccount.picture,
+        // email: action.payload.masterAccount.email,
+        // rating: action.payload.masterAccount.rating,
+        // description: action.payload.masterAccount.description,
+        // phoneNumber: action.payload.masterAccount.phoneNumber,
+        // category: action.payload.masterAccount.category,
+        // experience: action.payload.masterAccount.experience,
+        // reviews: action.payload.masterAccount.reviews,
+        // location: action.payload.masterAccount.location,
       };
     // case SET_ADMIN:
     //   return {...state,

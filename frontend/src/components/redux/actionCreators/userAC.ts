@@ -1,9 +1,9 @@
 
 import { AppDispatch } from "../../../index";
-import { SET_USER, UNSET_USER} from "../types/types";
+import { SET_USER, UNSET_USER, GET_MESSAGE, GET_USER_ACCOUNT } from "../types/types";
 
 export const getUserAC = (user: object) => {
-  // console.log('getUserAC ===================>', user);
+  console.log('getUserAC ===================>', user);
   return {
     type: SET_USER,
     payload: user
@@ -30,11 +30,18 @@ export const userSignupAC = (
       }),
     });
     const result = await response.json();
-    // console.log('userSignupAC===>', result);
-    dispatch({
-      type: SET_USER,
-      payload: result,
-    })
+    if (!result.message) {
+      dispatch({
+        type: SET_USER,
+        payload: result,
+      })
+    } else if (result.message) {
+      console.log(result.message);
+      dispatch({
+        type: GET_MESSAGE,
+        payload: result.message,
+      })
+    }
   }
 
 export const userLoginAC = (login: string, password: string) => async (dispatch: AppDispatch) => {
@@ -51,10 +58,18 @@ export const userLoginAC = (login: string, password: string) => async (dispatch:
   });
   const result = await response.json();
   // console.log('loginUserAC ====>', result);
-  dispatch({
-    type: SET_USER,
-    payload: result,
-  })
+  if (!result.message) {
+    dispatch({
+      type: SET_USER,
+      payload: result,
+    })
+  } else if (result.message) {
+    console.log(result.message);
+    dispatch({
+      type: GET_MESSAGE,
+      payload: result.message,
+    })
+  }
 }
 
 export const logoutAC = () => async (dispatch: AppDispatch) => {
@@ -71,4 +86,20 @@ export const logoutAC = () => async (dispatch: AppDispatch) => {
       payload: ''
     })
   }
+}
+
+export const getUserAccountAC = (user: object) => async (dispatch: AppDispatch) => {
+  const response = await fetch('http://localhost:8080/user/account', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: "include",
+  });
+  const result = await response.json();
+  console.log('getUserAccountAC ===>', result);
+  dispatch({
+    type: GET_USER_ACCOUNT,
+    payload: result
+  })
 }

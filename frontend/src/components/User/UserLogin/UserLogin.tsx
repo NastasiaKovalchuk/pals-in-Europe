@@ -2,12 +2,15 @@ import { useState } from "react"
 import css from "../User.module.css";
 import { userLoginAC } from '../../redux/actionCreators/userAC';
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { useSelector } from "react-redux";
+
 
 export const UserLogin = () => {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const dispatch = useDispatch();
+  const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -27,6 +30,7 @@ export const UserLogin = () => {
         value={password}
       />
       <button type="submit">Login</button>
+      <div>{errorMessage}</div>
     </form>
   )
 }

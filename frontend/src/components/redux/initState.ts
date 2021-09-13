@@ -76,7 +76,8 @@ const initState: RootStateValue = {
       city: '',
       coordinates: []
     },
-  }
+  },
+  errorMessage: '',
 };
 
 export default initState;
