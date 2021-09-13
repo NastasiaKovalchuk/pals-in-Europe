@@ -17,7 +17,6 @@ const Month = () => {
     a.rating > b.rating ? 1 : -1).slice(0, 10)
 
   const arr = ratingSort.map((el) => el.category.category)
-  console.log('ratingSort', arr);
 
 
   const history = useHistory();

@@ -80,3 +80,30 @@ export const getAccountUser: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+
+export const editUserProfile: RequestHandler = async (req, res) => {
+  try {
+    console.log('Зашли в ручку editUserProfile');
+    const {
+      name,
+      login,
+      email,
+      } = req.body as {
+        name: string,
+        login: string,
+        email: string,
+      };
+    //@ts-ignore
+    const uptdaterUser = await masterModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
+      name,
+      login,
+      email,
+    }, { new: true })
+    return res.status(200).json({
+      uptdaterUser
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
