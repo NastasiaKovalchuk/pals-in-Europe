@@ -35,11 +35,11 @@ const Month = () => {
         {ratingSort.map((el, index) => (
           <div key={index} className="topCards">
             {/* <CardMaster key={el._id} master={el} /> */}
-            <img src={el.picture} />
-            <div className="mastername">{el.mastername}</div>
+            <img src={el.picture} alt=''/>
+            <div className="mastername">{el.name}</div>
             <hr className="dropdown-divider" />
             <div className="category">Master {el.category.category}</div>
-            {el.rating >= 95 ? 
+            {el.rating >= '95' ? 
             <div className="topRating">Rating: {el.rating}</div> :
             <div className="rating">Rating: {el.rating}</div>
             }

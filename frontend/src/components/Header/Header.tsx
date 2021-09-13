@@ -52,13 +52,13 @@ export const Header = () => {
           </>
           :
           <>
-            <Link to="/account" className="dropdown-item">
-              <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <Link to="/account">
+              <button type="button" className="btn btn-primary "  aria-expanded="false">
                 Account
               </button>
             </Link>
-            <Link to="/" className="dropdown-item">
-              <button type="button" onClick={onLogout} className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <Link to="/" >
+              <button type="button" onClick={onLogout} className="btn btn-primary"  aria-expanded="false">
                 Logout
               </button>
             </Link>

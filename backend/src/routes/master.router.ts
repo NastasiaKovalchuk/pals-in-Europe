@@ -4,7 +4,8 @@ import {
   createMaster,
   loginMaster,
   getAllMasters,
-  getAccount
+  getAccountMaster,
+  editMasterProfile
 } from "../controllers/master";
 
 const router = Router();
@@ -15,6 +16,8 @@ router.post("/signup", createMaster);
 
 router.post("/login", loginMaster);
 
-router.get("/account", getAccount);
+router.get("/account", getAccountMaster);
+
+router.post("/profile", editMasterProfile);
 
 export default router;

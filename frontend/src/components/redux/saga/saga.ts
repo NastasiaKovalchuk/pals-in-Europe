@@ -21,7 +21,7 @@ function* getCategoryWorker(): Generator<StrictEffect, void, any> {
     const categorySagaCall = yield call(getCategoryFromServer);
     yield put(getCategoriesAC(categorySagaCall))
   } catch (error) {
-    console.log("Error from getCategoryWorker", error);
+    // console.log("Error from getCategoryWorker", error);
     // yield put({ type: 'ОШИБКА ИЗ addTodoWorker', message: error.message});
   }
 }

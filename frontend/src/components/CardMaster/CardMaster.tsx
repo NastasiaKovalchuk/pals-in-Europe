@@ -11,7 +11,7 @@ const CardMaster = ({master}: {master: Master}) => {
       <div className="card cardDiv">
         <img src={master.picture} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">{master.mastername}</h5>
+          <h5 className="card-title">{master.name}</h5>
           <p className="card-text">category: {master.category.category}</p>
           <p className="card-text">location: {master.location ? master.location.city : ''}</p>
           <button className="btn btn-primary stretched-link masterBtn">Go somewhere</button>
