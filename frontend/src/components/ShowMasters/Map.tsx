@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { YMaps, Map, Placemark, PlacemarkGeometry } from "react-yandex-maps";
 import { Master } from "../redux/initState";
 import { useDispatch, useSelector } from "react-redux";
 import { getMastersAC } from "../redux/actionCreators/mastersAC";
@@ -16,7 +16,6 @@ export const ShowMasters = () => {
   const categories = useSelector((state: RootStateValue) => state.categories);
   const masters = useSelector((state: RootStateValue) => state.masters);
   const search = useSelector((state: RootStateValue) => state.search);
-  // console.log(search);
 
   useEffect(() => {
     fetch("http://localhost:8080/master/")
@@ -85,7 +84,7 @@ export const ShowMasters = () => {
             uniqueCities.push(result.locations[i].city);
           }
         }
-        setCities(uniqueCities);
+        setCities(uniqueCities.sort((a, b) => a.localeCompare(b)));
       });
   }, [masters, search.category]);
 
@@ -147,6 +146,7 @@ export const ShowMasters = () => {
         >
           Find a master
         </button>
+
         <div className="cards">
           {showMasters
             ? showMasters.map((master) => (
@@ -158,18 +158,26 @@ export const ShowMasters = () => {
       <div className="ymaps">
         <YMaps>
           <Map
-            defaultState={{ center: [49.75, 14.57], zoom: 5 }}
+            defaultState={{
+              center: [52.450598158020995, 4.892641117642952],
+              zoom: 8,
+            }}
             className="map"
           >
-            {masters
-              ? masters.map((el) => {
+            {showMasters
+              ? showMasters.map((el) => {
                   if (el.location) {
                     return (
                       <Placemark
                         key={el._id}
-                        geometry={el.location.coordinates}
+                        geometry={[
+                          el.location.coordinates[1],
+                          el.location.coordinates[0],
+                        ]}
                       />
                     );
+                  } else {
+                    return "";
                   }
                 })
               : ""}

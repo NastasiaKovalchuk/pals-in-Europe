@@ -52,7 +52,6 @@ export const masterLoginAC = (login: string, password: string) => async (dispatc
     }),
   });
   const result = await response.json();
-  // console.log('masterLoginAC ===>', result);
   dispatch({
     type: SET_MASTER,
     payload: result,
@@ -99,7 +98,6 @@ export const editMasterProfileAC = (
     credentials: "include",
   });
   const result = await response.json();
-  console.log('editMasterProfileAC ===>', result);
   dispatch({
     type: EDIT_MASTER,
     payload: result

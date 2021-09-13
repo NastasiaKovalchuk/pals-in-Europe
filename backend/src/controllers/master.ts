@@ -96,7 +96,6 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
 export const getAllMasters: RequestHandler = async (req, res) => {
   try {
     const masters = await masterModel.find();
-    // console.log(masters)
     res.status(200).json({ masters });
   } catch (error) {
     console.log(error);
@@ -106,7 +105,6 @@ export const getAllMasters: RequestHandler = async (req, res) => {
 export const getAccountMaster: RequestHandler = async (req, res) => {
   try {
     const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id });
-    // console.log(masters)
     res.status(200).json({ masterAccount });
   } catch (error) {
     console.log(error);

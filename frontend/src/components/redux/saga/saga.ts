@@ -17,10 +17,8 @@ import { Category } from "../initState";
 export const categories = (state: RootStateValue) => state.categories
 
 function* getCategoryWorker(): Generator<StrictEffect, void, any> {
-  // console.log('herererererererer');
   try {
     const categorySagaCall = yield call(getCategoryFromServer);
-    // console.log('categorySagaCall11111111', categorySagaCall);
     yield put(getCategoriesAC(categorySagaCall))
   } catch (error) {
     // console.log("Error from getCategoryWorker", error);
