@@ -25,6 +25,8 @@ import {
 } from "./components/redux/actionCreators/categoryAC";
 import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
 import { getMasterAC } from "./components/redux/actionCreators/masterAC";
+import { Footer } from "./components/Footer/Footer";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -118,6 +120,7 @@ function App() {
             </Route>
           </Switch>
         </div>
+        <Footer />
       </Router>
     </div>
   );
