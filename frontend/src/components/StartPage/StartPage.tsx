@@ -9,6 +9,7 @@ import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import Month from "./Month/Month";
 import { Footer } from "../Footer/Footer";
+import Speacialist from "./Speacialists/Speacialist";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -96,6 +97,7 @@ const StartPage = () => {
       </div>
       <Categories />
       <Month />
+      <Speacialist />
       <Footer />
     </div>
   );
