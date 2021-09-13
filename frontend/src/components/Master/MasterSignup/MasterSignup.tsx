@@ -1,8 +1,9 @@
 import { useState } from "react";
 import css from '../Master.module.css';
 import { masterSignupAC } from '../../redux/actionCreators/masterAC';
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
 
 export const MasterSignup = () => {
   const [errorSignup, setErrorSignup] = useState(false);
@@ -12,9 +13,11 @@ export const MasterSignup = () => {
   const [password, setPassword] = useState('');
   const [category, setCategory] = useState('');
   const [experience, setExperience] = useState('');
-
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state: RootStateValue) => state.user);
+  console.log('MasterSignup =>', user);
+  
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
