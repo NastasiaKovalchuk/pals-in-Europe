@@ -2,6 +2,7 @@ import { mailer } from './mailer';
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
+import ReviewModel, { Review } from "../db/models/review.model";
 import categoryModel from "../db/models/category.model";
 
 export const createMaster: RequestHandler = async (req, res) => {
@@ -95,7 +96,13 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
 
 export const getAllMasters: RequestHandler = async (req, res) => {
   try {
+    // const populatedReviews  = await ReviewModel.find().populate(["author", "master"]).lean();
+    // console.log(populatedReviews);
+    
     const masters = await masterModel.find();
+    // console.log(masters[205]);
+    
+    // const map = masters.map((master) => master.populate("author", "master"))
     res.status(200).json({ masters });
   } catch (error) {
     console.log(error);

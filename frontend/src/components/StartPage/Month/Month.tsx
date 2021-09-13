@@ -11,26 +11,16 @@ const Month = () => {
   const mastersFromSelector = useSelector(
     (state: RootStateValue) => state.masters
   );
-  const dispatch = useDispatch();
 
   const ratingSort = mastersFromSelector.sort((b, a) =>
-    a.rating > b.rating ? 1 : -1).slice(0, 10)
+    a.rating > b.rating ? 1 : -1).slice(0, 5)
 
   const arr = ratingSort.map((el) => el.category.category)
-  console.log('ratingSort', arr);
-
-
-  const history = useHistory();
-  //@ts-ignore
-  const chooseCategory = (e, category: string) => {
-    e.preventDefault()
-    dispatch(setSearchValue(category));
-    history.push("/showmasters");
-  };
+  // console.log('ratingSort', arr);
 
   return (
     <div className="bestMasters">
-      <div className="bestMastersHead">TOP 10 masters of the month</div>
+      <div className="bestMastersHead">TOP 5 masters of the month</div>
       <div className="topMasters">
         {ratingSort.map((el, index) => (
           <Link to={`/master/${el._id}`} key={index}>

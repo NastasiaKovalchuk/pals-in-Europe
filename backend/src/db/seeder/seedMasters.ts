@@ -4,7 +4,7 @@ import categoryModel from "../models/category.model";
 
 async function masterMaker() {
   console.log("зашли к мастерам");
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < 2; i += 1) {
     const email = faker.internet.email();
     const mastername = faker.name.findName();
     const login = faker.internet.userName();
