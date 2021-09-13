@@ -2,6 +2,7 @@ import React, { MouseEventHandler } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { Footer } from "../../Footer/Footer";
 import { setSearchValue } from "../../redux/actionCreators/searchAC";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import "./Categories.scss";

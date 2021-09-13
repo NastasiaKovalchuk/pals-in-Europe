@@ -6,6 +6,7 @@
   padding-top: 20px;
   background-color: rgb(221, 221, 221);
   width: 100%;
+  text-decoration: none;
 
   .bestMastersHead {
     font-size: 32px;
@@ -19,11 +20,12 @@
     width: 1500px;
     margin-bottom: 30px;
     justify-content: space-between;
-
+    
     .topCards {
       background-color: rgb(255, 255, 255);
       filter: drop-shadow(0 0 4px #636363);
       margin: 30px;
+      border-radius: 6px;
 
       &:hover {
         cursor: pointer;

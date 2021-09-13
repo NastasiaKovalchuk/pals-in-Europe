@@ -7,6 +7,7 @@ import { getMastersAC } from "../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./Map.scss";
 import { RootStateValue } from "../redux/reducers/rootReducer";
+import { Link } from "react-router-dom";
 
 export const ShowMasters = () => {
   const [showMasters, setShowMasters] = useState<Master[]>([]);
@@ -91,7 +92,7 @@ export const ShowMasters = () => {
   return (
     <div className="maindiv">
       <div className="mastersDiv">
-        <span>Our masters:</span>
+        <span>Our masters: {showMasters.length}</span>
         <div className="selects">
           <div>
             <p>Category</p>
@@ -109,8 +110,8 @@ export const ShowMasters = () => {
               </option>
               {categories
                 ? categories.map((category) => (
-                    <option value={category}>{category}</option>
-                  ))
+                  <option value={category}>{category}</option>
+                ))
                 : ""}
             </select>
           </div>
@@ -131,10 +132,10 @@ export const ShowMasters = () => {
               </option>
               {cities
                 ? cities.map((city, index) => (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  ))
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))
                 : ""}
             </select>
           </div>
@@ -150,8 +151,10 @@ export const ShowMasters = () => {
         <div className="cards">
           {showMasters
             ? showMasters.map((master) => (
+              <Link to={`/master/${master._id}`}>
                 <CardMaster key={master._id} master={master} />
-              ))
+              </Link>
+            ))
             : ""}
         </div>
       </div>

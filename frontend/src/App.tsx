@@ -24,6 +24,7 @@ import {
   getCategoriesSagaAC,
 } from "./components/redux/actionCreators/categoryAC";
 import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
+import OneMasterPage from "./components/OneMasterPage/OneMasterPage";
 import { getMasterAC } from "./components/redux/actionCreators/masterAC";
 import { Footer } from "./components/Footer/Footer";
 
@@ -118,9 +119,11 @@ function App() {
             <Route exact path="/admin/account">
               <AdminAccount />
             </Route>
+            <Route exact path="/master/:id">
+              <OneMasterPage />
+            </Route>
           </Switch>
         </div>
-        <Footer />
       </Router>
     </div>
   );

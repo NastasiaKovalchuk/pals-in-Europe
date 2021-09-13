@@ -1,28 +1,29 @@
 import React from "react";
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { RootStateValue } from '../redux/reducers/rootReducer';
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logoutAC } from '../redux/actionCreators/userAC';
 import "./Footer.scss";
 
 export const Footer = () => {
-  const session = useSelector((state: RootStateValue) => state);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  // console.log('Header ===>', session.user.name);
-  // console.log('Header', session.user.name );
-  const onLogout = async (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    dispatch(logoutAC())
-    history.push("/");
-  }
+
   return (
-    <footer className="pt-4 my-md-5 pt-md-5 border-top">
-      <div className="col-12 col-md">
-      <h5>2113</h5>
-      <h4>sdad</h4>
+    <footer>
+      <div >
+        <div className="head">
+          <h4>About this portal</h4>
+          <h4>Contacts</h4>
+        </div>
+        <div className="elements">
+          <div className="discription">
+            Pals in Europe - a project helping to find craftsmen in Europe
+            from different categories. It speeds up the process of finding
+            the required specialist due to the geolocation system and filters.
+            Having tried it once, you will want to come back here again and again.
+          </div>
+          <div>
+            <img className="icons" src="icons/inst.png" alt="" />
+            <img className="icons" src="icons/fb.png" alt="" />
+            <img className="icons" src="icons/slack.png" alt="" />
+            <img className="icons" src="icons/tel.png" alt="" />
+          </div>
+        </div>
       </div>
     </footer>
   )

@@ -8,6 +8,7 @@ import { setSearchValue } from "../redux/actionCreators/searchAC";
 import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import Month from "./Month/Month";
+import { Footer } from "../Footer/Footer";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -95,6 +96,7 @@ const StartPage = () => {
       </div>
       <Categories />
       <Month />
+      <Footer />
     </div>
   );
 };
