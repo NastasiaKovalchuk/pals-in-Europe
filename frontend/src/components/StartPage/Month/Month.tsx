@@ -33,7 +33,7 @@ const Month = () => {
       <div className="bestMastersHead">TOP 10 masters of the month</div>
       <div className="topMasters">
         {ratingSort.map((el, index) => (
-          <Link to={`/master/${el._id}`}>
+          <Link to={`/master/${el._id}`} key={index}>
             <div key={index} className="topCards">
               <img src={el.picture} />
               <div className="mastername">{el.name}</div>
