@@ -34,8 +34,13 @@ export const ShowMasters = () => {
     category: string,
     location: string
   ) => {
-    event.preventDefault();    
-    if (category !== "" && location !== "" && category !== "all" && location !== "all") {      
+    event.preventDefault();
+    if (
+      category !== "" &&
+      location !== "" &&
+      category !== "all" &&
+      location !== "all"
+    ) {
       setShowMasters(
         masters.filter(
           (master) =>
@@ -43,12 +48,12 @@ export const ShowMasters = () => {
             master.location.city === location
         )
       );
-    } else if (category !== "" && category !== "all") {      
+    } else if (category !== "" && category !== "all") {
       const list = masters.filter(
         (master) => master.category.category === category
       );
       setShowMasters(list);
-    } else if (location !== "" && location !== "all") {      
+    } else if (location !== "" && location !== "all") {
       setShowMasters(
         masters.filter((master) => master.location.city === location)
       );
@@ -109,8 +114,8 @@ export const ShowMasters = () => {
             >
               <option value="all">All categories</option>
               {categories
-                ? categories.map((category) => (
-                    <option value={category}>{category}</option>
+                ? categories.map((category, index) => (
+                    <option key={index} value={category}>{category}</option>
                   ))
                 : ""}
             </select>
@@ -147,13 +152,15 @@ export const ShowMasters = () => {
         </button>
 
         <div className="cards">
-          {showMasters
-            ? showMasters.map((master) => (
-                // <Link to={`/master/${master._id}`}>
-                  <CardMaster key={master._id} master={master} />
-                // </Link>
-              ))
-            : ""}
+          {showMasters.length > 0 ? (
+            showMasters.map((master) => (
+              // <Link to={`/master/${master._id}`}>
+              <CardMaster key={master._id} master={master} />
+              // </Link>
+            ))
+          ) : (
+            <div>No masters found</div>
+          )}
         </div>
       </div>
       <div className="ymaps">

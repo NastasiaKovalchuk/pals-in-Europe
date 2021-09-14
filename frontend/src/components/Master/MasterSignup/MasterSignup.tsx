@@ -30,12 +30,15 @@ export const MasterSignup = () => {
     event.preventDefault();
     dispatch(
       masterSignupAC(
-        name, login, 
-        email, password, 
-        category, experience, 
-        description, city, 
+        name, login,
+        email, password,
+        category, experience,
+        description, city,
         street, phoneNumber)
     );
+    if (errorMessage !== '') {
+      history.push('/');
+    }
   };
 
   // console.log(categories);
@@ -49,6 +52,7 @@ export const MasterSignup = () => {
           }
           placeholder="Name"
           value={name}
+          required
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -63,6 +67,7 @@ export const MasterSignup = () => {
           }
           placeholder="Email"
           value={email}
+          type="email"
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -70,6 +75,7 @@ export const MasterSignup = () => {
           }
           placeholder="password"
           value={password}
+          type="password"
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -77,6 +83,7 @@ export const MasterSignup = () => {
           }
           placeholder="phoneNumber"
           value={phoneNumber}
+          
         />
         <select
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>

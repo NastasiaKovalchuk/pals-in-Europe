@@ -4,17 +4,19 @@ import { userLoginAC } from '../../redux/actionCreators/userAC';
 import { useDispatch } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
-
+import { useHistory } from "react-router-dom";
 
 export const UserLogin = () => {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const dispatch = useDispatch();
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
+  const history = useHistory();
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(userLoginAC(login, password))
+    history.push('/');
   }
 
   return (

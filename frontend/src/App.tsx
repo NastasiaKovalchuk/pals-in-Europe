@@ -42,10 +42,9 @@ function App() {
     // })
     //   .then((res) => res.json())
     //   .then((result) => dispatch(getUserAC(result)));
-      dispatch(getUserAC())
+    dispatch(getUserAC());
   }, [dispatch, user.role]);
 
-  // console.log(user.role);
 
   useEffect(() => {
     fetch("http://localhost:8080/categories/")
@@ -66,8 +65,8 @@ function App() {
       });
   }, [dispatch]);
 
+
   // console.log(user.role);
-  
   return (
     <div>
       <Router>
@@ -86,7 +85,7 @@ function App() {
             <Route exact path="/user/signup">
               {!user.name ? <UserSignup /> : <StartPage />}
             </Route>
-           
+
             <Route exact path="/master/login">
               {!user.name ? <MasterLogin /> : <StartPage />}
             </Route>
