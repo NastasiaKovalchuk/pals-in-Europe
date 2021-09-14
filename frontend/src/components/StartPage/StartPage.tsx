@@ -11,6 +11,7 @@ import Month from "./Month/Month";
 import { Footer } from "../Footer/Footer";
 import HowItsWork from "./HowItsWork/HowItsWork";
 import Reviews from "./Reviews/Reviews";
+import Speacialist from "./Speacialists/Speacialist";
 
 const StartPage = () => {
   const [search, setSearch] = useState("");
@@ -100,6 +101,7 @@ const StartPage = () => {
       <HowItsWork />
       <Month />
       <Reviews />
+      <Speacialist />
       <Footer />
     </div>
   );

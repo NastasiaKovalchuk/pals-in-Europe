@@ -1,6 +1,5 @@
 import { useState } from "react"
 import css from './Admin.module.css';
-import { adminLoginAC } from '../../redux/actionCreators/adminAC';
 import { useDispatch } from "react-redux";
 
 export const AdminLogin = () => {
@@ -10,7 +9,6 @@ export const AdminLogin = () => {
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(adminLoginAC(login, password))
   }
 
   return (

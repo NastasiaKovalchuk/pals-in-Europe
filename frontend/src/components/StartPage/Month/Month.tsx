@@ -12,11 +12,21 @@ const Month = () => {
     (state: RootStateValue) => state.masters
   );
 
+  const dispatch = useDispatch();
+
   const ratingSort = mastersFromSelector.sort((b, a) =>
     a.rating > b.rating ? 1 : -1).slice(0, 5)
 
   const arr = ratingSort.map((el) => el.category.category)
-  // console.log('ratingSort', arr);
+
+
+  const history = useHistory();
+  //@ts-ignore
+  const chooseCategory = (e, category: string) => {
+    e.preventDefault()
+    dispatch(setSearchValue(category));
+    history.push("/showmasters");
+  };
 
   return (
     <div className="bestMasters">

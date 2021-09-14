@@ -11,7 +11,6 @@ export const Header = () => {
   const session = useSelector((state: RootStateValue) => state);
   const history = useHistory();
   const dispatch = useDispatch();
-  // console.log('Header ===>', session.user.name);
   // console.log('Header', session.user.name );
   const onLogout = async (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -52,8 +51,8 @@ export const Header = () => {
           </>
           :
           <>
-            <Link to="/account">
-              <button type="button" className="btn btn-primary "  aria-expanded="false">
+            <Link to={session.user.masterID ? `/account/${session.user.masterID}` : `/account/${session.user.userID}`}>
+              <button type="button" className="btn loginBtn "  aria-expanded="false">
                 Account
               </button>
             </Link>

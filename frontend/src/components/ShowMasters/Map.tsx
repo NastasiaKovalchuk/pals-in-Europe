@@ -34,8 +34,8 @@ export const ShowMasters = () => {
     category: string,
     location: string
   ) => {
-    event.preventDefault();
-    if (category !== "" && location !== "") {
+    event.preventDefault();    
+    if (category !== "" && location !== "" && category !== "all" && location !== "all") {      
       setShowMasters(
         masters.filter(
           (master) =>
@@ -43,18 +43,20 @@ export const ShowMasters = () => {
             master.location.city === location
         )
       );
-    } else if (category !== "") {
+    } else if (category !== "" && category !== "all") {      
       const list = masters.filter(
         (master) => master.category.category === category
       );
       setShowMasters(list);
-    } else if (location !== "") {
+    } else if (location !== "" && location !== "all") {      
       setShowMasters(
         masters.filter((master) => master.location.city === location)
       );
+    } else if (category === "all" && location === "all") {
+      setShowMasters(masters);
     }
-    setChosenCategory("");
-    setChosenLocation("");
+    setChosenCategory("all");
+    setChosenLocation("all");
   };
 
   const findCategories = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -105,13 +107,11 @@ export const ShowMasters = () => {
               onChange={findCategories}
               value={chosenCategory}
             >
-              <option hidden disabled selected value="">
-                All categories
-              </option>
+              <option value="all">All categories</option>
               {categories
                 ? categories.map((category) => (
-                  <option value={category}>{category}</option>
-                ))
+                    <option value={category}>{category}</option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -127,15 +127,13 @@ export const ShowMasters = () => {
               onChange={findLocation}
               value={chosenLocation}
             >
-              <option hidden disabled selected value="">
-                All locations
-              </option>
+              <option value="all">All locations</option>
               {cities
                 ? cities.map((city, index) => (
-                  <option key={index} value={city}>
-                    {city}
-                  </option>
-                ))
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -151,10 +149,10 @@ export const ShowMasters = () => {
         <div className="cards">
           {showMasters
             ? showMasters.map((master) => (
-              <Link to={`/master/${master._id}`}>
-                <CardMaster key={master._id} master={master} />
-              </Link>
-            ))
+                // <Link to={`/master/${master._id}`}>
+                  <CardMaster key={master._id} master={master} />
+                // </Link>
+              ))
             : ""}
         </div>
       </div>
@@ -169,7 +167,7 @@ export const ShowMasters = () => {
           >
             {showMasters
               ? showMasters.map((el) => {
-                  if (el.location) {
+                  if (el.location && el.location.coordinates) {
                     return (
                       <Placemark
                         key={el._id}

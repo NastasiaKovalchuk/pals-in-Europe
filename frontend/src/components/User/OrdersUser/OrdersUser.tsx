@@ -6,9 +6,8 @@ import { RootStateValue } from '../../redux/reducers/rootReducer';
 import { Route, Switch, Link } from "react-router-dom";
 
 export const OrdersUser = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state: RootStateValue) => state.master)
-  console.log('OrdersUser tsx ===>');
+  // const dispatch = useDispatch();
+  // const user = useSelector((state: RootStateValue) => state.master)
 
   return (
     // <div className={css.masterAccount}>

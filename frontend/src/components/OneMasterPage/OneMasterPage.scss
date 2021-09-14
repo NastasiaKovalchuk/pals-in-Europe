@@ -3,17 +3,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+
+  img {
+    width: 250px;
+    border-radius: 250px;
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    left: 420px;
+    border: 8px solid #a3f0aa;
+  }
 
   .idHead {
-    width: 1150px;
+    width: 750px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    img {
-      width: 250px;
-      border-radius: 250px;
-    }
+    margin-left: 700px;
+    margin-right: 310px;
 
     .nameAndJob {
       display: flex;
@@ -28,30 +37,68 @@
       }
 
       .job {
-        margin-top: 20px;
-        font-size: 20px;
+        margin-top: 0px;
+        font-size: 24px;
       }
     }
 
-    .contactBtn {
-      font-size: 25px;
-      background-color: #7dc50f;
-      color: white;
-      width: 400px;
-      height: 80px;
-  
-      &:hover {
+    .ratingAndExperience {
+      display: flex;
+      margin-top: 10px;
+      font-size: px;
+
+      .rating {
+        margin-right: 20px;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+
+      .contactBtn {
+        font-size: 25px;
+        background-color: #7dc50f;
         color: white;
+        width: 400px;
+        height: 65px;
+    
+        &:hover {
+          color: white;
+          background-color: #a5df4e;
+          filter: drop-shadow(0 0 7px #88ca24);
+    
+          -webkit-transition: all 0.3s ease;
+          ;
+          -moz-transition: all 0.3s ease;
+          ;
+          -o-transition: all 0.3s ease;
+          ;
+          transition: all 0.3s ease;
+        }
+      }
+
+      .reviewBtn {
+        font-size: 25px;
         background-color: #4f52ff;
-        filter: drop-shadow(0 0 7px #b4b9ff);
-  
-        -webkit-transition: all 0.3s ease;
-        ;
-        -moz-transition: all 0.3s ease;
-        ;
-        -o-transition: all 0.3s ease;
-        ;
-        transition: all 0.3s ease;
+        color: white;
+        width: 400px;
+        height: 65px;
+        margin-top: 20px;
+    
+        &:hover {
+          color: white;
+          background-color: #888aff;
+          filter: drop-shadow(0 0 7px #8c8eff);
+    
+          -webkit-transition: all 0.3s ease;
+          ;
+          -moz-transition: all 0.3s ease;
+          ;
+          -o-transition: all 0.3s ease;
+          ;
+          transition: all 0.3s ease;
+        }
       }
     }
   }
@@ -61,34 +108,46 @@
     justify-content: center;
     background-color: rgb(224, 224, 224);
     width: 100%;
-    height: 64vh;
     filter: drop-shadow(0 0 7px #0fc51e);
     font-size: 20px;
     padding-left: 400px;
     padding-right: 390px;
 
-    .leftSide {
+    .leftSide { 
       padding-top: 20px;
       display: flex;
       width: 800px;
+      height: 73vh;
 
       .info {
-        margin-right: 50px;
+        margin-top: 80px;
+        margin-left: 80px;
         color: rgb(83, 83, 83);
       }
 
       .description {
         color: rgb(128, 128, 128);
+        width: 450px;
+        margin-left: 60px;
       }
     }
 
     .location {
       width: 425px;
+      height: 620px;
       background-color: snow;
       display: flex;
       flex-direction: column;
       padding-top: 30px;  
       font-size: 18px;
+
+      .city {
+        color: green;
+        font-size: 20px;
+      }
+      .contacts {
+        margin-bottom: 5px;
+      }
 
       .ymaps {
         display: flex;

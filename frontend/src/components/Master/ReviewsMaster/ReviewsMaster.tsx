@@ -1,57 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getMasterAccountAC } from '../../redux/actionCreators/masterAC';
-import { RootStateValue } from '../../redux/reducers/rootReducer';
-import css from '../Master.module.css';
-import { Link } from "react-router-dom";
+import { getMasterAccountAC } from "../../redux/actionCreators/masterAC";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
+import css from "../Master.module.css";
+import { Link, useParams } from "react-router-dom";
+import { IdParams } from "../MasterAccount/MasterAccount";
 
 export const ReviewsMaster = () => {
-  // const dispatch = useDispatch();
-  const reviews = useSelector((state: RootStateValue) => state.master.reviews)
-  console.log('ReviewsMaster tsx ===>', reviews);
-
-  // useEffect(() => {
-  //   const getMasterAccount = async () => {
-  //     const response = await fetch(
-  //       'http://localhost:8080/master/account',
-  //       {
-  //         method: 'GET',
-  //         credentials: 'include',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         }
-  //       }
-  //     )
-  //     const result = await response.json();
-  //     dispatch(getMasterAccountAC(result));
-  //   }
-  //   getMasterAccount();
-  // }, [dispatch]);
+  const [reviews, setReviews] = useState();
+  const { id } = useParams<IdParams>();
 
 
   return (
     <div className={css.masterAccount}>
       <div>
-        <Link to='/account'>
+        <Link to={`/account/${id}`}>
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to='/account/orders'>
+        <Link to={`/account/orders/${id}`}>
           <button className={css.btn}>My orders</button>
         </Link>
-        <Link to='/account/profile'>
+        <Link to={`/account/profile/${id}`}>
           <button className={css.btn}>Edit profile</button>
         </Link>
-        <Link to='/account/reviews'>
+        <Link to={`/account/reviews/${id}`}>
           <button className={css.btn}>Rewievs</button>
         </Link>
       </div>
-      {reviews.map((review) => {
+      {/* {reviews.map((review) => {
         return <div></div>
       })
-      }
+      } */}
       <div>RewievsMaster</div>
     </div>
-  )
-}
-
-
+  );
+};
