@@ -11,13 +11,11 @@ export const ReviewsMaster = () => {
   const dispatch = useDispatch();
   const masters = useSelector((state: RootStateValue) => state.masters);
   const user = useSelector((state: RootStateValue) => state.user);
-  // console.log('ReviewsMaster tsx 111===>', masters);
-
+  
   useEffect(() => {
     const masterReviews = masters.find((el) => el._id === user.masterID);
-    // console.log('masterReviews !!!!!!!!!!! ====>', masterReviews?.reviews);
     setMaster(masterReviews);
-  }, [masters, user.masterID]);
+  }, []);
 
   // console.log('ReviewsMaster tsx 222===>', reviews);
   return (
@@ -26,11 +24,11 @@ export const ReviewsMaster = () => {
         <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
         <Link to="/account/edit">
           <button className={css.btn}>Edit profile</button>
+        </Link>
+        <Link to="/account/orders">
+          <button className={css.btn}>My orders</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>

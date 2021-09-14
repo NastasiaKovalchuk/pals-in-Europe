@@ -14,21 +14,23 @@ export const EditMasterProfile = () => {
   const user = useSelector((state: RootStateValue) => state.user);
   const categories = useSelector((state: RootStateValue) => state.categories);
   const dispatch = useDispatch();
-  console.log("EditMasterProfile =>", newUser);
+
+  // console.log("EditMasterProfile =>", newUser);
   const [name, setName] = useState("");
-  const [login, setLogin] = useState(newUser?.login);
-  const [email, setEmail] = useState(newUser?.email);
+  const [login, setLogin] = useState('');
+  const [email, setEmail] = useState('');
   const [category, setCategory] = useState("");
-  const [experience, setExperience] = useState(newUser?.experience);
-  const [description, setDescription] = useState(newUser?.description);
-  const [city, setCity] = useState(newUser?.location.city);
+  const [experience, setExperience] = useState('');
+  const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
   const [street, setStreet] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState(newUser?.phoneNumber);
+  const [phoneNumber, setPhoneNumber] = useState('');
+
 
   const history = useHistory();
   useEffect(() => {
     const findAccountInfo = masters.find((el) => el._id === user.masterID);
-    console.log("useEffect", findAccountInfo);
+    // console.log("useEffect", findAccountInfo);
     if (findAccountInfo) {
       setNewUser(findAccountInfo);
       setName(findAccountInfo.name);
@@ -68,12 +70,12 @@ export const EditMasterProfile = () => {
       <div className={css.link}>
         <Link to="/account">
           <button className={css.btn}>My profile</button>
+        <Link to="/account/edit">
+          <button className={css.btn}>Edit profile</button>
+        </Link>
         </Link>
         <Link to="/account/orders">
           <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to="/account/edit">
-          <button className={css.btn}>Edit profile</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>

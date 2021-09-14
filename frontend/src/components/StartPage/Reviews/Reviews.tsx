@@ -1,3 +1,4 @@
+import { EIDRM } from "constants";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Review } from "../../redux/initState";
@@ -5,7 +6,7 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import "./Reviews.scss";
 
 const Reviews = () => {
-  const [review, setReview] = useState<Review[]>([])
+  const [review, setReview] = useState<Review[]>([]);
   const masters = useSelector(
     (state: RootStateValue) => state.masters
   );
@@ -13,7 +14,7 @@ const Reviews = () => {
   useEffect(() => {
     if (masters) {
       const reviewsOnly = masters.map((el) => (el.reviews)).flat()
-      console.log(reviewsOnly);
+      // console.log(reviewsOnly);
 
       const randomReviews = []
       for (let index = 0; index <= 3; index++) {
@@ -39,7 +40,7 @@ const Reviews = () => {
         {review.length > 0 ?
           review.map((el: Review, index) => (
             <div className="rev">
-              <img key={el._id} className="review" src={el.author.picture}></img>
+              <img key={el._id} className="review" src={el.author.picture} alt=""></img>
               <div>
                 {el.author.name ? 
                 <div key={el._id} className="name">{el.author.name}</div> :

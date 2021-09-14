@@ -59,6 +59,19 @@ export interface Master {
   };
 }
 
+export interface Order {
+  _id: string;
+  number: number;
+  name: string;
+  client: User;
+  master: Master;
+  comment: string;
+  date: string;
+  service: string;
+  createdAt: string;
+  status: 'Pending' | 'Accepted' | 'Declined' | 'Fullfilled' | 'Cancel';
+}
+
 export interface Review {
   _id: string,
   text: string,
