@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SET_USER, UNSET_USER, GET_USER_ACCOUNT } from "../types/types";
+import { SET_USER, UNSET_USER, GET_USER_ORDER } from "../types/types";
 
 export const userReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
@@ -15,39 +15,9 @@ export const userReducer = (state = {}, action: AnyAction) => {
         adminID: "",
         role: "",
       };
-
-    case GET_USER_ACCOUNT:
-      return {
-        // ...state,
-        // name: action.payload.masterAccount.name,
-        // password: action.payload.masterAccount.password,
-        // login: action.payload.masterAccount.login,
-        // _id: action.payload.masterAccount._id,
-        // role: 'master',
-        // picture: action.payload.masterAccount.picture,
-        // email: action.payload.masterAccount.email,
-        // rating: action.payload.masterAccount.rating,
-        // description: action.payload.masterAccount.description,
-        // phoneNumber: action.payload.masterAccount.phoneNumber,
-        // category: action.payload.masterAccount.category,
-        // experience: action.payload.masterAccount.experience,
-        // reviews: action.payload.masterAccount.reviews,
-        // location: action.payload.masterAccount.location,
-      };
-    // case SET_ADMIN:
-    //   return {...state,
-    //     name: action.payload.login,
-    //     adminID: action.payload.adminID,
-    //     role: action.payload.role,
-    //   };
-
-    // case GET_USER:
-    //   console.log('GET_USER =>', action.payload);
-    //   return {
-    //     name: action.payload.login,
-    //     id: action.payload,
-    //   };
-
+    case GET_USER_ORDER:
+      console.log('GET_USER_ORDER =>', action);
+      return action.payload;
     default:
       return state;
   }

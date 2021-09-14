@@ -71,7 +71,7 @@ const StartPage = () => {
     [dispatch, search, history]
   );
 
-  console.log('errorMessage from main', errorMessage);
+  // console.log('errorMessage from main', errorMessage);
 
   const getTheRightSearch = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,

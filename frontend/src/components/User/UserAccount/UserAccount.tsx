@@ -13,10 +13,6 @@ import { Master, User, UserStateValue } from "../../redux/initState";
 export const UserAccount = () => {
   const [user, setUser] = useState<User>();
 
-  // const user = useSelector((state: RootStateValue) => state.user);
-  // const dispatch = useDispatch();
-  // const user = useSelector((state: RootStateValue) => state.user)
-
   useEffect(() => {
     // const getUserAccount = async () => {
     fetch("http://localhost:8080/user/account", {
@@ -30,8 +26,6 @@ export const UserAccount = () => {
       .then((result) => setUser(result));
   }, []);
 
-  // console.log('UserAccount =====>', user?.userAccount);
-
 
   return (
     <div className={css.userAccount}>
@@ -39,11 +33,11 @@ export const UserAccount = () => {
         <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
         <Link to="/account/edit">
           <button className={css.btn}>Edit profile</button>
+        </Link>
+        <Link to="/account/orders">
+          <button className={css.btn}>My orders</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>
@@ -74,12 +68,6 @@ export const UserAccount = () => {
                     user ? user.userAccount.login : ''}</td>
                   </div>
                 </tr>
-                {/* <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>PhoneNumber: </span></td>
-                    <td>{user ? user.phoneNumber : ''}</td>
-                  </div>
-                </tr> */}
                 <tr>
                   <div className={css.margin}>
                     <td className={css.one}><span>Email: </span></td>

@@ -21,12 +21,12 @@ export const UserLogin = () => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(userLoginAC(login, password, () => {history.push('/');}))
-    console.log('errorMessage', errorMessage);
+    // console.log('errorMessage', errorMessage);
     if (errorMessage !== "") {
       dispatch(errorMessageAC(""))
     }
   }
-  console.log('errorMessage 2', errorMessage);
+  // console.log('errorMessage 2', errorMessage);
   return (
     <div className="all">
       <form className="forms" onSubmit={onSubmit}>

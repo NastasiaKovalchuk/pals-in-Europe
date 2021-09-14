@@ -5,6 +5,8 @@ import {
   UNSET_USER,
   GET_MESSAGE,
   GET_USER_ACCOUNT,
+  CREATE_ORDER,
+  GET_USER_ORDER,
 } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {
@@ -43,38 +45,38 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
 
 export const userSignupAC =
   (name: string, login: string, email: string, password: string, onSuccesSignup: () => void) =>
-  async (dispatch: AppDispatch) => {
-    // console.log('userSignupAC');
-    const response = await fetch("http://localhost:8080/user/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        name,
-        login,
-        email,
-        password,
-      }),
-    });
-    const result = await response.json();
-    if (!result.message) {
-      dispatch({
-        type: SET_USER,
-        payload: result,
+    async (dispatch: AppDispatch) => {
+      // console.log('userSignupAC');
+      const response = await fetch("http://localhost:8080/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          name,
+          login,
+          email,
+          password,
+        }),
       });
-      onSuccesSignup()
-    } else if (result.message) {
-      dispatch({
-        type: GET_MESSAGE,
-        payload: result.message,
-      });
-    }
-  };
+      const result = await response.json();
+      if (!result.message) {
+        dispatch({
+          type: SET_USER,
+          payload: result,
+        });
+        onSuccesSignup()
+      } else if (result.message) {
+        dispatch({
+          type: GET_MESSAGE,
+          payload: result.message,
+        });
+      }
+    };
 
 export const userLoginAC =
-  (login: string, password: string, onSuccesLogin: () => void ) => async (dispatch: AppDispatch) => {
+  (login: string, password: string, onSuccesLogin: () => void) => async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/user/login", {
       method: "POST",
       headers: {
@@ -182,44 +184,78 @@ export const masterSignupAC =
     phoneNumber: string,
     onSuccesSignup: () => void
   ) =>
-  async (dispatch: AppDispatch) => {
-    const response = await fetch("http://localhost:8080/master/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        name,
-        login,
-        email,
-        password,
-        category,
-        experience,
-        description,
-        city,
-        street,
-        phoneNumber,
-      }),
-    });
-    const result = await response.json();
-
-    if (!result.message) {
-      dispatch({
-        type: SET_USER,
-        payload: {
-          adminID: "",
-          userID: "",
-          masterID: result._id,
-          role: "master",
-          name: result.mastername,
+    async (dispatch: AppDispatch) => {
+      const response = await fetch("http://localhost:8080/master/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        credentials: "include",
+        body: JSON.stringify({
+          name,
+          login,
+          email,
+          password,
+          category,
+          experience,
+          description,
+          city,
+          street,
+          phoneNumber,
+        }),
       });
-      onSuccesSignup()
-    } else if (result.message) {
-      dispatch({
-        type: GET_MESSAGE,
-        payload: result.message,
-      });
-    }
-  };
+      const result = await response.json();
+
+      if (!result.message) {
+        dispatch({
+          type: SET_USER,
+          payload: {
+            adminID: "",
+            userID: "",
+            masterID: result._id,
+            role: "master",
+            name: result.mastername,
+          },
+        });
+        onSuccesSignup()
+      } else if (result.message) {
+        dispatch({
+          type: GET_MESSAGE,
+          payload: result.message,
+        });
+      }
+    };
+
+
+export const createOrderAC = (
+  name: string, comment: string, date: string, service: string, id: string
+) => async (dispatch: AppDispatch) => {
+  const response = await fetch("http://localhost:8080/user/addOrder", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name,
+      comment,
+      date,
+      service,
+      id
+    }),
+    credentials: "include",
+  });
+  const result = await response.json();
+  dispatch({
+    type: CREATE_ORDER,
+    payload: result,
+  });
+};
+
+
+// export const getUserOrdersAC = (result: object) => {
+
+//   return {
+//     type: GET_USER_ORDER,
+//     payload: result
+//   };
+// };

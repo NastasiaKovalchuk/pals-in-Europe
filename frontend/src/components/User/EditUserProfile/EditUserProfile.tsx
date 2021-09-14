@@ -32,9 +32,9 @@ export const EditUserProfile = () => {
     //@ts-ignore
     user?.userAccount?.email);
   
-  console.log(
-    //@ts-ignore
-    'EditUserProfile =====>', user?.userAccount);
+  // console.log(
+  //   //@ts-ignore
+  //   'EditUserProfile =====>', user?.userAccount);
 
   return (
     <div className={css.userAccount}>
@@ -42,11 +42,11 @@ export const EditUserProfile = () => {
         <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
         <Link to="/account/edit">
           <button className={css.btn}>Edit profile</button>
+        </Link>
+        <Link to="/account/orders">
+          <button className={css.btn}>My orders</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>
