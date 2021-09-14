@@ -42,7 +42,7 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
 };
 
 export const userSignupAC =
-  (name: string, login: string, email: string, password: string) =>
+  (name: string, login: string, email: string, password: string, onSuccesSignup: () => void) =>
   async (dispatch: AppDispatch) => {
     // console.log('userSignupAC');
     const response = await fetch("http://localhost:8080/user/signup", {
@@ -64,6 +64,7 @@ export const userSignupAC =
         type: SET_USER,
         payload: result,
       });
+      onSuccesSignup()
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
@@ -73,7 +74,7 @@ export const userSignupAC =
   };
 
 export const userLoginAC =
-  (login: string, password: string) => async (dispatch: AppDispatch) => {
+  (login: string, password: string, onSuccesLogin: () => void ) => async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/user/login", {
       method: "POST",
       headers: {
@@ -86,12 +87,12 @@ export const userLoginAC =
       }),
     });
     const result = await response.json();
-    // console.log('loginUserAC ====>', result);
     if (!result.message) {
       dispatch({
         type: SET_USER,
         payload: result,
       });
+      onSuccesLogin()
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
@@ -133,7 +134,7 @@ export const getUserAccountAC =
   };
 
 export const masterLoginAC =
-  (login: string, password: string) => async (dispatch: AppDispatch) => {
+  (login: string, password: string, onSuccesLogin: () => void) => async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/master/login", {
       method: "POST",
       headers: {
@@ -158,6 +159,7 @@ export const masterLoginAC =
           name: result.mastername,
         },
       });
+      onSuccesLogin()
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
@@ -177,7 +179,8 @@ export const masterSignupAC =
     description: string,
     city: string,
     street: string,
-    phoneNumber: string
+    phoneNumber: string,
+    onSuccesSignup: () => void
   ) =>
   async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/master/signup", {
@@ -212,6 +215,7 @@ export const masterSignupAC =
           name: result.mastername,
         },
       });
+      onSuccesSignup()
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
