@@ -4,7 +4,7 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
 import { Link } from "react-router-dom";
 import { Master } from "../../redux/initState";
-import { getAuthorsReviewsAC } from "../../redux/actionCreators/mastersAC";
+// import { getAuthorsReviewsAC } from "../../redux/actionCreators/mastersAC";
 
 interface Review {
   _id: object;
@@ -29,7 +29,7 @@ export const ReviewsMaster = () => {
     setReviews(masterReviews)
   }, [masters, user.masterID]);
 
-  console.log('ReviewsMaster tsx 222===>', reviews);
+  // console.log('ReviewsMaster tsx 222===>', reviews);
   return (
 
     <div className={css.masterAccount}>

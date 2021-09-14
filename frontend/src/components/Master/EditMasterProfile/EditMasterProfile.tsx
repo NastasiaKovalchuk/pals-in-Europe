@@ -25,8 +25,6 @@ export const EditMasterProfile = () => {
 
 
   const [name, setName] = useState(newUser && newUser.name);
-  console.log('name ===>', name);
-  
   const [login, setLogin] = useState(newUser?.login);
   const [email, setEmail] = useState(newUser?.email);
   const [category, setCategory] = useState("");

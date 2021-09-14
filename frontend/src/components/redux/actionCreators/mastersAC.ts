@@ -1,5 +1,5 @@
 import { Master } from "../initState";
-import { GET_MASTERS, EDIT_MASTER, GET_AUTHORS } from "../types/types";
+import { GET_MASTERS, EDIT_MASTER } from "../types/types";
 import { AppDispatch } from "../../../index";
 
 export const getMastersAC = (masters: Master[]) => {
@@ -32,9 +32,9 @@ export const editMasterProfileAC = (
     })
   }
 
-export const getAuthorsReviewsAC = (result: object) => {
-  return {
-    type: GET_AUTHORS,
-    payload: result
-  }
-}
+// export const getAuthorsReviewsAC = (result: object) => {
+//   return {
+//     type: GET_AUTHORS,
+//     payload: result
+//   }
+// }

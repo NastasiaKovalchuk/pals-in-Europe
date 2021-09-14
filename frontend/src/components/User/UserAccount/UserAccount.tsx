@@ -8,15 +8,13 @@ import { EditUserProfile } from "../EditUserProfile/EditUserProfile";
 import { OrdersUser } from "../OrdersUser/OrdersUser";
 import { ReviewsUser } from "../ReviewsUser/ReviewsUser";
 import { Master, User, UserStateValue } from "../../redux/initState";
-interface IdParams {
-  id: string;
-}
+
 
 export const UserAccount = () => {
   const [user, setUser] = useState<User>();
-  const { id } = useParams<IdParams>();
 
-  const dispatch = useDispatch();
+  // const user = useSelector((state: RootStateValue) => state.user);
+  // const dispatch = useDispatch();
   // const user = useSelector((state: RootStateValue) => state.user)
 
   useEffect(() => {
@@ -30,22 +28,21 @@ export const UserAccount = () => {
     })
       .then((res) => res.json())
       .then((result) => setUser(result));
-
-    // dispatch(getUserAccountAC(result));
-    // }
-    // getUserAccount();
   }, []);
 
+  // console.log('UserAccount =====>', user?.userAccount);
+
+
   return (
-    <div className={css.masterAccount}>
-      <div>
+    <div className={css.userAccount}>
+      <div className={css.link}>
         <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
         <Link to="/account/orders">
           <button className={css.btn}>My orders</button>
         </Link>
-        <Link to="/account/profile">
+        <Link to="/account/edit">
           <button className={css.btn}>Edit profile</button>
         </Link>
         <Link to="/account/reviews">
@@ -53,83 +50,82 @@ export const UserAccount = () => {
         </Link>
       </div>
       <div>
-        <Switch>
-          <Route exact path="/account/orders">
-            <OrdersUser />
-          </Route>
-          <Route exact path="/account/profile">
-            <EditUserProfile />
-          </Route>
-          <Route exact path="/account/rewievs">
-            <ReviewsUser />
-          </Route>
-        </Switch>
-        {/* <div className={css.userAccount}>
-          <div className={css.profile}>
-            <div className={css.name}>
-              <img className={css.img} src={user.picture} alt='' />
-              <div className={css.login}>
-                <table>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>Name: </span></td>
-                      <td>{user.name}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>Login: </span></td>
-                      <td>{user.login}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>PhoneNumber: </span></td>
-                      <td>{user.phoneNumber}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>Email: </span></td>
-                      <td>{user.email}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>About me: </span></td>
-                      <td className={css.description}>{user.description}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>Profession: </span></td>
-                      <td>{user.category.category}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div>
-                      <td className={css.one}><span>Experience: </span></td>
-                      <td>{user.experience}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>My rating: </span></td>
-                      <td>{user.rating}</td>
-                    </div>
-                  </tr>
-                  <tr>
-                    <div className={css.margin}>
-                      <td className={css.one}><span>City: </span></td>
-                      <td>{user.location.city}</td>
-                    </div>
-                  </tr>
-                </table>
-              </div>
+        <div className={css.profile}>
+          <div className={css.name}>
+            
+            <img className={css.img} 
+            //@ts-ignore
+            src={user ? user?.userAccount?.picture : ''} alt='' />
+            <div className={css.login}>
+              <table>
+                <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>Name: </span></td>
+                    <td>{
+                      //@ts-ignore
+                    user ? user.userAccount.name : ''}</td>
+                  </div>
+                </tr>
+                <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>Login: </span></td>
+                    <td>{
+                       //@ts-ignore
+                    user ? user.userAccount.login : ''}</td>
+                  </div>
+                </tr>
+                {/* <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>PhoneNumber: </span></td>
+                    <td>{user ? user.phoneNumber : ''}</td>
+                  </div>
+                </tr> */}
+                <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>Email: </span></td>
+                    <td>{
+                      //@ts-ignore
+                    user ? user.userAccount.email : ''}</td>
+                  </div>
+                </tr>
+                {/* <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>About me: </span></td>
+                    <td className={css.description}>{user.description}</td>
+                  </div>
+                </tr> */}
+                {/* <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>Profession: </span></td>
+                    <td>{user.category.category}</td>
+                  </div>
+                </tr> */}
+                {/* <tr>
+                  <div>
+                    <td className={css.one}><span>Experience: </span></td>
+                    <td>{user.experience}</td>
+                  </div>
+                </tr> */}
+                <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>My rating: </span></td>
+                    <td>{
+                    //@ts-ignore
+                    user ? user.userAccount.rating : ''}</td>
+                  </div>
+                </tr>
+                {/* <tr>
+                  <div className={css.margin}>
+                    <td className={css.one}><span>City: </span></td>
+                    <td>{user.location.city}</td>
+                  </div>
+                </tr> */}
+              </table>
             </div>
           </div>
-        </div>*/}
+        </div>
       </div>
     </div>
+
   );
 };

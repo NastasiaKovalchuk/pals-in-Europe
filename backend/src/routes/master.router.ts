@@ -6,7 +6,8 @@ import {
   getAllMasters,
   getAccountMaster,
   editMasterProfile,
-  getAuthorReviews
+  // getAuthorReviews
+  getReviews
 } from "../controllers/master";
 
 const router = Router();
@@ -21,7 +22,9 @@ router.get("/account", getAccountMaster);
 
 router.post("/edit/:id", editMasterProfile);
 
-router.get("/reviews", getAuthorReviews);
+// router.get("/account/reviews", getAuthorReviews);
 
+
+router.get("/reviews", getReviews)
 
 export default router;

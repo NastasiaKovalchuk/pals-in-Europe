@@ -45,7 +45,7 @@ function App() {
       dispatch(getUserAC())
   }, [dispatch, user.role]);
 
-  // console.log(user);
+  // console.log(user.role);
 
   useEffect(() => {
     fetch("http://localhost:8080/categories/")
