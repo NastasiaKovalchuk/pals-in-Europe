@@ -17,7 +17,7 @@ export const Footer = () => {
             the required specialist due to the geolocation system and filters.
             Having tried it once, you will want to come back here again and again.
           </div>
-          <div>
+          <div className="allIcons">
             <img className="icons" src="icons/inst.png" alt="" />
             <img className="icons" src="icons/fb.png" alt="" />
             <img className="icons" src="icons/slack.png" alt="" />

@@ -13,6 +13,7 @@
     width: 100%;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 
     .rev {
       width: 400px;
@@ -21,6 +22,7 @@
       height: 200px;
       border-radius: 10px;
       filter: drop-shadow(0 0 7px #b3b3b3);
+      margin: 10px;
 
       img {
         width: 200px;
@@ -31,14 +33,14 @@
       .name {
         font-size: 18px;
         font-weight: bold;
-        margin: 5px;
-        overflow-wrap: break-word;
+        margin: 5px;  
+        word-wrap:break-word
       }
 
-      .text {
-        overflow-wrap: break-word;
+      .text {       
         font-size: 14px;
         margin-left: 5px;
+        word-wrap:break-word
       }
     }
   }

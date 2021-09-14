@@ -18,28 +18,36 @@ footer {
       color: rgb(148, 148, 148);
       width: 930px;
     }
-  
-    .icons {
-      width: 46px;
-      background-color: rgb(116, 116, 116);
-      border-radius: 12px;
-      padding: 6px;
-      margin: 4px;
-  
-      &:hover {
-        cursor: pointer;
-        background-color: rgb(175, 175, 175);
-        filter: drop-shadow(0 0 7px #8aff94);
-  
-        -webkit-transition: all 0.3s ease;
-        ;
-        -moz-transition: all 0.3s ease;
-        ;
-        -o-transition: all 0.3s ease;
-        ;
-        transition: all 0.3s ease;
+
+    .allIcons {
+      display: flex;
+      flex-wrap: wrap;
+
+      .icons {
+        width: 46px;
+        background-color: rgb(116, 116, 116);
+        border-radius: 12px;
+        padding: 6px;
+        margin: 4px;
+        display: flex;
+        flex-direction: row;
+    
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(175, 175, 175);
+          filter: drop-shadow(0 0 7px #8aff94);
+    
+          -webkit-transition: all 0.3s ease;
+          ;
+          -moz-transition: all 0.3s ease;
+          ;
+          -o-transition: all 0.3s ease;
+          ;
+          transition: all 0.3s ease;
+        }
       }
     }
+  
   }
 
 }
