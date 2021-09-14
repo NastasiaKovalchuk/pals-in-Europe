@@ -1,5 +1,5 @@
 .reviews {
-  padding-bottom: 50px;
+  padding-bottom: 70px;
   background-color: rgb(221, 221, 221);
   width: 100%;
 
@@ -15,7 +15,12 @@
     justify-content: space-evenly;
 
     .rev {
-      width: 300px;
+      width: 400px;
+      display: flex;
+      background-color: rgb(255, 255, 255);
+      height: 200px;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 7px #b3b3b3);
 
       img {
         width: 200px;
@@ -23,8 +28,17 @@
         margin-bottom: 30px;
       }
 
+      .name {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px;
+        overflow-wrap: break-word;
+      }
+
       .text {
-        font-size: 20px;
+        overflow-wrap: break-word;
+        font-size: 14px;
+        margin-left: 5px;
       }
     }
   }

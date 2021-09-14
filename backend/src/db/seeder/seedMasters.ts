@@ -10,7 +10,7 @@ async function masterMaker() {
     console.log("зашли к мастерам");
     const locations = await LocationModel.find();
     const users = await userModel.find();
-    for (let i = 0; i < 1; i += 1) {
+    for (let i = 0; i < 101; i += 1) {
       const email = faker.internet.email();
       const name = faker.name.findName();
       const login = faker.internet.userName();

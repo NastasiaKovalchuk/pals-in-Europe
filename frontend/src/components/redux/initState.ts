@@ -3,7 +3,7 @@ import { RootStateValue } from "./reducers/rootReducer";
 export interface Review {
   _id: string;
   text: string;
-  author: string;
+  author: User;
   master: string;
 }
 
@@ -61,7 +61,7 @@ export interface Master {
 export interface Review {
   _id: string;
   text: string;
-  author: string;
+  author: User;
 }
 
 const initState: RootStateValue = {

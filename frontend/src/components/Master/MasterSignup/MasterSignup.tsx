@@ -1,10 +1,12 @@
 import { useState } from "react";
-import css from "../Master.module.css";
+// import css from "../Master.module.css";
 import { masterSignupAC } from "../../redux/actionCreators/userAC";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { Category } from "../../redux/initState";
+import "./MasterSignup.scss";
+import { errorMessageAC } from "../../redux/actionCreators/errorMessageAC";
 
 export const MasterSignup = () => {
   const [name, setName] = useState("");
@@ -34,109 +36,134 @@ export const MasterSignup = () => {
         email, password,
         category, experience,
         description, city,
-        street, phoneNumber)
+        street, phoneNumber,
+        () => { history.push('/'); })
     );
-    if (errorMessage !== '') {
-      history.push('/');
+    if (errorMessage !== "") {
+      dispatch(errorMessageAC(""))
     }
   };
 
   // console.log(categories);
 
   return (
-    <div>
-      <form className={css.form} onSubmit={onSubmit}>
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setName(ev.target.value)
-          }
-          placeholder="Name"
-          value={name}
-          required
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setLogin(ev.target.value)
-          }
-          placeholder="Login"
-          value={login}
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setEmail(ev.target.value)
-          }
-          placeholder="Email"
-          value={email}
-          type="email"
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setPassword(ev.target.value)
-          }
-          placeholder="password"
-          value={password}
-          type="password"
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setPhoneNumber(ev.target.value)
-          }
-          placeholder="phoneNumber"
-          value={phoneNumber}
-          
-        />
-        <select
-          onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
-            setCategory(ev.target.value)
-          }
-          placeholder="category"
-          value={category}
-        >
-          <option>Profession</option>
-          {categories
-            ? categories.map((el: string) => (
-              <option value={el}>{el}</option>
-            ))
-            : ""}
-        </select>
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setDescription(ev.target.value)
-          }
-          placeholder="About you"
-          value={description}
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setSocialMediaLinks(ev.target.value)
-          }
-          placeholder="About you"
-          value={socialMediaLinks}
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setCity(ev.target.value)
-          }
-          placeholder="city"
-          value={city}
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setStreet(ev.target.value)
-          }
-          placeholder="street"
-          value={street}
-        />
-        <input
-          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
-            setExperience(ev.target.value)
-          }
-          placeholder="experience"
-          value={experience}
-        />
-        <button type="submit">Signup</button>
+    <div className="all">
+      <form className="forms" onSubmit={onSubmit}>
+        <div className="signAndAbout">
+          <div className="sign">
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setName(ev.target.value)
+              }
+              placeholder="Name"
+              value={name}
+              required
+            />
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setLogin(ev.target.value)
+              }
+              placeholder="Login"
+              value={login}
+              required
+            />
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setEmail(ev.target.value)
+              }
+              placeholder="Email"
+              value={email}
+              type="email"
+              required
+            />
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setPassword(ev.target.value)
+              }
+              placeholder="Password"
+              value={password}
+              type="password"
+              required
+            />
+          </div>
+          <div className="about">
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setPhoneNumber(ev.target.value)
+              }
+              placeholder="Phone-number"
+              value={phoneNumber}
+              type="tel"
+            />
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setDescription(ev.target.value)
+              }
+              placeholder="About you"
+              value={description}
+            />
+            <input
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                setSocialMediaLinks(ev.target.value)
+              }
+              placeholder="Social media links"
+              value={socialMediaLinks}
+            />
+            <select
+              className="form-control me-2 inputs"
+              onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+                setCategory(ev.target.value)
+              }
+              placeholder="category"
+              value={category}
+              required
+            >
+              <option>Profession   ▽</option>
+              {categories
+                ? categories.map((el: string) => (
+                  <option value={el}>{el}</option>
+                ))
+                : ""}
+            </select>
+          </div>
+        </div>
+        <div className="city">
+          <input
+            className="form-control me-2 inputs"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+              setCity(ev.target.value)
+            }
+            placeholder="City"
+            value={city}
+          />
+          <input
+            className="form-control me-2 inputs"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+              setStreet(ev.target.value)
+            }
+            placeholder="Street"
+            value={street}
+          />
+          <input
+            className="form-control me-2 exp"
+            onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+              setExperience(ev.target.value)
+            }
+            placeholder="Experience"
+            value={experience}
+            type="number"
+          />
+        </div>
+        <button className="btn signupBtnMaster" type="submit">Signup as Master</button>
       </form>
-      <div>{errorMessage}</div>
+      <div className="error">{errorMessage}</div>
     </div>
   );
 };
