@@ -53,7 +53,7 @@ export const Header = () => {
           <>
             <div className="collapse navbar-collapse" id="navbarSupportedContent" />
             <div className="btn-group">
-              <Link to={session.user.masterID ? `/account/${session.user.masterID}` : `/account/${session.user.userID}`}>
+              <Link to='/account'>
                 <button type="button" className="btn loginBtn " aria-expanded="false">
                   Account
                 </button>

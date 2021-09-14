@@ -74,7 +74,6 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 export const getAccountUser: RequestHandler = async (req, res) => {
   try {
     const userAccount = await userModel.findOne({ _id: req?.session?.user?.id });
-    // console.log(masters)
     res.status(200).json({ userAccount });
   } catch (error) {
     console.log(error);

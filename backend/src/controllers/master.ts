@@ -166,7 +166,7 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
-    console.log("Зашли в ручку editMasterProfile");
+    // console.log("Зашли в ручку editMasterProfile");
     const { name, login, phoneNumber, email, description, category } =
       req.body as {
         name: string;
@@ -191,6 +191,7 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
       },
       { new: true }
     );
+
     return res.status(200).json({
       updatedMaster,
     });
@@ -198,6 +199,15 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+
+// export const getAuthorReviews: RequestHandler = async (req, res) => {
+//   try {
+//     console.log('Зашли в ручку getAuthorReviews');
+//     const master = await masterModel.findById(req?.session?.user?.id);
+//     console.log(master);
+    
+//     res.status(200).json({ master });
 
 export const getReviews: RequestHandler = async (req, res) => {
   try {
@@ -221,6 +231,7 @@ export const getReviews: RequestHandler = async (req, res) => {
     //   console.log(master);
     // }
     // return res.status(200).json({ response });
+
   } catch (error) {
     console.log(error);
   }

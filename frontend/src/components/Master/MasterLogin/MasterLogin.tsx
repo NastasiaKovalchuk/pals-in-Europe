@@ -7,7 +7,9 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
 import { masterLoginAC } from "../../redux/actionCreators/userAC";
 
+
 export const MasterLogin = () => {
+  const history = useHistory();
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
   const dispatch = useDispatch();
@@ -16,6 +18,7 @@ export const MasterLogin = () => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(masterLoginAC(login, password));
+    history.push('/');
   }
 
   return (

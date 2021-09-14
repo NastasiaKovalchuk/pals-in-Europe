@@ -15,6 +15,6 @@ router.post("/login", loginUser);
 
 router.get("/account", getAccountUser);
 
-router.post("/profile", editUserProfile);
+router.post("/edit", editUserProfile);
 
 export default router;

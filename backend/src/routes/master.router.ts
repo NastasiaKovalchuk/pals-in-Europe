@@ -6,6 +6,7 @@ import {
   getAllMasters,
   getAccountMaster,
   editMasterProfile,
+  // getAuthorReviews
   getReviews
 } from "../controllers/master";
 
@@ -19,7 +20,10 @@ router.post("/login", loginMaster);
 
 router.get("/account", getAccountMaster);
 
-router.post("/profile", editMasterProfile);
+router.post("/edit/:id", editMasterProfile);
+
+// router.get("/account/reviews", getAuthorReviews);
+
 
 router.get("/reviews", getReviews)
 

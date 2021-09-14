@@ -7,7 +7,6 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { Category } from "../../redux/initState";
 
 export const MasterSignup = () => {
-  const [errorSignup, setErrorSignup] = useState(false);
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
@@ -25,18 +24,21 @@ export const MasterSignup = () => {
   const history = useHistory();
   const user = useSelector((state: RootStateValue) => state.user);
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
-  console.log('errorMessage!!!!!!! =>', errorMessage);
+  // console.log('errorMessage!!!!!!! =>', errorMessage);
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(
       masterSignupAC(
-        name, login, 
-        email, password, 
-        category, experience, 
-        description, city, 
+        name, login,
+        email, password,
+        category, experience,
+        description, city,
         street, phoneNumber)
     );
+    if (errorMessage !== '') {
+      history.push('/');
+    }
   };
 
   // console.log(categories);
@@ -50,6 +52,7 @@ export const MasterSignup = () => {
           }
           placeholder="Name"
           value={name}
+          required
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -64,6 +67,7 @@ export const MasterSignup = () => {
           }
           placeholder="Email"
           value={email}
+          type="email"
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -71,6 +75,7 @@ export const MasterSignup = () => {
           }
           placeholder="password"
           value={password}
+          type="password"
         />
         <input
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -78,6 +83,7 @@ export const MasterSignup = () => {
           }
           placeholder="phoneNumber"
           value={phoneNumber}
+          
         />
         <select
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
