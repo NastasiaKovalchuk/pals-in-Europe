@@ -5,6 +5,7 @@ import { RootStateValue } from "../redux/reducers/rootReducer";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./OneMasterPage.scss";
 import { Master } from "../redux/initState";
+import { Footer } from "../Footer/Footer";
 type IdParams = {
   id: string;
 };
@@ -12,7 +13,7 @@ type IdParams = {
 export const OneMasterPage = () => {
   const [oneMasterObj, setOneMasterObj] = useState<Master>();
   const { id } = useParams<IdParams>();
-  
+
   const selectorMasters = useSelector((state: RootStateValue) => state.masters);
   const session = useSelector((state: RootStateValue) => state);
 
@@ -24,7 +25,7 @@ export const OneMasterPage = () => {
   }, [id, oneMasterObj, selectorMasters]);
 
   //@ts-ignore
-  // console.log(oneMasterObj.socialMediaLinks);
+  console.log(oneMasterObj);
 
 
   return (
@@ -46,20 +47,28 @@ export const OneMasterPage = () => {
             <button className="btn contactBtn" type="submit">
               Contact the master
             </button>
-            {session.user.name ? 
-            <button className="btn reviewBtn" type="submit">
-              Write a review
-            </button>
-            : ""
-          }
+            {session.user.name ?
+              <button className="btn reviewBtn" type="submit">
+                Write a review
+              </button>
+              : ""
+            }
           </div>
         </div>
         <hr className="dropdown-divider" />
         <div className="idBody">
-          <div className="leftSide">
-            <div className="info">INFORMATION</div>
-            <div className="description">
-              {oneMasterObj ? oneMasterObj.description : ""}
+          <div>
+            <div className="leftSide">
+              <div className="info">INFORMATION</div>
+              <div className="description">
+                {oneMasterObj ? oneMasterObj.description : ""}
+              </div>
+            </div>
+            <div className="leftSide">
+              <div className="info">INFORMATION</div>
+              <div className="description">
+                {oneMasterObj ? oneMasterObj.description : ""}
+              </div>
             </div>
           </div>
           <div className="location">

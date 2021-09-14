@@ -3,7 +3,7 @@ import { Review } from "./review.model";
 
 export interface Master {
   _id: string;
-  description: string,
+  description: string;
   email: string;
   name: string;
   password: string;
@@ -14,9 +14,8 @@ export interface Master {
   reviews: Review[];
   rating: number;
   picture: string;
-  socialMediaLinks: string[],
-  phoneNumber: string,
-
+  socialMediaLinks: string[];
+  phoneNumber: string;
 }
 
 const MasterSchema = new Schema<Master>({
@@ -30,10 +29,11 @@ const MasterSchema = new Schema<Master>({
   // category: String,
   experience: String,
   location: {},
-  reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+  // reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+  reviews: [{}],
   rating: { type: Number, default: 0 },
   picture: String,
-  socialMediaLinks: []
+  socialMediaLinks: [],
 });
 
 const masterModel = model<Master>("Master", MasterSchema);

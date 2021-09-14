@@ -4,19 +4,20 @@ import { User } from "./user.model";
 
 export interface Review {
   _id: string;
-  text: string,
-  author: string | User,
-  master: string | Master
+  text: string;
+  author: object;
+  master: object
 }
 
-const ReviewSchema = new Schema<Review>({
-  author: { type: Schema.Types.ObjectId, ref: "User" },
-  text: String,
-  master: { type: Schema.Types.ObjectId, ref: "Master" }
-},
-{
-    timestamps: true
-});
+const ReviewSchema = new Schema<Review>(
+  {
+    author: {},
+    text: String,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 
 const ReviewModel = model<Review>("Review", ReviewSchema);

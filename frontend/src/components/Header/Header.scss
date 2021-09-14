@@ -15,7 +15,7 @@
   .loginBtn {
     background-color: #7dc50f;
     color: white;
-    margin-right: 10px;
+    margin-right: 20px;
     width: 157px;
 
     &:hover {
@@ -43,6 +43,27 @@
       color: #7d7fff;
       background-color: white;
       filter: drop-shadow(0 0 7px #b4b9ff);
+
+      -webkit-transition: all 0.3s ease;
+      ;
+      -moz-transition: all 0.3s ease;
+      ;
+      -o-transition: all 0.3s ease;
+      ;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .logouBtn {
+    background-color: #ff5e5e;
+    color: white;
+    margin-right: 20px;
+    width: 157px;
+
+    &:hover {
+      color: #ff5e5e;
+      background-color: white;
+      filter: drop-shadow(0 0 7px #ff9b9b);
 
       -webkit-transition: all 0.3s ease;
       ;

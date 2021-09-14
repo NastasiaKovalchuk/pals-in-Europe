@@ -51,16 +51,19 @@ export const Header = () => {
           </>
           :
           <>
-            <Link to={session.user.masterID ? `/account/${session.user.masterID}` : `/account/${session.user.userID}`}>
-              <button type="button" className="btn loginBtn "  aria-expanded="false">
-                Account
-              </button>
-            </Link>
-            <Link to="/" >
-              <button type="button" onClick={onLogout} className="btn btn-primary"  aria-expanded="false">
-                Logout
-              </button>
-            </Link>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent" />
+            <div className="btn-group">
+              <Link to={session.user.masterID ? `/account/${session.user.masterID}` : `/account/${session.user.userID}`}>
+                <button type="button" className="btn loginBtn " aria-expanded="false">
+                  Account
+                </button>
+              </Link>
+              <Link to="/" >
+                <button type="button" onClick={onLogout} className="btn logouBtn" aria-expanded="false">
+                  Logout
+                </button>
+              </Link>
+            </div>
           </>
         }
       </div>

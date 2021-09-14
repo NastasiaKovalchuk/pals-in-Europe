@@ -1,4 +1,4 @@
-import { mailer } from './mailer';
+import { mailer } from "./mailer";
 const fetch = require("node-fetch");
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
@@ -6,30 +6,35 @@ import masterModel, { Master } from "../db/models/master.model";
 import ReviewModel, { Review } from "../db/models/review.model";
 import LocationModel, { Location } from "../db/models/location.model";
 import categoryModel from "../db/models/category.model";
+import userModel from "../db/models/user.model";
 
 export const createMaster: RequestHandler = async (req, res) => {
-  console.log('Зашли в ручку createMaster');
-  
+  console.log("Зашли в ручку createMaster");
+
   try {
     const {
-      name, login, email,
-      password, category,
+      name,
+      login,
+      email,
+      password,
+      category,
       experience,
       description,
       city,
       street,
-      phoneNumber, } = req.body as {
-        email: string;
-        name: string;
-        password: string;
-        login: string;
-        experience: string;
-        category: string;
-        description: string;
-        city: string;
-        street: string;
-        phoneNumber: string;
-      };
+      phoneNumber,
+    } = req.body as {
+      email: string;
+      name: string;
+      password: string;
+      login: string;
+      experience: string;
+      category: string;
+      description: string;
+      city: string;
+      street: string;
+      phoneNumber: string;
+    };
     const checkExistingEmail = await masterModel.findOne({ email });
     if (!checkExistingEmail) {
       const checkExistingName = await masterModel.findOne({ login });
@@ -42,16 +47,24 @@ export const createMaster: RequestHandler = async (req, res) => {
         const encodedURI = await encodeURI(URI);
         const response = await fetch(encodedURI);
         const result = await response.json();
-        const coordinates = result.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
-          .split(" ")
-          .map((el: string) => Number(el));
-          // console.log(coordinates);
-          
+        const coordinates =
+          result.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+            .split(" ")
+            .map((el: string) => Number(el));
+        // console.log(coordinates);
+
         if (coordinates) {
-          const location = await LocationModel.create({ coordinates, street, city });
+          const location = await LocationModel.create({
+            coordinates,
+            street,
+            city,
+          });
           const newMaster = await new masterModel({
-            email, name, password,
-            login, experience,
+            email,
+            name,
+            password,
+            login,
+            experience,
             location,
             category: chooseCategory,
             description,
@@ -61,7 +74,7 @@ export const createMaster: RequestHandler = async (req, res) => {
           // console.log('newMaster создан');
           const message = {
             to: email,
-            subject: 'Вы успешно зарегистрировались.',
+            subject: "Вы успешно зарегистрировались.",
             html: `
                 <h2>Поздравляем с успешной регистрацией!</h2>
                 <div>Данные вашей учетной записи:</div>
@@ -69,18 +82,18 @@ export const createMaster: RequestHandler = async (req, res) => {
                 <li>Логин: ${login},</li>
                 <li>Пароль: ${password}.</li>
                 </ul>
-                Желаем успешных заказов!`
+                Желаем успешных заказов!`,
           };
           mailer(message);
           if (newMaster) {
             req.session.user = {
               name: newMaster.name,
-              id: newMaster.id
+              id: newMaster.id,
             };
             return res.status(200).json({
               name: req.session.user.name,
               masterId: req.session.user.id,
-              role: 'master'
+              role: "master",
             });
           } else {
             return res.status(500).json({ message: "Something went wrong" });
@@ -108,12 +121,12 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
       if (checkMaster.password === password) {
         req.session.user = {
           name: checkMaster.name,
-          id: checkMaster.id
+          id: checkMaster.id,
         };
         return res.status(200).json({
           name: req.session.user.name,
           masterId: req.session.user.id,
-          role: 'master'
+          role: "master",
         });
       }
     }
@@ -142,7 +155,9 @@ export const getAllMasters: RequestHandler = async (req, res) => {
 
 export const getAccountMaster: RequestHandler = async (req, res) => {
   try {
-    const masterAccount = await masterModel.findOne({ _id: req?.session?.user?.id });
+    const masterAccount = await masterModel.findOne({
+      _id: req?.session?.user?.id,
+    });
     res.status(200).json({ masterAccount });
   } catch (error) {
     console.log(error);
@@ -151,34 +166,61 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
-    console.log('Зашли в ручку editMasterProfile');
-    const {
-      name,
-      login,
-      phoneNumber,
-      email,
-      description,
-      category, } = req.body as {
-        name: string,
-        login: string,
-        phoneNumber: string,
-        email: string,
-        description: string,
-        category: string,
+    console.log("Зашли в ручку editMasterProfile");
+    const { name, login, phoneNumber, email, description, category } =
+      req.body as {
+        name: string;
+        login: string;
+        phoneNumber: string;
+        email: string;
+        description: string;
+        category: string;
       };
     const newCategory = await categoryModel.findOne({ category });
     //@ts-ignore
-    const uptdaterMaster = await masterModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
-      name,
-      login,
-      phoneNumber,
-      email,
-      description,
-      category: newCategory,
-    }, { new: true })
+    const updatedMaster = await masterModel.findByIdAndUpdate(
+      { _id: req?.session?.user?.id },
+      //@ts-ignore
+      {
+        name,
+        login,
+        phoneNumber,
+        email,
+        description,
+        category: newCategory,
+      },
+      { new: true }
+    );
     return res.status(200).json({
-      uptdaterMaster
+      updatedMaster,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getReviews: RequestHandler = async (req, res) => {
+  try {
+    // const reviews = await ReviewModel.find().populate("author").exec();
+    // const response: Master[] = [];
+    // for (let i = 0; i < 4; i++) {
+    //   //@ts-ignore
+    //   response.push(reviews[Math.floor(Math.random() * reviews.length)]);
+    // }
+    // const masters = await masterModel.find();
+    // for (let i = 0; i < response.length; i++) {
+    //   const master = await masters.filter((master) =>
+    //   {
+    //       //@ts-ignore
+    //       master.reviews.includes(response._id);
+    //       console.log(master, response._id);
+    //     }
+    //   );
+    //   //@ts-ignore
+    //   response[i].master = master;
+    //   console.log(master);
+    // }
+    // return res.status(200).json({ response });
   } catch (error) {
     console.log(error);
   }
