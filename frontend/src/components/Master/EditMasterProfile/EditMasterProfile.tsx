@@ -23,6 +23,7 @@ export const EditMasterProfile = () => {
     if (findAccountInfo) setNewUser(findAccountInfo);
   }, [masters, user.masterID]);
 
+console.log('newUser ===>', newUser);
 
   const [name, setName] = useState(newUser && newUser.name);
   const [login, setLogin] = useState(newUser?.login);
