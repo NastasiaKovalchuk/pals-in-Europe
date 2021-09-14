@@ -26,15 +26,10 @@ export const editMasterProfileAC = (
       credentials: "include",
     });
     const result = await response.json();
+    console.log('editMasterProfileAC ===>', result);
+    
     dispatch({
       type: EDIT_MASTER,
       payload: result
     })
   }
-
-// export const getAuthorsReviewsAC = (result: object) => {
-//   return {
-//     type: GET_AUTHORS,
-//     payload: result
-//   }
-// }

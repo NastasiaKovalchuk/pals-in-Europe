@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import userModel, { User } from "../db/models/user.model";
-
+import masterModel, { Master } from "../db/models/master.model";
+import OrderModel, { Order } from "../db/models/order.model";
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
     const { email, name, login, password } = req.body as {
@@ -12,7 +13,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
     };
     const checkExistingEmail = await userModel.findOne({ email });
     if (!checkExistingEmail) {
-      const checkExistingNick = await userModel.findOne({  name });
+      const checkExistingNick = await userModel.findOne({ name });
       if (!checkExistingNick) {
         const newUser = await new userModel({ email, name, login, password });
         newUser.save();
@@ -88,13 +89,13 @@ export const editUserProfile: RequestHandler = async (req, res) => {
       name,
       login,
       email,
-      } = req.body as {
-        name: string,
-        login: string,
-        email: string,
-      };
+    } = req.body as {
+      name: string,
+      login: string,
+      email: string,
+    };
     //@ts-ignore
-    const uptdaterUser = await masterModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
+    const uptdaterUser = await userModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
       name,
       login,
       email,
@@ -106,3 +107,41 @@ export const editUserProfile: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+export const createOrder: RequestHandler = async (req, res) => {
+  try {
+    // console.log('Зашли в ручку editUserProfile');
+    const {
+      name,
+      comment,
+      date,
+      service,
+      id
+    } = req.body as {
+      name: string, comment: string, date: string, service: string, id: string
+    };
+    //@ts-ignore
+    const master = await masterModel.findById(id);
+    const user = await userModel.findById(req?.session?.user?.id);
+    const orders = await OrderModel.find();
+    const lastNumOrder = orders[orders.length - 1].number;
+    // console.log();
+    
+    // const numOrder = 
+    const newOrder = await OrderModel.create({
+      number: lastNumOrder + 1,
+      author: user,
+      master: master,
+      comment,
+      date,
+      service
+    })
+    // console.log(newOrder);
+    return res.status(200).json({
+      newOrder
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+

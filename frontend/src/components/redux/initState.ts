@@ -1,12 +1,5 @@
 import { RootStateValue } from "./reducers/rootReducer";
 
-export interface Review {
-  _id: string;
-  text: string;
-  author: string;
-  master: string;
-}
-
 export interface UserStateValue {
   name: string;
   userID: string;
@@ -21,13 +14,13 @@ export interface Category {
 }
 
 export interface User {
-  _id: string,
-  email: string,
-  name: string,
-  password: string,
-  login: string,
-  rating: number,
-  picture: string,
+  _id: string;
+  email: string;
+  name: string;
+  password: string;
+  login: string;
+  rating: number;
+  picture: string;
 }
 
 export interface Search {
@@ -52,16 +45,19 @@ export interface Master {
   experience: string;
   reviews: Review[];
   location: {
-    _id: string,
-    city: string,
-    coordinates: number[]
+    _id: string;
+    city: string;
+    street: string;
+    coordinates: number[];
   };
 }
 
 export interface Review {
-  _id: string;
-  text: string;
-  author: string;
+  _id: string,
+  text: string,
+  author: User,
+  createdAt: string,
+  updatedAt: string,
 }
 
 const initState: RootStateValue = {
@@ -78,7 +74,7 @@ const initState: RootStateValue = {
     category: "",
     location: "",
   },
-  errorMessage: '',
+  errorMessage: "",
 };
 
 export default initState;

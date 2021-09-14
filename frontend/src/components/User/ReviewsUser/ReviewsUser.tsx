@@ -15,7 +15,8 @@ type Reviews = Review[];
 
 export const ReviewsUser = () => {
   const [reviews, setReviews] = useState<Reviews>();
-  // const user = useSelector((state: RootStateValue) => state.master
+  const user = useSelector((state: RootStateValue) => state.user);
+  
 
   return (
     <div className={css.userAccount}>

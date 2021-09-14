@@ -5,6 +5,7 @@ import {
   UNSET_USER,
   GET_MESSAGE,
   GET_USER_ACCOUNT,
+  CREATE_ORDER,
 } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {
@@ -219,3 +220,29 @@ export const masterSignupAC =
       });
     }
   };
+
+
+  export const createOrderAC = (
+   name: string,comment: string, date: string, service: string, id: string
+      ) => async (dispatch: AppDispatch) => {
+    const response = await fetch("http://localhost:8080/user/addOrder", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        comment, 
+        date,
+        service,
+        id
+      }),
+      credentials: "include",
+    });
+    const result = await response.json();
+    dispatch({
+      type: CREATE_ORDER,
+      payload: result,
+    });
+  };
+  
