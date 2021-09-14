@@ -6,13 +6,15 @@ import "./Reviews.scss";
 
 const Reviews = () => {
   const [review, setReview] = useState<Review[]>([])
-  const reviewsSelector = useSelector(
+  const masters = useSelector(
     (state: RootStateValue) => state.masters
   );
 
   useEffect(() => {
-    if (reviewsSelector) {
-      const reviewsOnly = reviewsSelector.map((el) => (el.reviews)).flat()
+    if (masters) {
+      const reviewsOnly = masters.map((el) => (el.reviews)).flat()
+      console.log(reviewsOnly);
+      
       const randomReviews = []
       for (let index = 0; index <= 3; index++) {
         let random = Math.floor(Math.random() * reviewsOnly.length)
@@ -23,7 +25,7 @@ const Reviews = () => {
       console.log('randomReviews', randomReviews);
       setReview(randomReviews)
     }
-  }, [reviewsSelector])
+  }, [masters])
 
 
   return (

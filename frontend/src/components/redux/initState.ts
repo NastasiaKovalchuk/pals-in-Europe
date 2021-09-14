@@ -58,6 +58,12 @@ export interface Master {
   };
 }
 
+export interface Review {
+  _id: string;
+  text: string;
+  author: string;
+}
+
 const initState: RootStateValue = {
   masters: [],
   categories: [],

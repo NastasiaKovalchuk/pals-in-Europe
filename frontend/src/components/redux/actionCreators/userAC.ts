@@ -148,7 +148,6 @@ export const masterLoginAC =
     const result = await response.json();
 
     if (!result.message) {
-      console.log("result", result);
       dispatch({
         type: SET_USER,
         payload: {
@@ -203,7 +202,6 @@ export const masterSignupAC =
     const result = await response.json();
 
     if (!result.message) {
-      console.log("result", result);
       dispatch({
         type: SET_USER,
         payload: {

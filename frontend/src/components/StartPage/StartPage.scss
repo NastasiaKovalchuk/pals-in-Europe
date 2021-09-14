@@ -7,42 +7,36 @@
     z-index: 2;
     position: absolute;
     top: 480px;
-    
+
     .mainInput {
       font-size: 23px;
       padding-left: 20px;
 
       &:hover {
         filter: drop-shadow(0 0 9px #4aff59);
-  
+
         -webkit-transition: all 0.3s ease;
-        ;
         -moz-transition: all 0.3s ease;
-        ;
         -o-transition: all 0.3s ease;
-        ;
         transition: all 0.3s ease;
       }
     }
-  
+
     .btnSearch {
       font-size: 25px;
       background-color: #7dc50f;
       color: white;
       width: 600px;
       height: 70px;
-  
+
       &:hover {
         color: white;
         background-color: #8be700;
         filter: drop-shadow(0 0 7px #8aff94);
-  
+
         -webkit-transition: all 0.3s ease;
-        ;
         -moz-transition: all 0.3s ease;
-        ;
         -o-transition: all 0.3s ease;
-        ;
         transition: all 0.3s ease;
       }
     }
@@ -59,7 +53,7 @@
     &:hover {
       cursor: pointer;
     }
-    
+
     .onePrompt {
       padding-left: 25px;
       padding-bottom: 3px;
@@ -70,13 +64,10 @@
         color: white;
         background-color: #8be700;
         filter: drop-shadow(0 0 7px #8aff94);
-  
+
         -webkit-transition: all 0.3s ease;
-        ;
         -moz-transition: all 0.3s ease;
-        ;
         -o-transition: all 0.3s ease;
-        ;
         transition: all 0.3s ease;
       }
     }
@@ -92,14 +83,25 @@
         color: white;
         background-color: rgb(255, 153, 153);
         filter: drop-shadow(0 0 7px rgb(255, 79, 79));
-  
+
         -webkit-transition: all 0.3s ease;
-        ;
         -moz-transition: all 0.3s ease;
-        ;
         -o-transition: all 0.3s ease;
-        ;
         transition: all 0.3s ease;
+      }
+    }
+  }
+  .review {
+    display: flex;
+    justify-content: space-between;
+    span {
+      display: flex;
+      flex-direction: row;
+      height: 200px;
+      width: 350px;
+      div {
+        display: flex;
+        flex-direction: column;
       }
     }
   }
