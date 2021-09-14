@@ -1,5 +1,12 @@
 import { RootStateValue } from "./reducers/rootReducer";
 
+export interface Review {
+  _id: string;
+  text: string;
+  author: string;
+  master: string;
+}
+
 export interface UserStateValue {
   name: string;
   userID: string;
@@ -43,7 +50,7 @@ export interface Master {
     category: string;
   };
   experience: string;
-  reviews: string[];
+  reviews: Review[];
   location: {
     _id: string,
     city: string,

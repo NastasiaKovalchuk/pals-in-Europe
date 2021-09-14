@@ -9,6 +9,8 @@ import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import Month from "./Month/Month";
 import { Footer } from "../Footer/Footer";
+import HowItsWork from "./HowItsWork/HowItsWork";
+import Reviews from "./Reviews/Reviews";
 import Speacialist from "./Speacialists/Speacialist";
 
 const StartPage = () => {
@@ -96,7 +98,9 @@ const StartPage = () => {
         {noCategories ? <div className="noPrompt">We don't have such a category</div> : ""}
       </div>
       <Categories />
+      <HowItsWork />
       <Month />
+      <Reviews />
       <Speacialist />
       <Footer />
     </div>
