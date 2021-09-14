@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
+import OrderModel, { Order } from "../db/models/order.model";
 import ReviewModel, { Review } from "../db/models/review.model";
 import LocationModel, { Location } from "../db/models/location.model";
 import categoryModel from "../db/models/category.model";
@@ -220,14 +221,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
 };
 
 
-// export const getAuthorReviews: RequestHandler = async (req, res) => {
-//   try {
-//     console.log('Зашли в ручку getAuthorReviews');
-//     const master = await masterModel.findById(req?.session?.user?.id);
-//     console.log(master);
-
-//     res.status(200).json({ master });
-
 export const getReviews: RequestHandler = async (req, res) => {
   try {
     // const reviews = await ReviewModel.find().populate("author").exec();
@@ -255,3 +248,19 @@ export const getReviews: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+
+export const getMasterOrder: RequestHandler = async (req, res) => {
+  try {
+    const orders = await OrderModel.find();
+    const masterOrders = orders.filter((order: Order) => {
+      if (order?.master?._id == req?.session?.user?.id) {
+        return order;
+      }
+    })
+    res.status(200).json({ masterOrders });
+  } catch (error) {
+    console.log(error);
+  }
+};
+

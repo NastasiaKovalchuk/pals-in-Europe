@@ -26,7 +26,7 @@ export const editMasterProfileAC = (
       credentials: "include",
     });
     const result = await response.json();
-    console.log('editMasterProfileAC ===>', result);
+    // console.log('editMaste /rProfileAC ===>', result);
     
     dispatch({
       type: EDIT_MASTER,

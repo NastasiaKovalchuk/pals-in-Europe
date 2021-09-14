@@ -15,7 +15,7 @@ const Reviews = () => {
     if (masters) {
       const reviewsOnly = masters.map((el) => (el.reviews)).flat()
       // console.log(reviewsOnly);
-      
+
       const randomReviews = []
       for (let index = 0; index <= 3; index++) {
         let random = Math.floor(Math.random() * reviewsOnly.length)
@@ -28,16 +28,26 @@ const Reviews = () => {
     }
   }, [masters])
 
+  // const aa = review[0]
+
+  // console.log('000000000000aaa', aa);
+
 
   return (
     <div className="d-flex flex-column align-items-center reviews">
       <div className="title">Reviews about our masters</div>
       <div className="reviewsBody">
         {review.length > 0 ?
-          review.map((el: Review) => (
+          review.map((el: Review, index) => (
             <div className="rev">
-              <div key={el._id} className="review">{el.text}</div>
-              {/* <div key={el._id} className="review">{el.author}</div> */}
+              <img key={el._id} className="review" src={el.author.picture} alt=""></img>
+              <div>
+                {el.author.name ? 
+                <div key={el._id} className="name">{el.author.name}</div> :
+                <div key={el._id} className="name">{el.author.login}</div>
+              }
+                <div key={index} className="text">{el.text}</div>
+              </div>
             </div>
           )) : ""}
       </div>

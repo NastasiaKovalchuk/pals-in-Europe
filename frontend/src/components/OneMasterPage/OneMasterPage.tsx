@@ -31,7 +31,7 @@ export const OneMasterPage = () => {
       const master = selectorMasters.filter((el) => el._id === id);
       setOneMasterObj(master[0]);
     }
-  }, [id, oneMasterObj, selectorMasters]);
+  }, [id, selectorMasters]);
 
   //@ts-ignore
   // console.log(oneMasterObj);

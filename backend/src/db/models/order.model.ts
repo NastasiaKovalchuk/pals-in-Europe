@@ -5,8 +5,9 @@ import { User } from "./user.model";
 export interface Order {
   _id: string;
   number: number;
-  client: object;
-  master: object;
+  name: string;
+  client: User;
+  master: Master;
   comment: string;
   date: string;
   service: string;
@@ -16,6 +17,7 @@ export interface Order {
 const OrderSchema = new Schema<Order>(
   {
     number: Number,
+    name: String,
     client: {},
     master: {},
     comment: String,

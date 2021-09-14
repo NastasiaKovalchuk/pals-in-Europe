@@ -5,7 +5,7 @@ const HowItsWork = () => {
 
   return (
     <div className="d-flex flex-column align-items-center how">
-      <div className="title">How it's works</div>
+      <div className="title">How it works</div>
       <div className="steps">
         <div className="step">
           <img src="hw/1.png" alt="1"/>

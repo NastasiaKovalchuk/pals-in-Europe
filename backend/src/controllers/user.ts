@@ -3,6 +3,8 @@ import { RequestHandler } from "express";
 import userModel, { User } from "../db/models/user.model";
 import masterModel, { Master } from "../db/models/master.model";
 import OrderModel, { Order } from "../db/models/order.model";
+import ReviewModel, { Review } from "../db/models/review.model";
+
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
     const { email, name, login, password } = req.body as {
@@ -81,10 +83,8 @@ export const getAccountUser: RequestHandler = async (req, res) => {
   }
 };
 
-
 export const editUserProfile: RequestHandler = async (req, res) => {
   try {
-    console.log('Зашли в ручку editUserProfile');
     const {
       name,
       login,
@@ -110,7 +110,6 @@ export const editUserProfile: RequestHandler = async (req, res) => {
 
 export const createOrder: RequestHandler = async (req, res) => {
   try {
-    // console.log('Зашли в ручку editUserProfile');
     const {
       name,
       comment,
@@ -124,22 +123,62 @@ export const createOrder: RequestHandler = async (req, res) => {
     const master = await masterModel.findById(id);
     const user = await userModel.findById(req?.session?.user?.id);
     const orders = await OrderModel.find();
-    const lastNumOrder = orders[orders.length - 1].number;
-    // console.log();
-    
-    // const numOrder = 
-    const newOrder = await OrderModel.create({
-      number: lastNumOrder + 1,
-      author: user,
-      master: master,
-      comment,
-      date,
-      service
+    if (orders.length > 0) {
+      const lastNumOrder = orders[orders.length - 1].number;
+      const newOrder = await OrderModel.create({
+        number: lastNumOrder + 1,
+        name,
+        client: user,
+        master: master,
+        comment,
+        date,
+        service
+      })
+      return res.status(200).json({
+        newOrder
+      });
+    } else {
+      const newOrder = await OrderModel.create({
+        number: 1,
+        client: user,
+        master: master,
+        comment,
+        date,
+        service
+      })
+      return res.status(200).json({
+        newOrder
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserOrder: RequestHandler = async (req, res) => {
+  try {
+    const orders = await OrderModel.find();
+    const userOrders = orders.filter((order: Order) => {
+      if (order?.client?._id == req?.session?.user?.id) {
+        return order;
+      }
     })
-    // console.log(newOrder);
-    return res.status(200).json({
-      newOrder
+    res.status(200).json({ userOrders });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserReviews: RequestHandler = async (req, res) => {
+  try {
+    const reviews = await ReviewModel.find();
+    const userReviews = reviews.filter((review: Review) => {
+      //@ts-ignore
+      if (review?.author?._id == req?.session?.user?.id) {
+       return review;
+      }
     });
+    res.status(200).json({ userReviews });
   } catch (error) {
     console.log(error);
   }

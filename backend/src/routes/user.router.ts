@@ -5,7 +5,9 @@ import {
   loginUser,
   getAccountUser,
   editUserProfile,
-  createOrder
+  createOrder,
+  getUserOrder,
+  getUserReviews
 } from "../controllers/user";
 
 const router = Router();
@@ -19,5 +21,9 @@ router.get("/account", getAccountUser);
 router.post("/edit", editUserProfile);
 
 router.post("/addOrder", createOrder);
+
+router.get("/orders", getUserOrder);
+
+router.get("/reviews", getUserReviews);
 
 export default router;

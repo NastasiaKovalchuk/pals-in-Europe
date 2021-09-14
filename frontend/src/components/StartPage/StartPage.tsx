@@ -26,6 +26,7 @@ const StartPage = () => {
     (state: RootStateValue) => state.categories
   );
   const masters = useSelector((state: RootStateValue) => state.masters);
+  const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -69,6 +70,8 @@ const StartPage = () => {
     },
     [dispatch, search, history]
   );
+
+  // console.log('errorMessage from main', errorMessage);
 
   const getTheRightSearch = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,

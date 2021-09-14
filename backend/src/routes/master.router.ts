@@ -6,7 +6,7 @@ import {
   getAllMasters,
   getAccountMaster,
   editMasterProfile,
-  // getAuthorReviews
+  getMasterOrder,
   getReviews
 } from "../controllers/master";
 
@@ -22,8 +22,7 @@ router.get("/account", getAccountMaster);
 
 router.post("/edit", editMasterProfile);
 
-// router.get("/account/reviews", getAuthorReviews);
-
+router.get("/orders", getMasterOrder);
 
 router.get("/reviews", getReviews)
 

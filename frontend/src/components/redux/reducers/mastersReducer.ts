@@ -9,7 +9,7 @@ export const mastersReducer = (
     case GET_MASTERS:
       return action.payload
     case EDIT_MASTER:
-      console.log('EDIT_MASTER ===>', action);
+      // console.log('EDIT_MASTER ===>', action);
       return action.payload
     // case GET_AUTHORS:
     //   console.log('GET_AUTHORS ===>', action.payload.master.reviews);

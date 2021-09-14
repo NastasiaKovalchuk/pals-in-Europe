@@ -14,6 +14,7 @@ export const EditMasterProfile = () => {
   const user = useSelector((state: RootStateValue) => state.user);
   const categories = useSelector((state: RootStateValue) => state.categories);
   const dispatch = useDispatch();
+
   // console.log("EditMasterProfile =>", newUser);
   const [name, setName] = useState("");
   const [login, setLogin] = useState('');
@@ -24,6 +25,7 @@ export const EditMasterProfile = () => {
   const [city, setCity] = useState('');
   const [street, setStreet] = useState("");
   const [phoneNumber, setPhoneNumber] = useState('');
+
 
   const history = useHistory();
   useEffect(() => {
@@ -68,12 +70,12 @@ export const EditMasterProfile = () => {
       <div className={css.link}>
         <Link to="/account">
           <button className={css.btn}>My profile</button>
+        <Link to="/account/edit">
+          <button className={css.btn}>Edit profile</button>
+        </Link>
         </Link>
         <Link to="/account/orders">
           <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to="/account/edit">
-          <button className={css.btn}>Edit profile</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>
