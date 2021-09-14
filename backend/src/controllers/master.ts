@@ -7,7 +7,7 @@ import LocationModel, { Location } from "../db/models/location.model";
 import categoryModel from "../db/models/category.model";
 
 export const createMaster: RequestHandler = async (req, res) => {
-  console.log('Зашли в ручку createMaster');
+  // console.log('Зашли в ручку createMaster');
   
   try {
     const {
@@ -144,34 +144,44 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
-    console.log('Зашли в ручку editMasterProfile');
+    const { id } = req.params;
+    // console.log('Зашли в ручку editMasterProfile');
     const {
-      name,
-      login,
-      phoneNumber,
-      email,
-      description,
-      category, } = req.body as {
+      name, login, email, category, experience, description, city, street, phoneNumber } = req.body as {
         name: string,
         login: string,
         phoneNumber: string,
         email: string,
         description: string,
         category: string,
+        experience: string,
+        city: string,
+        street: string,
       };
     const newCategory = await categoryModel.findOne({ category });
     //@ts-ignore
     const uptdaterMaster = await masterModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
-      name,
-      login,
-      phoneNumber,
+      name, login,
       email,
-      description,
+      experience, description,
+      city, street, phoneNumber,
       category: newCategory,
     }, { new: true })
     return res.status(200).json({
       uptdaterMaster
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAuthorReviews: RequestHandler = async (req, res) => {
+  try {
+    console.log('Зашли в ручку getAuthorReviews');
+    const master = await masterModel.findById(req?.session?.user?.id);
+    console.log(master);
+    
+    res.status(200).json({ master });
   } catch (error) {
     console.log(error);
   }

@@ -45,7 +45,7 @@ function App() {
       dispatch(getUserAC())
   }, [dispatch, user.role]);
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     fetch("http://localhost:8080/categories/")
@@ -66,7 +66,7 @@ function App() {
       });
   }, [dispatch]);
 
-  console.log(user.role);
+  // console.log(user.role);
   
   return (
     <div>
@@ -96,20 +96,20 @@ function App() {
             <Route exact path="/search">
               <ShowMasters />
             </Route>
-            <Route exact path="/account/:id">
+            <Route exact path="/account">
               {user.role === "user" ? <UserAccount /> : <MasterAccount />}
             </Route>
-            <Route exact path="/account/profile/:id">
+            <Route exact path="/account/edit">
               {user.role === "user" ? (
                 <EditUserProfile />
               ) : (
                 <EditMasterProfile />
               )}
             </Route>
-            <Route exact path="/account/orders/:id">
+            <Route exact path="/account/orders">
               {user.role === "user" ? <OrdersUser /> : <OrdersMaster />}
             </Route>
-            <Route exact path="/account/reviews/:id">
+            <Route exact path="/account/reviews">
               {user.role === "user" ? <ReviewsUser /> : <ReviewsMaster />}
             </Route>
             <Route exact path="/admin/account">

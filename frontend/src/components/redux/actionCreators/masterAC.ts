@@ -98,31 +98,4 @@ export const getMasterAccountAC = (user: object) => async (dispatch: AppDispatch
 }
 
 
-export const editMasterProfileAC = (
-  name: string,
-  login: string,
-  phoneNumber: string,
-  email: string,
-  description: string,
-  category: string) => async (dispatch: AppDispatch) => {
-    const response = await fetch('http://localhost:8080/master/profile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        login,
-        phoneNumber,
-        email,
-        description,
-        category,
-      }),
-      credentials: "include",
-    });
-    const result = await response.json();
-    dispatch({
-      type: EDIT_MASTER,
-      payload: result
-    })
-  }
+

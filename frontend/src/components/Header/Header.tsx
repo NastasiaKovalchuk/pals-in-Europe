@@ -51,7 +51,7 @@ export const Header = () => {
           </>
           :
           <>
-            <Link to={session.user.masterID ? `/account/${session.user.masterID}` : `/account/${session.user.userID}`}>
+            <Link to='/account'>
               <button type="button" className="btn btn-primary "  aria-expanded="false">
                 Account
               </button>

@@ -7,7 +7,6 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { Category } from "../../redux/initState";
 
 export const MasterSignup = () => {
-  const [errorSignup, setErrorSignup] = useState(false);
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +24,7 @@ export const MasterSignup = () => {
   const history = useHistory();
   const user = useSelector((state: RootStateValue) => state.user);
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
-  console.log('errorMessage!!!!!!! =>', errorMessage);
+  // console.log('errorMessage!!!!!!! =>', errorMessage);
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();

@@ -17,4 +17,6 @@ export const GET_CATEGORY = 'GET_CATEGORY'
 export const GET_CATEGORY_SAGA = 'GET_CATEGORY_SAGA'
 
 export const SET_SEARCH = "SET_SEARCH"
-export const GET_MESSAGE = "GET_MESSAGE"
+export const GET_MESSAGE = "GET_MESSAGE";
+export const GET_AUTHORS = "GET_AUTHORS";
+
