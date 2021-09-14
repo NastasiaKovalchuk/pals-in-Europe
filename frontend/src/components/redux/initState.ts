@@ -43,12 +43,18 @@ export interface Master {
     category: string;
   };
   experience: string;
-  reviews: string[];
+  reviews: Review[];
   location: {
     _id: string,
     city: string,
     coordinates: number[]
   };
+}
+
+export interface Review {
+  _id: string;
+  text: string;
+  author: User;
 }
 
 const initState: RootStateValue = {
