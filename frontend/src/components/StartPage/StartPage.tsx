@@ -9,6 +9,8 @@ import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import Month from "./Month/Month";
 import { Footer } from "../Footer/Footer";
+import HowItsWork from "./HowItsWork/HowItsWork";
+import Reviews from "./Reviews/Reviews";
 import Speacialist from "./Speacialists/Speacialist";
 import { Master, Review } from "../redux/initState";
 
@@ -116,23 +118,9 @@ const StartPage = () => {
         )}
       </div>
       <Categories />
+      <HowItsWork />
       <Month />
-      <div className="review">
-        {mastersForReviews.length > 0 &&
-          mastersForReviews.map((master: Master) => {
-            const random = Math.floor(Math.random() * 10);
-            return (
-              <span>
-                <img src={master.reviews[random].author.picture} alt="" />
-                <div>
-                  <p>Review for {master.name}</p>
-                  <p>{master.reviews[random].text}</p>
-                </div>
-              </span>
-            );
-          })}
-      </div>
-
+      <Reviews />
       <Speacialist />
       <Footer />
     </div>

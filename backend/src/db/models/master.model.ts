@@ -29,6 +29,7 @@ const MasterSchema = new Schema<Master>({
   // category: String,
   experience: String,
   location: {},
+  // reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
   reviews: [{}],
   rating: { type: Number, default: 0 },
   picture: String,

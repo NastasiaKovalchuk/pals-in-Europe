@@ -25,7 +25,7 @@ const CardMaster = ({ master }: { master: Master }) => {
         <div className="cardBody">
           <div className="mastername">{master.name}</div>
           <hr className="dropdown-divider" />
-          <p className="category">{master.category.category}</p>
+          {/* <p className="category">{master.category.category}</p> */}
           {/* <EnvironmentOutlined  />{master.location ? master.location.city : ''} */}
           <div className="topRating">Rating: {master.rating}</div>
           <Link to={`/master/${master._id}`} className="btn btn-primary stretched-link masterBtn">{master.name}'s profile</Link>

@@ -1,0 +1,31 @@
+.reviews {
+  padding-bottom: 50px;
+  background-color: rgb(221, 221, 221);
+  width: 100%;
+
+  .title {
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+
+  .reviewsBody {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .rev {
+      width: 300px;
+
+      img {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 30px;
+      }
+
+      .text {
+        font-size: 20px;
+      }
+    }
+  }
+}

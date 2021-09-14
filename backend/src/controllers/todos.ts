@@ -31,7 +31,7 @@ import userModel from "../db/models/user.model";
 //     setTimeout(async () => {
 //       const { id } = req.params;
 //       const userID = (req.body as { userID: string }).userID;
-//       const user = await userModel.findById(userID).populate("todos").exec();
+//       const user = await userModel.findById(userID).populate("Use").exec();
 //       const findTodo = await todoModel.findById(id);
 //       if (findTodo) {
 //         findTodo.completed = !findTodo.completed;

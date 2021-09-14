@@ -10,7 +10,7 @@ async function masterMaker() {
     console.log("зашли к мастерам");
     const locations = await LocationModel.find();
     const users = await userModel.find();
-    for (let i = 0; i < 100; i += 1) {
+    for (let i = 0; i < 1; i += 1) {
       const email = faker.internet.email();
       const name = faker.name.findName();
       const login = faker.internet.userName();
@@ -23,8 +23,9 @@ async function masterMaker() {
       const rating = Math.floor(Math.random() * 100);
       const socialMediaLinks = [];
       for (let i = 0; i < 4; i++) {
-        socialMediaLinks.push(faker.internet.url);
+        socialMediaLinks.push(faker.internet.url());
       }
+      
       const description = faker.random.words(15);
       const phoneNumber = faker.phone.phoneNumber();
       const reviews = [];
