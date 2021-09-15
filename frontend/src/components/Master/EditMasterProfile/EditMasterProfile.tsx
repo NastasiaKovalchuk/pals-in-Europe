@@ -26,25 +26,25 @@ export const EditMasterProfile = () => {
   const [street, setStreet] = useState("");
   const [phoneNumber, setPhoneNumber] = useState('');
 
-
   const history = useHistory();
   useEffect(() => {
-    const findAccountInfo = masters.find((el) => el._id === user.masterID);
-    // console.log("useEffect", findAccountInfo);
-    if (findAccountInfo) {
-      setNewUser(findAccountInfo);
-      setName(findAccountInfo.name);
-      setLogin(findAccountInfo.login);
-      setEmail(findAccountInfo.email);
-      setExperience(findAccountInfo.experience);
-      setDescription(findAccountInfo.description);
-      setCity(findAccountInfo.location.city);
-      setStreet(findAccountInfo.location.street);
-      setPhoneNumber(findAccountInfo.phoneNumber);
+    if (masters.length > 0) {
+      const findAccountInfo = masters.find((el) => el._id === user.masterID);
+      // console.log("useEffect", findAccountInfo);
+      if (findAccountInfo) {
+        setNewUser(findAccountInfo);
+        setName(findAccountInfo.name);
+        setLogin(findAccountInfo.login);
+        setEmail(findAccountInfo.email);
+        setExperience(findAccountInfo.experience);
+        setDescription(findAccountInfo.description);
+        setCity(findAccountInfo.location.city);
+        setStreet(findAccountInfo.location.street);
+        setPhoneNumber(findAccountInfo.phoneNumber);
+      }
+
     }
   }, [masters, user.masterID]);
-
-  // const [socialMediaLinks, setSocialMediaLinks] = useState('');
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -68,7 +68,7 @@ export const EditMasterProfile = () => {
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
-      <HeaderMaster />
+        <HeaderMaster />
       </div>
 
       <div className={css.profile}>
@@ -174,11 +174,11 @@ export const EditMasterProfile = () => {
                         placeholder="category"
                         value={category}
                       >
-                        <option>Profession</option>
+                        <option>{newUser?.category.category}</option>
                         {categories
                           ? categories.map((el: string) => (
-                              <option value={el}>{el}</option>
-                            ))
+                            <option value={el}>{el}</option>
+                          ))
                           : ""}
                       </select>
                     </td>

@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { getMasterAccountAC } from '../../../redux/actionCreators/masterAC';
 import { Order } from "../../../redux/initState";
 import { RootStateValue } from '../../../redux/reducers/rootReducer';
-import css from "../User.module.css";
+import { HeaderUser } from "../HeaderUser.tsx/HeaderUser";
+import css from '../User.module.css'
+
+
 export const OrdersUser = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
@@ -28,18 +31,7 @@ export const OrdersUser = () => {
   return (
     <div className={css.userAccount}>
       <div className={css.link}>
-        <Link to='/account'>
-          <button className={css.btn}>My profile</button>
-        </Link>
-        <Link to='/account/edit'>
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        <Link to='/account/orders'>
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to='/account/reviews'>
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+        <HeaderUser />
       </div>
       <h4>My orders</h4>
       {orders ?
