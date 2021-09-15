@@ -1,8 +1,8 @@
 import { useState } from "react"
 import css from "../User.module.css";
-import { userLoginAC } from '../../redux/actionCreators/userAC';
+import { userLoginAC } from '../../../redux/actionCreators/userAC';
 import { useDispatch } from "react-redux";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 

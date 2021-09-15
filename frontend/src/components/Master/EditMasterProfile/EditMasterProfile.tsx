@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { Master } from "../../redux/initState";
-import { editMasterProfileAC } from "../../redux/actionCreators/mastersAC";
+import { Master } from "../../../redux/initState";
+import { editMasterProfileAC } from "../../../redux/actionCreators/mastersAC";
 
 export const EditMasterProfile = () => {
   const [newUser, setNewUser] = useState<Master>();

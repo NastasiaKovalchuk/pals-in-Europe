@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getUserAccountAC } from "../../redux/actionCreators/userAC";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { getUserAccountAC } from "../../../redux/actionCreators/userAC";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../User.module.css";
 import { Route, Switch, Link, useParams } from "react-router-dom";
 import { EditUserProfile } from "../EditUserProfile/EditUserProfile";
 import { OrdersUser } from "../OrdersUser/OrdersUser";
 import { ReviewsUser } from "../ReviewsUser/ReviewsUser";
-import { Master, User, UserStateValue } from "../../redux/initState";
+import { Master, User, UserStateValue } from "../../../redux/initState";
 
 
 export const UserAccount = () => {

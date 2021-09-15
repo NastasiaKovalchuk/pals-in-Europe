@@ -2,8 +2,8 @@ import React from "react";
 // import { useState, useCallback } from "react";
 // import { useHistory } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { Master } from "../redux/initState";
-import { RootStateValue } from "../redux/reducers/rootReducer";
+import { Master } from "../../redux/initState";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
 import "./CardMaster.scss";
 //@ts-ignore
 import { EnvironmentOutlined  } from '@ant-design/icons';

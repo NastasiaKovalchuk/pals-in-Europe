@@ -1,6 +1,6 @@
 import { Master } from "../initState";
 import { GET_MASTERS, EDIT_MASTER } from "../types/types";
-import { AppDispatch } from "../../../index";
+import { AppDispatch } from "../../index";
 
 export const getMastersAC = (masters: Master[]) => {
   return {

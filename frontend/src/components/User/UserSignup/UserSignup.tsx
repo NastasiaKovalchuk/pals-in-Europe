@@ -1,8 +1,8 @@
 import { useState } from "react";
 import css from '../User.module.css';
-import { userSignupAC } from '../../redux/actionCreators/userAC';
+import { userSignupAC } from '../../../redux/actionCreators/userAC';
 import { useDispatch } from "react-redux";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
 
 export const UserSignup = () => {

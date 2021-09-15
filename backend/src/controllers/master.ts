@@ -142,10 +142,10 @@ export const getAllMasters: RequestHandler = async (req, res) => {
   try {
     // const populatedReviews  = await ReviewModel.find().populate(["author", "master"]).lean();
     // console.log(populatedReviews);
-    
-    const masters = await masterModel.find();
+
+    const masters = await masterModel.find().lean();
     // console.log(masters[205]);
-    
+
     // const map = masters.map((master) => master.populate("author", "master"))
     res.status(200).json({ masters });
   } catch (error) {
@@ -155,9 +155,11 @@ export const getAllMasters: RequestHandler = async (req, res) => {
 
 export const getAccountMaster: RequestHandler = async (req, res) => {
   try {
-    const masterAccount = await masterModel.findOne({
-      _id: req?.session?.user?.id,
-    });
+    const masterAccount = await masterModel
+      .findOne({
+        _id: req?.session?.user?.id,
+      })
+      .lean();
     res.status(200).json({ masterAccount });
   } catch (error) {
     console.log(error);
@@ -178,19 +180,21 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
       };
     const newCategory = await categoryModel.findOne({ category });
     //@ts-ignore
-    const updatedMaster = await masterModel.findByIdAndUpdate(
-      { _id: req?.session?.user?.id },
-      //@ts-ignore
-      {
-        name,
-        login,
-        phoneNumber,
-        email,
-        description,
-        category: newCategory,
-      },
-      { new: true }
-    );
+    const updatedMaster = await masterModel
+      .findByIdAndUpdate(
+        { _id: req?.session?.user?.id },
+        //@ts-ignore
+        {
+          name,
+          login,
+          phoneNumber,
+          email,
+          description,
+          category: newCategory,
+        },
+        { new: true }
+      )
+      .lean();
 
     return res.status(200).json({
       updatedMaster,
@@ -199,15 +203,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
-
-
-// export const getAuthorReviews: RequestHandler = async (req, res) => {
-//   try {
-//     console.log('Зашли в ручку getAuthorReviews');
-//     const master = await masterModel.findById(req?.session?.user?.id);
-//     console.log(master);
-    
-//     res.status(200).json({ master });
 
 export const getReviews: RequestHandler = async (req, res) => {
   try {
@@ -231,7 +226,21 @@ export const getReviews: RequestHandler = async (req, res) => {
     //   console.log(master);
     // }
     // return res.status(200).json({ response });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+export const test: RequestHandler = async (req, res) => {
+  try {
+    const {id} = req.params;
+    
+    
+    const master = await masterModel.findById(id).lean();
+    
+    if (master) {
+      res.json(master);
+    }
   } catch (error) {
     console.log(error);
   }

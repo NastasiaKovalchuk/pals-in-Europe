@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import CardMaster from "../../CardMaster/CardMaster";
-import { setSearchValue } from "../../redux/actionCreators/searchAC";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { setSearchValue } from "../../../redux/actionCreators/searchAC";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import "./Month.scss";
 
 const Month = () => {

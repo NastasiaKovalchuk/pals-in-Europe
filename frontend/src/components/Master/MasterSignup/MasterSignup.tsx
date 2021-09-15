@@ -1,10 +1,10 @@
 import { useState } from "react";
 import css from "../Master.module.css";
-import { masterSignupAC } from "../../redux/actionCreators/userAC";
+import { masterSignupAC } from "../../../redux/actionCreators/userAC";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
-import { Category } from "../../redux/initState";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
+import { Category } from "../../../redux/initState";
 
 export const MasterSignup = () => {
   const [name, setName] = useState("");

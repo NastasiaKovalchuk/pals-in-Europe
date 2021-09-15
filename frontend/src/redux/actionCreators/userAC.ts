@@ -1,4 +1,4 @@
-import { AppDispatch } from "../../../index";
+import { AppDispatch } from "../../index";
 import { User, UserStateValue } from "../initState";
 import {
   SET_USER,

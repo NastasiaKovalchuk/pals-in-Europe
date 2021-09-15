@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { RootStateValue } from '../redux/reducers/rootReducer';
+import { RootStateValue } from '../../redux/reducers/rootReducer';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logoutAC } from '../redux/actionCreators/userAC';
+import { logoutAC } from '../../redux/actionCreators/userAC';
 import "./Header.scss";
 
 export const Header = () => {

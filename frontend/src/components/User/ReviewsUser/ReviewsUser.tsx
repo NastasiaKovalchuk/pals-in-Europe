@@ -1,7 +1,7 @@
 import css from "../User.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStateValue } from '../../redux/reducers/rootReducer';
+import { RootStateValue } from '../../../redux/reducers/rootReducer';
 import { useEffect, useState } from "react";
 
 interface Review {

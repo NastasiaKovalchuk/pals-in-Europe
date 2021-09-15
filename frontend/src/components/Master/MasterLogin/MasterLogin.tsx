@@ -3,9 +3,9 @@ import css from '../Master.module.css';
 // import { masterLoginAC } from '../../redux/actionCreators/masterAC';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
-import { masterLoginAC } from "../../redux/actionCreators/userAC";
+import { masterLoginAC } from "../../../redux/actionCreators/userAC";
 
 
 export const MasterLogin = () => {

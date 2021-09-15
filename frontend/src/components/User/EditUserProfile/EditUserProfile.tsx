@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import css from "../User.module.css";
+import css from "../User.module.css"
+import { User } from "../../../redux/initState";
 import { Link } from "react-router-dom";
-import { User } from "../../redux/initState";
 
 export const EditUserProfile = () => {
   const [user, setUser] = useState<User>();

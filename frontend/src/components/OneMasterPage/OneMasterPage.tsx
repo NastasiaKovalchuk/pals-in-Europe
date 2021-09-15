@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootStateValue } from "../redux/reducers/rootReducer";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./OneMasterPage.scss";
-import { Master } from "../redux/initState";
+import { Master } from "../../redux/initState";
 import { Footer } from "../Footer/Footer";
 type IdParams = {
   id: string;

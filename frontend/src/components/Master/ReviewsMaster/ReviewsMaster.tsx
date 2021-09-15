@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
 import { Link } from "react-router-dom";
-import { Master, Review } from "../../redux/initState";
+import { Master, Review } from "../../../redux/initState";
 // import { getAuthorsReviewsAC } from "../../redux/actionCreators/mastersAC";
 
 export const ReviewsMaster = () => {

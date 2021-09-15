@@ -1,4 +1,4 @@
-import { AppDispatch } from "../../../index";
+import { AppDispatch } from "../../index";
 import { SET_MASTER, GET_MASTER_ACCOUNT, EDIT_MASTER, GET_MESSAGE } from "../types/types";
 
 export const getMasterAC = (user: object) => {

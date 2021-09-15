@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import "./specialists.scss";
 
 const Specialist = () => {

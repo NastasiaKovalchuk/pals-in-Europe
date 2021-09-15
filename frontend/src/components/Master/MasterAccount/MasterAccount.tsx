@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
 import { Link } from "react-router-dom";
-import { Master } from "../../redux/initState";
+import { Master } from "../../../redux/initState";
 
 export const MasterAccount = () => {
   const [newUser, setNewUser] = useState<Master>();

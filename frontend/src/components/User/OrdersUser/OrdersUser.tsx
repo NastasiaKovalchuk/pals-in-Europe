@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getMasterAccountAC } from '../../redux/actionCreators/masterAC';
-import { RootStateValue } from '../../redux/reducers/rootReducer';
+import { getMasterAccountAC } from '../../../redux/actionCreators/masterAC';
+import { RootStateValue } from '../../../redux/reducers/rootReducer';
 import css from "../User.module.css";
 import { Route, Switch, Link } from "react-router-dom";
 
