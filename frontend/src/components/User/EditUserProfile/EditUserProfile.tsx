@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { User } from "../../../redux/initState";
-import "../UserAccount/UserAccount.scss";
+import "./EditUserProfile.scss";
 
 export const EditUserProfile = () => {
   const [user, setUser] = useState<User>();
@@ -34,7 +34,7 @@ export const EditUserProfile = () => {
   }, [user]);
 
   return (
-    <div className="mainUser">
+    <div className="mainEditUser">
       <div className="">
         <Link to="/account">
           <button className="btn userBtn">My profile</button>
@@ -50,19 +50,19 @@ export const EditUserProfile = () => {
         </Link>
       </div>
       <div>
-        <div className="userCard">
-          <div className="tableUser">
+        <div className="userEditCard">
+          <div className="tableEditUser">
             
-            <img className="picture"
+            <img className="pictureEdit"
             src={user?.picture} alt='' />
-            <div className="">
-              <table>
-                <tr>
+            <div>
+              <table className="tableOnly">
+                <tr className="trEditUser">
                   <div className="">
-                    <td className=""><span>Name: </span></td>
+                    <td><span>Name: </span></td>
                     <td>
                       <input
-                        className=""
+                        className="inputEditUser"
                         value={name}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>
@@ -71,12 +71,12 @@ export const EditUserProfile = () => {
                     </td>
                   </div>
                 </tr>
-                <tr>
+                <tr className="trEditUser">
                   <div className="">
-                    <td className=""><span>Login: </span></td>
+                    <td><span>Login: </span></td>
                     <td>
                       <input
-                        className=""
+                        className="inputEditUser"
                         value={login}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>
@@ -85,12 +85,12 @@ export const EditUserProfile = () => {
                     </td>
                   </div>
                 </tr>
-                <tr>
+                <tr className="trEditUser">
                   <div className="">
-                    <td className=""><span>Email: </span></td>
+                    <td><span>Email: </span></td>
                     <td>
                       <input
-                        className=""
+                        className="inputEditUser"
                         value={email}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>

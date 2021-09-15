@@ -9,8 +9,6 @@
     top: 480px;
     display: flex;
 
-    
-
     .mainInput {
       font-size: 23px;
       padding-left: 20px;
@@ -33,6 +31,8 @@
       color: white;
       width: 600px;
       height: 70px;
+      margin-top: 0px;
+      margin-bottom: 0px;
 
       &:hover {
         color: white;
@@ -52,7 +52,7 @@
     background-color: rgb(151, 151, 151);
     position: absolute;
     top: 70px;
-    right: 370px;
+    right: 390px;
     width: 538px;
 
     &:hover {
