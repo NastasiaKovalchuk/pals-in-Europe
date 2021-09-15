@@ -105,6 +105,7 @@ flex-direction: column;
 justify-content: center;
 }
 
+
 .status {
   border: pink solid 1px;
   width: 200px;
@@ -121,14 +122,13 @@ justify-content: center;
 
 .reviewsCard {
   width: 600px;
-  height: 100px;
+  height: 130px;
   border: gray solid 1px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 10px 10px -7px #38635d, 5px 5px 26px 5px #38635d; 
-box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
-display: flex;
-flex-direction: column;
-justify-content: center;
-
+  box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

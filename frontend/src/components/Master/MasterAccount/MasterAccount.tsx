@@ -12,8 +12,11 @@ export const MasterAccount = () => {
   // console.log('MasterAccount =>', user);
 
   useEffect(() => {
-    const findAccountInfo = masters.find((el) => el._id === user.masterID);
-    if (findAccountInfo) setNewUser(findAccountInfo);
+    if (masters.length > 0) {
+      const findAccountInfo = masters.find((el) => el._id === user.masterID);
+      if (findAccountInfo) setNewUser(findAccountInfo);
+
+    }
   }, [masters, user.masterID]);
 
   return (
