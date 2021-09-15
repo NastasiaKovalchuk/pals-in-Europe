@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { Master } from "../../redux/initState";
-import { editMasterProfileAC } from "../../redux/actionCreators/mastersAC";
+import { Master } from "../../../redux/initState";
+import { editMasterProfileAC } from "../../../redux/actionCreators/mastersAC";
+import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
 
 export const EditMasterProfile = () => {
   const [newUser, setNewUser] = useState<Master>();
@@ -68,18 +68,7 @@ export const EditMasterProfile = () => {
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
-        <Link to="/account">
-          <button className={css.btn}>My profile</button>
-        <Link to="/account/edit">
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to="/account/reviews">
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+      <HeaderMaster />
       </div>
 
       <div className={css.profile}>

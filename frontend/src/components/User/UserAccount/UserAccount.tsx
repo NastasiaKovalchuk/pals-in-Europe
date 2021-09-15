@@ -1,20 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getUserAccountAC } from "../../redux/actionCreators/userAC";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
-import { Route, Switch, Link, useParams } from "react-router-dom";
-import { EditUserProfile } from "../EditUserProfile/EditUserProfile";
-import { OrdersUser } from "../OrdersUser/OrdersUser";
-import { ReviewsUser } from "../ReviewsUser/ReviewsUser";
-import { Master, User, UserStateValue } from "../../redux/initState";
+import { Link } from "react-router-dom";
+import { User } from "../../../redux/initState";
 import "./UserAccount.scss";
-
 
 export const UserAccount = () => {
   const [user, setUser] = useState<User>();
 
   useEffect(() => {
-    // const getUserAccount = async () => {
     fetch("http://localhost:8080/user/account", {
       method: "GET",
       credentials: "include",
@@ -23,9 +15,8 @@ export const UserAccount = () => {
       },
     })
       .then((res) => res.json())
-      .then((result) => setUser(result));
+      .then((result) => setUser(result.userAccount));
   }, []);
-
 
   return (
     <div className="mainUser">
@@ -36,7 +27,7 @@ export const UserAccount = () => {
         <Link to="/account/edit">
           <button className="btn userBtn">Edit profile</button>
         </Link>
-        <Link to="/account/orbtn userBtnders">
+        <Link to="/account/orders">
           <button className="btn userBtn">My orders</button>
         </Link>
         <Link to="/account/reviews">
@@ -48,72 +39,42 @@ export const UserAccount = () => {
           <div className="tableUser">
             
             <img className="picture" 
-            //@ts-ignore
-            src={user ? user?.userAccount?.picture : ''} alt='' />
+            src={user?.picture} alt='' />
             <div className="tableInfo">
               <table>
                 <tr>
                   <div className="">
                     <td className=""><span>Name: </span></td>
                     <td>{
-                      //@ts-ignore
-                    user ? user.userAccount.name : ''}</td>
+                    user ? user.name : ''}</td>
                   </div>
                 </tr>
                 <tr>
                   <div className="">
                     <td className=""><span>Login: </span></td>
                     <td>{
-                       //@ts-ignore
-                    user ? user.userAccount.login : ''}</td>
+                    user ? user.login : ''}</td>
                   </div>
                 </tr>
                 <tr>
                   <div className="">
                     <td className=""><span>Email: </span></td>
                     <td>{
-                      //@ts-ignore
-                    user ? user.userAccount.email : ''}</td>
+                    user ? user.email : ''}</td>
                   </div>
                 </tr>
-                {/* <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>About me: </span></td>
-                    <td className={css.description}>{user.description}</td>
-                  </div>
-                </tr> */}
-                {/* <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>Profession: </span></td>
-                    <td>{user.category.category}</td>
-                  </div>
-                </tr> */}
-                {/* <tr>
-                  <div>
-                    <td className={css.one}><span>Experience: </span></td>
-                    <td>{user.experience}</td>
-                  </div>
-                </tr> */}
                 <tr>
                   <div className="">
                     <td className=""><span>My rating: </span></td>
                     <td>{
-                    //@ts-ignore
-                    user ? user.userAccount.rating : ''}</td>
+                    user ? user.rating : ''}</td>
                   </div>
                 </tr>
-                {/* <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>City: </span></td>
-                    <td>{user.location.city}</td>
-                  </div>
-                </tr> */}
               </table>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };

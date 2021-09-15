@@ -1,8 +1,7 @@
-import { EIDRM } from "constants";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Review } from "../../redux/initState";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { Review } from "../../../redux/initState";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import "./Reviews.scss";
 
 const Reviews = () => {

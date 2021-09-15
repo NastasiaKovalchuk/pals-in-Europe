@@ -4,6 +4,7 @@ import masterMaker from "./seeder/seedMasters";
 import { categoryMaker } from "./seeder/seedCategory";
 import { reviewsAndLinksMaker } from "./seeder/seedReviews";
 import { locationMaker } from "./seeder/seedLocation";
+import appMaker from "./seeder/addAppointments";
 
 const { DBURL } = process.env;
 const options = {
@@ -21,10 +22,10 @@ async function dbconnect() {
     });
   }
   // locationMaker();
-
+  // appMaker()
   // reviewsAndLinksMaker();
   // starting the seeding function
-  // masterMaker();
+  // await masterMaker();
   // categoryMaker()
 }
 

@@ -1,10 +1,7 @@
-import React, { MouseEventHandler } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import CardMaster from "../../CardMaster/CardMaster";
-import { setSearchValue } from "../../redux/actionCreators/searchAC";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { useSelector } from "react-redux";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import "./Month.scss";
 
 const Month = () => {
@@ -12,21 +9,21 @@ const Month = () => {
     (state: RootStateValue) => state.masters
   );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const ratingSort = mastersFromSelector.sort((b, a) =>
     a.rating > b.rating ? 1 : -1).slice(0, 5)
 
-  const arr = ratingSort.map((el) => el.category.category)
+  // const arr = ratingSort.map((el) => el.category.category)
 
 
-  const history = useHistory();
+  // const history = useHistory();
   //@ts-ignore
-  const chooseCategory = (e, category: string) => {
-    e.preventDefault()
-    dispatch(setSearchValue(category));
-    history.push("/showmasters");
-  };
+  // const chooseCategory = (e, category: string) => {
+  //   e.preventDefault()
+  //   dispatch(setSearchValue(category));
+  //   history.push("/showmasters");
+  // };
 
   return (
     <div className="bestMasters">
@@ -35,7 +32,7 @@ const Month = () => {
         {ratingSort.map((el, index) => (
           <Link to={`/master/${el._id}`} className="link" key={index}>
             <div key={index} className="topCards">
-              <img src={el.picture} />
+              <img src={el.picture} alt="master"/>
               <div className="mastername">{el.name}</div>
               <hr className="dropdown-divider" />
               <div className="category">Master {el.category.category}</div>

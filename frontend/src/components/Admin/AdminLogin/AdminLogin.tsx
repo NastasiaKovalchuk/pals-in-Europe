@@ -1,11 +1,11 @@
 import { useState } from "react"
 import css from './Admin.module.css';
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 export const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [login, setLogin] = useState('');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();

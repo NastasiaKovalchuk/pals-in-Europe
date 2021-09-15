@@ -1,10 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
-import css from "../Master.module.css";
-import { Link } from "react-router-dom";
-import { Order } from "../../redux/initState";
-import { Master } from "../../redux/initState";
+import { Order } from "../../../redux/initState";
+import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
+import css from '../Master.module.css'
 
 export const OrdersMaster = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -28,18 +25,7 @@ export const OrdersMaster = () => {
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
-        <Link to='/account'>
-          <button className={css.btn}>My profile</button>
-        </Link>
-        <Link to='/account/edit'>
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        <Link to='/account/orders'>
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to='/account/reviews'>
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+      <HeaderMaster />
       </div>
       <h4>My orders</h4>
       {orders ?
