@@ -5,6 +5,7 @@ import {
   GET_MESSAGE,
   GET_USER_ACCOUNT,
   CREATE_ORDER,
+  EDIT_USER
 } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {
@@ -251,10 +252,21 @@ export const createOrderAC = (
 };
 
 
-// export const getUserOrdersAC = (result: object) => {
-
-//   return {
-//     type: GET_USER_ORDER,
-//     payload: result
-//   };
-// };
+export const editUserProfileAC = (
+  name?: string, login?: string,
+  email?: string) => async (dispatch: AppDispatch) => {
+    const response = await fetch(`http://localhost:8080/user/edit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, login, email }),
+      credentials: "include",
+    });
+    const result = await response.json();
+    
+    dispatch({
+      type: EDIT_USER,
+      payload: result
+    })
+  }

@@ -1,9 +1,10 @@
 import css from "../User.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootStateValue } from '../../../redux/reducers/rootReducer';
 import { useEffect, useState } from "react";
 import { User } from "../../../redux/initState";
+import { HeaderUser } from "../HeaderUser.tsx/HeaderUser";
 
 export interface Review {
   _id: string,
@@ -20,36 +21,38 @@ export const ReviewsUser = () => {
 
 
   useEffect(() => {
-    if (masters.length > 0) {
-      const arr = masters.map(master => master.reviews).flat()
-      const result = arr.filter(review => review.author._id === user.userID)
-      setReviews(result)
-    }
+    // if (masters.length > 0) {
+    //   const arr = masters.map(master => master.reviews).flat()
+    //   const result = arr.filter(review => review.author._id === user.userID)
+    // console.log('result ===>', result);
+    // setReviews(masters)
+    // }
   }, [masters, user.userID]);
+
+  console.log('reviews ===>', reviews);
+
 
   return (
     <div className={css.userAccount}>
       <div className={css.link}>
-        <Link to='/account'>
-          <button className={css.btn}>My profile</button>
-        </Link>
-        <Link to='/account/edit'>
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        <Link to='/account/orders'>
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to='/account/reviews'>
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+        <HeaderUser />
       </div>
       <h4>My reviews</h4>
-      {reviews ?
-        reviews.map((review, index) => (
-          <div className={css.reviewsCard} key={index}>
-            <div><span>Date of creation: </span>{review.createdAt.slice(0, 10)}</div>
-            <div><span>Text: </span>{review.text}</div>
-          </div>
+      {masters ?
+        masters.map((master, index) => (
+          master.reviews.map((review) => (
+            review.author._id === user.userID &&
+            <>
+              <div className={css.reviewsCard} key={index}>
+                <img  src={master.picture} alt='' />
+                <div className={css.textReviews}>
+                  <div><span>Master: </span>{master.name}</div>
+                  <div><span>Date of creation: </span>{review.createdAt.slice(0, 10)}</div>
+                  <div><span>Text: </span>{review.text}</div>
+                </div>
+              </div>
+            </>
+          ))
         ))
         :
         <div>You have no reviews</div>

@@ -3,6 +3,8 @@ export const UNSET_USER = "UNSET_USER";
 
 export const SET_MASTER = "SET_MASTER"
 export const EDIT_MASTER = "EDIT_MASTER"
+export const EDIT_USER = "EDIT_USER"
+
 export const SET_ADMIN = "SET_ADMIN";
 
 export const GET_USER= "GET_USER";
