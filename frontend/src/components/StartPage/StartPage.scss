@@ -7,10 +7,15 @@
     z-index: 2;
     position: absolute;
     top: 480px;
+    display: flex;
+
+    
 
     .mainInput {
       font-size: 23px;
       padding-left: 20px;
+      padding: 20px !important;
+      height: 70px !important;
 
       &:hover {
         filter: drop-shadow(0 0 9px #4aff59);
@@ -46,15 +51,16 @@
     z-index: 13;
     background-color: rgb(151, 151, 151);
     position: absolute;
-    top: 549px;
-    left: 505px;
-    width: 543px;
+    top: 70px;
+    right: 370px;
+    width: 538px;
 
     &:hover {
       cursor: pointer;
     }
 
     .onePrompt {
+      text-align: center;
       padding-left: 25px;
       padding-bottom: 3px;
       padding-top: 3px;

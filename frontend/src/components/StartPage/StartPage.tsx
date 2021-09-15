@@ -73,7 +73,8 @@ const StartPage = () => {
       <form
         onSubmit={sumbitHandler}
         className="d-flex justify-content-center mainForm"
-      >
+      >     
+
         <input
           id="typeahead-basic"
           onChange={(e) => chooseCategory(e.target.value)}
@@ -82,14 +83,15 @@ const StartPage = () => {
           value={search}
           placeholder="Search"
           aria-label="Search"
-        />
+        >  
+        
+        </input>
         <button className="btn btnSearch" type="submit">
           Search Masters
         </button>
-      </form>
-      <div className="prompt">
-        {filterCategories && show
-          ? filterCategories.map((el, index) => (
+        <div className="prompt">
+          {filterCategories && show
+            ? filterCategories.map((el, index) => (
               <div
                 className="onePrompt"
                 key={index}
@@ -98,13 +100,14 @@ const StartPage = () => {
                 {el}
               </div>
             ))
-          : ""}
-        {noCategories ? (
-          <div className="noPrompt">We don't have such a category</div>
-        ) : (
-          ""
-        )}
-      </div>
+            : ""}
+          {noCategories ? (
+            <div className="noPrompt">We don't have such a category</div>
+          ) : (
+            ""
+          )}
+        </div>
+      </form>
       <Categories />
       <HowItsWork />
       <Month />

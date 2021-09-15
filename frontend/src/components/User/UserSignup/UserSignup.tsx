@@ -14,6 +14,7 @@ export const UserSignup = () => {
   const [login, setLogin] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [picture, setPicture] = useState('');
   const dispatch = useDispatch();
   const history = useHistory();
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
@@ -21,15 +22,17 @@ export const UserSignup = () => {
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    dispatch(userSignupAC(name, login, email, password, () => {history.push('/');}))
+    dispatch(userSignupAC(name, login, email, password, picture, () => {history.push('/');}))
     if (errorMessage !== "") {
       dispatch(errorMessageAC(""))
     }
   }
+  console.log('picture yyyyyyy', picture);
+  
 
   return (
     <div className="all">
-      <form className="forms" onSubmit={onSubmit}>
+      <form className="forms" onSubmit={onSubmit} encType="multipart/form-data">
         <input
           className="form-control me-2 inputs"
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void => setName(ev.target.value)}
@@ -58,6 +61,15 @@ export const UserSignup = () => {
           placeholder="password"
           value={password}
           type="password"
+          required
+        />
+        <input
+          className="form-control me-2 inputs"
+          onChange={(ev: React.ChangeEvent<HTMLInputElement>): void => setPicture(ev.target.value)}
+          placeholder="Upload picture"
+          value={picture}
+          type="file"
+          name="picture"
           required
         />
         <button className="btn signupBtnUser" type="submit">Signup as User</button>

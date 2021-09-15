@@ -42,7 +42,7 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
 };
 
 export const userSignupAC =
-  (name: string, login: string, email: string, password: string, onSuccesSignup: () => void) =>
+  (name: string, login: string, email: string, password: string, picture: string, onSuccesSignup: () => void) =>
     async (dispatch: AppDispatch) => {
       // console.log('userSignupAC');
       const response = await fetch("http://localhost:8080/user/signup", {
@@ -56,6 +56,7 @@ export const userSignupAC =
           login,
           email,
           password,
+          picture,
         }),
       });
       const result = await response.json();

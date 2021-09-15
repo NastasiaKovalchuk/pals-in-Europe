@@ -114,7 +114,9 @@ export const ShowMasters = () => {
               <option value="all">All categories</option>
               {categories
                 ? categories.map((category, index) => (
-                    <option key={index} value={category}>{category}</option>
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
                   ))
                 : ""}
             </select>
@@ -133,11 +135,15 @@ export const ShowMasters = () => {
             >
               <option value="all">All locations</option>
               {cities
-                ? cities.map((city, index) => (
-                    <option key={index} value={city}>
-                      {city}
-                    </option>
-                  ))
+                ? cities.map((city, index) => {
+                    if (city !== "") {
+                      return (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      );
+                    }
+                  })
                 : ""}
             </select>
           </div>

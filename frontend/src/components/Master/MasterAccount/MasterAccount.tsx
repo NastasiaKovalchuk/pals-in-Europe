@@ -18,7 +18,7 @@ export const MasterAccount = () => {
 
   return (
     <div className={css.masterAccount}>
-      <div className={css.link2}>
+      <div className={css.link}>
         <HeaderMaster />
       </div>
 
