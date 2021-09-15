@@ -57,6 +57,14 @@ export interface Master {
     street: string;
     coordinates: number[];
   };
+  appointments: Appointment[];
+  socialMediaLinks: string[];
+}
+
+export interface Appointment {
+  date: string;
+  time: string;
+  user: User;
 }
 
 export interface Order {
@@ -69,15 +77,15 @@ export interface Order {
   date: string;
   service: string;
   createdAt: string;
-  status: 'Pending' | 'Accepted' | 'Declined' | 'Fullfilled' | 'Cancel';
+  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
 }
 
 export interface Review {
-  _id: string,
-  text: string,
-  author: User,
-  createdAt: string,
-  updatedAt: string,
+  _id: string;
+  text: string;
+  author: User;
+  createdAt: string;
+  updatedAt: string;
 }
 
 const initState: RootStateValue = {

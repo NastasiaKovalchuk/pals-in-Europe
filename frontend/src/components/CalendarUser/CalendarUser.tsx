@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import "./Calendar.scss";
+import "./CalendarUser.scss";
 import { Calendar, Badge, Modal } from "antd";
-import moment, { Moment } from "moment";
+import moment from "moment";
 import Draggable from "react-draggable";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -9,9 +9,9 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
 import { Appointment, Master, User } from "../../redux/initState";
 
-export const CalendarComponent = () => {
-  const [modalUser, setModalUser] = useState<Appointment>();
-  const [user, setUser] = useState<Appointment[]>([]);
+export const UserCalendarComponent = () => {
+  const [modalMaster, setModalMaster] = useState<Master>();
+  const [userAppointments, setUserAppointments] = useState<Appointment[]>([]);
   const [value, setValue] = useState(moment());
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -37,42 +37,39 @@ export const CalendarComponent = () => {
     setVisible(false);
   };
 
-  const onStart = (event: any, uiData: { x: number; y: number }) => {
-    const { clientWidth, clientHeight } = window?.document?.documentElement;
-    //@ts-ignore
-    const targetRect = this.draggleRef?.current?.getBoundingClientRect();
-    // setBounds({
-    //   left: -targetRect?.left + uiData?.x,
-    //   right: clientWidth - (targetRect?.right - uiData?.x),
-    //   top: -targetRect?.top + uiData?.y,
-    //   bottom: clientHeight - (targetRect?.bottom - uiData?.y),
-    // });
-  };
-
-  const showModal = (item: any) => {
+  const showModal = (item: Appointment) => {
+    let master; 
+    for (let i = 0; i < masters.length; i++) {
+        for (let j = 0; j < masters[i].appointments.length; j++) {
+            if (masters[i].appointments[j].date === item.date && masters[i].appointments[j].time === item.time && masters[i].appointments[j].user._id == item.user._id) {
+                master = masters[i];
+            }
+        }
+    }    
     setVisible(true);
-    setModalUser(item);
+    setModalMaster(master);
   };
 
   useEffect(() => {
-    if (state.masterID) {
+    if (state.userID) {
       if (masters.length > 0) {
-        setUser(masters.filter((master: Master) => master._id === state.masterID)[0].appointments)
+        const arr = masters.map((master: Master) => master.appointments).flat();
+        setUserAppointments(arr.filter(appointment => appointment.user._id === state.userID))
       }
     }
-  }, [masters, state.masterID]);
+  }, [masters, state.masterID, state.userID]);
 
   function getListData(value: { date: () => any }) {
     let listData = [];
-    for (let i = 0; i < user.length; i++) {
-      if (Number(user[i].date.split("-")[0]) === value.date()) {
-        listData.push(user[i]);
+    for (let i = 0; i < userAppointments.length; i++) {
+      if (Number(userAppointments[i].date.split("-")[0]) === value.date()) {
+        listData.push(userAppointments[i]);
       }
     }
     return listData;
   }
 
-  function dateCellRender(value: Moment) {
+  function dateCellRender(value: any) {
     const listData = getListData(value);
 
     return (
@@ -109,7 +106,7 @@ export const CalendarComponent = () => {
                   onFocus={() => {}}
                   onBlur={() => {}}
                 >
-                  Your client
+                  Your appointment
                 </div>
               }
               visible={visible}
@@ -118,17 +115,15 @@ export const CalendarComponent = () => {
               modalRender={(modal) => (
                 <Draggable
                   disabled={disabled}
-                  // bounds={bounds}
-                  // onStart={(event: any, uiData: any) => onStart(event, uiData)}
                 >
                   {/* @ts-ignore */}
                   <div ref={draggleRef}>{modal}</div>
                 </Draggable>
               )}
             >
-              <p>{modalUser && modalUser.user ? modalUser.user.email : ""}</p>
+              <p>{modalMaster ? modalMaster.name : ""}</p>
               <br />
-              <p>{modalUser && modalUser.user ? modalUser.user.login : ""}</p>
+              <img src={modalMaster ? modalMaster.picture : ""} alt="" />
             </Modal>
           </li>
         ))}
@@ -136,13 +131,13 @@ export const CalendarComponent = () => {
     );
   }
 
-  function getMonthData(value: Moment) {
+  function getMonthData(value: { month: () => number }) {
     if (value.month() === 8) {
       return 1394;
     }
   }
 
-  function monthCellRender(value: Moment) {
+  function monthCellRender(value: any) {
     const num = getMonthData(value);
     return num ? (
       <div className="notes-month">
