@@ -14,6 +14,10 @@ export const UserLogin = () => {
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
   const history = useHistory();
 
+  const user = useSelector((state: RootStateValue) => state.user);
+  console.log('user=====>>>>', user);
+  
+
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(userLoginAC(login, password, () => {history.push('/');}))

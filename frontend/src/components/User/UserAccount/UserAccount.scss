@@ -1,0 +1,53 @@
+.mainUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  background-color: rgb(202, 202, 202);
+  height: 100vh;
+
+  .userBtn {
+    background-color: #7dc50f;
+    color: white;
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+
+    &:hover {
+      color: white;
+      background-color: #9ee92d;
+      filter: drop-shadow(0 0 7px #8aff94);
+
+      -webkit-transition: all 0.3s ease;
+      ;
+      -moz-transition: all 0.3s ease;
+      ;
+      -o-transition: all 0.3s ease;
+      ;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .userCard {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    filter: drop-shadow(0 0 5px #7c7c7c);
+
+    .tableUser {
+      display: flex;
+      padding: 10px;
+      margin-top: 30px;
+      font-size: 18px;
+  
+      .picture {
+        width: 250px;
+        margin-right: 20px;
+        border-radius: 10px;
+      }
+      
+      .tableInfo {
+        display: flex;
+      }
+    }
+  }
+}

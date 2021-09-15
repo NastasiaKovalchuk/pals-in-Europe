@@ -1,150 +1,152 @@
 .bestMasters {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 40px;
   padding-top: 20px;
   width: 100%;
   text-decoration: none;
+  margin-bottom: 60px;
 
   .bestMastersHead {
     font-size: 32px;
-    margin-bottom: 30px;
-    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .topMasters {
     display: flex;
-    flex-wrap: wrap;
-    width: 1500px;
-    margin-bottom: 30px;
-    justify-content: space-between;
-    
-    .topCards {
-      background-color: rgb(255, 255, 255);
-      filter: drop-shadow(0 0 4px #636363);
-      margin: 30px;
-      border-radius: 6px;
+    flex-wrap: wrap;   
+    justify-content: center;
 
-      &:hover {
-        cursor: pointer;
-        color: #4f52ff;
-        background-color: #e2e4ff;
+    .link {
+      margin: 0px;
+      padding: 0px;
 
-        filter: drop-shadow(0 0 7px #000ba5) saturate(2) hue-rotate(0deg);
-        ;
-
-        -webkit-transition: all 0.3s ease;
-        ;
-        -moz-transition: all 0.3s ease;
-        ;
-        -o-transition: all 0.3s ease;
-        ;
-        transition: all 0.3s ease;
-        background: linear-gradient(124deg, #ffe8c4, #fcffd1, #f1d9ff, #ffdde9, #b5ffe0, #c4c5ff, #bfffe4);
-        background-size: 1800% 1800%;
-
-        -webkit-animation: rainbow 5s ease infinite;
-        -z-animation: rainbow 5s ease infinite;
-        -o-animation: rainbow 5s ease infinite;
-        animation: rainbow 5s ease infinite;
+      .topCards {
+        background-color: rgb(255, 255, 255);
+        filter: drop-shadow(0 0 4px #636363);
+        margin: 30px;
+        border-radius: 6px;
+  
+        &:hover {
+          cursor: pointer;
+          color: #4f52ff;
+          background-color: #e2e4ff;
+  
+          filter: drop-shadow(0 0 7px #000ba5) saturate(2) hue-rotate(0deg);
+          ;
+  
+          -webkit-transition: all 0.3s ease;
+          ;
+          -moz-transition: all 0.3s ease;
+          ;
+          -o-transition: all 0.3s ease;
+          ;
+          transition: all 0.3s ease;
+          background: linear-gradient(124deg, #ffe8c4, #fcffd1, #f1d9ff, #ffdde9, #b5ffe0, #c4c5ff, #bfffe4);
+          background-size: 1800% 1800%;
+  
+          -webkit-animation: rainbow 5s ease infinite;
+          -z-animation: rainbow 5s ease infinite;
+          -o-animation: rainbow 5s ease infinite;
+          animation: rainbow 5s ease infinite;
+        }
+  
+        img {
+          width: 230px;
+        }
+  
+        .mastername {
+          margin-top: 5px;
+          text-align: center;
+          font-size: 25px;
+        }
+  
+        .category {
+          padding-left: 12px;
+          padding-bottom: 10px;
+        }
+  
+        .rating {
+          padding-left: 12px;
+          padding-bottom: 10px;
+          padding-top: 7px;
+          font-weight: bold;
+          color: rgb(255, 49, 49);
+        }
+  
+        .topRating {
+          padding-left: 12px;
+          padding-bottom: 10px;
+          padding-top: 7px;
+          color: rgb(0, 0, 0);
+          font-weight: bold;
+  
+          background: linear-gradient(124deg, #ffd698, #faffb8, #e5b7ff, #ffc1d6, #87ffcd, #8d8fff, #8bffcf);
+          background-size: 1800% 1800%;
+  
+          -webkit-animation: rainbow 5s ease infinite;
+          -z-animation: rainbow 5s ease infinite;
+          -o-animation: rainbow 5s ease infinite;
+          animation: rainbow 5s ease infinite;
+        }
+  
+        @-webkit-keyframes rainbow {
+          0% {
+            background-position: 0% 82%
+          }
+  
+          50% {
+            background-position: 100% 19%
+          }
+  
+          100% {
+            background-position: 0% 82%
+          }
+        }
+  
+        @-moz-keyframes rainbow {
+          0% {
+            background-position: 0% 82%
+          }
+  
+          50% {
+            background-position: 100% 19%
+          }
+  
+          100% {
+            background-position: 0% 82%
+          }
+        }
+  
+        @-o-keyframes rainbow {
+          0% {
+            background-position: 0% 82%
+          }
+  
+          50% {
+            background-position: 100% 19%
+          }
+  
+          100% {
+            background-position: 0% 82%
+          }
+        }
+  
+        @keyframes rainbow {
+          0% {
+            background-position: 0% 82%
+          }
+  
+          50% {
+            background-position: 100% 19%
+          }
+  
+          100% {
+            background-position: 0% 82%
+          }
+        }
       }
-
-      img {
-        width: 230px;
-      }
-
-      .mastername {
-        margin-top: 5px;
-        text-align: center;
-        font-size: 25px;
-      }
-
-      .category {
-        padding-left: 12px;
-        padding-bottom: 10px;
-      }
-
-      .rating {
-        padding-left: 12px;
-        padding-bottom: 10px;
-        padding-top: 7px;
-        font-weight: bold;
-        color: rgb(255, 49, 49);
-      }
-
-      .topRating {
-        padding-left: 12px;
-        padding-bottom: 10px;
-        padding-top: 7px;
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-
-        background: linear-gradient(124deg, #ffd698, #faffb8, #e5b7ff, #ffc1d6, #87ffcd, #8d8fff, #8bffcf);
-        background-size: 1800% 1800%;
-
-        -webkit-animation: rainbow 5s ease infinite;
-        -z-animation: rainbow 5s ease infinite;
-        -o-animation: rainbow 5s ease infinite;
-        animation: rainbow 5s ease infinite;
-      }
-
-      @-webkit-keyframes rainbow {
-        0% {
-          background-position: 0% 82%
-        }
-
-        50% {
-          background-position: 100% 19%
-        }
-
-        100% {
-          background-position: 0% 82%
-        }
-      }
-
-      @-moz-keyframes rainbow {
-        0% {
-          background-position: 0% 82%
-        }
-
-        50% {
-          background-position: 100% 19%
-        }
-
-        100% {
-          background-position: 0% 82%
-        }
-      }
-
-      @-o-keyframes rainbow {
-        0% {
-          background-position: 0% 82%
-        }
-
-        50% {
-          background-position: 100% 19%
-        }
-
-        100% {
-          background-position: 0% 82%
-        }
-      }
-
-      @keyframes rainbow {
-        0% {
-          background-position: 0% 82%
-        }
-
-        50% {
-          background-position: 100% 19%
-        }
-
-        100% {
-          background-position: 0% 82%
-        }
-      }
-    }
+    }   
   }
 }

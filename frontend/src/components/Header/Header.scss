@@ -12,6 +12,55 @@
   ;
   transition: all 0.3s ease;
 
+  .navLink {
+    
+    .flag {
+      position: absolute;
+      width: 155px;
+      height: 56px;
+      top: 0;
+      left: 0;
+      z-index: -5;
+    }
+    
+    .pals {
+      filter: drop-shadow(0 0 2px #ff9100);
+      color: #fffbc7;
+      font-weight: bold;
+
+      &:hover {
+        color: #ffffff;
+        filter: drop-shadow(0 0 5px #fffd84);
+  
+        -webkit-transition: all 0.3s ease;
+        ;
+        -moz-transition: all 0.3s ease;
+        ;
+        -o-transition: all 0.3s ease;
+        ;
+        transition: all 0.3s ease;
+      }
+    }
+  }
+
+  .show {
+    filter: drop-shadow(0 0 3px #0003b4);
+    color: #fff4b7;  
+    
+    &:hover {
+      color: #0004ff;
+      filter: drop-shadow(0 0 7px #15ff00);
+
+      -webkit-transition: all 0.3s ease;
+      ;
+      -moz-transition: all 0.3s ease;
+      ;
+      -o-transition: all 0.3s ease;
+      ;
+      transition: all 0.3s ease;
+    }
+  }
+
   .loginBtn {
     background-color: #7dc50f;
     color: white;

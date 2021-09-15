@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import css from "../User.module.css";
 import { Link } from "react-router-dom";
 import { User } from "../../redux/initState";
+import "../UserAccount/UserAccount.scss";
 
 export const EditUserProfile = () => {
   const [user, setUser] = useState<User>();
@@ -37,36 +37,36 @@ export const EditUserProfile = () => {
   //   'EditUserProfile =====>', user?.userAccount);
 
   return (
-    <div className={css.userAccount}>
-      <div className={css.link}>
+    <div className="mainUser">
+      <div className="">
         <Link to="/account">
-          <button className={css.btn}>My profile</button>
+          <button className="btn userBtn">My profile</button>
         </Link>
         <Link to="/account/edit">
-          <button className={css.btn}>Edit profile</button>
+          <button className="btn userBtn">Edit profile</button>
         </Link>
         <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
+          <button className="btn userBtn ">My orders</button>
         </Link>
         <Link to="/account/reviews">
-          <button className={css.btn}>Rewievs</button>
+          <button className="btn userBtn ">Rewievs</button>
         </Link>
       </div>
       <div>
-        <div className={css.profile}>
-          <div className={css.name}>
+        <div className="userCard">
+          <div className="tableUser">
             
-            <img className={css.img} 
+            <img className="picture"
             //@ts-ignore
             src={user ? user?.userAccount?.picture : ''} alt='' />
-            <div className={css.login}>
+            <div className="">
               <table>
                 <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>Name: </span></td>
+                  <div className="">
+                    <td className=""><span>Name: </span></td>
                     <td>
                       <input
-                        className={css.two}
+                        className=""
                         value={
                           //@ts-ignore
                           user ? user?.userAccount?.name : ''}
@@ -78,11 +78,11 @@ export const EditUserProfile = () => {
                   </div>
                 </tr>
                 <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>Login: </span></td>
+                  <div className="">
+                    <td className=""><span>Login: </span></td>
                     <td>
                       <input
-                        className={css.two}
+                        className=""
                         value={
                           //@ts-ignore
                           user ? user?.userAccount?.login : ''}
@@ -100,11 +100,11 @@ export const EditUserProfile = () => {
                   </div>
                 </tr> */}
                 <tr>
-                  <div className={css.margin}>
-                    <td className={css.one}><span>Email: </span></td>
+                  <div className="">
+                    <td className=""><span>Email: </span></td>
                     <td>
                       <input
-                        className={css.two}
+                        className=""
                         value={
                           //@ts-ignore
                           user ? user?.userAccount?.email : ''}

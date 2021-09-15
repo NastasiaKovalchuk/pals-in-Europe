@@ -1,4 +1,5 @@
 import { Router } from "express";
+const multerFunc = require("../middleware/upload");
 
 import {
   createUser,
@@ -12,7 +13,7 @@ import {
 
 const router = Router();
 
-router.post("/signup", createUser);
+router.post("/signup", multerFunc.single("picture"), createUser);
 
 router.post("/login", loginUser);
 
