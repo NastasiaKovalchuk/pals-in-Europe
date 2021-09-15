@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { User } from "../../../redux/initState";
 import "./UserAccount.scss";
+import { HeaderUser } from "../HeaderUser.tsx/HeaderUser";
+import css from '../User.module.css'
 
 export const UserAccount = () => {
   const [user, setUser] = useState<User>();
@@ -20,19 +21,8 @@ export const UserAccount = () => {
 
   return (
     <div className="mainUser">
-      <div className="">
-        <Link to="/account">
-          <button className="btn userBtn">My profile </button>
-        </Link>
-        <Link to="/account/edit">
-          <button className="btn userBtn">Edit profile</button>
-        </Link>
-        <Link to="/account/orders">
-          <button className="btn userBtn">My orders</button>
-        </Link>
-        <Link to="/account/reviews">
-          <button className="btn userBtn">Rewievs</button>
-        </Link>
+      <div className={css.link}>
+        <HeaderUser />
       </div>
       <div>
         <div className="userCard">

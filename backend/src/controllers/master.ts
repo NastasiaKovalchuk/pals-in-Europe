@@ -227,9 +227,8 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
         )
         .lean();
 
-      return res.status(200).json({
-        updatedMaster,
-      });
+      return res.status(200).json(
+        updatedMaster);
     }
   } catch (error) {
     console.log(error);

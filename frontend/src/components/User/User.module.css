@@ -123,14 +123,28 @@ justify-content: center;
 
 .reviewsCard {
   width: 600px;
-  height: 100px;
+  height: 130px;
   border: gray solid 1px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 10px 10px -7px #38635d, 5px 5px 26px 5px #38635d; 
-box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
-display: flex;
-flex-direction: column;
-justify-content: center;
+  box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.imgReviews {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  border: black solid 1px;
+}
+
+.textReviews {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+  text-align: start;
+  margin-left: 20px;
 }
