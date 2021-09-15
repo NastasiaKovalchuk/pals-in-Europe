@@ -1,4 +1,3 @@
-import { Category } from "../initState";
 import { GET_CATEGORY, GET_CATEGORY_SAGA } from "../types/types";
 
 export const getCategoriesAC = (categories: string[]) => {

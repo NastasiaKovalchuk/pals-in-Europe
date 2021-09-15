@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
-import { Link } from "react-router-dom";
 import { Master, Review } from "../../../redux/initState";
+import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
 // import { getAuthorsReviewsAC } from "../../redux/actionCreators/mastersAC";
 
 export const ReviewsMaster = () => {
   const [master, setMaster] = useState<Master>();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const masters = useSelector((state: RootStateValue) => state.masters);
   const user = useSelector((state: RootStateValue) => state.user);
-  // console.log('ReviewsMaster tsx 111===>', masters);
-
+  
   useEffect(() => {
     const masterReviews = masters.find((el) => el._id === user.masterID);
-    // console.log('masterReviews !!!!!!!!!!! ====>', masterReviews?.reviews);
     setMaster(masterReviews);
   }, [masters, user.masterID]);
 
@@ -23,18 +21,7 @@ export const ReviewsMaster = () => {
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
-        <Link to="/account">
-          <button className={css.btn}>My profile</button>
-        </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to="/account/edit">
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        <Link to="/account/reviews">
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+      <HeaderMaster />
       </div>
 
       <div>

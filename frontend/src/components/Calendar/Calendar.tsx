@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Calendar.scss";
 import { Calendar, Badge, Modal } from "antd";
 import moment from "moment";
@@ -6,6 +6,7 @@ import Draggable from "react-draggable";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
 
 export const CalendarComponent = () => {
   const [modalUser, setModalUser] = useState({});
@@ -20,10 +21,10 @@ export const CalendarComponent = () => {
     right: 0,
   });
 
-  const master =useSelector((state: RootStateValue) => state.user)
+  const master = useSelector((state: RootStateValue) => state.user);
 
   // console.log(master);
-  
+
   const draggleRef = React.createRef();
 
   const handleOk = (e: any) => {
@@ -55,13 +56,14 @@ export const CalendarComponent = () => {
     if (master.masterID) {
       fetch(`http://localhost:8080/master/test/${master.masterID}`)
         .then((res) => res.json())
-        .then((result) => {          
+        .then((result) => {
+          console.log(result);
+
           setUser(result.appointments);
         });
-
     }
   }, [master.masterID]);
-
+  console.log(user);
 
   function getListData(value: { date: () => any }) {
     let listData = [];
@@ -87,9 +89,10 @@ export const CalendarComponent = () => {
               //@ts-ignore
               onClick={() => showModal(item)}
               status={"default"}
-              title='hi'
-              text={`${item.time} \n ${item.user.email}`}
+              title="hi"
+              text={`${item.time}: ${item.user.email}`}
             />
+
             <Modal
               title={
                 <div
@@ -118,7 +121,7 @@ export const CalendarComponent = () => {
               modalRender={(modal) => (
                 <Draggable
                   disabled={disabled}
-                  bounds={bounds}
+                  // bounds={bounds}
                   // onStart={(event: any, uiData: any) => onStart(event, uiData)}
                 >
                   {/* @ts-ignore */}
@@ -127,10 +130,10 @@ export const CalendarComponent = () => {
               )}
             >
               {/* @ts-ignore */}
-              <p>{modalUser && modalUser.user ? modalUser.user.email : ''}</p>
+              <p>{modalUser && modalUser.user ? modalUser.user.email : ""}</p>
               <br />
               {/* @ts-ignore */}
-              <p>{modalUser && modalUser.user ? modalUser.user.login : ''}</p>
+              <p>{modalUser && modalUser.user ? modalUser.user.login : ""}</p>
             </Modal>
           </li>
         ))}
@@ -159,22 +162,27 @@ export const CalendarComponent = () => {
   };
 
   const onSelect = () => {
-    alert('hi')
-  }
+    // alert('hi')
+  };
   return (
     <>
-      <div className="calendar">
-        <Calendar
-          // @ts-ignore
-          dateCellRender={user.length > 0 ? dateCellRender : ""}
-          monthCellRender={monthCellRender}
-          value={value}
-          onChange={onChange}
-          defaultValue={moment()}
-          onSelect={onSelect}
-          //@ts-ignore
-          //   validRange={[moment([2021, 8, 12]), moment()]}
-        />
+      <div className="masterAccount">
+        <div className="link2">
+          <HeaderMaster />
+          <div className="calendar">
+            <Calendar
+              // @ts-ignore
+              dateCellRender={user.length > 0 ? dateCellRender : ""}
+              monthCellRender={monthCellRender}
+              value={value}
+              onChange={onChange}
+              defaultValue={moment()}
+              onSelect={onSelect}
+              //@ts-ignore
+              //   validRange={[moment([2021, 8, 12]), moment()]}
+            />{" "}
+          </div>
+        </div>
       </div>
     </>
   );

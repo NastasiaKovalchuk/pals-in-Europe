@@ -12,10 +12,8 @@ import { Footer } from "../Footer/Footer";
 import HowItsWork from "./HowItsWork/HowItsWork";
 import Reviews from "./Reviews/Reviews";
 import Speacialist from "./Speacialists/Speacialist";
-import { Master, Review } from "../../redux/initState";
 
 const StartPage = () => {
-  const [mastersForReviews, setReviews] = useState<Master[]>([]);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(false);
   const [noCategories, setNoCategories] = useState(false);
@@ -25,18 +23,8 @@ const StartPage = () => {
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
-  const masters = useSelector((state: RootStateValue) => state.masters);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (masters.length > 0) {
-      const arr = [];
-      for (let i = 0; i < 4; i++) {
-        arr.push(masters[Math.floor(Math.random() * masters.length)]);
-      }
-      setReviews(arr);
-    }
-  }, [masters]);
 
   const chooseCategory = (value: string) => {
     setSearch(value);

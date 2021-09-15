@@ -188,4 +188,17 @@
 .badge:hover {
  background-color: forestgreen
 }
+
+.masterAccount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 100px;
+  flex-direction: column;
+}
+
+.link2 {
+  margin-bottom: 50px;
+}
 @import "antd/dist/antd.css";

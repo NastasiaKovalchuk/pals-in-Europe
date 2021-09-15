@@ -3,6 +3,7 @@ const fetch = require("node-fetch");
 import mongoose from "mongoose";
 import { RequestHandler } from "express";
 import masterModel, { Master } from "../db/models/master.model";
+import OrderModel, { Order } from "../db/models/order.model";
 import ReviewModel, { Review } from "../db/models/review.model";
 import LocationModel, { Location } from "../db/models/location.model";
 import categoryModel from "../db/models/category.model";
@@ -169,36 +170,67 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
     // console.log("Зашли в ручку editMasterProfile");
-    const { name, login, phoneNumber, email, description, category } =
-      req.body as {
-        name: string;
-        login: string;
-        phoneNumber: string;
-        email: string;
-        description: string;
-        category: string;
-      };
+    const {
+      name,
+      login,
+      phoneNumber,
+      email,
+      description,
+      category,
+      experience,
+      city,
+      street,
+    } = req.body as {
+      name: string;
+      login: string;
+      phoneNumber: string;
+      email: string;
+      description: string;
+      category: string;
+      experience: string;
+      city: string;
+      street: string;
+    };
     const newCategory = await categoryModel.findOne({ category });
-    //@ts-ignore
-    const updatedMaster = await masterModel
-      .findByIdAndUpdate(
-        { _id: req?.session?.user?.id },
-        //@ts-ignore
-        {
-          name,
-          login,
-          phoneNumber,
-          email,
-          description,
-          category: newCategory,
-        },
-        { new: true }
-      )
-      .lean();
+    const api = "0f8e2dd1-121c-4be5-aeac-8ed33dc30430";
+    const URI = `https://geocode-maps.yandex.ru/1.x/?apikey=${api}&format=json&geocode=${street},+${city},+Netherlands`;
+    const encodedURI = await encodeURI(URI);
+    const response = await fetch(encodedURI);
+    const result = await response.json();
+    const coordinates =
+      result.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
+        .split(" ")
+        .map((el: string) => Number(el));
+    // console.log(coordinates);
+    if (coordinates) {
+      const location = await LocationModel.create({
+        coordinates,
+        street,
+        city,
+      });
+      //@ts-ignore
+      const updatedMaster = await masterModel
+        .findByIdAndUpdate(
+          { _id: req?.session?.user?.id },
+          //@ts-ignore
+          {
+            name,
+            login,
+            phoneNumber,
+            email,
+            experience,
+            description,
+            location,
+            category: newCategory,
+          },
+          { new: true }
+        )
+        .lean();
 
-    return res.status(200).json({
-      updatedMaster,
-    });
+      return res.status(200).json({
+        updatedMaster,
+      });
+    }
   } catch (error) {
     console.log(error);
   }
@@ -233,14 +265,27 @@ export const getReviews: RequestHandler = async (req, res) => {
 
 export const test: RequestHandler = async (req, res) => {
   try {
-    const {id} = req.params;
-    
-    
+    const { id } = req.params;
+
     const master = await masterModel.findById(id).lean();
-    
+
     if (master) {
       res.json(master);
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMasterOrder: RequestHandler = async (req, res) => {
+  try {
+    const orders = await OrderModel.find();
+    const masterOrders = orders.filter((order: Order) => {
+      if (order?.master?._id == req?.session?.user?.id) {
+        return order;
+      }
+    });
+    res.status(200).json({ masterOrders });
   } catch (error) {
     console.log(error);
   }

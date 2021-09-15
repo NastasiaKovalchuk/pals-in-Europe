@@ -1,40 +1,37 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import css from "../User.module.css"
+import css from "../User.module.css";
 import { User } from "../../../redux/initState";
 import { Link } from "react-router-dom";
 
 export const EditUserProfile = () => {
   const [user, setUser] = useState<User>();
-  // const dispatch = useDispatch();
-  // const user = useSelector((state: RootStateValue) => state.master)
+  const [name, setName] = useState("");
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
+
 
   useEffect(() => {
-      fetch("http://localhost:8080/user/account", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((result) => setUser(result));
-    
+    fetch("http://localhost:8080/user/account", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setUser(result.userAccount);
+      });
   }, []);
 
-  const [name, setName] = useState(
-    //@ts-ignore
-    user?.userAccount?.name);
-  const [login, setLogin] = useState(
-    //@ts-ignore
-    user?.userAccount?.login);
-  const [email, setEmail] = useState(
-    //@ts-ignore
-    user?.userAccount?.email);
-  
-  console.log(
-    //@ts-ignore
-    'EditUserProfile =====>', user?.userAccount);
+  useEffect(() => {
+    if (user) {
+      setLogin(user?.login);
+      setEmail(user?.email);
+      setName(user?.name);
+    }
+  }, [user]);
 
   return (
     <div className={css.userAccount}>
@@ -42,11 +39,11 @@ export const EditUserProfile = () => {
         <Link to="/account">
           <button className={css.btn}>My profile</button>
         </Link>
-        <Link to="/account/orders">
-          <button className={css.btn}>My orders</button>
-        </Link>
         <Link to="/account/edit">
           <button className={css.btn}>Edit profile</button>
+        </Link>
+        <Link to="/account/orders">
+          <button className={css.btn}>My orders</button>
         </Link>
         <Link to="/account/reviews">
           <button className={css.btn}>Rewievs</button>
@@ -55,21 +52,22 @@ export const EditUserProfile = () => {
       <div>
         <div className={css.profile}>
           <div className={css.name}>
-            
-            <img className={css.img} 
-            //@ts-ignore
-            src={user ? user?.userAccount?.picture : ''} alt='' />
+            <img
+              className={css.img}
+              src={user?.picture}
+              alt=""
+            />
             <div className={css.login}>
               <table>
                 <tr>
                   <div className={css.margin}>
-                    <td className={css.one}><span>Name: </span></td>
+                    <td className={css.one}>
+                      <span>Name: </span>
+                    </td>
                     <td>
                       <input
                         className={css.two}
-                        value={
-                          //@ts-ignore
-                          user ? user?.userAccount?.name : ''}
+                        value={name}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>
                         ): void => setName(ev.target.value)}
@@ -79,13 +77,13 @@ export const EditUserProfile = () => {
                 </tr>
                 <tr>
                   <div className={css.margin}>
-                    <td className={css.one}><span>Login: </span></td>
+                    <td className={css.one}>
+                      <span>Login: </span>
+                    </td>
                     <td>
                       <input
                         className={css.two}
-                        value={
-                          //@ts-ignore
-                          user ? user?.userAccount?.login : ''}
+                        value={login}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>
                         ): void => setLogin(ev.target.value)}
@@ -101,13 +99,13 @@ export const EditUserProfile = () => {
                 </tr> */}
                 <tr>
                   <div className={css.margin}>
-                    <td className={css.one}><span>Email: </span></td>
+                    <td className={css.one}>
+                      <span>Email: </span>
+                    </td>
                     <td>
                       <input
                         className={css.two}
-                        value={
-                          //@ts-ignore
-                          user ? user?.userAccount?.email : ''}
+                        value={email}
                         onChange={(
                           ev: React.ChangeEvent<HTMLInputElement>
                         ): void => setEmail(ev.target.value)}
@@ -153,8 +151,5 @@ export const EditUserProfile = () => {
         </div>
       </div>
     </div>
-
   );
-}
-
-
+};

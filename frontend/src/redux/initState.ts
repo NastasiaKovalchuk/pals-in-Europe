@@ -1,5 +1,12 @@
 import { RootStateValue } from "./reducers/rootReducer";
 
+export interface Review {
+  _id: string;
+  text: string;
+  author: User;
+  master: string;
+}
+
 export interface UserStateValue {
   name: string;
   userID: string;
@@ -50,6 +57,19 @@ export interface Master {
     street: string;
     coordinates: number[];
   };
+}
+
+export interface Order {
+  _id: string;
+  number: number;
+  name: string;
+  client: User;
+  master: Master;
+  comment: string;
+  date: string;
+  service: string;
+  createdAt: string;
+  status: 'Pending' | 'Accepted' | 'Declined' | 'Fullfilled' | 'Cancel';
 }
 
 export interface Review {

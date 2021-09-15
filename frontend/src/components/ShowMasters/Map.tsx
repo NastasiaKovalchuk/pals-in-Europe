@@ -1,13 +1,12 @@
 import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { YMaps, Map, Placemark, PlacemarkGeometry } from "react-yandex-maps";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { Master } from "../../redux/initState";
 import { useDispatch, useSelector } from "react-redux";
 import { getMastersAC } from "../../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./Map.scss";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
-import { Link } from "react-router-dom";
 
 export const ShowMasters = () => {
   const [showMasters, setShowMasters] = useState<Master[]>([]);

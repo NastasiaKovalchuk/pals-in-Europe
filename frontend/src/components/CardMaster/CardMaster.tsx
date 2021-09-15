@@ -1,21 +1,15 @@
 import React from "react";
 // import { useState, useCallback } from "react";
 // import { useHistory } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux";
 import { Master } from "../../redux/initState";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
 import "./CardMaster.scss";
 //@ts-ignore
-import { EnvironmentOutlined  } from '@ant-design/icons';
 import { Link } from "react-router-dom";
 
 // import { AiFillUnlock } from "react-icons/ai";
 
 
 const CardMaster = ({ master }: { master: Master }) => {
-  const mastersFromSelector = useSelector(
-    (state: RootStateValue) => state.masters
-  );
 
   return (
     <>
