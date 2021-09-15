@@ -3,8 +3,8 @@ import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./StartPage.scss";
-import { RootStateValue } from "../redux/reducers/rootReducer";
-import { setSearchValue } from "../redux/actionCreators/searchAC";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { setSearchValue } from "../../redux/actionCreators/searchAC";
 import Slider from "./Slider/Slider";
 import Categories from "./Categories/Categories";
 import Month from "./Month/Month";
@@ -12,10 +12,8 @@ import { Footer } from "../Footer/Footer";
 import HowItsWork from "./HowItsWork/HowItsWork";
 import Reviews from "./Reviews/Reviews";
 import Speacialist from "./Speacialists/Speacialist";
-import { Master, Review } from "../redux/initState";
 
 const StartPage = () => {
-  const [mastersForReviews, setReviews] = useState<Master[]>([]);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(false);
   const [noCategories, setNoCategories] = useState(false);
@@ -25,19 +23,8 @@ const StartPage = () => {
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
-  const masters = useSelector((state: RootStateValue) => state.masters);
-  const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (masters.length > 0) {
-      const arr = [];
-      for (let i = 0; i < 4; i++) {
-        arr.push(masters[Math.floor(Math.random() * masters.length)]);
-      }
-      setReviews(arr);
-    }
-  }, [masters]);
 
   const chooseCategory = (value: string) => {
     setSearch(value);
@@ -70,8 +57,6 @@ const StartPage = () => {
     },
     [dispatch, search, history]
   );
-
-  // console.log('errorMessage from main', errorMessage);
 
   const getTheRightSearch = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,

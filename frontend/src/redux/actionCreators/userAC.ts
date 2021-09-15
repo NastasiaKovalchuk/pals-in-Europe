@@ -1,12 +1,10 @@
-import { AppDispatch } from "../../../index";
-import { User, UserStateValue } from "../initState";
+import { AppDispatch } from "../../index";
 import {
   SET_USER,
   UNSET_USER,
   GET_MESSAGE,
   GET_USER_ACCOUNT,
   CREATE_ORDER,
-  GET_USER_ORDER,
 } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {

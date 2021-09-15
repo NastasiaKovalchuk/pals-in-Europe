@@ -144,7 +144,7 @@ export const getAllMasters: RequestHandler = async (req, res) => {
     // const populatedReviews  = await ReviewModel.find().populate(["author", "master"]).lean();
     // console.log(populatedReviews);
 
-    const masters = await masterModel.find();
+    const masters = await masterModel.find().lean();
     // console.log(masters[205]);
 
     // const map = masters.map((master) => master.populate("author", "master"))
@@ -156,9 +156,11 @@ export const getAllMasters: RequestHandler = async (req, res) => {
 
 export const getAccountMaster: RequestHandler = async (req, res) => {
   try {
-    const masterAccount = await masterModel.findOne({
-      _id: req?.session?.user?.id,
-    });
+    const masterAccount = await masterModel
+      .findOne({
+        _id: req?.session?.user?.id,
+      })
+      .lean();
     res.status(200).json({ masterAccount });
   } catch (error) {
     console.log(error);
@@ -168,18 +170,27 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
     // console.log("Зашли в ручку editMasterProfile");
-    const { name, login, phoneNumber, email, description, category, experience, city, street } =
-      req.body as {
-        name: string;
-        login: string;
-        phoneNumber: string;
-        email: string;
-        description: string;
-        category: string;
-        experience: string;
-        city: string;
-        street: string;
-      };
+    const {
+      name,
+      login,
+      phoneNumber,
+      email,
+      description,
+      category,
+      experience,
+      city,
+      street,
+    } = req.body as {
+      name: string;
+      login: string;
+      phoneNumber: string;
+      email: string;
+      description: string;
+      category: string;
+      experience: string;
+      city: string;
+      street: string;
+    };
     const newCategory = await categoryModel.findOne({ category });
     const api = "0f8e2dd1-121c-4be5-aeac-8ed33dc30430";
     const URI = `https://geocode-maps.yandex.ru/1.x/?apikey=${api}&format=json&geocode=${street},+${city},+Netherlands`;
@@ -198,28 +209,32 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
         city,
       });
       //@ts-ignore
-      const updatedMaster = await masterModel.findByIdAndUpdate(
-        { _id: req?.session?.user?.id },
-        //@ts-ignore
-        {
-          name,
-          login,
-          phoneNumber,
-          email,
-          experience,
-          description,
-          location,
-          category: newCategory,
-        },
-        { new: true });
+      const updatedMaster = await masterModel
+        .findByIdAndUpdate(
+          { _id: req?.session?.user?.id },
+          //@ts-ignore
+          {
+            name,
+            login,
+            phoneNumber,
+            email,
+            experience,
+            description,
+            location,
+            category: newCategory,
+          },
+          { new: true }
+        )
+        .lean();
 
-      return res.status(200).json({ updatedMaster, });
+      return res.status(200).json({
+        updatedMaster,
+      });
     }
   } catch (error) {
     console.log(error);
   }
 };
-
 
 export const getReviews: RequestHandler = async (req, res) => {
   try {
@@ -243,12 +258,24 @@ export const getReviews: RequestHandler = async (req, res) => {
     //   console.log(master);
     // }
     // return res.status(200).json({ response });
-
   } catch (error) {
     console.log(error);
   }
 };
 
+export const test: RequestHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const master = await masterModel.findById(id).lean();
+
+    if (master) {
+      res.json(master);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getMasterOrder: RequestHandler = async (req, res) => {
   try {
@@ -257,10 +284,9 @@ export const getMasterOrder: RequestHandler = async (req, res) => {
       if (order?.master?._id == req?.session?.user?.id) {
         return order;
       }
-    })
+    });
     res.status(200).json({ masterOrders });
   } catch (error) {
     console.log(error);
   }
 };
-

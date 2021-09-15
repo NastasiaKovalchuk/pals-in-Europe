@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStateValue } from "../redux/reducers/rootReducer";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./OneMasterPage.scss";
 import css from "./Modal.module.css";
-import { Master } from "../redux/initState";
 // import { Modal } from './Modal';
-import { Footer } from "../Footer/Footer";
-import { createOrderAC } from "../redux/actionCreators/userAC";
+import { Master } from "../../redux/initState";
+import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { createOrderAC } from "../../redux/actionCreators/userAC";
 type IdParams = {
   id: string;
 };

@@ -8,11 +8,14 @@
     position: absolute;
     top: 480px;
     display: flex;
+
     
 
     .mainInput {
       font-size: 23px;
       padding-left: 20px;
+      padding: 20px !important;
+      height: 70px !important;
 
       &:hover {
         filter: drop-shadow(0 0 9px #4aff59);

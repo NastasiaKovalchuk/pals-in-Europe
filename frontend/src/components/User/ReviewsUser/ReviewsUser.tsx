@@ -1,9 +1,9 @@
 import css from "../User.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootStateValue } from '../../redux/reducers/rootReducer';
+import { RootStateValue } from '../../../redux/reducers/rootReducer';
 import { useEffect, useState } from "react";
-import { User } from '../../redux/initState';
+import { User } from "../../../redux/initState";
 
 export interface Review {
   _id: string,
@@ -15,23 +15,17 @@ export interface Review {
 
 export const ReviewsUser = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
+  const masters = useSelector((state: RootStateValue) => state.masters)
+  const user = useSelector((state: RootStateValue) => state.user)
+
 
   useEffect(() => {
-    const getUserReviews = async () => {
-      const response = await fetch("http://localhost:8080/user/reviews", {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: "include",
-      });
-      const result = await response.json();
-      // console.log('getUserReviews ===>', result.userReviews);
-      setReviews(result.userReviews)
-    };
-    getUserReviews();
-  }, []);
-
+    if (masters.length > 0) {
+      const arr = masters.map(master => master.reviews).flat()
+      const result = arr.filter(review => review.author._id === user.userID)
+      setReviews(result)
+    }
+  }, [masters, user.userID]);
 
   return (
     <div className={css.userAccount}>

@@ -17,31 +17,20 @@ import { ReviewsUser } from "./components/User/ReviewsUser/ReviewsUser";
 import { ReviewsMaster } from "./components/Master/ReviewsMaster/ReviewsMaster";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUserAC } from "./components/redux/actionCreators/userAC";
-import { RootStateValue } from "./components/redux/reducers/rootReducer";
+import { getUserAC } from "./redux/actionCreators/userAC";
+import { RootStateValue } from "./redux/reducers/rootReducer";
 import {
   getCategoriesAC,
-  getCategoriesSagaAC,
-} from "./components/redux/actionCreators/categoryAC";
-import { getMastersAC } from "./components/redux/actionCreators/mastersAC";
+} from "./redux/actionCreators/categoryAC";
+import { getMastersAC } from "./redux/actionCreators/mastersAC";
 import OneMasterPage from "./components/OneMasterPage/OneMasterPage";
-import { getMasterAC } from "./components/redux/actionCreators/masterAC";
-import { Footer } from "./components/Footer/Footer";
+import { CalendarComponent } from "./components/Calendar/Calendar";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateValue) => state.user);
 
   useEffect(() => {
-    // fetch("http://localhost:8080/checkuser", {
-    //   method: "GET",
-    //   credentials: "include",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => dispatch(getUserAC(result)));
     dispatch(getUserAC());
   }, [dispatch, user.role]);
 
@@ -117,6 +106,10 @@ function App() {
             <Route exact path="/master/:id">
               <OneMasterPage />
             </Route>
+            <Route exact path="/calendar">
+              <CalendarComponent />
+            </Route>
+            
           </Switch>
         </div>
       </Router>

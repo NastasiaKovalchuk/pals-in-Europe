@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import css from "../Master.module.css";
-import { Link } from "react-router-dom";
-import { Master } from "../../redux/initState";
+import { Master } from "../../../redux/initState";
+import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
 
 export const MasterAccount = () => {
   const [newUser, setNewUser] = useState<Master>();
@@ -19,23 +19,16 @@ export const MasterAccount = () => {
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
-        <Link to='/account'>
-          <button className={css.btn}>My profile</button>
-        </Link>
-        <Link to='/account/edit'>
-          <button className={css.btn}>Edit profile</button>
-        </Link>
-        <Link to='/account/orders'>
-          <button className={css.btn}>My orders</button>
-        </Link>
-        <Link to='/account/reviews'>
-          <button className={css.btn}>Rewievs</button>
-        </Link>
+        <HeaderMaster />
       </div>
 
       <div className={css.profile}>
         <div className={css.name}>
-          <img className={css.img} src={newUser ? newUser.picture : ''} alt="" />
+          <img
+            className={css.img}
+            src={newUser ? newUser.picture : ""}
+            alt=""
+          />
           <div className={css.login}>
             <table>
               <tr>
@@ -43,7 +36,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>Name: </span>
                   </td>
-                  <td>{newUser ? newUser.name : ''}</td>
+                  <td>{newUser ? newUser.name : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -51,7 +44,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>Login: </span>
                   </td>
-                  <td>{newUser ? newUser.login : ''}</td>
+                  <td>{newUser ? newUser.login : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -59,7 +52,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>PhoneNumber: </span>
                   </td>
-                  <td>{newUser ? newUser.phoneNumber : ''}</td>
+                  <td>{newUser ? newUser.phoneNumber : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -67,7 +60,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>Email: </span>
                   </td>
-                  <td>{newUser ? newUser.email : ''}</td>
+                  <td>{newUser ? newUser.email : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -75,7 +68,9 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>About me: </span>
                   </td>
-                  <td className={css.description}>{newUser ? newUser.description : ''}</td>
+                  <td className={css.description}>
+                    {newUser ? newUser.description : ""}
+                  </td>
                 </div>
               </tr>
               <tr>
@@ -83,7 +78,11 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>Profession: </span>
                   </td>
-                  <td>{newUser && newUser.category ? newUser.category.category : ''}</td>
+                  <td>
+                    {newUser && newUser.category
+                      ? newUser.category.category
+                      : ""}
+                  </td>
                 </div>
               </tr>
               <tr>
@@ -91,7 +90,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>Experience: </span>
                   </td>
-                  <td>{newUser ? newUser.experience : ''}</td>
+                  <td>{newUser ? newUser.experience : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -99,7 +98,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>My rating: </span>
                   </td>
-                  <td>{newUser ? newUser.rating : ''}</td>
+                  <td>{newUser ? newUser.rating : ""}</td>
                 </div>
               </tr>
               <tr>
@@ -107,7 +106,7 @@ export const MasterAccount = () => {
                   <td className={css.one}>
                     <span>City: </span>
                   </td>
-                  <td>{newUser ? newUser.location.city : ''}</td>
+                  <td>{newUser ? newUser.location.city : ""}</td>
                 </div>
               </tr>
             </table>
@@ -115,6 +114,5 @@ export const MasterAccount = () => {
         </div>
       </div>
     </div>
-
   );
 };

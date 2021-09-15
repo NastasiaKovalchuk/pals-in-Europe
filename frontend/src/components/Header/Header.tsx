@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { RootStateValue } from '../redux/reducers/rootReducer';
+import { RootStateValue } from '../../redux/reducers/rootReducer';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logoutAC } from '../redux/actionCreators/userAC';
+import { logoutAC } from '../../redux/actionCreators/userAC';
 import "./Header.scss";
 
 export const Header = () => {
@@ -23,9 +23,6 @@ export const Header = () => {
         <Link to="/" className="navbar-brand navLink">
           <div className="pals">Pals in Europe</div>
           <img src="img/flag2.gif" alt="" className="flag" />
-        </Link>
-        <Link to="/showmasters" className="navbar-brand show">
-          <div className="">Show masters</div>
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

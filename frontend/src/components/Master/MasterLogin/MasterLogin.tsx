@@ -2,11 +2,11 @@ import { useState } from "react"
 // import { masterLoginAC } from '../../redux/actionCreators/masterAC';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
 import { useSelector } from "react-redux";
-import { masterLoginAC } from "../../redux/actionCreators/userAC";
 import "./MasterLogin.scss";
-import { errorMessageAC } from "../../redux/actionCreators/errorMessageAC";
+import { masterLoginAC } from "../../../redux/actionCreators/userAC";
+import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
 
 
 export const MasterLogin = () => {

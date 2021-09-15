@@ -16,6 +16,7 @@ export interface Master {
   picture: string;
   socialMediaLinks: string[];
   phoneNumber: string;
+  appointments:[],
 }
 
 const MasterSchema = new Schema<Master>({
@@ -34,6 +35,7 @@ const MasterSchema = new Schema<Master>({
   rating: { type: Number, default: 0 },
   picture: String,
   socialMediaLinks: [],
+  appointments:[],
 });
 
 const masterModel = model<Master>("Master", MasterSchema);

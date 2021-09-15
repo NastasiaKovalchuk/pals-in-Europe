@@ -22,6 +22,7 @@ async function masterMaker() {
       const picture = faker.image.avatar();
       const rating = Math.floor(Math.random() * 100);
       const socialMediaLinks = [];
+      
       for (let i = 0; i < 4; i++) {
         socialMediaLinks.push(faker.internet.url());
       }
@@ -36,6 +37,34 @@ async function masterMaker() {
         });
         reviews.push(review);
       }
+      // const appointments = [];
+      const randomDate: number[] = [];
+      const randomHour: number[] = [];
+      // for (let i = 0; i < 20; i++) {
+      //   const obj: { date: string; time: string; user: {} } = {
+      //     date: "",
+      //     time: "",
+      //     user: {},
+      //   };
+        
+      //   let random1 = 0;
+      //   do {
+      //     random1 = Math.ceil(Math.random() * 29);
+      //   } while (randomDate.includes(random1));
+      //   let random2 = 0;
+      //   do {
+      //     random2 = Math.floor(Math.random() * (20 - 10) + 20);
+      //   } while (randomHour.includes(random2));
+      //   obj.date = random1 + "-09-2021";
+      //   randomDate.push(random1);
+      //   obj.time = random2 + ":00";
+      //   randomHour.push(random2);
+      //   obj.user = users[Math.floor(Math.random() * users.length)];
+      //   appointments.push(obj);
+      //   console.log('hoi');
+      // }
+      console.log('hi');
+      
       await masterModel.create({
         description,
         email,
@@ -50,6 +79,7 @@ async function masterMaker() {
         rating,
         picture,
         socialMediaLinks,
+        // appointments
       });
     }
     console.log("Seed Done!");

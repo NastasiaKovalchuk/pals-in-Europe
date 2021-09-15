@@ -1,12 +1,11 @@
 import { useState } from "react";
 // import css from "../Master.module.css";
-import { masterSignupAC } from "../../redux/actionCreators/userAC";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { RootStateValue } from "../../redux/reducers/rootReducer";
-import { Category } from "../../redux/initState";
 import "./MasterSignup.scss";
-import { errorMessageAC } from "../../redux/actionCreators/errorMessageAC";
+import { RootStateValue } from "../../../redux/reducers/rootReducer";
+import { masterSignupAC } from "../../../redux/actionCreators/userAC";
+import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
 
 export const MasterSignup = () => {
   const [name, setName] = useState("");
@@ -24,7 +23,6 @@ export const MasterSignup = () => {
   const categories = useSelector((state: RootStateValue) => state.categories);
   const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector((state: RootStateValue) => state.user);
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
   // console.log('errorMessage!!!!!!! =>', errorMessage);
 
