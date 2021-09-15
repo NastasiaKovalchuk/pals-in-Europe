@@ -21,7 +21,10 @@ export const createUser: RequestHandler = async (req, res, next) => {
       const checkExistingNick = await userModel.findOne({ name });
       if (!checkExistingNick) {
         //@ts-ignore
-        const newUser = await new userModel({ email, name, login, password, picture: req.file ? req.file.path : '' });
+        console.log("reqfile", req.file);
+        //@ts-ignore
+        const newUser = await new userModel({ email, name, login, password, picture: req.file ? `/uploads/${req.file.filename}` : '' });
+        
         newUser.save();
         if (newUser) {
           if (req.session) {

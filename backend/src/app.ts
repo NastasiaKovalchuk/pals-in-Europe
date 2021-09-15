@@ -13,6 +13,7 @@ import adminRouter from "./routes/admin.router";
 import generalRouter from "./routes/general.router";
 import categoryRouter from "./routes/category.router";
 import locationRouter from "./routes/location.router";
+import path from 'path';
 
 declare module "express-session" {
   export interface SessionData {
@@ -37,10 +38,12 @@ app.use(
     credentials: true,
     optionsSuccessStatus: 204,
   })
-);
-app.use(cookieParser());
-
-app.use(express.urlencoded({ extended: false }));
+  );
+  app.use(cookieParser());
+  
+  app.use(express.urlencoded({ extended: false }));
+  
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use(
   session({

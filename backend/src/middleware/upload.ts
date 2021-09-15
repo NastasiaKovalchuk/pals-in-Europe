@@ -1,10 +1,11 @@
 const multer = require("multer");
 const moment = require("moment");
+import path from 'path';
 
 const storage = multer.diskStorage({
   //@ts-ignore
   destination(req, file, cb) {
-    cb(null, "src/uploads/")
+    cb(null, path.join(__dirname, "../../../frontend/public/uploads/"))
   },
   //@ts-ignore
   filename(req, file, cb) {
@@ -25,8 +26,17 @@ const limits = {
   fileSize: 1024 * 1024 * 5
 }
 
-module.exports = multer({
+// module.exports = multer({
+//   storage,
+//   fileFilter,
+//   limits,
+// })
+
+const multerFunc = multer({
   storage,
   fileFilter,
   limits,
-})
+});
+
+module.exports = multerFunc;
+
