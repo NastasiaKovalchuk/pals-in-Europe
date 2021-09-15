@@ -25,6 +25,7 @@ import {
 import { getMastersAC } from "./redux/actionCreators/mastersAC";
 import OneMasterPage from "./components/OneMasterPage/OneMasterPage";
 import { CalendarComponent } from "./components/Calendar/Calendar";
+import { UserCalendarComponent } from "./components/CalendarUser/CalendarUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -107,9 +108,8 @@ function App() {
               <OneMasterPage />
             </Route>
             <Route exact path="/calendar">
-              <CalendarComponent />
+            {user.role === "user" ? <UserCalendarComponent /> : <CalendarComponent /> }
             </Route>
-            
           </Switch>
         </div>
       </Router>

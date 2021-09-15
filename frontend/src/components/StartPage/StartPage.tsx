@@ -63,6 +63,8 @@ const StartPage = () => {
     text: React.SetStateAction<string>
   ) => {
     event.preventDefault();
+    console.log(text);
+    
     setSearch(text);
     setfilterCategories([]);
   };

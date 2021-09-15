@@ -174,7 +174,7 @@ export const EditMasterProfile = () => {
                         placeholder="category"
                         value={category}
                       >
-                        <option>Profession</option>
+                        <option>{newUser?.category.category}</option>
                         {categories
                           ? categories.map((el: string) => (
                             <option value={el}>{el}</option>
