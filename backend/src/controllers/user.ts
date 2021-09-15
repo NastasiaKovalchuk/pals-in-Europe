@@ -15,7 +15,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
     };
     //@ts-ignore
     // const { picture } = req.file ? req.file.path : "";
-    
+
     const checkExistingEmail = await userModel.findOne({ email });
     if (!checkExistingEmail) {
       const checkExistingNick = await userModel.findOne({ name });
@@ -23,25 +23,30 @@ export const createUser: RequestHandler = async (req, res, next) => {
         //@ts-ignore
         console.log("reqfile", req.file);
         //@ts-ignore
-        const newUser = await new userModel({ email, name, login, password, picture: req.file ? `/uploads/${req.file.filename}` : '' });
-        
+        const newUser = await new userModel({
+          email,
+          name,
+          login,
+          password,
+          //@ts-ignore
+          picture: req.file ? `/uploads/${req.file.filename}` : "",
+        });
+
         newUser.save();
         if (newUser) {
           if (req.session) {
             req.session.user = {
               name: newUser.name,
               id: newUser._id,
-            }
+            };
             return res.status(200).json({
               name: req.session.user.name,
               id: req.session.user.id,
-              role: 'user',
+              role: "user",
             });
           }
         }
-        return res
-          .status(500)
-          .json({ message: "Something went wrong" });
+        return res.status(500).json({ message: "Something went wrong" });
       }
       return res.status(500).json({ message: "This nick already exists" });
     }
@@ -64,11 +69,11 @@ export const loginUser: RequestHandler = async (req, res, next) => {
           req.session.user = {
             name: checkUser.name,
             id: checkUser._id,
-          }
+          };
           return res.status(200).json({
             name: req.session.user.name,
             id: req.session.user.id,
-            role: 'user',
+            role: "user",
           });
         }
       }
@@ -83,7 +88,9 @@ export const loginUser: RequestHandler = async (req, res, next) => {
 
 export const getAccountUser: RequestHandler = async (req, res) => {
   try {
-    const userAccount = await userModel.findOne({ _id: req?.session?.user?.id });
+    const userAccount = await userModel.findOne({
+      _id: req?.session?.user?.id,
+    });
     res.status(200).json({ userAccount });
   } catch (error) {
     console.log(error);
@@ -92,23 +99,23 @@ export const getAccountUser: RequestHandler = async (req, res) => {
 
 export const editUserProfile: RequestHandler = async (req, res) => {
   try {
-    const {
-      name,
-      login,
-      email,
-    } = req.body as {
-      name: string,
-      login: string,
-      email: string,
+    const { name, login, email } = req.body as {
+      name: string;
+      login: string;
+      email: string;
     };
     //@ts-ignore
-    const uptdaterUser = await userModel.findByIdAndUpdate({ _id: req?.session?.user?.id }, {
-      name,
-      login,
-      email,
-    }, { new: true })
+    const uptdaterUser = await userModel.findByIdAndUpdate(
+      { _id: req?.session?.user?.id },
+      {
+        name,
+        login,
+        email,
+      },
+      { new: true }
+    );
     return res.status(200).json({
-      uptdaterUser
+      uptdaterUser,
     });
   } catch (error) {
     console.log(error);
@@ -117,44 +124,44 @@ export const editUserProfile: RequestHandler = async (req, res) => {
 
 export const createOrder: RequestHandler = async (req, res) => {
   try {
-    const {
-      name,
-      comment,
-      date,
-      service,
-      id
-    } = req.body as {
-      name: string, comment: string, date: string, service: string, id: string
+    const { userID, comment, date, time, service, masterID } = req.body as {
+      userID: string;
+      comment: string;
+      date: string;
+      time: string;
+      service: string;
+      masterID: string;
     };
-    //@ts-ignore
-    const master = await masterModel.findById(id);
-    const user = await userModel.findById(req?.session?.user?.id);
+    const master = await masterModel.findById(masterID);
+    const user = await userModel.findById(userID);
     const orders = await OrderModel.find();
     if (orders.length > 0) {
       const lastNumOrder = orders[orders.length - 1].number;
       const newOrder = await OrderModel.create({
         number: lastNumOrder + 1,
-        name,
+        name: user?.name,
         client: user,
         master: master,
         comment,
         date,
-        service
-      })
+        time,
+        service,
+      });
       return res.status(200).json({
-        newOrder
+        message: "success",
       });
     } else {
       const newOrder = await OrderModel.create({
-        number: 1,
+        name: user?.name,
         client: user,
         master: master,
         comment,
         date,
-        service
-      })
+        time,
+        service,
+      });
       return res.status(200).json({
-        newOrder
+        message: "success",
       });
     }
   } catch (error) {
@@ -169,7 +176,7 @@ export const getUserOrder: RequestHandler = async (req, res) => {
       if (order?.client?._id == req?.session?.user?.id) {
         return order;
       }
-    })
+    });
     res.status(200).json({ userOrders });
   } catch (error) {
     console.log(error);
@@ -182,7 +189,7 @@ export const getUserReviews: RequestHandler = async (req, res) => {
     const userReviews = reviews.filter((review: Review) => {
       //@ts-ignore
       if (review?.author?._id == req?.session?.user?.id) {
-       return review;
+        return review;
       }
     });
     res.status(200).json({ userReviews });
@@ -190,4 +197,3 @@ export const getUserReviews: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
-

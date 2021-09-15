@@ -1,0 +1,205 @@
+.calendar {
+    margin: 100px;
+    //   height: 200px;
+    //   width: 400px;
+  }
+  .events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .events .ant-badge-status {
+    margin-left: -50px;
+    width: 100%;
+    overflow: hidden;
+    font-size: 1px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notes-month {
+    font-size: 28px;
+    text-align: center;
+  }
+  .notes-month section {
+    font-size: 28px;
+  }
+  
+  .site-calendar-demo-card {
+    width: 300px;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+  }
+  
+  .show {
+    display: block;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s ease;
+  }
+  
+  .modal {
+    z-index: 1000;
+    width: 500px;
+    height: 230px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    transform: translateY(100%);
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+  
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    justify-content: center;
+  
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  
+    background-size: 1800% 1800%;
+  
+    -webkit-animation: rainbow 5s ease infinite;
+    -z-animation: rainbow 5s ease infinite;
+    -o-animation: rainbow 5s ease infinite;
+    animation: rainbow 5s ease infinite;
+  }
+  
+  @-webkit-keyframes rainbow {
+    0% {
+      background-position: 0% 82%;
+    }
+    50% {
+      background-position: 100% 19%;
+    }
+    100% {
+      background-position: 0% 82%;
+    }
+  }
+  @-moz-keyframes rainbow {
+    0% {
+      background-position: 0% 82%;
+    }
+    50% {
+      background-position: 100% 19%;
+    }
+    100% {
+      background-position: 0% 82%;
+    }
+  }
+  @-o-keyframes rainbow {
+    0% {
+      background-position: 0% 82%;
+    }
+    50% {
+      background-position: 100% 19%;
+    }
+    100% {
+      background-position: 0% 82%;
+    }
+  }
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 82%;
+    }
+    50% {
+      background-position: 100% 19%;
+    }
+    100% {
+      background-position: 0% 82%;
+    }
+  }
+  
+  .modal:hover {
+  }
+  
+  .btn {
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    color: #50a2ff;
+    cursor: pointer;
+    animation: 2s pulse;
+  }
+  
+  .btnPoints {
+    width: 150px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    /* filter: drop-shadow(0 0 10px #ffd2e7); */
+  
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  
+  .btnPoints:hover {
+    cursor: pointer;
+  }
+  .inactive {
+    color: black;
+  }
+  
+  .inputModel {
+    border-radius: 3px;
+    border: none;
+    min-height: 50px;
+    padding-left: 10px;
+  }
+  
+  .inputModel:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  .inputModel:focus {
+    border: none;
+    outline: none;
+  }
+  
+  .badge:hover {
+   background-color: forestgreen
+  }
+  
+  .masterAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 100px;
+    flex-direction: column;
+  }
+  
+  .link2 {
+    margin-bottom: 50px;
+  }
+  @import "antd/dist/antd.css";
+  

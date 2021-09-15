@@ -71,12 +71,21 @@ export const ShowMasters = () => {
   };
 
   useEffect(() => {
+    console.log(search);
+
     if (masters.length > 0) {
       if (search.category !== "") {
         setShowMasters(
-          masters.filter(
-            (master) => master.category.category === search.category
-          )
+          masters.filter((master) => {
+            if (master.category) {
+            console.log('ffffffffff111', master.category.category);
+            console.log('ffffffffff', search.category);
+              if (master.category.category === search.category) {
+                return master;
+              }
+
+            }
+          })
         );
       } else {
         setShowMasters(masters);
@@ -93,7 +102,7 @@ export const ShowMasters = () => {
         }
         setCities(uniqueCities.sort((a, b) => a.localeCompare(b)));
       });
-  }, [masters, search.category]);
+  }, [masters, search, search.category]);
 
   return (
     <div className="maindiv">

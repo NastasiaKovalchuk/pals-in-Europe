@@ -10,8 +10,9 @@ export interface Order {
   master: Master;
   comment: string;
   date: string;
+  time: string;
   service: string;
-  status: 'Pending' | 'Accepted' | 'Declined' | 'Fullfilled' | 'Cancel';
+  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
 }
 
 const OrderSchema = new Schema<Order>(
@@ -22,8 +23,9 @@ const OrderSchema = new Schema<Order>(
     master: {},
     comment: String,
     date: String,
+    time: String,
     service: String,
-    status: {type: String, default: "Pending", }
+    status: { type: String, default: "Pending" },
   },
   {
     timestamps: true,

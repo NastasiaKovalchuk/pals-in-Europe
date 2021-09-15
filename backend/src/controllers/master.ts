@@ -192,6 +192,8 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
       street: string;
     };
     const newCategory = await categoryModel.findOne({ category });
+    console.log(newCategory);
+
     const api = "0f8e2dd1-121c-4be5-aeac-8ed33dc30430";
     const URI = `https://geocode-maps.yandex.ru/1.x/?apikey=${api}&format=json&geocode=${street},+${city},+Netherlands`;
     const encodedURI = await encodeURI(URI);
