@@ -35,6 +35,19 @@ export interface Search {
   location: string;
 }
 
+export interface Order {
+  _id: string;
+  number: number;
+  name: string;
+  client: User;
+  master: Master;
+  comment: string;
+  date: string;
+  time: string;
+  service: string;
+  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
+}
+
 export interface Master {
   picture: string | undefined;
   _id: string;
