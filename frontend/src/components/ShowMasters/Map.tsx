@@ -227,7 +227,7 @@ export const ShowMasters = () => {
                       alt=""
                     />
                   </Link>
-                  <button className="btn modalBtn" onClick={() => setShow(false)}>cansel</button>
+                  <button className="btn modalBtn" onClick={() => setShow(false)}>Close</button>
                 </form>
               </div>
             )}
