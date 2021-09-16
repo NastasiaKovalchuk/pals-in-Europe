@@ -21,16 +21,26 @@ export const UserSignup = () => {
     (state: RootStateValue) => state.errorMessage
   );
 
+  // const onSubmit = (event: React.FormEvent) => {
+  //   event.preventDefault();
+  //   console.log('ggggggggg', picture);
+  //   const formData = new FormData();
+  //   formData.append("picture", picture);
+  //   // console.log(formData.get());
+  //   dispatch(
+  //     userSignupAC(name, login, email, password, formData, () => {
+  //       history.push("/");
+  //     })
+  //   );
+  //   if (errorMessage !== "") {
+  //     dispatch(errorMessageAC(""));
+  //   }
+  // };
+
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(picture);
-    const formData = new FormData();
-    console.log(formData);
-
-    formData.append("profileImg", picture);
-    // console.log(formData.get());
     dispatch(
-      userSignupAC(name, login, email, password, formData, () => {
+      userSignupAC(name, login, email, password, () => {
         history.push("/");
       })
     );
@@ -82,7 +92,7 @@ export const UserSignup = () => {
         />
         <input
           className="form-control me-2 inputs"
-          onChange={(ev: any) => {
+          onChange={(ev: any) => {            
             //@ts-ignore
             setPicture(ev.target.files[0]);
           }}
