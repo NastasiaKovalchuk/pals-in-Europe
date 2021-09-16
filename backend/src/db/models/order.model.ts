@@ -4,7 +4,6 @@ import { User } from "./user.model";
 
 export interface Order {
   _id: string;
-  number: number;
   name: string;
   client: User;
   master: Master;
@@ -17,7 +16,6 @@ export interface Order {
 
 const OrderSchema = new Schema<Order>(
   {
-    number: Number,
     name: String,
     client: {},
     master: {},

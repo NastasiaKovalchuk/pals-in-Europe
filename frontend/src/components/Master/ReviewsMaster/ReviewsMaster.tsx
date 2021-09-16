@@ -25,7 +25,8 @@ export const ReviewsMaster = () => {
       </div>
 
       <div>
-        {master &&
+      <h4>My reviews</h4>
+        {master ?
           master.reviews.map((review: Review) => {
             return (
               <div className={css.reviewsCard} key={review._id}>
@@ -46,7 +47,10 @@ export const ReviewsMaster = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        :
+        <div>You have no reviews</div>
+        }
       </div>
     </div>
   );

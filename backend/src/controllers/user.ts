@@ -154,9 +154,7 @@ export const createOrder: RequestHandler = async (req, res) => {
     
     const orders = await OrderModel.find();
     if (orders.length > 0) {
-      const lastNumOrder = orders[orders.length - 1].number;
       const newOrder = await OrderModel.create({
-        number: lastNumOrder + 1,
         name: user?.name,
         client: user,
         master: master,
@@ -172,7 +170,6 @@ export const createOrder: RequestHandler = async (req, res) => {
             <h2>Congratulations on your successful application!</h2>
             <div>Your application details:</div>
             <ul>
-            <li><strong>Number: </strong>${newOrder.number},</li>
             <li><strong>Your master: </strong>${master?.name}, ${newOrder.master.email}.</li>
             <li><strong>Date: </strong>${newOrder.date}.</li>
             <li><strong>Service: </strong>${newOrder.service}.</li>
@@ -250,6 +247,30 @@ export const getUserReviews: RequestHandler = async (req, res) => {
       }
     });
     res.status(200).json({ userReviews });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+export const changeStatusOrder: RequestHandler = async (req, res) => {
+  try {
+    const { id, status } = req.body as {
+      id: string;
+      status: string;
+    };
+    await OrderModel.findByIdAndUpdate(
+      { _id: id },
+      { status: status },
+      { new: true }
+    );
+    const orders = await OrderModel.find();
+    const userOrders = orders.filter((order: Order) => {
+      if (order?.client?._id == req?.session?.user?.id) {
+        return order;
+      }
+    });
+    res.status(200).json({message: 'success'});
   } catch (error) {
     console.log(error);
   }

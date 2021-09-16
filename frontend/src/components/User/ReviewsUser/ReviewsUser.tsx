@@ -40,6 +40,7 @@ export const ReviewsUser = () => {
       <h4>My reviews</h4>
       {masters ?
         masters.map((master, index) => (
+          master.reviews.length > 0 ?
           master.reviews.map((review) => (
             review.author._id === user.userID &&
             <>
@@ -53,6 +54,7 @@ export const ReviewsUser = () => {
               </div>
             </>
           ))
+          :  <div>You have no reviews</div>
         ))
         :
         <div>You have no reviews</div>
