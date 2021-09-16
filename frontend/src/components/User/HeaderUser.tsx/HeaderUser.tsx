@@ -1,23 +1,24 @@
-import css from '../User.module.css'
+// import css from '../User.module.css'
 import { Link } from "react-router-dom";
+import "./HeaderUser.scss";
 
 export const HeaderUser = () => {
   return (
     <>
       <Link to="/account">
-        <button className={css.btn}>My profile</button>
+        <button className="btn userBtn">My profile</button>
       </Link>
       <Link to="/account/edit">
-        <button className={css.btn}>Edit profile</button>
+        <button className="btn userBtn">Edit profile</button>
       </Link>
       <Link to="/account/orders">
-        <button className={css.btn}>My orders</button>
+        <button className="btn userBtn">My orders</button>
       </Link>
       <Link to="/account/reviews">
-        <button className={css.btn}>Rewievs</button>
+        <button className="btn userBtn">Rewievs</button>
       </Link>
       <Link to="/calendar">
-        <button className={css.btn}>Calendar</button>
+        <button className="btn userBtn">Calendar</button>
       </Link>
     </>
   );

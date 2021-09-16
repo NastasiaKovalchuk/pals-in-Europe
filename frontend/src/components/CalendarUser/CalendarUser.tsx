@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
 import { Appointment, Master, User } from "../../redux/initState";
+import { HeaderUser } from "../User/HeaderUser.tsx/HeaderUser";
 
 export const UserCalendarComponent = () => {
   const [modalMaster, setModalMaster] = useState<Master>();
@@ -28,7 +29,7 @@ export const UserCalendarComponent = () => {
   const draggleRef = React.createRef();
 
   const handleOk = (e: any) => {
-    e.stopPropagation()    
+    e.stopPropagation()
     setVisible(false);
   };
 
@@ -38,14 +39,14 @@ export const UserCalendarComponent = () => {
   };
 
   const showModal = (item: Appointment) => {
-    let master; 
+    let master;
     for (let i = 0; i < masters.length; i++) {
-        for (let j = 0; j < masters[i].appointments.length; j++) {
-            if (masters[i].appointments[j].date === item.date && masters[i].appointments[j].time === item.time && masters[i].appointments[j].user._id == item.user._id) {
-                master = masters[i];
-            }
+      for (let j = 0; j < masters[i].appointments.length; j++) {
+        if (masters[i].appointments[j].date === item.date && masters[i].appointments[j].time === item.time && masters[i].appointments[j].user._id == item.user._id) {
+          master = masters[i];
         }
-    }    
+      }
+    }
     setVisible(true);
     setModalMaster(master);
   };
@@ -74,7 +75,7 @@ export const UserCalendarComponent = () => {
 
     return (
       <ul>
-        {listData.map((item:Appointment) => (
+        {listData.map((item: Appointment) => (
           <li key={item.user.email} className="events">
             <Badge
               className="badge"
@@ -103,8 +104,8 @@ export const UserCalendarComponent = () => {
                   onMouseOut={() => {
                     setDisabled(true);
                   }}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
+                  onFocus={() => { }}
+                  onBlur={() => { }}
                 >
                   Your appointment
                 </div>
@@ -157,10 +158,12 @@ export const UserCalendarComponent = () => {
 
   return (
     <>
-      <div className="masterAccount">
+      <div className="mainUser">
         <div className="link2">
-          <HeaderMaster />
-          <div className="calendar">
+          <div className="headUs">
+            <HeaderUser />
+          </div>
+          <div className="calendarUser">
             <Calendar
               dateCellRender={dateCellRender}
               monthCellRender={monthCellRender}
@@ -168,8 +171,8 @@ export const UserCalendarComponent = () => {
               onChange={onChange}
               defaultValue={moment()}
               onSelect={onSelect}
-              //@ts-ignore
-              //   validRange={[moment([2021, 8, 12]), moment()]}
+            //@ts-ignore
+            //   validRange={[moment([2021, 8, 12]), moment()]}
             />{" "}
           </div>
         </div>
