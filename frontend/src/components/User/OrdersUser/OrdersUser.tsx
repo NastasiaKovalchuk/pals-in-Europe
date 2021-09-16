@@ -52,11 +52,10 @@ export const OrdersUser = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className={css.userAccount}>
-=======
 
-    // <div className="">
+    <div className={css.userAccount}>
+
+    {/* // <div className="">
     //   <div className="">
     //     <Link to='/account'>
     //       <button className="">My profile</button>
@@ -71,8 +70,8 @@ export const OrdersUser = () => {
     //       <button className="">Rewievs</button>
     //     </Link>
 
-    <div className="mainEditUser">
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
+    <div className="mainEditUser"> */}
+
       <div className={css.link}>
         <HeaderUser />
       </div>

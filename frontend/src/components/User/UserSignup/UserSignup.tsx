@@ -7,10 +7,7 @@ import { useSelector } from "react-redux";
 import "./UserSignup.scss";
 import { useHistory } from "react-router-dom";
 import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
-<<<<<<< HEAD
-// import axios from "axios";
-=======
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
+
 
 export const UserSignup = () => {
   const [name, setName] = useState("");
@@ -106,10 +103,9 @@ export const UserSignup = () => {
           // value={picture}
           type="file"
           name="picture"
-<<<<<<< HEAD
-=======
 
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
+
+
         />
         <button className="btn signupBtnUser" type="submit">
           Signup as User
