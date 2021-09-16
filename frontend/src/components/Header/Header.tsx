@@ -18,7 +18,7 @@ export const Header = () => {
     history.push("/");
   }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light header">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light headerMain">
       <div className="container-fluid">
         <Link to="/" className="navbar-brand navLink">
           <div className="pals">Pals in Europe</div>
@@ -31,7 +31,7 @@ export const Header = () => {
           <>
             <div className="collapse navbar-collapse" id="navbarSupportedContent" />
             <div className="btn-group">
-              <button type="button" className="btn dropdown-toggle signupBtn" data-bs-toggle="dropdown" aria-expanded="false">
+              <button type="button" className="btn dropdown-toggle signupBtnMain" data-bs-toggle="dropdown" aria-expanded="false">
                 Signup
               </button>
               <ul className="dropdown-menu">

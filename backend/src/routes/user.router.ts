@@ -8,7 +8,8 @@ import {
   editUserProfile,
   createOrder,
   getUserOrder,
-  getUserReviews
+  getUserReviews,
+  createReview
 } from "../controllers/user";
 
 const router = Router();
@@ -22,6 +23,8 @@ router.get("/account", getAccountUser);
 router.post("/edit", editUserProfile);
 
 router.post("/addOrder", createOrder);
+
+router.post("/addReview", createReview);
 
 router.get("/orders", getUserOrder);
 

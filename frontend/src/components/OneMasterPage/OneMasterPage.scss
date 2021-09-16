@@ -5,7 +5,7 @@
   align-items: center;
   
 
-  img {
+  .masterPicture {
     width: 250px;
     border-radius: 250px;
     // position: absolute;
@@ -45,7 +45,7 @@
     .ratingAndExperience {
       display: flex;
       margin-top: 10px;
-      font-size: 10px;
+      font-size: 14px;
 
       .rating {
         margin-right: 20px;
@@ -106,31 +106,81 @@
   .idBody {
     display: flex;
     justify-content: center;
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(235, 235, 235);
     width: 100%;
     filter: drop-shadow(0 0 7px #0fc51e);
     font-size: 20px;
     padding-left: 400px;
     padding-right: 390px;
 
-    .leftSide { 
-      padding-top: 20px;
+    .leftDiv {
       display: flex;
-      width: 720px;
-      // height: 73vh;
+      flex-direction: column;
+      max-width: 800px;
 
-      .info {
-        margin-top: 80px;
-        margin-left: 80px;
-        color: rgb(83, 83, 83);
+      .leftSide { 
+        padding-top: 20px;
+        display: flex;
+        width: 720px;
+        // height: 73vh;
+  
+        .info {
+          margin-top: 5px;
+          margin-left: 80px;
+          color: rgb(83, 83, 83);
+        }
+  
+        .description {
+          color: rgb(128, 128, 128);
+          width: 450px;
+          margin-left: 60px;
+        }
       }
 
-      .description {
-        color: rgb(128, 128, 128);
-        width: 450px;
-        margin-left: 60px;
+      .reviewsTitle {
+        color: rgb(47, 47, 173);
+        margin-top: 30px;
+        margin-left: 80px;
+      }
+
+      .masterReviews {
+        margin-top: 20px;
+        max-width: 770px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .oneReviewMaster {
+          background-color: rgb(255, 255, 255);
+          padding: 5px;
+          margin: 10px;
+          font-size: 14px;
+          max-width: 215px;
+          min-width: 215px;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          border-radius: 10px;
+          filter: drop-shadow(0 0 7px #afafaf);
+
+          .nameText {
+            display: flex;
+
+            .authorName {
+              font-weight: bold;
+              overflow-wrap: anywhere;
+              margin-left: 3px;
+            }
+  
+            .authorPicture {
+              width: 100px;
+              height: 100px;
+            }
+          }
+
+        }
       }
     }
+
 
     .location {
       width: 425px;
@@ -166,6 +216,12 @@
         margin-right: 33px;
         margin-top: 10px;
       }
+    }
+
+    .masterReviews {
+      display: flex;
+      
+      max-width: 300px;
     }
   }
 

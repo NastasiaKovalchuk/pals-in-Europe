@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getMasterAccountAC } from '../../../redux/actionCreators/masterAC';
 import { Order } from "../../../redux/initState";
 import { RootStateValue } from '../../../redux/reducers/rootReducer';
+import "./OrdersUser.scss";
 import { HeaderUser } from "../HeaderUser.tsx/HeaderUser";
 import css from '../User.module.css'
 
@@ -29,18 +30,35 @@ export const OrdersUser = () => {
 
 
   return (
+
+    // <div className="">
+    //   <div className="">
+    //     <Link to='/account'>
+    //       <button className="">My profile</button>
+    //     </Link>
+    //     <Link to='/account/edit'>
+    //       <button className="">Edit profile</button>
+    //     </Link>
+    //     <Link to='/account/orders'>
+    //       <button className="">My orders</button>
+    //     </Link>
+    //     <Link to='/account/reviews'>
+    //       <button className="">Rewievs</button>
+    //     </Link>
+
     <div className={css.userAccount}>
       <div className={css.link}>
         <HeaderUser />
+
       </div>
       <h4>My orders</h4>
       {orders ?
         orders.map((order, index) => (
-          <div className={css.orderCard} key={index}>
-            <div className={css.orderInfo}><span>Order information:</span>
+          <div className="" key={index}>
+            <div className=""><span>Order information:</span>
               <div>№ {order.number},
                 date of creation: {order.createdAt.slice(0, 10)}</div>
-                <div className={css.status}>status: {order.status}</div>
+                <div className="">status: {order.status}</div>
             </div>
             <div><span>Master:</span>
               <div> {order.master.name}, {order.master.email}</div>

@@ -169,6 +169,29 @@ export const createOrder: RequestHandler = async (req, res) => {
   }
 };
 
+export const createReview: RequestHandler = async (req, res) => {
+  try {
+    const { userID, newReview, masterID } = req.body as {
+      userID: string;
+      newReview: string;
+      masterID: string;
+    };
+    const master = await masterModel.findById(masterID); 
+    const user = await userModel.findById(userID);
+    const newReviewModel = await ReviewModel.create({
+      text: newReview,
+      author: user,
+      master: master,
+    });
+    master?.reviews.push(newReviewModel);
+    await master?.save();
+    
+    return res.status(200).json(newReviewModel);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getUserOrder: RequestHandler = async (req, res) => {
   try {
     const orders = await OrderModel.find();

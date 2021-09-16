@@ -10,6 +10,7 @@ export const mastersReducer = (
 ) => {
   switch (action.type) {
     case GET_MASTERS:
+      
       return action.payload
     case EDIT_MASTER:
       console.log('EDIT_MASTER ===>', state)

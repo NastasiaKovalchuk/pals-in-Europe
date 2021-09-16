@@ -1,13 +1,16 @@
-footer {
+.footerMain {
   background-color: rgb(75, 75, 75); 
   bottom: 0;
   width: 100%;
   padding: 20px 220px;
 
-  .head {
+  .footerTitle {
     display: flex;
-    color: rgb(184, 184, 184);
     justify-content: space-between;
+    
+    h4 { 
+      color: rgb(184, 184, 184);
+    }
   }
   
   .elements {
@@ -47,7 +50,5 @@ footer {
         }
       }
     }
-  
   }
-
 }
