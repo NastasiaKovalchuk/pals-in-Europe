@@ -5,6 +5,7 @@ import { categoryMaker } from "./seeder/seedCategory";
 import { reviewsAndLinksMaker } from "./seeder/seedReviews";
 import { locationMaker } from "./seeder/seedLocation";
 import appMaker from "./seeder/addAppointments";
+import { developersMaker } from "./seeder/developersSeed";
 
 const { DBURL } = process.env;
 const options = {
@@ -14,13 +15,14 @@ const options = {
   useNewUrlParser: true,
 };
 
-async function dbconnect() {
+export default async function dbconnect() {
   if (typeof DBURL === "string") {
     await mongoose.connect(DBURL, options, (err) => {
       console.log("success connect mongo");
       if (err) return console.log(err);
     });
   }
+  // developersMaker()
   // locationMaker();
   // appMaker()
   // reviewsAndLinksMaker();
@@ -29,4 +31,4 @@ async function dbconnect() {
   // categoryMaker()
 }
 
-export default dbconnect;
+

@@ -5,7 +5,7 @@ import {
   GET_MESSAGE,
   GET_USER_ACCOUNT,
   CREATE_ORDER,
-  EDIT_USER
+  EDIT_USER,
 } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {
@@ -42,44 +42,85 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
   }
 };
 
+// export const userSignupAC =
+//   (
+//     name: string,
+//     login: string,
+//     email: string,
+//     password: string,
+//     formData: any,
+//     onSuccesSignup: () => void
+//   ) =>
+//   async (dispatch: AppDispatch) => {
+//     // formData.append("name", name);
+//     // formData.append("login", login);
+//     // formData.append("email", email);
+//     // formData.append("password", password);
+//     // console.log("userSignupAC", formData.get("profileImg"));
+//     const response = await fetch("http://localhost:8080/user/signup", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "multipart/form-data boundary"
+//         // "Content-Type": "application/json",
+//       },
+//       credentials: "include",
+//       body: formData,
+//     });
+//     const result = await response.json();
+//     console.log(result);
+
+//     if (!result.message) {
+//       dispatch({
+//         type: SET_USER,
+//         payload: result,
+//       });
+//       onSuccesSignup();
+//     } else if (result.message) {
+//       dispatch({
+//         type: GET_MESSAGE,
+//         payload: result.message,
+//       });
+//     }
+//   };
+
 export const userSignupAC =
-  (name: string, login: string, email: string, password: string, formData: any, onSuccesSignup: () => void) =>
-    async (dispatch: AppDispatch) => {
-      console.log('userSignupAC', formData.get('profileImg'));
-      const response = await fetch("http://localhost:8080/user/signup", {
-        method: "POST",
-        headers: {
-          // "Content-Type": "multipart/form-data"
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          name,
-          login,
-          email,
-          password,
-          formData,
-        }),
+  (
+    name: string,
+    login: string,
+    email: string,
+    password: string,
+    onSuccesSignup: () => void
+  ) =>
+  async (dispatch: AppDispatch) => {
+    
+    const response = await fetch("http://localhost:8080/user/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        name, login, email, password, picture: 'https://freerangestock.com/sample/116135/handsome-man-avatar-.jpg'
+      })
+    });
+    const result = await response.json();
+    if (!result.message) {
+      dispatch({
+        type: SET_USER,
+        payload: result,
       });
-      const result = await response.json();
-      console.log(result);
-      
-      if (!result.message) {
-        dispatch({
-          type: SET_USER,
-          payload: result,
-        });
-        onSuccesSignup()
-      } else if (result.message) {
-        dispatch({
-          type: GET_MESSAGE,
-          payload: result.message,
-        });
-      }
-    };
+      onSuccesSignup();
+    } else if (result.message) {
+      dispatch({
+        type: GET_MESSAGE,
+        payload: result.message,
+      });
+    }
+  };
 
 export const userLoginAC =
-  (login: string, password: string, onSuccesLogin: () => void) => async (dispatch: AppDispatch) => {
+  (login: string, password: string, onSuccesLogin: () => void) =>
+  async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/user/login", {
       method: "POST",
       headers: {
@@ -97,7 +138,7 @@ export const userLoginAC =
         type: SET_USER,
         payload: result,
       });
-      onSuccesLogin()
+      onSuccesLogin();
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
@@ -139,7 +180,8 @@ export const getUserAccountAC =
   };
 
 export const masterLoginAC =
-  (login: string, password: string, onSuccesLogin: () => void) => async (dispatch: AppDispatch) => {
+  (login: string, password: string, onSuccesLogin: () => void) =>
+  async (dispatch: AppDispatch) => {
     const response = await fetch("http://localhost:8080/master/login", {
       method: "POST",
       headers: {
@@ -164,7 +206,7 @@ export const masterLoginAC =
           name: result.mastername,
         },
       });
-      onSuccesLogin()
+      onSuccesLogin();
     } else if (result.message) {
       dispatch({
         type: GET_MESSAGE,
@@ -187,63 +229,63 @@ export const masterSignupAC =
     phoneNumber: string,
     onSuccesSignup: () => void
   ) =>
-    async (dispatch: AppDispatch) => {
-      const response = await fetch("http://localhost:8080/master/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          name,
-          login,
-          email,
-          password,
-          category,
-          experience,
-          description,
-          city,
-          street,
-          phoneNumber,
-        }),
-      });
-      const result = await response.json();
-
-      if (!result.message) {
-        dispatch({
-          type: SET_USER,
-          payload: {
-            adminID: "",
-            userID: "",
-            masterID: result._id,
-            role: "master",
-            name: result.mastername,
-          },
-        });
-        onSuccesSignup()
-      } else if (result.message) {
-        dispatch({
-          type: GET_MESSAGE,
-          payload: result.message,
-        });
-      }
-    };
-
-export const editUserProfileAC = (
-  name?: string, login?: string,
-  email?: string) => async (dispatch: AppDispatch) => {
-    const response = await fetch(`http://localhost:8080/user/edit`, {
-      method: 'POST',
+  async (dispatch: AppDispatch) => {
+    const response = await fetch("http://localhost:8080/master/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        name,
+        login,
+        email,
+        password,
+        category,
+        experience,
+        description,
+        city,
+        street,
+        phoneNumber,
+      }),
+    });
+    const result = await response.json();
+
+    if (!result.message) {
+      dispatch({
+        type: SET_USER,
+        payload: {
+          adminID: "",
+          userID: "",
+          masterID: result._id,
+          role: "master",
+          name: result.mastername,
+        },
+      });
+      onSuccesSignup();
+    } else if (result.message) {
+      dispatch({
+        type: GET_MESSAGE,
+        payload: result.message,
+      });
+    }
+  };
+
+export const editUserProfileAC =
+  (name?: string, login?: string, email?: string) =>
+  async (dispatch: AppDispatch) => {
+    const response = await fetch(`http://localhost:8080/user/edit`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, login, email }),
       credentials: "include",
     });
     const result = await response.json();
-    
+
     dispatch({
       type: EDIT_USER,
-      payload: result
-    })
-  }
+      payload: result,
+    });
+  };

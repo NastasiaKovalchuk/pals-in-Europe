@@ -7,11 +7,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
-import { Appointment, Master, User } from "../../redux/initState";
+import { Appointment, Master, Order, User } from "../../redux/initState";
 
 export const CalendarComponent = () => {
-  const [modalUser, setModalUser] = useState<Appointment>();
-  const [user, setUser] = useState<Appointment[]>([]);
+  const [modalOrder, setModalOrder] = useState<Order>();
+  const [orders, setOrders] = useState<Order[]>([]);
   const [value, setValue] = useState(moment());
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -23,17 +23,16 @@ export const CalendarComponent = () => {
   });
 
   const state = useSelector((state: RootStateValue) => state.user);
-  const masters = useSelector((state: RootStateValue) => state.masters);
 
   const draggleRef = React.createRef();
 
   const handleOk = (e: any) => {
-    e.stopPropagation()    
+    e.stopPropagation();
     setVisible(false);
   };
 
   const handleCancel = (e: any) => {
-    e.stopPropagation()
+    e.stopPropagation();
     setVisible(false);
   };
 
@@ -49,26 +48,36 @@ export const CalendarComponent = () => {
     // });
   };
 
-  const showModal = (item: any) => {
+  const showModal = (item: Order) => {
     setVisible(true);
-    setModalUser(item);
+    setModalOrder(item);
   };
 
   useEffect(() => {
-    if (state.masterID) {
-      if (masters.length > 0) {
-        setUser(masters.filter((master: Master) => master._id === state.masterID)[0].appointments)
-      }
-    }
-  }, [masters, state.masterID]);
 
+    if (state.masterID) {
+      fetch("http://localhost:8080/master/orders", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((result) => setOrders(result.masterOrders));
+    }
+  }, [state.masterID]);
+  console.log(orders);
+  
   function getListData(value: { date: () => any }) {
-    let listData = [];
-    for (let i = 0; i < user.length; i++) {
-      if (Number(user[i].date.split("-")[0]) === value.date()) {
-        listData.push(user[i]);
+    let listData: Order[] = [];
+    
+    for (let i = 0; i < orders.length; i++) {
+      if (Number(orders[i].date.split("-")[2]) === value.date()) {
+        listData.push(orders[i]);
       }
     }
+    
     return listData;
   }
 
@@ -77,8 +86,8 @@ export const CalendarComponent = () => {
 
     return (
       <ul>
-        {listData.map((item:Appointment) => (
-          <li key={item.user.email} className="events">
+        {listData.map((item: Order) => (
+          <li key={item._id} className="events">
             <Badge
               className="badge"
               //@ts-ignore
@@ -126,9 +135,14 @@ export const CalendarComponent = () => {
                 </Draggable>
               )}
             >
-              <p>{modalUser && modalUser.user ? modalUser.user.email : ""}</p>
-              <br />
-              <p>{modalUser && modalUser.user ? modalUser.user.login : ""}</p>
+              <p>Client: {modalOrder ? modalOrder.client.name : ""}</p>
+              <img src={modalOrder?.client.picture} alt="" />
+              <p>Status: {modalOrder ? modalOrder.status : ""}</p>
+              <p>Date: {modalOrder ? modalOrder.date : ""}</p>
+              <p>Time: {modalOrder ? modalOrder.time : ""}</p>
+              {/* <br /> */}
+              <p>Service: {modalOrder ? modalOrder.service : ""}</p>
+              <p>Comment: {modalOrder ? modalOrder.comment : ""}</p>
             </Modal>
           </li>
         ))}
@@ -156,15 +170,12 @@ export const CalendarComponent = () => {
     setValue(e);
   };
 
-  const onSelect = () => {
-    // alert('hi')
-  };
-
   return (
     <>
       <div className="masterAccount">
         <div className="link2">
-          <HeaderMaster />
+          <div className="headUs"><HeaderMaster /></div>
+          
           <div className="calendar">
             <Calendar
               dateCellRender={dateCellRender}
@@ -172,7 +183,6 @@ export const CalendarComponent = () => {
               value={value}
               onChange={onChange}
               defaultValue={moment()}
-              onSelect={onSelect}
               //@ts-ignore
               //   validRange={[moment([2021, 8, 12]), moment()]}
             />{" "}

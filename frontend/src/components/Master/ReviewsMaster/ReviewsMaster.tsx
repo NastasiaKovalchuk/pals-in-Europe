@@ -28,7 +28,7 @@ export const ReviewsMaster = () => {
         {master &&
           master.reviews.map((review: Review) => {
             return (
-              <div className={css.reviewsCard}>
+              <div className={css.reviewsCard} key={review._id}>
                 <img src={review.author.picture} alt="" />
                 <div className={css.text}>
                   <div>

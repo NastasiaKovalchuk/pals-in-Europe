@@ -6,7 +6,6 @@ export interface Review {
   _id: string;
   text: string;
   author: object;
-  master: object
 }
 
 const ReviewSchema = new Schema<Review>(
