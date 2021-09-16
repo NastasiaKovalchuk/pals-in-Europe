@@ -33,7 +33,7 @@ export const ReviewsUser = () => {
 
 
   return (
-    <div className={css.userAccount}>
+    <div className="mainUser">
       <div className={css.link}>
         <HeaderUser />
       </div>

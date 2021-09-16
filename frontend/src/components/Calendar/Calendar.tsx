@@ -135,7 +135,7 @@ export const CalendarComponent = () => {
                 </Draggable>
               )}
             >
-              <p>Master: {modalOrder ? modalOrder.client.name : ""}</p>
+              <p>Client: {modalOrder ? modalOrder.client.name : ""}</p>
               <img src={modalOrder?.client.picture} alt="" />
               <p>Status: {modalOrder ? modalOrder.status : ""}</p>
               <p>Date: {modalOrder ? modalOrder.date : ""}</p>
@@ -174,7 +174,8 @@ export const CalendarComponent = () => {
     <>
       <div className="masterAccount">
         <div className="link2">
-          <HeaderMaster />
+          <div className="headUs"><HeaderMaster /></div>
+          
           <div className="calendar">
             <Calendar
               dateCellRender={dateCellRender}

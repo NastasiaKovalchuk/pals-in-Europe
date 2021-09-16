@@ -9,6 +9,7 @@ import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
 import { Appointment, Master, Order, User } from "../../redux/initState";
 import { Link } from "react-router-dom";
+import { HeaderUser } from "../User/HeaderUser.tsx/HeaderUser";
 
 export const UserCalendarComponent = () => {
   const [modalOrder, setModalOrder] = useState<Order>();
@@ -102,8 +103,8 @@ export const UserCalendarComponent = () => {
                   onMouseOut={() => {
                     setDisabled(true);
                   }}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
+                  onFocus={() => { }}
+                  onBlur={() => { }}
                 >
                   
                   Your appointment
@@ -162,10 +163,12 @@ export const UserCalendarComponent = () => {
 
   return (
     <>
-      <div className="masterAccount">
+      <div className="mainUser">
         <div className="link2">
-          <HeaderMaster />
-          <div className="calendar">
+          <div className="headUs">
+            <HeaderUser />
+          </div>
+          <div className="calendarUser">
             <Calendar
               dateCellRender={dateCellRender}
               monthCellRender={monthCellRender}
@@ -173,8 +176,8 @@ export const UserCalendarComponent = () => {
               onChange={onChange}
               defaultValue={moment()}
               onSelect={onSelect}
-              //@ts-ignore
-              //   validRange={[moment([2021, 8, 12]), moment()]}
+            //@ts-ignore
+            //   validRange={[moment([2021, 8, 12]), moment()]}
             />{" "}
           </div>
         </div>

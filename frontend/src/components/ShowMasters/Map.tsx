@@ -131,10 +131,10 @@ export const ShowMasters = () => {
               <option value="all">All categories</option>
               {categories
                 ? categories.map((category, index) => (
-                    <option key={index} value={category}>
-                      {category}
-                    </option>
-                  ))
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                ))
                 : ""}
             </select>
           </div>
@@ -153,14 +153,14 @@ export const ShowMasters = () => {
               <option value="all">All locations</option>
               {cities
                 ? cities.map((city, index) => {
-                    if (city !== "") {
-                      return (
-                        <option key={index} value={city}>
-                          {city}
-                        </option>
-                      );
-                    }
-                  })
+                  if (city !== "") {
+                    return (
+                      <option key={index} value={city}>
+                        {city}
+                      </option>
+                    );
+                  }
+                })
                 : ""}
             </select>
           </div>
@@ -196,35 +196,38 @@ export const ShowMasters = () => {
           >
             {showMasters
               ? showMasters.map((el) => {
-                  if (el.location && el.location.coordinates) {
-                    return (
-                      <Placemark
-                        hintContent="Hey"
-                        key={el._id}
-                        onClick={() => placemarkClick(el)}
-                        geometry={[
-                          el.location.coordinates[1],
-                          el.location.coordinates[0],
-                        ]}
-                      />
-                    );
-                  } else {
-                    return "";
-                  }
-                })
+                if (el.location && el.location.coordinates) {
+                  return (
+                    <Placemark
+                      hintContent="Hey"
+                      key={el._id}
+                      onClick={() => placemarkClick(el)}
+                      geometry={[
+                        el.location.coordinates[1],
+                        el.location.coordinates[0],
+                      ]}
+                    />
+                  );
+                } else {
+                  return "";
+                }
+              })
               : ""}
             {show && (
-              <div className={show ? "overlay" : "hide"}>
-                <form className={show ? "modal" : "hide"}>
+              <div className={show ? "overlayMap" : "hide"}>
+                <form className={show ? "modalMap" : "hide"}>
                   <Link to={`/master/${chosenMaster?._id}`}>
-                    <p>{chosenMaster ? chosenMaster?.name : ""}</p>
-                    <p>{chosenMaster ? chosenMaster?.category.category : ""}</p>
+                    <div className="nameAndCategoryModal">
+                      <p className="nameModal">{chosenMaster ? chosenMaster?.name : ""}</p>
+                      <p className="categoryModal">{chosenMaster ? chosenMaster?.category.category : ""}</p>
+                    </div>
                     <img
+                      className="modalImgMap"
                       src={chosenMaster ? chosenMaster?.picture : ""}
                       alt=""
                     />
                   </Link>
-                  <button onClick={() => setShow(false)}>x</button>
+                  <button className="btn modalBtn" onClick={() => setShow(false)}>Close</button>
                 </form>
               </div>
             )}

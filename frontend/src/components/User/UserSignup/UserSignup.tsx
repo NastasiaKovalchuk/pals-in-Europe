@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import "./UserSignup.scss";
 import { useHistory } from "react-router-dom";
 import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
-import axios from "axios";
 
 export const UserSignup = () => {
   const [name, setName] = useState("");
@@ -49,9 +48,12 @@ export const UserSignup = () => {
     }
   };
 
+  console.log('picture', picture);
+  
   return (
     <div className="all">
-      <form className="forms" onSubmit={onSubmit} encType="multipart/form-data">
+      {/* @ts-ignore */}
+      <form className="forms" onSubmit={onSubmit} enctype="multipart/form-data">
         <input
           className="form-control me-2 inputs"
           onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -100,7 +102,7 @@ export const UserSignup = () => {
           // value={picture}
           type="file"
           name="picture"
-          required
+
         />
         <button className="btn signupBtnUser" type="submit">
           Signup as User
