@@ -48,7 +48,7 @@ export const OneMasterPage = () => {
   };
 
   const onSubmit = (event: any) => {
-    console.log(event.target.time.value);
+    // console.log(event.target.time.value);
 
     event.preventDefault();
     fetch("http://localhost:8080/user/addOrder", {

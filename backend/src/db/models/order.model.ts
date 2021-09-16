@@ -12,7 +12,7 @@ export interface Order {
   date: string;
   time: string;
   service: string;
-  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
+  status: string;
 }
 
 const OrderSchema = new Schema<Order>(

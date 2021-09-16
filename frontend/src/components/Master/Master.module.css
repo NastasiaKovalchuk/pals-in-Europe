@@ -105,9 +105,8 @@ flex-direction: column;
 justify-content: center;
 }
 
-
 .status {
-  border: pink solid 1px;
+  border: rgb(177, 96, 109) solid 1px;
   width: 200px;
   border-radius:10px ;
   background-color: pink;
@@ -131,4 +130,31 @@ justify-content: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.css.chooseStatus {
+  display: flex;
+}
+ 
+.accepted {
+  border: rgb(49, 131, 41) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(197, 255, 192);
+  margin-right: 10px;
+}
+
+.declined {
+  border: rgb(117, 62, 172) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(166, 124, 208);
+  margin-right: 10px;
+}
+
+.fullfilled {
+  border: rgb(147, 147, 41) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(237, 237, 144);
 }
