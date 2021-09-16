@@ -229,8 +229,7 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
         )
         .lean();
 
-      return res.status(200).json(
-        updatedMaster);
+      return res.status(200).json(updatedMaster);
     }
   } catch (error) {
     console.log(error);
@@ -280,9 +279,9 @@ export const test: RequestHandler = async (req, res) => {
 
 export const getMasterOrder: RequestHandler = async (req, res) => {
   try {
-    const orders = await OrderModel.find();
+    const orders = await OrderModel.find().lean();
     const masterOrders = orders.filter((order: Order) => {
-      if (order?.master?._id == req?.session?.user?.id) {
+      if (order.master._id == req?.session?.user?.id) {
         return order;
       }
     });
@@ -294,17 +293,17 @@ export const getMasterOrder: RequestHandler = async (req, res) => {
 
 export const changeStatusOrder: RequestHandler = async (req, res) => {
   try {
-    const { id, changeStatus } = req.body as {
+    const { id, status } = req.body as {
       id: string;
-      changeStatus: string;
+      status: string;
     };
-    console.log('===========', id, '===========', changeStatus);
-    
     await OrderModel.findByIdAndUpdate(
-      {_id: id}, 
-      { status: changeStatus}, { new: true });
+      { _id: id },
+      { status: status },
+      { new: true }
+    );
 
-      const orders = await OrderModel.find();
+    const orders = await OrderModel.find();
 
     const masterOrders = orders.filter((order: Order) => {
       if (order?.master?._id == req?.session?.user?.id) {
@@ -320,10 +319,8 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
     // })
     // const changedOrder = await OrderModel.
     //   // console.log('11111', changedOrder);
-    res.status(200).json(masterOrders);
+    res.status(200).json({message: 'success'});
   } catch (error) {
     console.log(error);
   }
 };
-
-

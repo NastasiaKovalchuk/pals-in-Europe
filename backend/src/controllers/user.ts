@@ -40,9 +40,11 @@ export const createUser: RequestHandler = async (req, res, next) => {
               id: newUser._id,
             };
             return res.status(200).json({
-              name: req.session.user.name,
-              id: req.session.user.id,
-              role: "user",
+
+              newUser
+              // name: req.session.user.name,
+              // id: req.session.user.id,
+              // role: "user",
             });
           }
         }
