@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { mailer } from "./mailer";
 import { RequestHandler } from "express";
 import userModel, { User } from "../db/models/user.model";
 import masterModel, { Master } from "../db/models/master.model";
@@ -33,6 +34,19 @@ export const createUser: RequestHandler = async (req, res, next) => {
         });
 
         newUser.save();
+        const message = {
+          to: email,
+          subject: "You have successfully registered!",
+          html: `
+              <h2>Congratulations on your successful registration as User!</h2>
+              <div>Your account details:</div>
+              <ul>
+              <li><strong>Login: </strong>${login},</li>
+              <li><strong>Password: </strong>${password}.</li>
+              </ul>
+              We wish you success!`,
+        };
+        mailer(message);
         if (newUser) {
           if (req.session) {
             req.session.user = {
@@ -134,6 +148,8 @@ export const createOrder: RequestHandler = async (req, res) => {
     };
     const master = await masterModel.findById(masterID);
     const user = await userModel.findById(userID);
+    // console.log(user.email);
+    
     const orders = await OrderModel.find();
     if (orders.length > 0) {
       const lastNumOrder = orders[orders.length - 1].number;
@@ -147,6 +163,22 @@ export const createOrder: RequestHandler = async (req, res) => {
         time,
         service,
       });
+      const message = {
+        to: newOrder.client.email,
+        subject: "Your application is accepted!!",
+        html: `
+            <h2>Congratulations on your successful application!</h2>
+            <div>Your application details:</div>
+            <ul>
+            <li><strong>Number: </strong>${newOrder.number},</li>
+            <li><strong>Your master: </strong>${master?.name}, ${newOrder.master.email}.</li>
+            <li><strong>Date: </strong>${newOrder.date}.</li>
+            <li><strong>Service: </strong>${newOrder.service}.</li>
+            <li><strong>Comment: </strong>${newOrder.comment}.</li>
+            </ul>
+            We wish you success!`,
+      };
+      mailer(message);
       return res.status(200).json({
         message: "success",
       });
@@ -176,7 +208,7 @@ export const createReview: RequestHandler = async (req, res) => {
       newReview: string;
       masterID: string;
     };
-    const master = await masterModel.findById(masterID); 
+    const master = await masterModel.findById(masterID);
     const user = await userModel.findById(userID);
     const newReviewModel = await ReviewModel.create({
       text: newReview,
@@ -185,7 +217,7 @@ export const createReview: RequestHandler = async (req, res) => {
     });
     master?.reviews.push(newReviewModel);
     await master?.save();
-    
+
     return res.status(200).json(newReviewModel);
   } catch (error) {
     console.log(error);

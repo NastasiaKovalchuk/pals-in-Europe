@@ -10,7 +10,7 @@ import categoryModel from "../db/models/category.model";
 import userModel from "../db/models/user.model";
 
 export const createMaster: RequestHandler = async (req, res) => {
-  console.log("Зашли в ручку createMaster");
+  // console.log("Зашли в ручку createMaster");
 
   try {
     const {
@@ -75,15 +75,15 @@ export const createMaster: RequestHandler = async (req, res) => {
           // console.log('newMaster создан');
           const message = {
             to: email,
-            subject: "Вы успешно зарегистрировались.",
+            subject: "You have successfully registered!",
             html: `
-                <h2>Поздравляем с успешной регистрацией!</h2>
-                <div>Данные вашей учетной записи:</div>
+                <h2>Congratulations on your successful registration as Master!</h2>
+                <div>Your account details:</div>
                 <ul>
-                <li>Логин: ${login},</li>
-                <li>Пароль: ${password}.</li>
+                <li>Login: ${login},</li>
+                <li>Password: ${password}.</li>
                 </ul>
-                Желаем успешных заказов!`,
+                We wish you success!`,
           };
           mailer(message);
           if (newMaster) {

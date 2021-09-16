@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import "./UserSignup.scss";
 import { useHistory } from "react-router-dom";
 import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
-import axios from "axios";
+// import axios from "axios";
 
 export const UserSignup = () => {
   const [name, setName] = useState("");
@@ -90,7 +90,6 @@ export const UserSignup = () => {
           // value={picture}
           type="file"
           name="picture"
-          required
         />
         <button className="btn signupBtnUser" type="submit">
           Signup as User
