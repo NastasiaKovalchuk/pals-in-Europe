@@ -42,6 +42,7 @@ const StartPage = () => {
       });
       setfilterCategories(check);
       if (check.length > 0) {
+        setNoCategories(false);
         setShow(true);
       } else {
         setNoCategories(true);
