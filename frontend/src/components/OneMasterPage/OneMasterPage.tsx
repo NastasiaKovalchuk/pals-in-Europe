@@ -17,8 +17,10 @@ type IdParams = {
 export const OneMasterPage = () => {
   const [oneMasterObj, setOneMasterObj] = useState<Master>();
   const [show, setShow] = useState(false);
+  const [reviewModal, setReviewModal] = useState(false);
   const [comment, setComment] = useState("");
   const [service, setService] = useState("");
+  const [newReview, setNewReview] = useState("");
   const [reviewsOnly, setReviewsOnly] = useState<Review[]>([])
   const { id } = useParams<IdParams>();
   const selectorMasters = useSelector((state: RootStateValue) => state.masters);
@@ -31,17 +33,21 @@ export const OneMasterPage = () => {
       const master = selectorMasters.find((el) => el._id === id)
       if (master) {
         setOneMasterObj(master);
+        // master.reviews.push(newReview)
         setReviewsOnly(master.reviews);
       }
     }
   }, [selectorMasters, id]);
 
-  console.log(reviewsOnly);
   const onClick = () => {
     setShow(true);
   };
 
-  const onSubmit = useMemo(() => (event: any) => {
+  const onClickReview = () => {
+    setReviewModal(true);
+  };
+
+  const onSubmit = (event: any) => {
     console.log(event.target.time.value);
 
     event.preventDefault();
@@ -71,8 +77,37 @@ export const OneMasterPage = () => {
           alert("something went wrong");
         }
       });
-  }, [comment, id, service, session.user.userID]);
+  };
 
+  const onReviewSubmit = (event: any) => {
+
+    event.preventDefault();
+    fetch("http://localhost:8080/user/addReview", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userID: session.user.userID,
+        newReview,
+        masterID: id,
+      }),
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result) {
+          reviewsOnly.push(result)
+          setReviewModal(false);
+          setNewReview("");
+          alert("Your review has been published!");
+        } else {
+          alert("something went wrong");
+        }
+      });
+    };
+    
+  console.log('reviewsOnly', reviewsOnly);  
   function onChange(date: Moment | null, dateString: string) {
     // console.log(date, dateString);
   }
@@ -103,6 +138,30 @@ export const OneMasterPage = () => {
                 style={{ height: 100 }}
                 onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
                   setComment(ev.target.value)
+                }
+              />
+              <button className={css.btn} type="submit">
+                Отправить
+              </button>
+            </form>
+          </div>
+        </>
+      ) : (
+        <>
+          <div>Нет модального окна</div>
+        </>
+      )}
+      {reviewModal ? (
+        <>
+          <div className={reviewModal ? css.overlay : css.hide}>
+            <form onSubmit={onReviewSubmit} className={reviewModal ? css.modal : css.hide}>
+              <p>Write a review to the master {oneMasterObj?.name}</p>
+              <input
+                placeholder="review for the master"
+                value={newReview}
+                style={{ height: 100 }}
+                onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
+                  setNewReview(ev.target.value)
                 }
               />
               <button className={css.btn} type="submit">
@@ -150,7 +209,11 @@ export const OneMasterPage = () => {
               ""
             )}
             {session.user.role === "user" ? (
-              <button className="btn reviewBtn" type="submit">
+              <button
+                onClick={onClickReview}
+                className="btn reviewBtn"
+                type="submit"
+              >
                 Write a review
               </button>
             ) : (
