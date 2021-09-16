@@ -43,12 +43,13 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
 };
 
 export const userSignupAC =
-  (name: string, login: string, email: string, password: string, picture: string, onSuccesSignup: () => void) =>
+  (name: string, login: string, email: string, password: string, formData: any, onSuccesSignup: () => void) =>
     async (dispatch: AppDispatch) => {
-      // console.log('userSignupAC');
+      console.log('userSignupAC', formData.get('profileImg'));
       const response = await fetch("http://localhost:8080/user/signup", {
         method: "POST",
         headers: {
+          // "Content-Type": "multipart/form-data"
           "Content-Type": "application/json",
         },
         credentials: "include",
@@ -57,10 +58,12 @@ export const userSignupAC =
           login,
           email,
           password,
-          picture,
+          formData,
         }),
       });
       const result = await response.json();
+      console.log(result);
+      
       if (!result.message) {
         dispatch({
           type: SET_USER,

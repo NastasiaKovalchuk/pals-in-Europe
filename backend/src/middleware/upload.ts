@@ -26,12 +26,6 @@ const limits = {
   fileSize: 1024 * 1024 * 5
 }
 
-// module.exports = multer({
-//   storage,
-//   fileFilter,
-//   limits,
-// })
-
 const multerFunc = multer({
   storage,
   fileFilter,
@@ -39,4 +33,3 @@ const multerFunc = multer({
 });
 
 module.exports = multerFunc;
-

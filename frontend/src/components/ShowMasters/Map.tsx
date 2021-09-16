@@ -1,14 +1,18 @@
 import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { YMaps, Map, Placemark, Clusterer } from "react-yandex-maps";
 import { Master } from "../../redux/initState";
 import { useDispatch, useSelector } from "react-redux";
 import { getMastersAC } from "../../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./Map.scss";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
+import ActivePlacemark from "./Test";
+import { Link } from "react-router-dom";
 
 export const ShowMasters = () => {
+  const [show, setShow] = useState(false);
+  const [chosenMaster, setChosenMaster] = useState<Master>();
   const [showMasters, setShowMasters] = useState<Master[]>([]);
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenLocation, setChosenLocation] = useState("");
@@ -78,12 +82,11 @@ export const ShowMasters = () => {
         setShowMasters(
           masters.filter((master) => {
             if (master.category) {
-            // console.log('ffffffffff111', master.category.category);
-            // console.log('ffffffffff', search.category);
+              console.log("ffffffffff111", master.category.category);
+              console.log("ffffffffff", search.category);
               if (master.category.category === search.category) {
                 return master;
               }
-
             }
           })
         );
@@ -103,6 +106,11 @@ export const ShowMasters = () => {
         setCities(uniqueCities.sort((a, b) => a.localeCompare(b)));
       });
   }, [masters, search, search.category]);
+
+  const placemarkClick = (master: Master) => {
+    setShow((prev) => !prev);
+    setChosenMaster(master);
+  };
 
   return (
     <div className="maindiv">
@@ -191,7 +199,9 @@ export const ShowMasters = () => {
                   if (el.location && el.location.coordinates) {
                     return (
                       <Placemark
+                        hintContent="Hey"
                         key={el._id}
+                        onClick={() => placemarkClick(el)}
                         geometry={[
                           el.location.coordinates[1],
                           el.location.coordinates[0],
@@ -203,6 +213,21 @@ export const ShowMasters = () => {
                   }
                 })
               : ""}
+            {show && (
+              <div className={show ? "overlay" : "hide"}>
+                <form className={show ? "modal" : "hide"}>
+                  <Link to={`/master/${chosenMaster?._id}`}>
+                    <p>{chosenMaster ? chosenMaster?.name : ""}</p>
+                    <p>{chosenMaster ? chosenMaster?.category.category : ""}</p>
+                    <img
+                      src={chosenMaster ? chosenMaster?.picture : ""}
+                      alt=""
+                    />
+                  </Link>
+                  <button onClick={() => setShow(false)}>x</button>
+                </form>
+              </div>
+            )}
           </Map>
         </YMaps>
       </div>
