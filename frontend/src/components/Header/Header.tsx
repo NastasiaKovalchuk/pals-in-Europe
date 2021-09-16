@@ -22,7 +22,7 @@ export const Header = () => {
       <div className="container-fluid">
         <Link to="/" className="navbar-brand navLink">
           <div className="pals">Pals in Europe</div>
-          <img src="img/flag2.gif" alt="" className="flag" />
+          <img src="img/stars.png" alt="" className="flag" />
         </Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
