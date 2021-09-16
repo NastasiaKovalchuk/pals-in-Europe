@@ -78,8 +78,8 @@ export const ShowMasters = () => {
         setShowMasters(
           masters.filter((master) => {
             if (master.category) {
-            console.log('ffffffffff111', master.category.category);
-            console.log('ffffffffff', search.category);
+            // console.log('ffffffffff111', master.category.category);
+            // console.log('ffffffffff', search.category);
               if (master.category.category === search.category) {
                 return master;
               }

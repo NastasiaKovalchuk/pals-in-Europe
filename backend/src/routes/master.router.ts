@@ -9,7 +9,8 @@ import {
   // getAuthorReviews
   test,
   getMasterOrder,
-  getReviews
+  getReviews,
+  changeStatusOrder
 } from "../controllers/master";
 
 const router = Router();
@@ -28,5 +29,9 @@ router.get("/orders", getMasterOrder);
 
 router.get("/reviews", getReviews)
 router.get("/test/:id", test)
+
+router.post("/changeStatus", changeStatusOrder)
+
+
 
 export default router;
