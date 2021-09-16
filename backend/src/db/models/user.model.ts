@@ -15,7 +15,7 @@ const UserSchema = new Schema<User>({
   name: String,
   login: String,
   password: String,
-  rating: Number,
+  rating: {type: Number, default: 0},
   picture: String
 });
 

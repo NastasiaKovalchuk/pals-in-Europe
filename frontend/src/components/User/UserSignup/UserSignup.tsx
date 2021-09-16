@@ -8,6 +8,7 @@ import "./UserSignup.scss";
 import { useHistory } from "react-router-dom";
 import { errorMessageAC } from "../../../redux/actionCreators/errorMessageAC";
 
+
 export const UserSignup = () => {
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
@@ -102,6 +103,8 @@ export const UserSignup = () => {
           // value={picture}
           type="file"
           name="picture"
+
+
 
         />
         <button className="btn signupBtnUser" type="submit">

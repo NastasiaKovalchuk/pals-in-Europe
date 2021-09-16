@@ -105,13 +105,14 @@ box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
 display: flex;
 flex-direction: column;
 justify-content: center;
+background-color: rgb(250, 248, 238);
 }
 
 .status {
-  border: pink solid 1px;
+  border: rgb(32, 108, 106) solid 1px;
   width: 200px;
   border-radius:10px ;
-  background-color: pink;
+  background-color: rgb(116, 198, 194) ;
 }
 
 .orderInfo {
@@ -147,4 +148,34 @@ justify-content: center;
   width: 450px;
   text-align: start;
   margin-left: 20px;
+}
+
+.cancel {
+  border: rgb(196, 9, 174) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(233, 127, 238);
+}
+
+.accepted {
+  border: rgb(49, 131, 41) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(197, 255, 192);
+  margin-right: 10px;
+}
+
+.declined {
+  border: rgb(117, 62, 172) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(166, 124, 208);
+  margin-right: 10px;
+}
+
+.fullfilled {
+  border: rgb(147, 147, 41) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(237, 237, 144);
 }

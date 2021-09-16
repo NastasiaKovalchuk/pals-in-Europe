@@ -19,6 +19,7 @@ flex-direction: column;
   width: 220px;
   height: 220px;
   margin-right: 30px;
+  border-radius: 5px;
   
 }
 
@@ -103,6 +104,7 @@ box-shadow: 0px 10px 13px -7px #38635d, 5px 5px 26px 5px #38635d;
 display: flex;
 flex-direction: column;
 justify-content: center;
+background-color: rgb(250, 248, 238);
 }
 
 .status {
@@ -158,3 +160,26 @@ justify-content: center;
   border-radius:10px ;
   background-color: rgb(237, 237, 144);
 }
+
+.cancel {
+  border: rgb(196, 9, 174) solid 1px;
+  width: 100px;
+  border-radius:10px ;
+  background-color: rgb(233, 127, 238);
+}
+
+.cancelOrder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: crimson;
+  color: aliceblue;
+  width: 200px;
+  border-radius: 10px;
+  height: 25px;
+}
+
+/* img{
+border-radius: 5px;
+} */

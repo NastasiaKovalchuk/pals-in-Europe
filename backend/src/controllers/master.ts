@@ -10,8 +10,6 @@ import categoryModel from "../db/models/category.model";
 import userModel from "../db/models/user.model";
 
 export const createMaster: RequestHandler = async (req, res) => {
-  console.log("Зашли в ручку createMaster");
-
   try {
     const {
       name,
@@ -41,8 +39,6 @@ export const createMaster: RequestHandler = async (req, res) => {
       const checkExistingName = await masterModel.findOne({ login });
       if (!checkExistingName) {
         const chooseCategory = await categoryModel.findOne({ category });
-        // console.log(chooseCategory);
-
         const api = "0f8e2dd1-121c-4be5-aeac-8ed33dc30430";
         const URI = `https://geocode-maps.yandex.ru/1.x/?apikey=${api}&format=json&geocode=${street},+${city},+Netherlands`;
         const encodedURI = await encodeURI(URI);
@@ -52,8 +48,6 @@ export const createMaster: RequestHandler = async (req, res) => {
           result.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
             .split(" ")
             .map((el: string) => Number(el));
-        // console.log(coordinates);
-
         if (coordinates) {
           const location = await LocationModel.create({
             coordinates,
@@ -72,18 +66,17 @@ export const createMaster: RequestHandler = async (req, res) => {
             phoneNumber,
           });
           await newMaster.save();
-          // console.log('newMaster создан');
           const message = {
             to: email,
-            subject: "Вы успешно зарегистрировались.",
+            subject: "You have successfully registered!",
             html: `
-                <h2>Поздравляем с успешной регистрацией!</h2>
-                <div>Данные вашей учетной записи:</div>
+                <h2>Congratulations on your successful registration as Master!</h2>
+                <div>Your account details:</div>
                 <ul>
-                <li>Логин: ${login},</li>
-                <li>Пароль: ${password}.</li>
+                <li>Login: ${login},</li>
+                <li>Password: ${password}.</li>
                 </ul>
-                Желаем успешных заказов!`,
+                We wish you success!`,
           };
           mailer(message);
           if (newMaster) {
@@ -141,13 +134,7 @@ export const loginMaster: RequestHandler = async (req, res, next) => {
 
 export const getAllMasters: RequestHandler = async (req, res) => {
   try {
-    // const populatedReviews  = await ReviewModel.find().populate(["author", "master"]).lean();
-    // console.log(populatedReviews);
-
     const masters = await masterModel.find().lean();
-    // console.log(masters[205]);
-
-    // const map = masters.map((master) => master.populate("author", "master"))
     res.status(200).json({ masters });
   } catch (error) {
     console.log(error);
@@ -169,7 +156,6 @@ export const getAccountMaster: RequestHandler = async (req, res) => {
 
 export const editMasterProfile: RequestHandler = async (req, res) => {
   try {
-    // console.log("Зашли в ручку editMasterProfile");
     const {
       name,
       login,
@@ -192,8 +178,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
       street: string;
     };
     const newCategory = await categoryModel.findOne({ category });
-    console.log(newCategory);
-
     const api = "0f8e2dd1-121c-4be5-aeac-8ed33dc30430";
     const URI = `https://geocode-maps.yandex.ru/1.x/?apikey=${api}&format=json&geocode=${street},+${city},+Netherlands`;
     const encodedURI = await encodeURI(URI);
@@ -203,7 +187,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
       result.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos
         .split(" ")
         .map((el: string) => Number(el));
-    // console.log(coordinates);
     if (coordinates) {
       const location = await LocationModel.create({
         coordinates,
@@ -228,7 +211,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
           { new: true }
         )
         .lean();
-
       return res.status(200).json(updatedMaster);
     }
   } catch (error) {
@@ -238,26 +220,6 @@ export const editMasterProfile: RequestHandler = async (req, res) => {
 
 export const getReviews: RequestHandler = async (req, res) => {
   try {
-    // const reviews = await ReviewModel.find().populate("author").exec();
-    // const response: Master[] = [];
-    // for (let i = 0; i < 4; i++) {
-    //   //@ts-ignore
-    //   response.push(reviews[Math.floor(Math.random() * reviews.length)]);
-    // }
-    // const masters = await masterModel.find();
-    // for (let i = 0; i < response.length; i++) {
-    //   const master = await masters.filter((master) =>
-    //   {
-    //       //@ts-ignore
-    //       master.reviews.includes(response._id);
-    //       console.log(master, response._id);
-    //     }
-    //   );
-    //   //@ts-ignore
-    //   response[i].master = master;
-    //   console.log(master);
-    // }
-    // return res.status(200).json({ response });
   } catch (error) {
     console.log(error);
   }
@@ -266,9 +228,7 @@ export const getReviews: RequestHandler = async (req, res) => {
 export const test: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
-
     const master = await masterModel.findById(id).lean();
-
     if (master) {
       res.json(master);
     }
@@ -302,23 +262,12 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
       { status: status },
       { new: true }
     );
-
     const orders = await OrderModel.find();
-
     const masterOrders = orders.filter((order: Order) => {
       if (order?.master?._id == req?.session?.user?.id) {
         return order;
       }
     });
-    // const updaterOrders = masterOrders.map((order: Order) => {
-    //   if(order._id == id){
-    //     order.status = changeStatus;
-    //     return order;
-    //   }
-    //   order
-    // })
-    // const changedOrder = await OrderModel.
-    //   // console.log('11111', changedOrder);
     res.status(200).json({message: 'success'});
   } catch (error) {
     console.log(error);
