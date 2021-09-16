@@ -70,7 +70,7 @@ export const UserSignup = () => {
           value={picture}
           type="file"
           name="picture"
-          required
+
         />
         <button className="btn signupBtnUser" type="submit">Signup as User</button>
       </form>
