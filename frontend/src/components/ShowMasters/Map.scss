@@ -94,44 +94,140 @@
     .map {
       width: 100%;
       height: 100vh;
+
+      .show {
+        display: block;
+      }
+      
+      .hide {
+        display: none;
+      }
+      
+      .overlayMap {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        background: #290838d3;
+        transition: opacity 0.2s ease;
+        display: flex;
+        justify-content: center;
+      
+        .modalMap {
+          width: 300px;
+          height: 350px;
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+          border: 2px solid rgb(224, 224, 224);
+          border-radius: 10px;
+          transform: translateY(100%);
+          transition: transform 0.2s ease;
+          box-shadow: 0 2px 8px 3px;
+          font-family: Helvetica, Arial, sans-serif;
+      
+          justify-content: center;
+          align-items: center;
+          background-color: #fefefe92;
+
+          &:hover {
+            filter: drop-shadow(0 0 9px #2b5f77);
+    
+            -webkit-transition: all 0.3s ease;
+            ;
+            -moz-transition: all 0.3s ease;
+            ;
+            -o-transition: all 0.3s ease;
+            ;
+            transition: all 0.3s ease;
+          }
+      
+          .nameAndCategoryModal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 18px;
+
+            .nameModal {
+              color: rgb(36, 46, 187);
+              font-weight: bold;
+              margin: 0px;
+
+              &:hover {
+                color: #a9e4ff;
+                filter: drop-shadow(0 0 9px #85d8ff);
+        
+                -webkit-transition: all 0.3s ease;
+                ;
+                -moz-transition: all 0.3s ease;
+                ;
+                -o-transition: all 0.3s ease;
+                ;
+                transition: all 0.3s ease;
+              }
+            }
+
+            .categoryModal {
+              margin-bottom: 7px;
+              color: rgb(36, 46, 187);
+
+              &:hover {
+                color: #a9e4ff;
+                filter: drop-shadow(0 0 9px #85d8ff);
+        
+                -webkit-transition: all 0.3s ease;
+                ;
+                -moz-transition: all 0.3s ease;
+                ;
+                -o-transition: all 0.3s ease;
+                ;
+                transition: all 0.3s ease;
+              }
+            }
+          }
+
+          .modalImgMap {
+            width: 200px;
+
+            &:hover {
+              color: #a9e4ff;
+              background-color: #a79eff;
+              filter: drop-shadow(0 0 9px #85d8ff);
+      
+              -webkit-transition: all 0.3s ease;
+              ;
+              -moz-transition: all 0.3s ease;
+              ;
+              -o-transition: all 0.3s ease;
+              ;
+              transition: all 0.3s ease;
+            }
+          }
+
+          .modalBtn {
+            background-color: #5c66ff;
+            width: 200px;
+            color: aliceblue;
+
+            &:hover {
+              color: #a9e4ff;
+              background-color: #a79eff;
+              filter: drop-shadow(0 0 7px #85d8ff);
+      
+              -webkit-transition: all 0.3s ease;
+              ;
+              -moz-transition: all 0.3s ease;
+              ;
+              -o-transition: all 0.3s ease;
+              ;
+              transition: all 0.3s ease;
+            }
+          }
+        }
     }
   }
 }
 
-.show {
-  display: block;
-}
 
-.hide {
-  display: none;
-}
-
-.overlay {
-  // position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80%;
-  background: #290838d3;
-  transition: opacity 0.2s ease;
-}
-
-.modal {
-  z-index: -1000;
-  width: 500px;
-  height: 270px;
-  margin-left: 500px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  border: 5px ridge rgb(98, 58, 192);
-  border-radius: 10px;
-  transform: translateY(100%);
-  transition: transform 0.2s ease;
-  box-shadow: 0 2px 8px 3px;
-  font-family: Helvetica, Arial, sans-serif;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  background-color: #fefefe92;
 }

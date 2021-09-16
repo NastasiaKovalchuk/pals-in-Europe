@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { getMasterAccountAC } from '../../../redux/actionCreators/masterAC';
 import { Order } from "../../../redux/initState";
 import { RootStateValue } from '../../../redux/reducers/rootReducer';
-import "./OrdersUser.scss";
 import { HeaderUser } from "../HeaderUser.tsx/HeaderUser";
 import css from '../User.module.css'
+import "../HeaderUser.tsx/HeaderUser.scss";
 
 
 export const OrdersUser = () => {
@@ -46,7 +46,7 @@ export const OrdersUser = () => {
     //       <button className="">Rewievs</button>
     //     </Link>
 
-    <div className={css.userAccount}>
+    <div className="mainEditUser">
       <div className={css.link}>
         <HeaderUser />
 
