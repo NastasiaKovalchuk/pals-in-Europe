@@ -18,21 +18,23 @@
     
     .flag {
       position: absolute;
-      width: 155px;
+      width: 55px;
       height: 55px;
       top: 0;
       left: 0;
       z-index: -5;
+      margin-left: 80px;
     }
     
     .pals {
-      filter: drop-shadow(0 0 2px #ff9100);
-      color: #fffbc7;
+      filter: drop-shadow(0 0 3px #945400);
+      color: #fff785;
       font-weight: bold;
+      font-size: 30px;
 
       &:hover {
-        color: #ffffff;
-        filter: drop-shadow(0 0 5px #fffd84);
+        color: #fdff86;
+        filter: drop-shadow(0 0 5px #ff9900);
   
         -webkit-transition: all 0.3s ease;
         ;
@@ -64,8 +66,8 @@
   }
 
   .loginBtn {
-    background-color: #7dc50f;
-    color: white;
+    background-color: #ffffff;
+    color: #67ac00;
     margin-right: 20px;
     width: 157px;
     height: 40px;
@@ -74,11 +76,12 @@
     justify-content: center;
     margin-bottom: 0;
     margin-top: 0;
+    filter: drop-shadow(0 0 7px #8aff94);
 
     &:hover {
-      color: #72be00;
-      background-color: white;
-      filter: drop-shadow(0 0 7px #8aff94);
+      color: #ffffff;
+      background-color: #72be00;
+      filter: drop-shadow(0 0 7px #f7ff8a);
 
       -webkit-transition: all 0.3s ease;
       ;
@@ -91,8 +94,8 @@
   }
 
   .signupBtnMain {
-    background-color: #4f52ff;
-    color: white;
+    background-color: #ffffff;
+    color: #2e32ff;
     margin-right: 20px;
     width: 157px;
     height: 40px;
@@ -101,11 +104,12 @@
     justify-content: center;
     margin-bottom: 0;
     margin-top: 0;
+    filter: drop-shadow(0 0 7px #7c85ff);
 
     &:hover {
-      color: #7d7fff;
-      background-color: white;
-      filter: drop-shadow(0 0 7px #b4b9ff);
+      color: #ffffff;
+      background-color: #5255ff;
+      filter: drop-shadow(0 0 7px #9fe9ff);
 
       -webkit-transition: all 0.3s ease;
       ;
@@ -118,8 +122,8 @@
   }
 
   .logouBtn {
-    background-color: #ff5e5e;
-    color: white;
+    background-color: #ffffff;
+    color: #ff1c1c;
     margin-right: 20px;
     width: 157px;
     height: 40px;
@@ -128,11 +132,12 @@
     justify-content: center;
     margin-bottom: 0;
     margin-top: 0;
+    filter: drop-shadow(0 0 7px #ff9b9b);
 
     &:hover {
-      color: #ff5e5e;
-      background-color: white;
-      filter: drop-shadow(0 0 7px #ff9b9b);
+      color: #ffffff;
+      background-color: #ff5e5e;
+      filter: drop-shadow(0 0 7px #ffb867);
 
       -webkit-transition: all 0.3s ease;
       ;
