@@ -291,3 +291,39 @@ export const getMasterOrder: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+export const changeStatusOrder: RequestHandler = async (req, res) => {
+  try {
+    const { id, changeStatus } = req.body as {
+      id: string;
+      changeStatus: string;
+    };
+    console.log('===========', id, '===========', changeStatus);
+    
+    await OrderModel.findByIdAndUpdate(
+      {_id: id}, 
+      { status: changeStatus}, { new: true });
+
+      const orders = await OrderModel.find();
+
+    const masterOrders = orders.filter((order: Order) => {
+      if (order?.master?._id == req?.session?.user?.id) {
+        return order;
+      }
+    });
+    // const updaterOrders = masterOrders.map((order: Order) => {
+    //   if(order._id == id){
+    //     order.status = changeStatus;
+    //     return order;
+    //   }
+    //   order
+    // })
+    // const changedOrder = await OrderModel.
+    //   // console.log('11111', changedOrder);
+    res.status(200).json(masterOrders);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
