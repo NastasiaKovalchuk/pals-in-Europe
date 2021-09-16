@@ -268,7 +268,24 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
         return order;
       }
     });
-    res.status(200).json({message: 'success'});
+    res.status(200).json({ message: "success" });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const rateClient: RequestHandler = async (req, res) => {
+  try {
+    const { clientId, rating } = req.body as {
+      clientId: string;
+      rating: number;
+    };
+    const user = await userModel.findById(clientId);
+    if (user) {
+      user.rating += rating;
+      await user.save();
+      res.status(200).json({ message: "success" });
+    }
   } catch (error) {
     console.log(error);
   }

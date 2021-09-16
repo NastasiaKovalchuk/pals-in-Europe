@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Order } from "../../../redux/initState";
 import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
 import css from "../Master.module.css";
-import { useDispatch } from "react-redux";
 import { AnyAction } from "redux";
-// import { changeMasterOrderStatusAC } from "../../../redux/actionCreators/mastersAC";
+import { InputNumber, Result } from "antd";
 
 export const OrdersMaster = () => {
+  const [show, setShowModal] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
-  const dispatch = useDispatch();
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const getMasterOrders = async () => {
@@ -20,13 +20,15 @@ export const OrdersMaster = () => {
         credentials: "include",
       });
       const result = await response.json();
-      // console.log('getUserOrders ===>', result);
       setOrders(result.masterOrders);
     };
     getMasterOrders();
   }, []);
 
-  const onChangeStatusAccepted = async (event: any, status: string) => {
+  const onChangeStatus = async (
+    event: any,
+    status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel"
+  ) => {
     event.preventDefault();
     const id = event.target.value;
     const response = await fetch(`http://localhost:8080/master/changeStatus`, {
@@ -42,7 +44,7 @@ export const OrdersMaster = () => {
       setOrders(
         orders.map((order) => {
           if (order._id === id) {
-            order.status = "Accepted";
+            order.status = status;
           }
           return order;
         })
@@ -50,74 +52,46 @@ export const OrdersMaster = () => {
     }
   };
 
-  const onChangeStatusDeclined = async (event: any, status: string) => {
-    event.preventDefault();
-    const id = event.target.value;
-    const response = await fetch(`http://localhost:8080/master/changeStatus`, {
+  async function onSubmit(e: FormEvent, clientId: string, rating: number) {
+    e.preventDefault();
+    console.log(clientId, rating);
+    const response = await fetch(`http://localhost:8080/master/rateClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id, status }),
+      body: JSON.stringify({ clientId, rating }),
       credentials: "include",
     });
     const result = await response.json();
     if (result.message === "success") {
-      setOrders(
-        orders.map((order) => {
-          if (order._id === id) {
-            order.status = "Declined";
-          }
-          return order;
-        })
-      );
+      setShowModal(false);
     }
-  };
+  }
 
-  const onChangeStatusFullfilled = async (event: any, status: string) => {
-    event.preventDefault();
-    const id = event.target.value;
-    const response = await fetch(`http://localhost:8080/master/changeStatus`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, status }),
-      credentials: "include",
-    });
-    const result = await response.json();
-    if (result.message === "success") {
-      setOrders(
-        orders.map((order) => {
-          if (order._id === id) {
-            order.status = "Fullfilled";
-          }
-          return order;
-        })
-      );
-    }
-  };
+  function onChangeRating(value: number) {
+    setRating(value);
+  }
 
-  console.log('orders', orders);
-  
   return (
     <div className={css.masterAccount}>
       <div className={css.link}>
         <HeaderMaster />
       </div>
       <h4>My orders</h4>
-      {orders.length > 0 ? 
+      {orders.length > 0 ? (
         orders.map((order, index) => (
           <div className={css.orderCard} key={index}>
-            
             {order.status === "Pending" ? (
               <>
-              <div className={css.orderInfo}>
-              <span>Order information:</span>
-              <div> date of creation:
-                {order.createdAt.slice(0, 10)}
-              </div>
-            </div>
+                <div className={css.orderInfo}>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
                 <div className={css.orderInfo}>
                   <div className={css.status}>status: {order.status}</div>
                 </div>
@@ -125,7 +99,8 @@ export const OrdersMaster = () => {
                   <span>Client:</span>
                   <div>
                     <span>Name: </span>
-                    {order.client.name}, <span>email:</span>
+                    {order.client.name}
+                    <span>email:</span>
                     {order.client.email}
                   </div>
                 </div>
@@ -137,20 +112,14 @@ export const OrdersMaster = () => {
                 </div>
                 <div className={css.chooseStatus}>
                   <button
-                    // @ts-ignore
-                    onClick={(e: any) =>
-                      onChangeStatusAccepted(e, "Accepted")
-                    }
+                    onClick={(e: any) => onChangeStatus(e, "Accepted")}
                     value={order._id}
                     className={css.accepted}
                   >
                     Accepted
                   </button>
                   <button
-                    // @ts-ignore
-                    onClick={(e: any) =>
-                      onChangeStatusDeclined(e, "Declined")
-                    }
+                    onClick={(e: any) => onChangeStatus(e, "Declined")}
                     value={order._id}
                     className={css.declined}
                   >
@@ -163,12 +132,14 @@ export const OrdersMaster = () => {
             )}
             {order.status === "Accepted" ? (
               <>
-              <div className={css.orderInfo}>
-              <span>Order information:</span>
-              <div> date of creation:
-                {order.createdAt.slice(0, 10)}
-              </div>
-            </div>
+                <div className={css.orderInfo}>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
                 <div className={css.orderInfo}>
                   <div className={css.accepted} style={{ width: "200px" }}>
                     status: {order.status}
@@ -178,7 +149,7 @@ export const OrdersMaster = () => {
                   <span>Client:</span>
                   <div>
                     <span>Name: </span>
-                    {order.client.name}, <span>email:</span>
+                    {order.client.name} <span>email:</span>
                     {order.client.email}
                   </div>
                 </div>
@@ -190,18 +161,14 @@ export const OrdersMaster = () => {
                 </div>
                 <div className={css.chooseStatus}>
                   <button
-                    onClick={(e: any) =>
-                      onChangeStatusDeclined(e, "Declined")
-                    }
+                    onClick={(e: any) => onChangeStatus(e, "Declined")}
                     value={order._id}
                     className={css.declined}
                   >
                     Declined
                   </button>
                   <button
-                    onClick={(e: AnyAction) =>
-                      onChangeStatusFullfilled(e, "Fullfilled")
-                    }
+                    onClick={(e: AnyAction) => onChangeStatus(e, "Fullfilled")}
                     value={order._id}
                     className={css.fullfilled}
                   >
@@ -214,12 +181,14 @@ export const OrdersMaster = () => {
             )}
             {order.status === "Declined" ? (
               <>
-              <div className={css.orderInfo}>
-              <span>Order information:</span>
-              <div> date of creation:
-                {order.createdAt.slice(0, 10)}
-              </div>
-            </div>
+                <div className={css.orderInfo}>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
                 <div className={css.orderInfo}>
                   <div className={css.declined} style={{ width: "200px" }}>
                     status: {order.status}
@@ -229,7 +198,7 @@ export const OrdersMaster = () => {
                   <span>Client:</span>
                   <div>
                     <span>Name: </span>
-                    {order.client.name}, <span>email:</span>
+                    {order.client.name} <span>email:</span>
                     {order.client.email}
                   </div>
                 </div>
@@ -245,12 +214,14 @@ export const OrdersMaster = () => {
             )}
             {order.status === "Fullfilled" ? (
               <>
-              <div className={css.orderInfo}>
-              <span>Order information:</span>
-              <div> date of creation:
-                {order.createdAt.slice(0, 10)}
-              </div>
-            </div>
+                <div className={css.orderInfo}>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
                 <div className={css.orderInfo}>
                   <div className={css.fullfilled} style={{ width: "200px" }}>
                     status: {order.status}
@@ -260,7 +231,7 @@ export const OrdersMaster = () => {
                   <span>Client:</span>
                   <div>
                     <span>Name: </span>
-                    {order.client.name}, <span>email:</span>
+                    {order.client.name} <span>email:</span>
                     {order.client.email}
                   </div>
                 </div>
@@ -269,20 +240,52 @@ export const OrdersMaster = () => {
                   <div>
                     Date: {order.date}, service: {order.service}
                   </div>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowModal(true);
+                    }}
+                    value={order._id}
+                    className={css.fullfilled}
+                  >
+                    Rate client
+                  </button>
+                  <div className={show ? css.overlay : css.hide}>
+                    <form
+                      onSubmit={(e) => onSubmit(e, order.client._id, rating)}
+                      className={show ? css.modal : css.hide}
+                    >
+                      <p>Leave your rating</p>
+                      (max - 5)
+                      <InputNumber
+                        min={1}
+                        max={5}
+                        defaultValue={1}
+                        onChange={onChangeRating}
+                      />
+                      <button className={css.btn} type="submit">
+                        Send
+                      </button>
+                    </form>
+                  </div>
                 </div>
               </>
             ) : (
               <></>
             )}
-             {order.status === "Cancel" ? (
+            {order.status === "Cancel" ? (
               <>
-              <div className={css.orderInfo}>
-                  <div className={css.cancelOrder}>This order has been canceled</div>
-              <span>Order information:</span>
-              <div> date of creation:
-                {order.createdAt.slice(0, 10)}
-              </div>
-            </div>
+                <div className={css.orderInfo}>
+                  <div className={css.cancelOrder}>
+                    This order has been canceled
+                  </div>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
                 <div className={css.orderInfo}>
                   <div className={css.cancel} style={{ width: "200px" }}>
                     status: {order.status}
@@ -308,9 +311,9 @@ export const OrdersMaster = () => {
             )}
           </div>
         ))
-      : 
+      ) : (
         <div>You have no orders</div>
-      }
+      )}
     </div>
   );
 };

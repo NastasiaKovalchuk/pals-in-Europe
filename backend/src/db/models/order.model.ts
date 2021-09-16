@@ -4,10 +4,6 @@ import { User } from "./user.model";
 
 export interface Order {
   _id: string;
-<<<<<<< HEAD
-=======
-  // number: number;
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
   name: string;
   client: User;
   master: Master;
@@ -20,10 +16,6 @@ export interface Order {
 
 const OrderSchema = new Schema<Order>(
   {
-<<<<<<< HEAD
-=======
-    // number: Number,
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
     name: String,
     client: {},
     master: {},

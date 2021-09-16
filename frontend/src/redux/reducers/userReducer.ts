@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
-import { SET_USER, UNSET_USER, GET_USER_ORDER } from "../types/types";
+import { EDIT_USER, SET_USER, UNSET_USER } from "../types/types";
 
 export const userReducer = (state = {}, action: AnyAction) => {
   switch (action.type) {
@@ -15,9 +15,9 @@ export const userReducer = (state = {}, action: AnyAction) => {
         adminID: "",
         role: "",
       };
-    case GET_USER_ORDER:
-      console.log('GET_USER_ORDER =>', action);
-      return action.payload;
+
+    case EDIT_USER:
+      return { ...state, name: action.payload };
     default:
       return state;
   }

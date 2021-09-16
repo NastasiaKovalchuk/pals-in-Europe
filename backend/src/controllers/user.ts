@@ -8,39 +8,29 @@ import ReviewModel, { Review } from "../db/models/review.model";
 
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
-    //@ts-ignore
-    console.log(req.file);
     const { email, name, login, password, picture } = req.body as {
       email: string;
       name: string;
       login: string;
       password: string;
-      picture: string,
+      picture: string;
     };
-    //@ts-ignore
-    // const { picture } = req.file ? req.file.path : "";
-
     const checkExistingEmail = await userModel.findOne({ email });
-    console.log(checkExistingEmail);
-    
+
     if (!checkExistingEmail) {
       const checkExistingNick = await userModel.findOne({ name });
       if (!checkExistingNick) {
-        //@ts-ignore
-        console.log("reqfile", req.file);
-        //@ts-ignore
         const newUser = await new userModel({
           email,
           name,
           login,
           password,
-          //@ts-ignore
-          picture
+          picture,
           // picture: req.file ? `/uploads/${req.file.filename}` : "",
         });
 
         console.log(picture);
-        
+
         newUser.save();
         const message = {
           to: email,
@@ -61,12 +51,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
               name: newUser.name,
               id: newUser._id,
             };
-            return res.status(200).json({
-              newUser,
-              // name: req.session.user.name,
-              // id: req.session.user.id,
-              // role: "user",
-            });
+            return res.status(200).json(newUser);
           }
         }
         return res.status(500).json({ message: "Something went wrong" });
@@ -138,7 +123,7 @@ export const editUserProfile: RequestHandler = async (req, res) => {
       { new: true }
     );
     return res.status(200).json({
-      uptdaterUser,
+      message: "success",
     });
   } catch (error) {
     console.log(error);
@@ -158,16 +143,10 @@ export const createOrder: RequestHandler = async (req, res) => {
     const master = await masterModel.findById(masterID);
     const user = await userModel.findById(userID);
     // console.log(user.email);
-    
+
     const orders = await OrderModel.find();
     if (orders.length > 0) {
-<<<<<<< HEAD
       const newOrder = await OrderModel.create({
-=======
-      // const lastNumOrder = orders[orders.length - 1].number;
-      const newOrder = await OrderModel.create({
-        // number: lastNumOrder + 1,
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
         name: user?.name,
         client: user,
         master: master,
@@ -264,8 +243,6 @@ export const getUserReviews: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
-<<<<<<< HEAD
-
 
 export const changeStatusOrder: RequestHandler = async (req, res) => {
   try {
@@ -284,10 +261,32 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
         return order;
       }
     });
-    res.status(200).json({message: 'success'});
+    res.status(200).json({ message: "success" });
   } catch (error) {
     console.log(error);
   }
 };
-=======
->>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
+
+export const reviewMaster: RequestHandler = async (req, res) => {
+  try {
+    const { masterId, rating, reviewText } = req.body as {
+      masterId: string;
+      rating: number;
+      reviewText: string
+    };
+    const user = await userModel.findById(req?.session?.user?.id);
+    const master = await masterModel.findById(masterId)
+    if (user && master) {
+      master.rating += rating;
+      const newReview = await ReviewModel.create({
+        author: user,
+        text: reviewText,
+      })
+      master.reviews.push(newReview)
+      await master.save();
+      res.status(200).json({ message: "success", master });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

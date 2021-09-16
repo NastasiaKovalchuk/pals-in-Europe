@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { editUserProfileAC } from "../../../redux/actionCreators/userAC";
 import { User } from "../../../redux/initState";
 
@@ -54,72 +53,6 @@ export const EditUserProfile = () => {
   };
 
   return (
-    // <div className="mainEditUser">
-    //   <div className="">
-    //     <Link to="/account">
-    //       <button className="btn userBtn">My profile</button>
-    //     </Link>
-    //     <Link to="/account/edit">
-    //       <button className="btn userBtn">Edit profile</button>
-    //     </Link>
-    //     <Link to="/account/orders">
-    //       <button className="btn userBtn ">My orders</button>
-    //     </Link>
-    //     <Link to="/account/reviews">
-    //       <button className="btn userBtn ">Rewievs</button>
-    //     </Link>
-    //   </div>
-    //   <div>
-    //     <div className="userEditCard">
-    //       <div className="tableEditUser">
-            
-    //         <img className="pictureEdit"
-    //         src={user?.picture} alt='' />
-    //         <div>
-    //           <table className="tableOnly">
-    //             <tr className="trEditUser">
-    //               <div className="">
-    //                 <td><span>Name: </span></td>
-    //                 <td>
-    //                   <input
-    //                     className="inputEditUser"
-    //                     value={name}
-    //                     onChange={(
-    //                       ev: React.ChangeEvent<HTMLInputElement>
-    //                     ): void => setName(ev.target.value)}
-    //                   />
-    //                 </td>
-    //               </div>
-    //             </tr>
-    //             <tr className="trEditUser">
-    //               <div className="">
-    //                 <td><span>Login: </span></td>
-    //                 <td>
-    //                   <input
-    //                     className="inputEditUser"
-    //                     value={login}
-    //                     onChange={(
-    //                       ev: React.ChangeEvent<HTMLInputElement>
-    //                     ): void => setLogin(ev.target.value)}
-    //                   />
-    //                 </td>
-    //               </div>
-    //             </tr>
-    //             <tr className="trEditUser">
-    //               <div className="">
-    //                 <td><span>Email: </span></td>
-    //                 <td>
-    //                   <input
-    //                     className="inputEditUser"
-    //                     value={email}
-    //                     onChange={(
-    //                       ev: React.ChangeEvent<HTMLInputElement>
-    //                     ): void => setEmail(ev.target.value)}
-    //                   />
-    //                 </td>
-    //               </div>
-    //             </tr>
-    //           </table>
     <div className="mainUser">
       <div className={css.link}>
         <HeaderUser />

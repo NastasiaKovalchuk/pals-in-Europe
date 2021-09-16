@@ -23,7 +23,5 @@ export const GET_MESSAGE = "GET_MESSAGE";
 
 export const CREATE_ORDER = "CREATE_ORDER";
 
-export const GET_USER_ORDER = "GET_USER_ORDER";
-
 export const CHANGE_STATUS_ORDER = "CHANGE_STATUS_ORDER";
 

@@ -17,14 +17,14 @@ export const EditMasterProfile = () => {
 
   // console.log("EditMasterProfile =>", newUser);
   const [name, setName] = useState("");
-  const [login, setLogin] = useState('');
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
-  const [experience, setExperience] = useState('');
-  const [description, setDescription] = useState('');
-  const [city, setCity] = useState('');
+  const [experience, setExperience] = useState("");
+  const [description, setDescription] = useState("");
+  const [city, setCity] = useState("");
   const [street, setStreet] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const history = useHistory();
   useEffect(() => {
@@ -41,8 +41,8 @@ export const EditMasterProfile = () => {
         setCity(findAccountInfo.location.city);
         setStreet(findAccountInfo.location.street);
         setPhoneNumber(findAccountInfo.phoneNumber);
+        setCategory(findAccountInfo.category.category)
       }
-
     }
   }, [masters, user.masterID]);
 
@@ -174,11 +174,16 @@ export const EditMasterProfile = () => {
                         placeholder="category"
                         value={category}
                       >
-                        <option>{newUser?.category.category}</option>
-                        {categories
-                          ? categories.map((el: string) => (
-                            <option value={el}>{el}</option>
-                          ))
+                        <option>{newUser?.category?.category}</option>
+                        {categories && newUser?.category
+                          ? categories
+                              .filter(
+                                (category) =>
+                                  category !== newUser?.category.category
+                              )
+                              .map((el: string) => (
+                                <option value={el}>{el}</option>
+                              ))
                           : ""}
                       </select>
                     </td>

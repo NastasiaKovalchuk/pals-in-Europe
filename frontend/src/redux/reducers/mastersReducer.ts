@@ -13,21 +13,13 @@ export const mastersReducer = (
       
       return action.payload
     case EDIT_MASTER:
-      console.log('EDIT_MASTER ===>', state)
       return state.map((master: Master) => {
         if(master._id === action.payload._id){
           master = action.payload
         }
         return master;
       })
-    // case CHANGE_STATUS_ORDER:
-    //   console.log('CHANGE_STATUS_ORDER ===>', state);
-    //   // return state.map((master: Master) => {
-    //   //   if(master._id === action.payload.master._id){
-    //   //      return action.payload
-    //   //   }
-    //     return action.payload;
-      // })
+
     default:
       return state;
   }

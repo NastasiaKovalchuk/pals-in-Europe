@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,13 +19,15 @@ const StartPage = () => {
   const [noCategories, setNoCategories] = useState(false);
   const [filterCategories, setfilterCategories] = useState<string[]>([]);
   let history = useHistory();
-  // const dispatch = useDispatch();
   const categoryFromSelector = useSelector(
     (state: RootStateValue) => state.categories
   );
   const dispatch = useDispatch();
-
-
+  const user = useSelector(
+    (state: RootStateValue) => state.user
+  );
+  console.log(user);
+  
   const chooseCategory = (value: string) => {
     setSearch(value);
     if (value.length === 0) {
@@ -34,12 +36,7 @@ const StartPage = () => {
       setNoCategories(false);
     } else {
       const regexp = new RegExp(value, "i");
-      const check = categoryFromSelector.filter((el) => {
-        const returnCheck = el.match(regexp);
-        if (returnCheck) {
-          return returnCheck;
-        }
-      });
+      const check = categoryFromSelector.filter((el) => el.match(regexp));
       setfilterCategories(check);
       if (check.length > 0) {
         setNoCategories(false);
@@ -64,8 +61,6 @@ const StartPage = () => {
     text: React.SetStateAction<string>
   ) => {
     event.preventDefault();
-    console.log(text);
-    
     setSearch(text);
     setfilterCategories([]);
   };
@@ -76,8 +71,7 @@ const StartPage = () => {
       <form
         onSubmit={sumbitHandler}
         className="d-flex justify-content-center mainForm"
-      >     
-
+      >
         <input
           id="typeahead-basic"
           onChange={(e) => chooseCategory(e.target.value)}
@@ -86,23 +80,21 @@ const StartPage = () => {
           value={search}
           placeholder="Search"
           aria-label="Search"
-        >  
-        
-        </input>
+        ></input>
         <button className="btn btnSearch" type="submit">
           Search Masters
         </button>
         <div className="prompt">
           {filterCategories && show
             ? filterCategories.map((el, index) => (
-              <div
-                className="onePrompt"
-                key={index}
-                onClick={(e) => getTheRightSearch(e, el)}
-              >
-                {el}
-              </div>
-            ))
+                <div
+                  className="onePrompt"
+                  key={index}
+                  onClick={(e) => getTheRightSearch(e, el)}
+                >
+                  {el}
+                </div>
+              ))
             : ""}
           {noCategories ? (
             <div className="noPrompt">We don't have such a category</div>

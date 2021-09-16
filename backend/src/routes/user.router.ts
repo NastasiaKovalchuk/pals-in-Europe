@@ -10,7 +10,8 @@ import {
   getUserOrder,
   getUserReviews,
   createReview,
-  changeStatusOrder
+  changeStatusOrder,
+  reviewMaster
 } from "../controllers/user";
 
 const router = Router();
@@ -32,5 +33,7 @@ router.get("/orders", getUserOrder);
 router.get("/reviews", getUserReviews);
 
 router.post("/changeStatus", changeStatusOrder);
+
+router.post("/reviewMaster", reviewMaster)
 
 export default router;
