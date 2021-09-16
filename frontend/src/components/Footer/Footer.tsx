@@ -4,9 +4,9 @@ import "./Footer.scss";
 export const Footer = () => {
 
   return (
-    <footer>
+    <footer className="footerMain">
       <div >
-        <div className="head">
+        <div className="footerTitle">
           <h4>About this portal</h4>
           <h4>Contacts</h4>
         </div>

@@ -34,29 +34,29 @@ export const UserAccount = () => {
               <table>
                 <tr>
                   <div className="">
-                    <td className=""><span>Name: </span></td>
-                    <td>{
+                    <td className="tdUser"><span>Name: </span></td>
+                    <td className="tdUser">{
                     user ? user.name : ''}</td>
                   </div>
                 </tr>
                 <tr>
                   <div className="">
-                    <td className=""><span>Login: </span></td>
-                    <td>{
+                    <td className="tdUser"><span>Login: </span></td>
+                    <td className="tdUser">{
                     user ? user.login : ''}</td>
                   </div>
                 </tr>
                 <tr>
                   <div className="">
-                    <td className=""><span>Email: </span></td>
-                    <td>{
+                    <td className="tdUser"><span>Email: </span></td>
+                    <td className="tdUser">{
                     user ? user.email : ''}</td>
                   </div>
                 </tr>
                 <tr>
                   <div className="">
-                    <td className=""><span>My rating: </span></td>
-                    <td>{
+                    <td className="tdUser"><span>My rating: </span></td>
+                    <td className="tdUser">{
                     user ? user.rating : ''}</td>
                   </div>
                 </tr>

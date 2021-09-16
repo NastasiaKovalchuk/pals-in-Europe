@@ -1,3 +1,4 @@
+// import { CHANGE_STATUS_ORDER } from './../types/types';
 import { Master } from '../initState';
 
 import { GET_MASTERS, EDIT_MASTER } from '../types/types';
@@ -9,6 +10,7 @@ export const mastersReducer = (
 ) => {
   switch (action.type) {
     case GET_MASTERS:
+      
       return action.payload
     case EDIT_MASTER:
       console.log('EDIT_MASTER ===>', state)
@@ -18,10 +20,14 @@ export const mastersReducer = (
         }
         return master;
       })
-    // case GET_AUTHORS:
-    //   console.log('GET_AUTHORS ===>', action.payload.master.reviews);
-    //   return [...state, action.payload.master.reviews]
-
+    // case CHANGE_STATUS_ORDER:
+    //   console.log('CHANGE_STATUS_ORDER ===>', state);
+    //   // return state.map((master: Master) => {
+    //   //   if(master._id === action.payload.master._id){
+    //   //      return action.payload
+    //   //   }
+    //     return action.payload;
+      // })
     default:
       return state;
   }
