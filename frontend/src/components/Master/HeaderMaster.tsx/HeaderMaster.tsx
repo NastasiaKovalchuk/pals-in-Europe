@@ -1,24 +1,25 @@
 import css from "../Master.module.css";
 import { Link } from "react-router-dom";
+import "./HeaderMaster.scss"
 
 export const HeaderMaster = () => {
   return (
-    <>
+    <div className="mainMaster">
       <Link to="/account">
-        <button className={css.btn}>My profile</button>
+        <button className="btn masterBtn">My profile</button>
       </Link>
       <Link to="/account/edit">
-        <button className={css.btn}>Edit profile</button>
+        <button className="btn masterBtn">Edit profile</button>
       </Link>
       <Link to="/account/orders">
-        <button className={css.btn}>My orders</button>
+        <button className="btn masterBtn">My orders</button>
       </Link>
       <Link to="/account/reviews">
-        <button className={css.btn}>Rewievs</button>
+        <button className="btn masterBtn">Rewievs</button>
       </Link>
       <Link to="/calendar">
-        <button className={css.btn}>Calendar</button>
+        <button className="btn masterBtn">Calendar</button>
       </Link>
-    </>
+    </div>
   );
 };

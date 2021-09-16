@@ -8,16 +8,21 @@ import ReviewModel, { Review } from "../db/models/review.model";
 
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
-    const { email, name, login, password } = req.body as {
+    //@ts-ignore
+    console.log(req.file);
+    const { email, name, login, password, picture } = req.body as {
       email: string;
       name: string;
       login: string;
       password: string;
+      picture: string,
     };
     //@ts-ignore
     // const { picture } = req.file ? req.file.path : "";
 
     const checkExistingEmail = await userModel.findOne({ email });
+    console.log(checkExistingEmail);
+    
     if (!checkExistingEmail) {
       const checkExistingNick = await userModel.findOne({ name });
       if (!checkExistingNick) {
@@ -30,9 +35,12 @@ export const createUser: RequestHandler = async (req, res, next) => {
           login,
           password,
           //@ts-ignore
-          picture: req.file ? `/uploads/${req.file.filename}` : "",
+          picture
+          // picture: req.file ? `/uploads/${req.file.filename}` : "",
         });
 
+        console.log(picture);
+        
         newUser.save();
         const message = {
           to: email,
@@ -54,8 +62,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
               id: newUser._id,
             };
             return res.status(200).json({
-
-              newUser
+              newUser,
               // name: req.session.user.name,
               // id: req.session.user.id,
               // role: "user",
@@ -154,7 +161,13 @@ export const createOrder: RequestHandler = async (req, res) => {
     
     const orders = await OrderModel.find();
     if (orders.length > 0) {
+<<<<<<< HEAD
       const newOrder = await OrderModel.create({
+=======
+      // const lastNumOrder = orders[orders.length - 1].number;
+      const newOrder = await OrderModel.create({
+        // number: lastNumOrder + 1,
+>>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c
         name: user?.name,
         client: user,
         master: master,
@@ -251,6 +264,7 @@ export const getUserReviews: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+<<<<<<< HEAD
 
 
 export const changeStatusOrder: RequestHandler = async (req, res) => {
@@ -275,3 +289,5 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
     console.log(error);
   }
 };
+=======
+>>>>>>> 2d104f177a3cf4f364a03c01c0e7f96f72bfb99c

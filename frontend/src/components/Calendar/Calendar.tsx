@@ -54,7 +54,6 @@ export const CalendarComponent = () => {
   };
 
   useEffect(() => {
-    console.log(state.masterID);
 
     if (state.masterID) {
       fetch("http://localhost:8080/master/orders", {
@@ -65,17 +64,20 @@ export const CalendarComponent = () => {
         credentials: "include",
       })
         .then((res) => res.json())
-        .then((result) => console.log(result));
+        .then((result) => setOrders(result.masterOrders));
     }
   }, [state.masterID]);
-
+  console.log(orders);
+  
   function getListData(value: { date: () => any }) {
     let listData: Order[] = [];
+    
     for (let i = 0; i < orders.length; i++) {
-      // if (Number(orders[i].date.split("-")[0]) === value.date()) {
-      //   listData.push(user[i]);
-      // }
+      if (Number(orders[i].date.split("-")[2]) === value.date()) {
+        listData.push(orders[i]);
+      }
     }
+    
     return listData;
   }
 
@@ -133,17 +135,14 @@ export const CalendarComponent = () => {
                 </Draggable>
               )}
             >
-              <p>
-                {modalOrder && modalOrder.client.name
-                  ? modalOrder.client.name
-                  : ""}
-              </p>
-              <br />
-              <p>
-                {modalOrder && modalOrder.client.email
-                  ? modalOrder.client.email
-                  : ""}
-              </p>
+              <p>Client: {modalOrder ? modalOrder.client.name : ""}</p>
+              <img src={modalOrder?.client.picture} alt="" />
+              <p>Status: {modalOrder ? modalOrder.status : ""}</p>
+              <p>Date: {modalOrder ? modalOrder.date : ""}</p>
+              <p>Time: {modalOrder ? modalOrder.time : ""}</p>
+              {/* <br /> */}
+              <p>Service: {modalOrder ? modalOrder.service : ""}</p>
+              <p>Comment: {modalOrder ? modalOrder.comment : ""}</p>
             </Modal>
           </li>
         ))}
@@ -171,15 +170,12 @@ export const CalendarComponent = () => {
     setValue(e);
   };
 
-  const onSelect = () => {
-    // alert('hi')
-  };
-
   return (
     <>
       <div className="masterAccount">
         <div className="link2">
-          <HeaderMaster />
+          <div className="headUs"><HeaderMaster /></div>
+          
           <div className="calendar">
             <Calendar
               dateCellRender={dateCellRender}
@@ -187,7 +183,6 @@ export const CalendarComponent = () => {
               value={value}
               onChange={onChange}
               defaultValue={moment()}
-              onSelect={onSelect}
               //@ts-ignore
               //   validRange={[moment([2021, 8, 12]), moment()]}
             />{" "}

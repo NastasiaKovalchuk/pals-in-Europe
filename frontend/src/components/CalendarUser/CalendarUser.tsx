@@ -7,11 +7,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
-import { Appointment, Master, User } from "../../redux/initState";
+import { Appointment, Master, Order, User } from "../../redux/initState";
+import { Link } from "react-router-dom";
+import { HeaderUser } from "../User/HeaderUser.tsx/HeaderUser";
 
 export const UserCalendarComponent = () => {
-  const [modalMaster, setModalMaster] = useState<Master>();
-  const [userAppointments, setUserAppointments] = useState<Appointment[]>([]);
+  const [modalOrder, setModalOrder] = useState<Order>();
+  const [orders, setOrders] = useState<Order[]>([]);
   const [value, setValue] = useState(moment());
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -23,47 +25,45 @@ export const UserCalendarComponent = () => {
   });
 
   const state = useSelector((state: RootStateValue) => state.user);
-  const masters = useSelector((state: RootStateValue) => state.masters);
 
   const draggleRef = React.createRef();
 
   const handleOk = (e: any) => {
-    e.stopPropagation()    
+    e.stopPropagation();
     setVisible(false);
   };
 
   const handleCancel = (e: any) => {
-    e.stopPropagation()
+    e.stopPropagation();
     setVisible(false);
   };
 
-  const showModal = (item: Appointment) => {
-    let master; 
-    for (let i = 0; i < masters.length; i++) {
-        for (let j = 0; j < masters[i].appointments.length; j++) {
-            if (masters[i].appointments[j].date === item.date && masters[i].appointments[j].time === item.time && masters[i].appointments[j].user._id == item.user._id) {
-                master = masters[i];
-            }
-        }
-    }    
+  const showModal = (item: Order) => {
     setVisible(true);
-    setModalMaster(master);
+    setModalOrder(item);
   };
 
   useEffect(() => {
     if (state.userID) {
-      if (masters.length > 0) {
-        const arr = masters.map((master: Master) => master.appointments).flat();
-        setUserAppointments(arr.filter(appointment => appointment.user._id === state.userID))
-      }
+      fetch("http://localhost:8080/user/orders", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setOrders(result.userOrders);
+        });
     }
-  }, [masters, state.masterID, state.userID]);
+  }, [state.masterID, state.userID]);
 
   function getListData(value: { date: () => any }) {
     let listData = [];
-    for (let i = 0; i < userAppointments.length; i++) {
-      if (Number(userAppointments[i].date.split("-")[0]) === value.date()) {
-        listData.push(userAppointments[i]);
+    for (let i = 0; i < orders.length; i++) {
+      if (Number(orders[i].date.split("-")[2]) === value.date()) {
+        listData.push(orders[i]);
       }
     }
     return listData;
@@ -74,8 +74,8 @@ export const UserCalendarComponent = () => {
 
     return (
       <ul>
-        {listData.map((item:Appointment) => (
-          <li key={item.user.email} className="events">
+        {listData.map((item: Order) => (
+          <li key={item._id} className="events">
             <Badge
               className="badge"
               //@ts-ignore
@@ -103,27 +103,33 @@ export const UserCalendarComponent = () => {
                   onMouseOut={() => {
                     setDisabled(true);
                   }}
-                  onFocus={() => {}}
-                  onBlur={() => {}}
+                  onFocus={() => { }}
+                  onBlur={() => { }}
                 >
+                  
                   Your appointment
+                  
                 </div>
               }
               visible={visible}
               onOk={handleOk}
               onCancel={handleCancel}
               modalRender={(modal) => (
-                <Draggable
-                  disabled={disabled}
-                >
+                <Draggable disabled={disabled}>
                   {/* @ts-ignore */}
                   <div ref={draggleRef}>{modal}</div>
                 </Draggable>
               )}
             >
-              <p>{modalMaster ? modalMaster.name : ""}</p>
-              <br />
-              <img src={modalMaster ? modalMaster.picture : ""} alt="" />
+              <p>Master: <Link to={`/master/${modalOrder?.master._id}`}>{modalOrder ? modalOrder.master.name : ""}</Link></p>
+              <img src={modalOrder?.master.picture} alt="" />
+              <p>Status: {modalOrder ? modalOrder.status : ""}</p>
+              <p>Date: {modalOrder ? modalOrder.date : ""}</p>
+              <p>Time: {modalOrder ? modalOrder.time : ""}</p>
+              {/* <br /> */}
+              <p>Service: {modalOrder ? modalOrder.service : ""}</p>
+              <p>Comment: {modalOrder ? modalOrder.comment : ""}</p>
+              <img src={modalOrder ? modalOrder.master.email : ""} alt="" />
             </Modal>
           </li>
         ))}
@@ -157,10 +163,12 @@ export const UserCalendarComponent = () => {
 
   return (
     <>
-      <div className="masterAccount">
+      <div className="mainUser">
         <div className="link2">
-          <HeaderMaster />
-          <div className="calendar">
+          <div className="headUs">
+            <HeaderUser />
+          </div>
+          <div className="calendarUser">
             <Calendar
               dateCellRender={dateCellRender}
               monthCellRender={monthCellRender}
@@ -168,8 +176,8 @@ export const UserCalendarComponent = () => {
               onChange={onChange}
               defaultValue={moment()}
               onSelect={onSelect}
-              //@ts-ignore
-              //   validRange={[moment([2021, 8, 12]), moment()]}
+            //@ts-ignore
+            //   validRange={[moment([2021, 8, 12]), moment()]}
             />{" "}
           </div>
         </div>
