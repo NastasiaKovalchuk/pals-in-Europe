@@ -1,13 +1,12 @@
 import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
-import { YMaps, Map, Placemark, Clusterer } from "react-yandex-maps";
+import { YMaps, Map, Placemark } from "react-yandex-maps";
 import { Master } from "../../redux/initState";
 import { useDispatch, useSelector } from "react-redux";
 import { getMastersAC } from "../../redux/actionCreators/mastersAC";
 import CardMaster from "../CardMaster/CardMaster";
 import "./Map.scss";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
-import ActivePlacemark from "./Test";
 import { Link } from "react-router-dom";
 
 export const ShowMasters = () => {
@@ -44,18 +43,17 @@ export const ShowMasters = () => {
       category !== "all" &&
       location !== "all"
     ) {
-      setShowMasters(
-        masters.filter(
-          (master) =>
-            master.category.category === category &&
-            master.location.city === location
-        )
+      const all = masters.filter(
+        (master) =>
+          master.category.category === category &&
+          master.location.city === location
       );
+      setShowMasters(all);
     } else if (category !== "" && category !== "all") {
-      const list = masters.filter(
+      const all = masters.filter(
         (master) => master.category.category === category
       );
-      setShowMasters(list);
+      setShowMasters(all);
     } else if (location !== "" && location !== "all") {
       setShowMasters(
         masters.filter((master) => master.location.city === location)
@@ -75,20 +73,12 @@ export const ShowMasters = () => {
   };
 
   useEffect(() => {
-    console.log(search);
-
     if (masters.length > 0) {
       if (search.category !== "") {
         setShowMasters(
-          masters.filter((master) => {
-            if (master.category) {
-              console.log("ffffffffff111", master.category.category);
-              console.log("ffffffffff", search.category);
-              if (master.category.category === search.category) {
-                return master;
-              }
-            }
-          })
+          masters.filter(
+            (master) => master.category.category === search.category
+          )
         );
       } else {
         setShowMasters(masters);
@@ -131,10 +121,10 @@ export const ShowMasters = () => {
               <option value="all">All categories</option>
               {categories
                 ? categories.map((category, index) => (
-                  <option key={index} value={category}>
-                    {category}
-                  </option>
-                ))
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -152,15 +142,11 @@ export const ShowMasters = () => {
             >
               <option value="all">All locations</option>
               {cities
-                ? cities.map((city, index) => {
-                  if (city !== "") {
-                    return (
-                      <option key={index} value={city}>
-                        {city}
-                      </option>
-                    );
-                  }
-                })
+                ? cities.map((city, index) => (
+                    <option key={index} value={city}>
+                      {city}
+                    </option>
+                  ))
                 : ""}
             </select>
           </div>
@@ -176,9 +162,7 @@ export const ShowMasters = () => {
         <div className="cards">
           {showMasters.length > 0 ? (
             showMasters.map((master) => (
-              // <Link to={`/master/${master._id}`}>
               <CardMaster key={master._id} master={master} />
-              // </Link>
             ))
           ) : (
             <div>No masters found</div>
@@ -196,30 +180,34 @@ export const ShowMasters = () => {
           >
             {showMasters
               ? showMasters.map((el) => {
-                if (el.location && el.location.coordinates) {
-                  return (
-                    <Placemark
-                      hintContent="Hey"
-                      key={el._id}
-                      onClick={() => placemarkClick(el)}
-                      geometry={[
-                        el.location.coordinates[1],
-                        el.location.coordinates[0],
-                      ]}
-                    />
-                  );
-                } else {
-                  return "";
-                }
-              })
+                  if (el.location && el.location.coordinates) {
+                    return (
+                      <Placemark
+                        hintContent="Hey"
+                        key={el._id}
+                        onClick={() => placemarkClick(el)}
+                        geometry={[
+                          el.location.coordinates[1],
+                          el.location.coordinates[0],
+                        ]}
+                      />
+                    );
+                  } else {
+                    return "";
+                  }
+                })
               : ""}
             {show && (
               <div className={show ? "overlayMap" : "hide"}>
                 <form className={show ? "modalMap" : "hide"}>
                   <Link to={`/master/${chosenMaster?._id}`}>
                     <div className="nameAndCategoryModal">
-                      <p className="nameModal">{chosenMaster ? chosenMaster?.name : ""}</p>
-                      <p className="categoryModal">{chosenMaster ? chosenMaster?.category.category : ""}</p>
+                      <p className="nameModal">
+                        {chosenMaster ? chosenMaster?.name : ""}
+                      </p>
+                      <p className="categoryModal">
+                        {chosenMaster ? chosenMaster?.category.category : ""}
+                      </p>
                     </div>
                     <img
                       className="modalImgMap"
@@ -227,7 +215,12 @@ export const ShowMasters = () => {
                       alt=""
                     />
                   </Link>
-                  <button className="btn modalBtn" onClick={() => setShow(false)}>Close</button>
+                  <button
+                    className="btn modalBtn"
+                    onClick={() => setShow(false)}
+                  >
+                    Close
+                  </button>
                 </form>
               </div>
             )}

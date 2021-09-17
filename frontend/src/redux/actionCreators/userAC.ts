@@ -1,12 +1,5 @@
 import { AppDispatch } from "../../index";
-import {
-  SET_USER,
-  UNSET_USER,
-  GET_MESSAGE,
-  GET_USER_ACCOUNT,
-  CREATE_ORDER,
-  EDIT_USER,
-} from "../types/types";
+import { SET_USER, UNSET_USER, GET_MESSAGE, EDIT_USER } from "../types/types";
 
 export const getUserAC = () => async (dispatch: AppDispatch) => {
   const response = await fetch("http://localhost:8080/checkuser", {
@@ -42,47 +35,6 @@ export const getUserAC = () => async (dispatch: AppDispatch) => {
   }
 };
 
-// export const userSignupAC =
-//   (
-//     name: string,
-//     login: string,
-//     email: string,
-//     password: string,
-//     formData: any,
-//     onSuccesSignup: () => void
-//   ) =>
-//   async (dispatch: AppDispatch) => {
-//     // formData.append("name", name);
-//     // formData.append("login", login);
-//     // formData.append("email", email);
-//     // formData.append("password", password);
-//     // console.log("userSignupAC", formData.get("profileImg"));
-//     const response = await fetch("http://localhost:8080/user/signup", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "multipart/form-data boundary"
-//         // "Content-Type": "application/json",
-//       },
-//       credentials: "include",
-//       body: formData,
-//     });
-//     const result = await response.json();
-//     console.log(result);
-
-//     if (!result.message) {
-//       dispatch({
-//         type: SET_USER,
-//         payload: result,
-//       });
-//       onSuccesSignup();
-//     } else if (result.message) {
-//       dispatch({
-//         type: GET_MESSAGE,
-//         payload: result.message,
-//       });
-//     }
-//   };
-
 export const userSignupAC =
   (
     name: string,
@@ -92,7 +44,6 @@ export const userSignupAC =
     onSuccesSignup: () => void
   ) =>
   async (dispatch: AppDispatch) => {
-    
     const response = await fetch("http://localhost:8080/user/signup", {
       method: "POST",
       headers: {
@@ -100,14 +51,25 @@ export const userSignupAC =
       },
       credentials: "include",
       body: JSON.stringify({
-        name, login, email, password, picture: 'https://freerangestock.com/sample/116135/handsome-man-avatar-.jpg'
-      })
+        name,
+        login,
+        email,
+        password,
+        picture:
+          "https://i.imgur.com/3S0HJ4q.png",
+      }),
     });
     const result = await response.json();
     if (!result.message) {
       dispatch({
         type: SET_USER,
-        payload: result,
+        payload: {
+          adminID: "",
+          userID: result._id,
+          masterID: "",
+          role: "user",
+          name: result.name,
+        },
       });
       onSuccesSignup();
     } else if (result.message) {
@@ -136,7 +98,13 @@ export const userLoginAC =
     if (!result.message) {
       dispatch({
         type: SET_USER,
-        payload: result,
+        payload: {
+          adminID: "",
+          userID: result.id,
+          masterID: "",
+          role: result.role,
+          name: result.name,
+        },
       });
       onSuccesLogin();
     } else if (result.message) {
@@ -148,36 +116,17 @@ export const userLoginAC =
   };
 
 export const logoutAC = () => async (dispatch: AppDispatch) => {
-  // console.log('logoutAC', logoutAC);
   const responce = await fetch("http://localhost:8080/logout", {
     credentials: "include",
   });
   const result = await responce.json();
-  // console.log('logoutAC =>', result);
   if (result.success) {
-    // console.log("Сессия окончена");
     dispatch({
       type: UNSET_USER,
       payload: "",
     });
   }
 };
-
-export const getUserAccountAC =
-  (user: object) => async (dispatch: AppDispatch) => {
-    const response = await fetch("http://localhost:8080/user/account", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-    const result = await response.json();
-    dispatch({
-      type: GET_USER_ACCOUNT,
-      payload: result,
-    });
-  };
 
 export const masterLoginAC =
   (login: string, password: string, onSuccesLogin: () => void) =>
@@ -284,8 +233,10 @@ export const editUserProfileAC =
     });
     const result = await response.json();
 
-    dispatch({
-      type: EDIT_USER,
-      payload: result,
-    });
+    if (result.message === "success") {
+      dispatch({
+        type: EDIT_USER,
+        payload: name,
+      });
+    }
   };

@@ -10,7 +10,8 @@ import {
   test,
   getMasterOrder,
   getReviews,
-  changeStatusOrder
+  changeStatusOrder,
+  rateClient,
 } from "../controllers/master";
 
 const router = Router();
@@ -27,11 +28,11 @@ router.post("/edit", editMasterProfile);
 
 router.get("/orders", getMasterOrder);
 
-router.get("/reviews", getReviews)
-router.get("/test/:id", test)
+router.get("/reviews", getReviews);
+router.get("/test/:id", test);
 
-router.post("/changeStatus", changeStatusOrder)
+router.post("/changeStatus", changeStatusOrder);
 
-
+router.post("/rateClient", rateClient);
 
 export default router;

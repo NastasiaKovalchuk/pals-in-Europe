@@ -36,10 +36,8 @@ async function appMaker() {
           obj.user = users[Math.floor(Math.random() * users.length)];
           //@ts-ignore
           masters[i].appointments.push(obj);
-          console.log("hoi");
         }
        masters[i].save();
-      console.log("hi");
     }
     console.log("Seed Done!");
   } catch (error) {

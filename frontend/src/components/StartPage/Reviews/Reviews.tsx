@@ -38,7 +38,7 @@ const Reviews = () => {
       <div className="reviewsBody">
         {review.length > 0 ?
           review.map((el: Review, index) => (
-            <div className="rev">
+            <div className="rev" key={el._id}>
               <img key={el._id} className="review" src={el.author.picture} alt=""></img>
               <div>
                 {el.author.name ? 

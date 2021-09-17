@@ -13,11 +13,7 @@ export const UserLogin = () => {
   const [login, setLogin] = useState('');
   const dispatch = useDispatch();
   const errorMessage = useSelector((state: RootStateValue) => state.errorMessage);
-  const history = useHistory();
-
-  const user = useSelector((state: RootStateValue) => state.user);
-  console.log('user=====>>>>', user);
-  
+  const history = useHistory();  
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();

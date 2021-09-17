@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { setSearchValue } from "../../../redux/actionCreators/searchAC";
@@ -11,11 +10,9 @@ const Categories = () => {
     (state: RootStateValue) => state.categories
   );
   const dispatch = useDispatch();
-  // console.log(categoryFromSelector);
 
   const history = useHistory();
-  //@ts-ignore
-  const chooseCategory = (e, category: string) => {
+  const chooseCategory = (e: React.MouseEvent<HTMLLIElement, MouseEvent>, category: string) => {
     e.preventDefault()
     dispatch(setSearchValue(category));
     history.push("/showmasters");

@@ -35,19 +35,6 @@ export interface Search {
   location: string;
 }
 
-export interface Order {
-  _id: string;
-  number: number;
-  name: string;
-  client: User;
-  master: Master;
-  comment: string;
-  date: string;
-  time: string;
-  service: string;
-  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
-}
-
 export interface Master {
   picture: string | undefined;
   _id: string;
@@ -88,9 +75,16 @@ export interface Order {
   master: Master;
   comment: string;
   date: string;
+  time: string;
   service: string;
   createdAt: string;
-  status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel";
+  status:
+    | "Pending"
+    | "Accepted"
+    | "Declined"
+    | "Fullfilled"
+    | "Cancel"
+    | "Fullfilled & Rated";
 }
 
 export interface Review {

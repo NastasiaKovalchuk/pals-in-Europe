@@ -7,7 +7,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
-import { Appointment, Master, Order, User } from "../../redux/initState";
+import { Order } from "../../redux/initState";
 
 export const CalendarComponent = () => {
   const [modalOrder, setModalOrder] = useState<Order>();
@@ -15,12 +15,6 @@ export const CalendarComponent = () => {
   const [value, setValue] = useState(moment());
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [bounds, setBounds] = useState({
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-  });
 
   const state = useSelector((state: RootStateValue) => state.user);
 
@@ -34,18 +28,6 @@ export const CalendarComponent = () => {
   const handleCancel = (e: any) => {
     e.stopPropagation();
     setVisible(false);
-  };
-
-  const onStart = (event: any, uiData: { x: number; y: number }) => {
-    const { clientWidth, clientHeight } = window?.document?.documentElement;
-    //@ts-ignore
-    const targetRect = this.draggleRef?.current?.getBoundingClientRect();
-    // setBounds({
-    //   left: -targetRect?.left + uiData?.x,
-    //   right: clientWidth - (targetRect?.right - uiData?.x),
-    //   top: -targetRect?.top + uiData?.y,
-    //   bottom: clientHeight - (targetRect?.bottom - uiData?.y),
-    // });
   };
 
   const showModal = (item: Order) => {
@@ -67,7 +49,6 @@ export const CalendarComponent = () => {
         .then((result) => setOrders(result.masterOrders));
     }
   }, [state.masterID]);
-  console.log(orders);
   
   function getListData(value: { date: () => any }) {
     let listData: Order[] = [];
@@ -95,7 +76,7 @@ export const CalendarComponent = () => {
                 e.stopPropagation();
                 showModal(item);
               }}
-              status={"default"}
+              status={item.status === "Accepted" ? "success" :  "warning"}
               title="hi"
               text={item.time}
             />
@@ -127,8 +108,6 @@ export const CalendarComponent = () => {
               modalRender={(modal) => (
                 <Draggable
                   disabled={disabled}
-                  // bounds={bounds}
-                  // onStart={(event: any, uiData: any) => onStart(event, uiData)}
                 >
                   {/* @ts-ignore */}
                   <div ref={draggleRef}>{modal}</div>

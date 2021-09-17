@@ -1,4 +1,3 @@
-import css from "../Master.module.css";
 import { Link } from "react-router-dom";
 import "./HeaderMaster.scss"
 
@@ -15,7 +14,7 @@ export const HeaderMaster = () => {
         <button className="btn masterBtn">My orders</button>
       </Link>
       <Link to="/account/reviews">
-        <button className="btn masterBtn">Rewievs</button>
+        <button className="btn masterBtn">Reviews</button>
       </Link>
       <Link to="/calendar">
         <button className="btn masterBtn">Calendar</button>

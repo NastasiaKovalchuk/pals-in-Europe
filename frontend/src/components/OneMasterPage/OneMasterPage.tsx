@@ -1,10 +1,9 @@
-import React, { FormEvent, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 import "./OneMasterPage.scss";
 import css from "./Modal.module.css";
-// import { Modal } from './Modal';
 import { Master, Review } from "../../redux/initState";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
 import { DatePicker, TimePicker } from "antd";
@@ -29,11 +28,9 @@ export const OneMasterPage = () => {
 
   useEffect(() => {
     if (selectorMasters.length > 0) {
-      // const master = selectorMasters.filter((el) => el._id === id);
       const master = selectorMasters.find((el) => el._id === id)
       if (master) {
         setOneMasterObj(master);
-        // master.reviews.push(newReview)
         setReviewsOnly(master.reviews);
       }
     }
@@ -43,9 +40,9 @@ export const OneMasterPage = () => {
     setShow(true);
   };
 
-  const onClickReview = () => {
-    setReviewModal(true);
-  };
+  // const onClickReview = () => {
+  //   setReviewModal(true);
+  // };
 
   const closeModal = () => {
     setShow(false);
@@ -56,8 +53,6 @@ export const OneMasterPage = () => {
   }
 
   const onSubmit = (event: any) => {
-    // console.log(event.target.time.value);
-
     event.preventDefault();
     fetch("http://localhost:8080/user/addOrder", {
       method: "POST",
@@ -115,7 +110,6 @@ export const OneMasterPage = () => {
       });
   };
 
-  console.log('reviewsOnly', reviewsOnly);
   function onChange(date: Moment | null, dateString: string) {
     // console.log(date, dateString);
   }
@@ -222,12 +216,12 @@ export const OneMasterPage = () => {
                 className="btn contactBtn"
                 type="submit"
               >
-                Contact the master
+                Make an appointment
               </button>
             ) : (
               ""
             )}
-            {session.user.role === "user" ? (
+            {/* {session.user.role === "user" ? (
               <button
                 onClick={onClickReview}
                 className="btn reviewBtn"
@@ -237,7 +231,7 @@ export const OneMasterPage = () => {
               </button>
             ) : (
               ""
-            )}
+            )} */}
           </div>
         </div>
         <hr className="dropdown-divider" />

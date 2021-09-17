@@ -14,28 +14,12 @@ export const UserSignup = () => {
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [picture, setPicture] = useState("");
+  const [setPicture] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const errorMessage = useSelector(
     (state: RootStateValue) => state.errorMessage
   );
-
-  // const onSubmit = (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   console.log('ggggggggg', picture);
-  //   const formData = new FormData();
-  //   formData.append("picture", picture);
-  //   // console.log(formData.get());
-  //   dispatch(
-  //     userSignupAC(name, login, email, password, formData, () => {
-  //       history.push("/");
-  //     })
-  //   );
-  //   if (errorMessage !== "") {
-  //     dispatch(errorMessageAC(""));
-  //   }
-  // };
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -48,8 +32,6 @@ export const UserSignup = () => {
       dispatch(errorMessageAC(""));
     }
   };
-
-  console.log('picture', picture);
   
   return (
     <div className="all">

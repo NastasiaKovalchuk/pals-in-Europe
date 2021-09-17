@@ -6,8 +6,7 @@ import Draggable from "react-draggable";
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootStateValue } from "../../redux/reducers/rootReducer";
-import { HeaderMaster } from "../Master/HeaderMaster.tsx/HeaderMaster";
-import { Appointment, Master, Order, User } from "../../redux/initState";
+import { Order } from "../../redux/initState";
 import { Link } from "react-router-dom";
 import { HeaderUser } from "../User/HeaderUser.tsx/HeaderUser";
 
@@ -17,12 +16,6 @@ export const UserCalendarComponent = () => {
   const [value, setValue] = useState(moment());
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [bounds, setBounds] = useState({
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-  });
 
   const state = useSelector((state: RootStateValue) => state.user);
 
