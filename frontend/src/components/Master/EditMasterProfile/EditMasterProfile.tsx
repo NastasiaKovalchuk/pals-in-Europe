@@ -176,8 +176,8 @@ export const EditMasterProfile = () => {
                       >
                         <option>{newUser?.category.category}</option>
                         {categories
-                          ? categories.map((el: string) => (
-                            <option value={el}>{el}</option>
+                          ? categories.map((el: string, index) => (
+                            <option key={index} value={el}>{el}</option>
                           ))
                           : ""}
                       </select>

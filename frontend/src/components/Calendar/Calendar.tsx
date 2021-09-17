@@ -174,7 +174,7 @@ export const CalendarComponent = () => {
     <>
       <div className="masterAccount">
         <div className="link2">
-          <div className="headUs"><HeaderMaster /></div>
+          <div className="headUsMaster"><HeaderMaster /></div>
           
           <div className="calendar">
             <Calendar
