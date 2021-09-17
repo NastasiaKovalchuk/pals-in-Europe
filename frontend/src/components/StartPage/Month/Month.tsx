@@ -14,9 +14,13 @@ const Month = () => {
   useEffect(() => {
     if (mastersFromSelector) {
       setRatingSort(
-        mastersFromSelector.filter(
-          (master) => master.category.category === "Developer"
-        )
+        mastersFromSelector.filter((master) => {
+          console.log(master);
+
+          if (master.category.category === "Developer") {
+            return master;
+          }
+        })
       );
     }
   }, [mastersFromSelector]);

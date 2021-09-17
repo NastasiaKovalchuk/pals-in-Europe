@@ -245,6 +245,7 @@ export const getMasterOrder: RequestHandler = async (req, res) => {
         return order;
       }
     });
+
     res.status(200).json({ masterOrders });
   } catch (error) {
     console.log(error);
@@ -276,14 +277,18 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
 
 export const rateClient: RequestHandler = async (req, res) => {
   try {
-    const { clientId, rating } = req.body as {
+    const { clientId, rating, orderId } = req.body as {
       clientId: string;
       rating: number;
+      orderId: string;
     };
+    const order = await OrderModel.findById(orderId);
     const user = await userModel.findById(clientId);
-    if (user) {
+    if (user && order) {
       user.rating += rating;
       await user.save();
+      order.status = "Fullfilled & Rated";
+      await order.save();
       res.status(200).json({ message: "success" });
     }
   } catch (error) {

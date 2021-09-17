@@ -3,7 +3,7 @@ import { Order } from "../../../redux/initState";
 import { HeaderMaster } from "../HeaderMaster.tsx/HeaderMaster";
 import css from "../Master.module.css";
 import { AnyAction } from "redux";
-import { InputNumber, Result } from "antd";
+import { InputNumber } from "antd";
 
 export const OrdersMaster = () => {
   const [show, setShowModal] = useState(false);
@@ -19,7 +19,7 @@ export const OrdersMaster = () => {
         },
         credentials: "include",
       });
-      const result = await response.json();
+      const result = await response.json();      
       setOrders(result.masterOrders);
     };
     getMasterOrders();
@@ -27,7 +27,13 @@ export const OrdersMaster = () => {
 
   const onChangeStatus = async (
     event: any,
-    status: "Pending" | "Accepted" | "Declined" | "Fullfilled" | "Cancel"
+    status:
+      | "Pending"
+      | "Accepted"
+      | "Declined"
+      | "Fullfilled"
+      | "Cancel"
+      | "Fullfilled & Rated"
   ) => {
     event.preventDefault();
     const id = event.target.value;
@@ -52,19 +58,26 @@ export const OrdersMaster = () => {
     }
   };
 
-  async function onSubmit(e: FormEvent, clientId: string, rating: number) {
+  async function onSubmit(e: FormEvent, clientId: string, rating: number, orderId: string) {
     e.preventDefault();
-    console.log(clientId, rating);
     const response = await fetch(`http://localhost:8080/master/rateClient`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ clientId, rating }),
+      body: JSON.stringify({ clientId, rating, orderId }),
       credentials: "include",
     });
     const result = await response.json();
     if (result.message === "success") {
+      setOrders(
+        orders.map((order) => {
+          if (order._id === orderId) {
+            order.status = "Fullfilled & Rated";
+          }
+          return order;
+        })
+      );
       setShowModal(false);
     }
   }
@@ -252,7 +265,7 @@ export const OrdersMaster = () => {
                   </button>
                   <div className={show ? css.overlay : css.hide}>
                     <form
-                      onSubmit={(e) => onSubmit(e, order.client._id, rating)}
+                      onSubmit={(e) => onSubmit(e, order.client._id, rating, order._id)}
                       className={show ? css.modal : css.hide}
                     >
                       <p>Leave your rating</p>
@@ -267,6 +280,39 @@ export const OrdersMaster = () => {
                         Send
                       </button>
                     </form>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            {order.status === "Fullfilled & Rated" ? (
+              <>
+                <div className={css.orderInfo}>
+                  <span>Order information:</span>
+                  <div>
+                    {" "}
+                    date of creation:
+                    {order.createdAt.slice(0, 10)}
+                  </div>
+                </div>
+                <div className={css.orderInfo}>
+                  <div className={css.fullfilled} style={{ width: "200px" }}>
+                    status: {order.status}
+                  </div>
+                </div>
+                <div>
+                  <span>Client:</span>
+                  <div>
+                    <span>Name: </span>
+                    {order.client.name} <span>email:</span>
+                    {order.client.email}
+                  </div>
+                </div>
+                <div>
+                  <span>Service request:</span>
+                  <div>
+                    Date: {order.date}, service: {order.service}
                   </div>
                 </div>
               </>

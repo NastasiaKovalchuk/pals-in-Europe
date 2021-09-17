@@ -16,6 +16,7 @@ export const OrdersUser = () => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     const getUserOrders = async () => {
       const response = await fetch("http://localhost:8080/user/orders", {
@@ -69,7 +70,8 @@ export const OrdersUser = () => {
     e: FormEvent,
     masterId: string,
     rating: number,
-    reviewText: string
+    reviewText: string,
+    orderId: string
   ) {
     e.preventDefault();
     console.log(masterId, rating, reviewText);
@@ -78,15 +80,22 @@ export const OrdersUser = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ masterId, rating, reviewText }),
+      body: JSON.stringify({ masterId, rating, reviewText, orderId }),
       credentials: "include",
     });
     const result = await response.json();
     if (result.message === "success") {
       dispatch(editMasterAC(result.master));
+      setOrders(
+        orders.map((order) => {
+          if (order._id === orderId) {
+            order.status = "Fullfilled & Rated";
+          }
+          return order;
+        })
+      );
       alert("Thank you for your feedback");
       setShowModal(false);
-      await onChangeStatus(e, "Fullfilled & Rated");
     }
   }
 
@@ -269,7 +278,13 @@ export const OrdersUser = () => {
                 <div className={show ? css.overlay : css.hide}>
                   <form
                     onSubmit={(e) =>
-                      onSubmit(e, order.master._id, rating, reviewText)
+                      onSubmit(
+                        e,
+                        order.master._id,
+                        rating,
+                        reviewText,
+                        order._id
+                      )
                     }
                     className={show ? css.modal : css.hide}
                   >

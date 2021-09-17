@@ -269,21 +269,25 @@ export const changeStatusOrder: RequestHandler = async (req, res) => {
 
 export const reviewMaster: RequestHandler = async (req, res) => {
   try {
-    const { masterId, rating, reviewText } = req.body as {
+    const { masterId, rating, reviewText, orderId } = req.body as {
       masterId: string;
       rating: number;
-      reviewText: string
+      reviewText: string;
+      orderId: string;
     };
+    const order = await OrderModel.findById(orderId);
     const user = await userModel.findById(req?.session?.user?.id);
-    const master = await masterModel.findById(masterId)
-    if (user && master) {
+    const master = await masterModel.findById(masterId);
+    if (user && master && order) {
       master.rating += rating;
       const newReview = await ReviewModel.create({
         author: user,
         text: reviewText,
-      })
-      master.reviews.push(newReview)
+      });
+      master.reviews.push(newReview);
       await master.save();
+      order.status = "Fullfilled & Rated";
+      await order.save()
       res.status(200).json({ message: "success", master });
     }
   } catch (error) {
