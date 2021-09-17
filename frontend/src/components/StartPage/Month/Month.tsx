@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -15,8 +16,6 @@ const Month = () => {
     if (mastersFromSelector) {
       setRatingSort(
         mastersFromSelector.filter((master) => {
-          console.log(master);
-
           if (master.category.category === "Developer") {
             return master;
           }

@@ -8,24 +8,27 @@
 }
 
 .overlay {
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
   background: #290838d3;
   transition: opacity 0.2s ease;
+  display: flex;
+  justify-content: center;
 }
 
 .modal {
   z-index: -1000;
-  width: 500px;
+  width: 550px;
   height: 270px;
-  margin-left: 500px;
+  /* margin-left: 500px; */
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border: 5px ridge rgb(98, 58, 192);
+  border: 2px solid rgb(224, 224, 224);
   border-radius: 10px;
   transform: translateY(100%);
   transition: transform 0.2s ease;
@@ -34,20 +37,32 @@
   position: absolute;
   justify-content: center;
   align-items: center;
-  background-color: #fefefe92;
+  background-color: #fefefecc;
 }
 
 
 .btn {
-  padding: 10px ;
-  margin: 10px;
-  margin-bottom: 20px;
-  background-color: #ffa4ce;
-  color: #fdecff;
-  border: 2px solid rgb(255, 211, 251);
+  background-color: #5c66ff;
+  width: 200px;
+  color: aliceblue;
+  border: none;
   border-radius: 5px;
-  filter: drop-shadow(0 0 10px #ffd2e7);
-  
+  min-height: 50px;
+  margin-top: 15px;
+}
+
+.btn:hover {
+    color: #a9e4ff;
+    background-color: #a79eff;
+    filter: drop-shadow(0 0 7px #85d8ff);
+
+    -webkit-transition: all 0.3s ease;
+    ;
+    -moz-transition: all 0.3s ease;
+    ;
+    -o-transition: all 0.3s ease;
+    ;
+    transition: all 0.3s ease;
 }
 
 .btnPoints {
@@ -63,5 +78,58 @@
   filter: drop-shadow(0 0 10px #ffd2e7);
 }
 
+.inputModalMaster {
+  margin: 4px;
+  max-width: 400px;
+  min-width: 300px;
+  min-height: 30px;
+  border: none;
+  outline: none;
+}
 
+.nameModalMaster {
+  color: rgb(36, 46, 187);
+  font-weight: bold;
+  font-size: 18px;
+}  
 
+.divMargin {
+  margin-bottom: 5px;
+}
+
+.exit {
+  display: flex;
+}
+
+.xBtn {
+  max-height: 30px;
+  min-width: 30px;
+  margin-left: 30px;
+  background-color: rgb(255, 115, 115);
+  border: none;
+  border-radius: 5px;
+}
+
+.xBtn:hover {
+  background-color: rgb(255, 160, 160);
+  filter: drop-shadow(0 0 7px #ffd7d7);
+
+    -webkit-transition: all 0.3s ease;
+    ;
+    -moz-transition: all 0.3s ease;
+    ;
+    -o-transition: all 0.3s ease;
+    ;
+    transition: all 0.3s ease;
+}
+
+.inputModule2 {
+  margin: 4px;
+  max-width: 400px;
+  min-width: 300px;
+  min-height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding-left: 10px;
+}

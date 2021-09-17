@@ -63,7 +63,6 @@ async function masterMaker() {
       //   appointments.push(obj);
       //   console.log('hoi');
       // }
-      console.log('hi');
       
       await masterModel.create({
         description,

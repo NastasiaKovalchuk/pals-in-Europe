@@ -8,8 +8,7 @@ import { useDispatch } from "react-redux";
 import { editMasterAC } from "../../../redux/actionCreators/mastersAC";
 
 export const OrdersUser = () => {
-  const [leftReview, setLeftReview] = useState(false);
-  const [show, setShowModal] = useState(false);
+   const [show, setShowModal] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
 
@@ -74,7 +73,6 @@ export const OrdersUser = () => {
     orderId: string
   ) {
     e.preventDefault();
-    console.log(masterId, rating, reviewText);
     const response = await fetch(`http://localhost:8080/user/reviewMaster`, {
       method: "POST",
       headers: {
@@ -132,13 +130,13 @@ export const OrdersUser = () => {
                 <div>
                   <span>Master: </span>
                   <div>
-                    <span>Name: </span>
-                    {order.master.name}, <span>email:</span>{" "}
-                    {order.master.email}
+                    <span>Master: </span>
+                    <div>
+                      <span>Name: </span>
+                      {order.master.name}, <span>email:</span>{" "}
+                      {order.master.email}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span>Service request:</span>
                   <div>
                     <span> Date:</span> {order.date}, <span>service: </span>
                     {order.service}
@@ -159,25 +157,29 @@ export const OrdersUser = () => {
               <> </>
             )}
 
-            {order.status === "Cancel" ? (
-              <>
-                <div className={css.orderInfo}>
-                  <div className={css.cancel} style={{ width: "200px" }}>
-                    status: {order.status}
+              {order.status === "Cancel" ? (
+                <>
+                  <div className={css.orderInfo}>
+                    <div className={css.cancel} style={{ width: "200px" }}>
+                      status: {order.status}
+                    </div>
                   </div>
-                </div>
+                
                 <div>
                   <span>Master: </span>
                   <div>
-                    <span>Name: </span>
-                    {order.master.name}, <span>email:</span>
-                    {order.master.email}
+                    <span>Master: </span>
+                    <div>
+                      <span>Name: </span>
+                      {order.master.name}, <span>email:</span>
+                      {order.master.email}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span>Service request:</span>
                   <div>
-                    Date: {order.date}, service: {order.service}
+                    <span>Service request:</span>
+                    <div>
+                      Date: {order.date}, service: {order.service}
+                    </div>
                   </div>
                 </div>
               </>
@@ -194,21 +196,24 @@ export const OrdersUser = () => {
                 <div>
                   <span>Master: </span>
                   <div>
-                    <span>Name: </span>
-                    {order.master.name}, <span>email:</span>
-                    {order.master.email}
+                    <span>Master: </span>
+                    <div>
+                      <span>Name: </span>
+                      {order.master.name}, <span>email:</span>
+                      {order.master.email}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span>Service request:</span>
                   <div>
-                    Date: {order.date}, service: {order.service}
+                    <span>Service request:</span>
+                    <div>
+                      Date: {order.date}, service: {order.service}
+                    </div>
                   </div>
                 </div>
                 <div className={css.chooseStatus}>
                   <button
                     // @ts-ignore
-                    onClick={(e: any) => onChangeStatusCancel(e, "Cancel")}
+                    onClick={(e: any) => onChangeStatus(e, "Cancel")}
                     value={order._id}
                     className={css.cancel}
                   >
@@ -229,15 +234,18 @@ export const OrdersUser = () => {
                 <div>
                   <span>Master: </span>
                   <div>
-                    <span>Name: </span>
-                    {order.master.name}, <span>email:</span>
-                    {order.master.email}
+                    <span>Master: </span>
+                    <div>
+                      <span>Name: </span>
+                      {order.master.name}, <span>email:</span>
+                      {order.master.email}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span>Service request:</span>
                   <div>
-                    Date: {order.date}, service: {order.service}
+                    <span>Service request:</span>
+                    <div>
+                      Date: {order.date}, service: {order.service}
+                    </div>
                   </div>
                 </div>
               </>
@@ -325,15 +333,18 @@ export const OrdersUser = () => {
                 <div>
                   <span>Master: </span>
                   <div>
-                    <span>Name: </span>
-                    {order.master.name}, <span>email:</span>
-                    {order.master.email}
+                    <span>Master: </span>
+                    <div>
+                      <span>Name: </span>
+                      {order.master.name}, <span>email:</span>
+                      {order.master.email}
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <span>Service request:</span>
                   <div>
-                    Date: {order.date}, service: {order.service}
+                    <span>Service request:</span>
+                    <div>
+                      Date: {order.date}, service: {order.service}
+                    </div>
                   </div>
                 </div>
               </>

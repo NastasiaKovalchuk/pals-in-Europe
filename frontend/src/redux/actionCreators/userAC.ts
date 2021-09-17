@@ -56,7 +56,7 @@ export const userSignupAC =
         email,
         password,
         picture:
-          "https://freerangestock.com/sample/116135/handsome-man-avatar-.jpg",
+          "https://i.imgur.com/3S0HJ4q.png",
       }),
     });
     const result = await response.json();

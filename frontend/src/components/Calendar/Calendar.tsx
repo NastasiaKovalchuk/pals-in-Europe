@@ -49,7 +49,6 @@ export const CalendarComponent = () => {
         .then((result) => setOrders(result.masterOrders));
     }
   }, [state.masterID]);
-  console.log(orders);
   
   function getListData(value: { date: () => any }) {
     let listData: Order[] = [];
@@ -154,7 +153,7 @@ export const CalendarComponent = () => {
     <>
       <div className="masterAccount">
         <div className="link2">
-          <div className="headUs"><HeaderMaster /></div>
+          <div className="headUsMaster"><HeaderMaster /></div>
           
           <div className="calendar">
             <Calendar

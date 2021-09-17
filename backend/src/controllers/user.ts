@@ -142,7 +142,6 @@ export const createOrder: RequestHandler = async (req, res) => {
     };
     const master = await masterModel.findById(masterID);
     const user = await userModel.findById(userID);
-    // console.log(user.email);
 
     const orders = await OrderModel.find();
     if (orders.length > 0) {

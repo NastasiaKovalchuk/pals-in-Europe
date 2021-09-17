@@ -23,10 +23,9 @@ const StartPage = () => {
     (state: RootStateValue) => state.categories
   );
   const dispatch = useDispatch();
-  const user = useSelector(
-    (state: RootStateValue) => state.user
-  );
-  console.log(user);
+  // const user = useSelector(
+  //   (state: RootStateValue) => state.user
+  // );
   
   const chooseCategory = (value: string) => {
     setSearch(value);
