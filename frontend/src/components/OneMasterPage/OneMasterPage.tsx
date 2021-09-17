@@ -47,6 +47,14 @@ export const OneMasterPage = () => {
     setReviewModal(true);
   };
 
+  const closeModal = () => {
+    setShow(false);
+  }
+
+  const closeModal2 = () => {
+    setReviewModal(false)
+  }
+
   const onSubmit = (event: any) => {
     // console.log(event.target.time.value);
 
@@ -105,9 +113,9 @@ export const OneMasterPage = () => {
           alert("something went wrong");
         }
       });
-    };
-    
-  console.log('reviewsOnly', reviewsOnly);  
+  };
+
+  console.log('reviewsOnly', reviewsOnly);
   function onChange(date: Moment | null, dateString: string) {
     // console.log(date, dateString);
   }
@@ -118,14 +126,20 @@ export const OneMasterPage = () => {
         <>
           <div className={show ? css.overlay : css.hide}>
             <form onSubmit={onSubmit} className={show ? css.modal : css.hide}>
-              <p>You have chosen the master: {oneMasterObj?.name}</p>
-              <DatePicker name="date" onChange={onChange} />
+              <div className={css.exit}>
+                <p className={css.nameModalMaster}>You have chosen the master: {oneMasterObj?.name}</p>
+                <button onClick={closeModal} className={css.xBtn}>X</button>
+              </div>
+              <DatePicker className={css.inputModalMaster} name="date" onChange={onChange} />
+              <div className={css.divMargin} />
               <TimePicker
+                className={css.inputModalMaster}
                 name="time"
                 defaultValue={moment("12:08", "HH:mm")}
                 format={"HH:mm"}
               />
               <input
+                className={css.inputModalMaster}
                 placeholder="service"
                 value={service}
                 onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
@@ -133,6 +147,7 @@ export const OneMasterPage = () => {
                 }
               />
               <input
+                className={css.inputModalMaster}
                 placeholder="comment for the master"
                 value={comment}
                 style={{ height: 100 }}
@@ -155,11 +170,15 @@ export const OneMasterPage = () => {
         <>
           <div className={reviewModal ? css.overlay : css.hide}>
             <form onSubmit={onReviewSubmit} className={reviewModal ? css.modal : css.hide}>
-              <p>Write a review to the master {oneMasterObj?.name}</p>
+              <div className={css.exit}>
+                <p className={css.nameModalMaster}>Write a review to the master {oneMasterObj?.name}</p>
+                <button onClick={closeModal2} className={css.xBtn}>X</button>
+              </div>
               <input
                 placeholder="review for the master"
                 value={newReview}
-                style={{ height: 100 }}
+                className={css.inputModule2}
+                style={{ height: 70 }}
                 onChange={(ev: React.ChangeEvent<HTMLInputElement>): void =>
                   setNewReview(ev.target.value)
                 }
